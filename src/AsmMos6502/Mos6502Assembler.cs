@@ -56,6 +56,38 @@ public partial class Mos6502Assembler : IDisposable
     public Span<byte> Buffer => _buffer.AsSpan(0, (int)SizeInBytes);
 
     /// <summary>
+    /// Writes a buffer of bytes to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
+    public Mos6502Assembler AppendBuffer(ReadOnlySpan<byte> input)
+    {
+        var newSizeInBytes = SafeAddress(SizeInBytes + input.Length);
+        if (input.Length > 0)
+        {
+            var span = GetBuffer(input.Length);
+            input.CopyTo(span);
+            SizeInBytes = newSizeInBytes;
+        }
+
+        return this;
+    }
+
+    /// <summary>
+    /// Writes a number of bytes to the assembler's internal buffer, filling them with a specified byte value.
+    /// </summary>
+    /// <param name="length">The number of bytes to write.</param>
+    /// <param name="c">The byte value to fill the buffer with. Default is 0.</param>
+    public Mos6502Assembler AppendBytes(int length, byte c = 0)
+    {
+        if (length <= 0) return this;
+        var newSizeInBytes = SafeAddress(SizeInBytes + length);
+        var span = GetBuffer(length);
+        span.Fill(c);
+        SizeInBytes = newSizeInBytes;
+        return this;
+    }
+    
+    /// <summary>
     /// Resets the assembler state.
     /// </summary>
     public void Begin()
