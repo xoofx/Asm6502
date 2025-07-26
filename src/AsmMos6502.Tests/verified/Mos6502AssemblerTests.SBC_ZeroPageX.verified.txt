@@ -1,0 +1,5 @@
+﻿C000  F5 02      SBC $02,X
+C002  F5 30      SBC $30,X
+C004  F5 FB      SBC $FB,X
+
+; F5 02 F5 30 F5 FB

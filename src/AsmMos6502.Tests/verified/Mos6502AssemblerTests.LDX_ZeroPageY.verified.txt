@@ -1,0 +1,5 @@
+﻿C000  B6 01      LDX $01,Y
+C002  B6 40      LDX $40,Y
+C004  B6 FC      LDX $FC,Y
+
+; B6 01 B6 40 B6 FC

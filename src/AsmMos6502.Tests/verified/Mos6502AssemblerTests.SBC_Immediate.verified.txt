@@ -1,0 +1,5 @@
+﻿C000  E9 01      SBC #$01
+C002  E9 42      SBC #$42
+C004  E9 FF      SBC #$FF
+
+; E9 01 E9 42 E9 FF

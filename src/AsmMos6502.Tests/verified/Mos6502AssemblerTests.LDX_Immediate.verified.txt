@@ -1,0 +1,5 @@
+﻿C000  A2 01      LDX #$01
+C002  A2 42      LDX #$42
+C004  A2 FF      LDX #$FF
+
+; A2 01 A2 42 A2 FF

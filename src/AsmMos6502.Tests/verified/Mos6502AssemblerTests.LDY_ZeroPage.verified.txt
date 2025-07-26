@@ -1,0 +1,5 @@
+﻿C000  A4 03      LDY $03
+C002  A4 20      LDY $20
+C004  A4 FE      LDY $FE
+
+; A4 03 A4 20 A4 FE

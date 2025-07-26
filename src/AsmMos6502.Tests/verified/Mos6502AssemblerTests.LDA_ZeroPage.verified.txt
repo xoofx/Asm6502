@@ -1,0 +1,5 @@
+﻿C000  A5 03      LDA $03
+C002  A5 20      LDA $20
+C004  A5 FE      LDA $FE
+
+; A5 03 A5 20 A5 FE

@@ -3,12 +3,14 @@
 // See license.txt file in the project root for full license information.
 
 using System.Diagnostics;
+using System.Reflection.Emit;
 
 namespace AsmMos6502.CodeGen;
 
 internal class GeneratorApp
 {
     private static readonly string GeneratedFolderPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "AsmMos6502", "generated"));
+    private static readonly string GeneratedTestsFolderPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "AsmMos6502.Tests", "generated"));
 
     public void Run()
     {
@@ -17,6 +19,11 @@ internal class GeneratorApp
             throw new DirectoryNotFoundException($"The directory '{GeneratedFolderPath}' does not exist. Please ensure the path is correct.");
         }
 
+        if (!Directory.Exists(GeneratedTestsFolderPath))
+        {
+            throw new DirectoryNotFoundException($"The test directory '{GeneratedTestsFolderPath}' does not exist. Please ensure the path is correct.");
+        }
+        
         var model = JsonAsm6502Instructions.ReadJson("6502.json");
 
         var opcodes = model.Opcodes.Where(op => !op.Illegal).OrderBy(x => x.Opcode)
@@ -32,6 +39,7 @@ internal class GeneratorApp
         GenerateInstructionFactory(opcodes, modes);
         GenerateAssemblerFactory(opcodes, modes);
         GenerateAssemblerFactoryWithLabel(opcodes, modes);
+        GenerateAssemblyTests(opcodes);
     }
 
     private static Dictionary<string, int> GenerateAddressingModes(List<JsonAsm6502AddressingMode> addressingModes)
@@ -78,8 +86,7 @@ internal class GeneratorApp
 
         writer.CloseBraceBlock();
     }
-
-
+    
     private static void GenerateTables(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, int> mapAddressingModeToValue, List<string> mnemonics)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Tables.gen.cs");
@@ -238,6 +245,7 @@ internal class GeneratorApp
     private enum OperandValueKind
     {
         None,
+        Immediate,
         Relative,
         Zp,
         Address,
@@ -264,6 +272,7 @@ internal class GeneratorApp
             case "Immediate":
                 argumentTypes = ( [new("immediate", "byte")]);
                 opName = $"{opName}_Imm";
+                operandKind = OperandValueKind.Immediate;
                 break;
             case "ZeroPage":
                 argumentTypes = ( [new("zeroPage", "byte")]);
@@ -377,19 +386,11 @@ internal class GeneratorApp
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             writer.Write($"public Mos6502Assembler {signature} => AddInstruction(Mos6502InstructionFactory.{name}(");
 
-            switch (operandKind)
+            if (arguments.Count > 0)
             {
-                case OperandValueKind.Indirect:
-                    writer.Write($"{arguments[0].Name}");
-                    break;
-                default:
-                    if (arguments.Count > 0)
-                    {
-                        writer.Write($"{arguments[0].Name}");
-                    }
-
-                    break;
+                writer.Write($"{arguments[0].Name}");
             }
+
             if (arguments.Count == 2)
             {
                 writer.Write($", {arguments[1].Name}");
@@ -422,7 +423,11 @@ internal class GeneratorApp
         foreach (var opcode in opcodes)
         {
             var (name, arguments, _, operandKind) = GetInstructionSignature(opcode);
-            if (operandKind != OperandValueKind.None && operandKind != OperandValueKind.Zp && opcode.AddressingMode != "IndirectX" && opcode.AddressingMode != "IndirectY")
+            if (operandKind != OperandValueKind.None &&
+                operandKind != OperandValueKind.Immediate &&
+                operandKind != OperandValueKind.Zp &&
+                opcode.AddressingMode != "IndirectX" &&
+                opcode.AddressingMode != "IndirectY")
             {
                 arguments[0] = new Operand6502("address", operandKind == OperandValueKind.Indirect ? arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : "Mos6502Label");
                 var signature = $"{name}({string.Join(", ", arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null ? $" = {arg.DefaultValue}" : "")}"))})";
@@ -482,9 +487,119 @@ internal class GeneratorApp
         }
     }
 
-    private static CodeWriter CreateCodeWriter(string fileName)
+
+    private static IEnumerable<string> GetTestVariations(JsonAsm6502Opcode opcode)
     {
-        var filePath = Path.Combine(GeneratedFolderPath, fileName);
+        switch (opcode.AddressingMode)
+        {
+            case "Implied":
+                yield return "";
+                break;
+            case "Relative":
+                yield return "0x10"; // Relative address for test
+                yield return "-3";
+                break;
+            case "Accumulator":
+                yield return $"A";
+                yield return $"";
+                break;
+            case "Immediate":
+                yield return "0x01"; // Immediate value for test
+                yield return "0x42";
+                yield return "0xFF";
+                break;
+            case "ZeroPage":
+                yield return "0x03"; // Zero page address for test
+                yield return "0x20";
+                yield return "0xFE";
+                break;
+            case "ZeroPageX":
+                yield return "0x02, X"; // Zero page X address for test
+                yield return "0x30, X";
+                yield return "0xFB, X";
+                break;
+            case "ZeroPageY":
+                yield return "0x01, Y"; // Zero page Y address for test
+                yield return "0x40, Y";
+                yield return "0xFC, Y";
+                break;
+            case "Absolute":
+                yield return "0x1234"; // Absolute address for test
+                yield return "0xFF01";
+                break;
+            case "AbsoluteX":
+                yield return "0x1234, X"; // Absolute X address for test
+                yield return "0xFF02, X";
+                break;
+            case "AbsoluteY":
+                yield return "0x1234, Y"; // Absolute Y address for test
+                yield return "0xFF03, Y";
+                break;
+            case "Indirect":
+                yield return $"_[0x1234]"; // Indirect address for test
+                yield return $"_[0xFF04]";
+                break;
+            case "IndirectX":
+                yield return $"_[0x05, X]"; // Indirect X address for test
+                yield return $"_[0x20, X]";
+                yield return $"_[0xFF, X]";
+                break;
+            case "IndirectY":
+                yield return $"_[0x06], Y"; // Indirect Y address for test
+                yield return $"_[0x30], Y";
+                yield return $"_[0xFE], Y";
+                break;
+            default:
+                throw new NotSupportedException($"Addressing mode '{opcode.AddressingMode}' is not supported for opcode '{opcode.Name}'");
+        }
+    }
+    
+    private static void GenerateAssemblyTests(List<JsonAsm6502Opcode> opcodes)
+    {
+        using var writer = CreateCodeWriter("Mos6502AssemblerTests.gen.cs", true);
+
+        writer.WriteLine("using System.Runtime.CompilerServices;");
+        writer.WriteLine("using static AsmMos6502.Mos6502Factory;");
+        writer.WriteLine();
+
+        writer.WriteLine("namespace AsmMos6502.Tests;");
+        writer.WriteLine();
+        writer.WriteLine("[TestClass]");
+        writer.WriteLine("public partial class Mos6502AssemblerTests : VerifyBase");
+        writer.OpenBraceBlock();
+
+        foreach (var opcode in opcodes)
+        {
+            writer.WriteLine("[TestMethod]");
+            writer.WriteLine($"public async Task {opcode.Name}_{opcode.AddressingMode}()");
+            writer.OpenBraceBlock();
+
+            writer.WriteLine("using var asm = new Mos6502Assembler()");
+            writer.Indent();
+
+            var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
+            foreach (var testItem in GetTestVariations(opcode))
+            {
+                writer.WriteLine($".{name}({testItem})");
+            }
+
+            writer.WriteLine(".End();");
+            writer.UnIndent();
+
+            writer.WriteLine("await VerifyAsm(asm);");
+
+            writer.CloseBraceBlock();
+
+            writer.WriteLine();
+        }
+
+        writer.CloseBraceBlock();
+    }
+
+
+    private static CodeWriter CreateCodeWriter(string fileName, bool test = false)
+    {
+        var filePath = Path.Combine(test ? GeneratedTestsFolderPath : GeneratedFolderPath, fileName);
         var writer = new CodeWriter(new StreamWriter(filePath), autoDispose: true);
         writer.WriteLine("// Copyright (c) Alexandre Mutel. All rights reserved.");
         writer.WriteLine("// Licensed under the BSD-Clause 2 license.");

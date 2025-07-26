@@ -43,7 +43,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Add with carry. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction ADC_Imm(byte immediate) => new (Mos6502OpCode.ADC_Immediate);
+    public static Mos6502Instruction ADC_Imm(byte immediate) => new (Mos6502OpCode.ADC_Immediate, immediate);
     
     /// <summary>
     /// Creates the ADC instruction (0x61) instruction with addressing mode IndirectX.
@@ -99,7 +99,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Logical AND. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction AND_Imm(byte immediate) => new (Mos6502OpCode.AND_Immediate);
+    public static Mos6502Instruction AND_Imm(byte immediate) => new (Mos6502OpCode.AND_Immediate, immediate);
     
     /// <summary>
     /// Creates the AND instruction (0x21) instruction with addressing mode IndirectX.
@@ -295,7 +295,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Compare. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction CMP_Imm(byte immediate) => new (Mos6502OpCode.CMP_Immediate);
+    public static Mos6502Instruction CMP_Imm(byte immediate) => new (Mos6502OpCode.CMP_Immediate, immediate);
     
     /// <summary>
     /// Creates the CMP instruction (0xc1) instruction with addressing mode IndirectX.
@@ -337,7 +337,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Compare X register. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction CPX_Imm(byte immediate) => new (Mos6502OpCode.CPX_Immediate);
+    public static Mos6502Instruction CPX_Imm(byte immediate) => new (Mos6502OpCode.CPX_Immediate, immediate);
     
     /// <summary>
     /// Creates the CPX instruction (0xe4) instruction with addressing mode ZeroPage.
@@ -358,7 +358,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Compare Y register. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction CPY_Imm(byte immediate) => new (Mos6502OpCode.CPY_Immediate);
+    public static Mos6502Instruction CPY_Imm(byte immediate) => new (Mos6502OpCode.CPY_Immediate, immediate);
     
     /// <summary>
     /// Creates the CPY instruction (0xc4) instruction with addressing mode ZeroPage.
@@ -435,7 +435,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Logical Exclusive OR (XOR). Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction EOR_Imm(byte immediate) => new (Mos6502OpCode.EOR_Immediate);
+    public static Mos6502Instruction EOR_Imm(byte immediate) => new (Mos6502OpCode.EOR_Immediate, immediate);
     
     /// <summary>
     /// Creates the EOR instruction (0x41) instruction with addressing mode IndirectX.
@@ -554,7 +554,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Load accumulator. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction LDA_Imm(byte immediate) => new (Mos6502OpCode.LDA_Immediate);
+    public static Mos6502Instruction LDA_Imm(byte immediate) => new (Mos6502OpCode.LDA_Immediate, immediate);
     
     /// <summary>
     /// Creates the LDA instruction (0xa1) instruction with addressing mode IndirectX.
@@ -603,7 +603,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Load X register. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction LDX_Imm(byte immediate) => new (Mos6502OpCode.LDX_Immediate);
+    public static Mos6502Instruction LDX_Imm(byte immediate) => new (Mos6502OpCode.LDX_Immediate, immediate);
     
     /// <summary>
     /// Creates the LDX instruction (0xa6) instruction with addressing mode ZeroPage.
@@ -638,7 +638,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Load Y register. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction LDY_Imm(byte immediate) => new (Mos6502OpCode.LDY_Immediate);
+    public static Mos6502Instruction LDY_Imm(byte immediate) => new (Mos6502OpCode.LDY_Immediate, immediate);
     
     /// <summary>
     /// Creates the LDY instruction (0xa4) instruction with addressing mode ZeroPage.
@@ -722,7 +722,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Logical Inclusive OR. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction ORA_Imm(byte immediate) => new (Mos6502OpCode.ORA_Immediate);
+    public static Mos6502Instruction ORA_Imm(byte immediate) => new (Mos6502OpCode.ORA_Immediate, immediate);
     
     /// <summary>
     /// Creates the ORA instruction (0x01) instruction with addressing mode IndirectX.
@@ -890,7 +890,7 @@ public static partial class Mos6502InstructionFactory
     /// </summary>
     /// <remarks>Subtract with carry. Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Mos6502Instruction SBC_Imm(byte immediate) => new (Mos6502OpCode.SBC_Immediate);
+    public static Mos6502Instruction SBC_Imm(byte immediate) => new (Mos6502OpCode.SBC_Immediate, immediate);
     
     /// <summary>
     /// Creates the SBC instruction (0xe1) instruction with addressing mode IndirectX.

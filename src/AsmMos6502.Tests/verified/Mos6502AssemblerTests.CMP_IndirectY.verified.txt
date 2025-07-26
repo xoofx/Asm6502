@@ -1,0 +1,5 @@
+﻿C000  D1 06      CMP ($06),Y
+C002  D1 30      CMP ($30),Y
+C004  D1 FE      CMP ($FE),Y
+
+; D1 06 D1 30 D1 FE

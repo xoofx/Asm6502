@@ -1,0 +1,5 @@
+﻿C000  B5 02      LDA $02,X
+C002  B5 30      LDA $30,X
+C004  B5 FB      LDA $FB,X
+
+; B5 02 B5 30 B5 FB

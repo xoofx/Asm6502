@@ -1,0 +1,5 @@
+﻿C000  D5 02      CMP $02,X
+C002  D5 30      CMP $30,X
+C004  D5 FB      CMP $FB,X
+
+; D5 02 D5 30 D5 FB

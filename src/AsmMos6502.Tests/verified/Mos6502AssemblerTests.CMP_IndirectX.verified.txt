@@ -1,0 +1,5 @@
+﻿C000  C1 05      CMP ($05,X)
+C002  C1 20      CMP ($20,X)
+C004  C1 FF      CMP ($FF,X)
+
+; C1 05 C1 20 C1 FF

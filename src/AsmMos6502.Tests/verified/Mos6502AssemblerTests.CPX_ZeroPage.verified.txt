@@ -1,0 +1,5 @@
+﻿C000  E4 03      CPX $03
+C002  E4 20      CPX $20
+C004  E4 FE      CPX $FE
+
+; E4 03 E4 20 E4 FE

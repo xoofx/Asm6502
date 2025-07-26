@@ -1,0 +1,5 @@
+﻿C000  F1 06      SBC ($06),Y
+C002  F1 30      SBC ($30),Y
+C004  F1 FE      SBC ($FE),Y
+
+; F1 06 F1 30 F1 FE

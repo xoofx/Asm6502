@@ -1,0 +1,5 @@
+﻿C000  B1 06      LDA ($06),Y
+C002  B1 30      LDA ($30),Y
+C004  B1 FE      LDA ($FE),Y
+
+; B1 06 B1 30 B1 FE

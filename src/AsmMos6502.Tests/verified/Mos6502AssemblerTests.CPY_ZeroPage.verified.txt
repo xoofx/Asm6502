@@ -1,0 +1,5 @@
+﻿C000  C4 03      CPY $03
+C002  C4 20      CPY $20
+C004  C4 FE      CPY $FE
+
+; C4 03 C4 20 C4 FE

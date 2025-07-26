@@ -1,0 +1,5 @@
+﻿C000  C9 01      CMP #$01
+C002  C9 42      CMP #$42
+C004  C9 FF      CMP #$FF
+
+; C9 01 C9 42 C9 FF
