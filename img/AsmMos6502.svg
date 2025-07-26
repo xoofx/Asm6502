@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="AsmMos6502.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.6168981"
+     inkscape:cx="400.76736"
+     inkscape:cy="203.16679"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:70.5556px;line-height:4.59346px;font-family:Broadway;-inkscape-font-specification:Broadway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       x="19.091883"
+       y="28.348555"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="stroke-width:0.264583;-inkscape-font-specification:Broadway;font-family:Broadway;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+         x="19.091883"
+         y="28.348555" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70.5556px;line-height:4.59346px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="17.819092"
+       y="57.738483"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';stroke-width:0.264583"
+         x="17.819092"
+         y="57.738483" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:70.5556px;line-height:4.59346px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';letter-spacing:0px;word-spacing:0px;stroke-width:0.264583;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       x="26.844343"
+       y="49.060352"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="stroke-width:0.264583;-inkscape-font-specification:'Bauhaus 93, ';font-family:'Bauhaus 93';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+         x="26.844343"
+         y="49.060352" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:70.5556px;line-height:4.59346px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';letter-spacing:0px;word-spacing:0px;stroke-width:1.05833333;stroke:#000000;stroke-opacity:1;stroke-dasharray:none"
+       x="7.1739187"
+       y="81.60038"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="stroke-width:1.05833333;stroke:#000000;stroke-opacity:1;stroke-dasharray:none"
+         x="7.1739187"
+         y="81.60038"><tspan
+           style="fill:#00aa88;stroke:#000000;stroke-opacity:1;stroke-width:1.05833333;stroke-dasharray:none"
+           id="tspan6">m</tspan><tspan
+           style="fill:#ff6600;stroke:#000000;stroke-opacity:1;stroke-width:1.05833333;stroke-dasharray:none"
+           id="tspan7">o</tspan><tspan
+           style="fill:#ff0000;stroke:#000000;stroke-opacity:1;stroke-width:1.05833333;stroke-dasharray:none"
+           id="tspan8">s</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:50.8px;line-height:3.30729px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';letter-spacing:0px;word-spacing:0px;stroke-width:1.05833333;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+       x="8.6781292"
+       y="123.58255"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="font-size:50.8px;line-height:3.30729px;stroke-width:1.05833333;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+         x="8.6781292"
+         y="123.58255"><tspan
+           style="fill:#cc00ff;stroke-width:1.05833333;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+           id="tspan9">6</tspan><tspan
+           style="fill:#0066ff;stroke-width:1.05833333;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+           id="tspan10">5</tspan><tspan
+           style="fill:#00ff00;stroke-width:1.05833333;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+           id="tspan11">0</tspan><tspan
+           style="fill:#ffcc00;stroke-width:1.05833333;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+           id="tspan12">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:70.5556px;line-height:4.59346px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, Normal';letter-spacing:0px;word-spacing:0px;stroke-width:1.05833333;fill:#808080;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+       x="7.7524605"
+       y="38.299473"
+       id="text13"><tspan
+         sodipodi:role="line"
+         id="tspan13"
+         style="stroke-width:1.05833333;fill:#808080;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+         x="7.7524605"
+         y="38.299473">asm</tspan></text>
+  </g>
+</svg>
