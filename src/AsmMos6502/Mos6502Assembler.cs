@@ -3,6 +3,7 @@
 // See license.txt file in the project root for full license information.
 
 using System.Buffers;
+using System.Diagnostics;
 
 namespace AsmMos6502;
 
@@ -144,6 +145,7 @@ public partial class Mos6502Assembler : IDisposable
         if (!instruction.IsValid) throw new ArgumentException("Invalid instruction", nameof(instruction));
 
         var sizeInBytes = instruction.SizeInBytes;
+        Debug.Assert(sizeInBytes > 0);
         var span = GetBuffer(sizeInBytes);
         instruction.AsSpan.CopyTo(span);
         SizeInBytes = SafeAddress(SizeInBytes + (byte)sizeInBytes);
@@ -178,7 +180,7 @@ public partial class Mos6502Assembler : IDisposable
     
     private Span<byte> GetBuffer(int minimumSize)
     {
-        if (_buffer.Length + SizeInBytes < minimumSize)
+        if (SizeInBytes + minimumSize > _buffer.Length)
         {
             // Resize the buffer to accommodate the new instruction
             var newSize = Math.Max(_buffer.Length * 2, Math.Max(minimumSize, 16));

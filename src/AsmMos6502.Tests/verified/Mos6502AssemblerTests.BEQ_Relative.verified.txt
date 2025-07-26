@@ -1,5 +1,5 @@
 ﻿C000  F0 10      BEQ $16
 
-C002  F0 FD      BEQ LL_01
+C002  F0 DB      BEQ $-37
 
-; F0 10 F0 FD
+; F0 10 F0 DB

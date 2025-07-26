@@ -4,6 +4,7 @@
 
 using System.Diagnostics;
 using System.Reflection.Emit;
+using System.Reflection.Metadata;
 
 namespace AsmMos6502.CodeGen;
 
@@ -497,7 +498,7 @@ internal class GeneratorApp
                 break;
             case "Relative":
                 yield return "0x10"; // Relative address for test
-                yield return "-3";
+                yield return "-37";
                 break;
             case "Accumulator":
                 yield return $"A";
@@ -581,6 +582,32 @@ internal class GeneratorApp
             foreach (var testItem in GetTestVariations(opcode))
             {
                 writer.WriteLine($".{name}({testItem})");
+            }
+
+            writer.WriteLine(".End();");
+            writer.UnIndent();
+
+            writer.WriteLine("await VerifyAsm(asm);");
+
+            writer.CloseBraceBlock();
+
+            writer.WriteLine();
+        }
+
+        {
+            // All tests in a single method for simplicity and checking with existing assemblers
+            writer.WriteLine("[TestMethod]");
+            writer.WriteLine($"public async Task AllInstructions()");
+            writer.OpenBraceBlock();
+            writer.WriteLine("using var asm = new Mos6502Assembler()");
+            writer.Indent();
+            foreach (var opcode in opcodes)
+            {
+                var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
+                foreach (var testItem in GetTestVariations(opcode))
+                {
+                    writer.WriteLine($".{name}({testItem})");
+                }
             }
 
             writer.WriteLine(".End();");

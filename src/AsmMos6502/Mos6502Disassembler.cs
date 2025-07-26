@@ -4,12 +4,14 @@
 
 using System.Buffers;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace AsmMos6502;
 
 public class Mos6502Disassembler
 {
     private readonly Dictionary<ushort, int> _internalLabels;
+    private int _internalLabelId;
     private ushort _currentOffset;
     private readonly Mos6502TryFormatDelegate _tryFormatLabelDelegate;
     private ushort _currentPc;
@@ -61,6 +63,7 @@ public class Mos6502Disassembler
         // And collect any new internal labels from the buffer
         // So that we can create labels for the disassembled instructions
         _internalLabels.Clear();
+        _internalLabelId = 0;
 
         // Create a label for the first instruction if requested
         if (Options.PrintLabelBeforeFirstInstruction)
@@ -68,6 +71,7 @@ public class Mos6502Disassembler
             _internalLabels.Add(0, 1);
         }
 
+        // Resolve all potential labels used by instructions
         int position = 0;
         while (position < buffer.Length)
         {
@@ -90,16 +94,60 @@ public class Mos6502Disassembler
                     addressOffset = instruction.Operand - Options.BaseAddress;
                 }
 
-                if (addressOffset >= 0 && addressOffset <= buffer.Length)
+                if (addressOffset >= 0)
                 {
                     var absoluteOffset = (ushort)addressOffset;
-                    _internalLabels.TryAdd(absoluteOffset, _internalLabels.Count + 1);
+                    ++_internalLabelId;
+                    _internalLabels.TryAdd(absoluteOffset, _internalLabelId);
                 }
             }
 
             position += instructionSizeInBytes;
         }
 
+        // Verify that labels are sorted by offset and check that a label is on a valid offset, otherwise remove it
+        var sortedLabels = _internalLabels.OrderBy(kv => kv.Key).ToList();
+        int sortedIndex = 0;
+
+        position = 0;
+        while (position < buffer.Length)
+        {
+            var instruction = Mos6502Instruction.Decode(buffer.Slice(position));
+            var instructionSizeInBytes = instruction.SizeInBytes;
+
+            if (!instruction.IsValid)
+            {
+                instructionSizeInBytes = 1; // Skip invalid instructions
+            }
+            
+            if (sortedIndex < sortedLabels.Count)
+            {
+                var labelOffset = sortedLabels[sortedIndex].Key;
+
+                if (position == labelOffset)
+                {
+                    // If the current position matches a label offset, we can keep it
+                    sortedIndex++;
+                }
+                else if (position > labelOffset)
+                {
+                    // Remove the label if it is not valid
+                    _internalLabels.Remove(labelOffset);
+                    sortedIndex++;
+                }
+            }
+
+            position += instructionSizeInBytes;
+        }
+
+        // Remove remaining labels not valid
+        for(int i = sortedLabels.Count - 1; i >= sortedIndex; i--)
+        {
+            // Remove any remaining labels that are not valid
+            _internalLabels.Remove(sortedLabels[i].Key);
+        }
+        
+        // Process instructions
         var textBuffer = ArrayPool<char>.Shared.Rent(Options.FormatLineBufferLength);
         try
         {

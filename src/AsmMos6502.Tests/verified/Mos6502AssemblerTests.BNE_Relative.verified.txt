@@ -1,5 +1,5 @@
 ﻿C000  D0 10      BNE $16
 
-C002  D0 FD      BNE LL_01
+C002  D0 DB      BNE $-37
 
-; D0 10 D0 FD
+; D0 10 D0 DB

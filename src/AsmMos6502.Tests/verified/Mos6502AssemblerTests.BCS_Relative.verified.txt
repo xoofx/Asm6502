@@ -1,5 +1,5 @@
 ﻿C000  B0 10      BCS $16
 
-C002  B0 FD      BCS LL_01
+C002  B0 DB      BCS $-37
 
-; B0 10 B0 FD
+; B0 10 B0 DB
