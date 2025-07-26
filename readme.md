@@ -110,6 +110,56 @@ asm.End();                 // Mark the end of the assembly (to resolve labels)
 var buffer = asm.Buffer; // Get the assembled buffer
 ```
 
+Disassembling the same code can be done using the `Mos6502Disassembler` class:
+```csharp
+var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions()
+{
+    PrintLabelBeforeFirstInstruction = false,
+    PrintAddress = true,
+    PrintAssemblyBytes = true,
+});
+
+var asmText = dis.Disassemble(asm.Buffer);
+Console.WriteLine(asmText);
+```
+
+Will generate the following disassembled code:
+
+```
+C000  A6 00      LDX $00
+C002  A4 10      LDY $10
+
+LL_02:
+C004  BD 00 02   LDA $0200,X
+C007  C5 FF      CMP $FF
+C009  F0 06      BEQ LL_01
+
+C00B  18         CLC
+C00C  65 01      ADC $01
+C00E  9D 00 02   STA $0200,X
+
+LL_01:
+C011  E8         INX
+C012  88         DEY
+C013  D0 EF      BNE LL_02
+
+C015  20 1B C0   JSR LL_03
+
+LL_04:
+C018  4C 18 C0   JMP LL_04
+
+LL_03:
+C01B  A6 00      LDX $00
+
+LL_05:
+C01D  8E 20 D0   STX $D020
+C020  E8         INX
+C021  E4 08      CPX $08
+C023  D0 F8      BNE LL_05
+
+C025  60         RTS
+```
+
 For more details on how to use AsmMos6502, please visit the [user guide](https://github.com/xoofx/AsmMos6502/blob/main/doc/readme.md).
 
 ## 🪪 License

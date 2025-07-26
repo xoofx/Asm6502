@@ -1,3 +1,196 @@
 # AsmMos6502 User Guide
 
-This is a default project description.
+This document provides a small user guide for the AsmMos6502 library.
+
+---
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Quick Start](#quick-start)
+  - [Assembling 6502 Code](#assembling-6502-code)
+  - [Disassembling 6502 Code](#disassembling-6502-code)
+- [Assembling 6502 Code](#assembling-6502-code-1)
+  - [Example: Loop with Labels](#example-loop-with-labels)
+  - [Appending Raw Bytes](#appending-raw-bytes)
+- [Disassembling 6502 Code](#disassembling-6502-code-1)
+  - [Basic Disassembly](#basic-disassembly)
+  - [Customizing Output](#customizing-output)
+- [Advanced Usage](#advanced-usage)
+  - [Labels and Branches](#labels-and-branches)
+  - [Appending Raw Bytes](#appending-raw-bytes-1)
+  - [Customizing Disassembly Output](#customizing-disassembly-output)
+- [Tips and Best Practices](#tips-and-best-practices)
+
+---
+
+
+## Quick Start
+
+### Assembling 6502 Code
+
+```csharp
+using AsmMos6502;
+
+// Create an assembler with a base address (e.g., $C000)
+using var asm = new Mos6502Assembler(0xC000);
+
+asm.LDX(0x00);      // LDX #$00
+asm.LDY(0x10);      // LDY #$10
+asm.LDA(0x0200, X); // LDA $0200,X
+asm.STA(0x0200, X); // STA $0200,X
+asm.RTS();          // RTS
+
+asm.End(); // Finalize assembly (resolves labels)
+
+// Get the assembled machine code
+var buffer = asm.Buffer;
+```
+
+### Disassembling 6502 Code
+
+```csharp
+using AsmMos6502;
+
+var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions {
+    PrintLabelBeforeFirstInstruction = false,
+    PrintAddress = true,
+    PrintAssemblyBytes = true,
+});
+
+string asmText = dis.Disassemble(buffer);
+Console.WriteLine(asmText);
+```
+
+---
+
+## Assembling 6502 Code
+
+The `Mos6502Assembler` class provides a fluent API for generating 6502 machine code. Each method corresponds to a 6502 instruction. Labels and branches are supported and resolved automatically.
+
+### Example: Loop with Labels
+
+```csharp
+using var asm = new Mos6502Assembler(0xC000);
+
+asm.Label("START", out var startLabel);
+asm.LDX(0x00);             // X = 0
+asm.LDY(0x10);             // Y = 16
+
+asm.Label("LOOP", out var loopLabel);
+asm.LDA(0x0200, X);        // LDA $0200,X
+asm.CMP(0xFF);             // CMP #$FF
+var skipLabel = new Mos6502Label("SKIP");
+asm.BEQ(skipLabel);        // BEQ SKIP
+asm.CLC();                 // CLC
+asm.ADC(0x01);             // ADC #$01
+asm.STA(0x0200, X);        // STA $0200,X
+asm.Label(skipLabel);
+asm.INX();                 // INX
+asm.DEY();                 // DEY
+asm.BNE(loopLabel);        // BNE LOOP
+asm.Label("END", out var endLabel);
+asm.JMP(endLabel);
+asm.End();
+
+```
+
+### Appending Raw Bytes
+
+You can append arbitrary bytes or fill memory regions:
+
+```csharp
+asm.AppendBuffer([0x01, 0x02, 0x03]); // Appends 3 bytes
+asm.AppendBytes(5, 0xFF);             // Appends 5 bytes of value 0xFF
+```
+
+---
+
+## Disassembling 6502 Code
+
+The `Mos6502Disassembler` class converts machine code back to readable assembly. Output formatting is highly customizable via `Mos6502DisassemblerOptions`.
+
+### Basic Disassembly
+
+```csharp
+var dis = new Mos6502Disassembler();
+string asmText = dis.Disassemble(buffer);
+Console.WriteLine(asmText);
+```
+
+### Customizing Output
+
+Options include:
+- Show addresses and bytes
+- Label formatting
+- Indentation and padding
+- Custom comments
+
+Example:
+
+```csharp
+var options = new Mos6502DisassemblerOptions {
+    PrintAddress = true,
+    PrintAssemblyBytes = true,
+    IndentSize = 4,
+    InstructionTextPaddingLength = 20,
+    PrintLabelBeforeFirstInstruction = false,
+};
+var dis = new Mos6502Disassembler(options);
+```
+
+---
+
+## Advanced Usage
+
+### Labels and Branches
+
+Labels can be created and bound to addresses. Branch instructions (e.g., BEQ, BNE) can reference labels, even forward-declared ones. The assembler will resolve all label addresses when `End()` is called.
+
+```csharp
+asm.Label("LOOP", out var loopLabel);
+asm.BNE(loopLabel);
+```
+
+### Appending Raw Bytes
+
+You can insert arbitrary data into the assembled buffer:
+
+```csharp
+asm.AppendBuffer([0xDE, 0xAD, 0xBE, 0xEF]);
+asm.AppendBytes(16, 0x00); // Fill 16 bytes with zero
+```
+
+### Customizing Disassembly Output
+
+The disassembler supports extensive customization:
+- **Custom label formatting**: Provide a delegate to format labels.
+- **Instruction comments**: Add comments per instruction.
+- **Pre/Post instruction hooks**: Inject text before/after each instruction.
+
+Example:
+
+```csharp
+var options = new Mos6502DisassemblerOptions {
+    TryFormatLabel = (offset, span, out int charsWritten) => {
+        // Custom label formatting logic
+        charsWritten = $"LBL_{offset:X4}".AsSpan().CopyTo(span) ? 9 : 0;
+        return charsWritten > 0;
+    },
+    TryFormatComment = (offset, inst, span, out int charsWritten) => {
+        // Add a comment for each instruction
+        charsWritten = $"; Offset {offset:X4}".AsSpan().CopyTo(span) ? 13 : 0;
+        return charsWritten > 0;
+    }
+};
+```
+
+---
+
+## Tips and Best Practices
+
+- Always call `End()` after assembling to resolve labels and finalize the buffer.
+- Instead of raw addresses you can use labels for all branch targets; the assembler will resolve them.
+- Customize disassembly output for integration with tools or documentation.
+- Use `AppendBuffer` and `AppendBytes` for embedding data or padding.
+- Dispose the assembler (`using var asm = ...`) to release internal buffers.
