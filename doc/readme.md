@@ -47,6 +47,26 @@ asm.End(); // Finalize assembly (resolves labels)
 var buffer = asm.Buffer;
 ```
 
+With a more fluent syntax:
+```csharp
+using AsmMos6502;
+
+// Create an assembler with a base address (e.g., $C000)
+using var asm = new Mos6502Assembler(0xC000);
+
+asm
+    .LDX(0x00)      // LDX #$00
+    .LDY(0x10)      // LDY #$10
+    .LDA(0x0200, X) // LDA $0200,X
+    .STA(0x0200, X) // STA $0200,X
+    .RTS()          // RTS
+
+    .End(); // Finalize assembly (resolves labels)
+
+// Get the assembled machine code
+var buffer = asm.Buffer;
+```
+
 ### Disassembling 6502 Code
 
 ```csharp
@@ -73,25 +93,25 @@ The `Mos6502Assembler` class provides a fluent API for generating 6502 machine c
 ```csharp
 using var asm = new Mos6502Assembler(0xC000);
 
-asm.Label("START", out var startLabel);
-asm.LDX(0x00);             // X = 0
-asm.LDY(0x10);             // Y = 16
-
-asm.Label("LOOP", out var loopLabel);
-asm.LDA(0x0200, X);        // LDA $0200,X
-asm.CMP(0xFF);             // CMP #$FF
-var skipLabel = new Mos6502Label("SKIP");
-asm.BEQ(skipLabel);        // BEQ SKIP
-asm.CLC();                 // CLC
-asm.ADC(0x01);             // ADC #$01
-asm.STA(0x0200, X);        // STA $0200,X
-asm.Label(skipLabel);
-asm.INX();                 // INX
-asm.DEY();                 // DEY
-asm.BNE(loopLabel);        // BNE LOOP
-asm.Label("END", out var endLabel);
-asm.JMP(endLabel);
-asm.End();
+asm
+    .Label("START", out var startLabel)
+    .LDX(0x00)             // X = 0
+    .LDY(0x10)             // Y = 16
+    .Label("LOOP", out var loopLabel)
+    .LDA(0x0200, X)        // LDA $0200,X
+    .CMP(0xFF)             // CMP #$FF
+    .ForwardLabel("SKIP", out var skipLabel)
+    .BEQ(skipLabel)        // BEQ SKIP
+    .CLC()                 // CLC
+    .ADC(0x01)             // ADC #$01
+    .STA(0x0200, X)        // STA $0200,X
+    .Label(skipLabel)
+    .INX()                 // INX
+    .DEY()                 // DEY
+    .BNE(loopLabel)        // BNE LOOP
+    .Label("END", out var endLabel)
+    .JMP(endLabel)
+    .End();
 
 ```
 
@@ -100,8 +120,9 @@ asm.End();
 You can append arbitrary bytes or fill memory regions:
 
 ```csharp
-asm.AppendBuffer([0x01, 0x02, 0x03]); // Appends 3 bytes
-asm.AppendBytes(5, 0xFF);             // Appends 5 bytes of value 0xFF
+asm
+    .AppendBuffer([0x01, 0x02, 0x03])  // Appends 3 bytes
+    .AppendBytes(5, 0xFF);             // Appends 5 bytes of value 0xFF
 ```
 
 ---
@@ -148,17 +169,18 @@ var dis = new Mos6502Disassembler(options);
 Labels can be created and bound to addresses. Branch instructions (e.g., BEQ, BNE) can reference labels, even forward-declared ones. The assembler will resolve all label addresses when `End()` is called.
 
 ```csharp
-asm.Label("LOOP", out var loopLabel);
-asm.BNE(loopLabel);
+asm
+    .Label("LOOP", out var loopLabel)
+    .BNE(loopLabel);
 ```
 
-### Appending Raw Bytes
-
-You can insert arbitrary data into the assembled buffer:
-
+You can also create forward labels that are resolved later:
 ```csharp
-asm.AppendBuffer([0xDE, 0xAD, 0xBE, 0xEF]);
-asm.AppendBytes(16, 0x00); // Fill 16 bytes with zero
+asm
+    .ForwardLabel("SKIP", out var skipLabel)
+    .BEQ(skipLabel)    // Branch to SKIP if condition met
+    .LDA(0xFF)         // Load accumulator with 0xFF
+    .Label(skipLabel)  // Bind SKIP label later
 ```
 
 ### Customizing Disassembly Output

@@ -179,6 +179,18 @@ public partial class Mos6502Assembler : IDisposable
     }
 
     /// <summary>
+    /// Creates a new forward label with a specified name that will need to be bound later via <see cref="Label(AsmMos6502.Mos6502Label,bool)"/>.
+    /// </summary>
+    /// <param name="name">The name of the label.</param>
+    /// <param name="label">The label identifier (output).</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502Assembler LabelForward(string? name, out Mos6502Label label)
+    {
+        label = new Mos6502Label(name); // Create an anonymous label
+        return this;
+    }
+
+    /// <summary>
     /// Adds an instruction to the assembler.
     /// </summary>
     /// <param name="instruction">The instruction to add.</param>

@@ -68,49 +68,50 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmBase
         // Start address (for example, on C64 this is an available memory area)
         using var asm = new Mos6502Assembler(0xc000);
 
-        asm.Label("START", out var startLabel);
-        asm.LDX(0x00);             // X = 0, index into buffer
-        asm.LDY(0x10);             // Y = 16, number of bytes to process
+        asm
+            .Label("START", out var startLabel)
+            .LDX(0x00)             // X = 0, index into buffer
+            .LDY(0x10)             // Y = 16, number of bytes to process
 
-        asm.Label("LOOP", out var loopLabel);
-        asm.LDA(0x0200, X);        // Load byte at $0200 + X
-        asm.CMP(0xFF);             // Check if byte is already 0xFF
-        var skipLabel = new Mos6502Label("SKIP");
-        asm.BEQ(skipLabel);        // If so, skip incrementing
+            .Label("LOOP", out var loopLabel)
+            .LDA(0x0200, X) // Load byte at $0200 + X
+            .CMP(0xFF)             // Check if byte is already 0xFF
 
-        asm.CLC();                 // Clear carry before addition
-        asm.ADC(0x01);             // Add 1
-        asm.STA(0x0200, X);        // Store result back to memory
+            .LabelForward("SKIP", out var skipLabel)
+            .BEQ(skipLabel)        // If so, skip incrementing
+            .CLC()                 // Clear carry before addition
+            .ADC(0x01)             // Add 1
+            .STA(0x0200, X) // Store result back to memory
 
-        asm.Label(skipLabel);      // X = X + 1
-        asm.INX();
-        asm.DEY();                 // Y = Y - 1
-        asm.BNE(loopLabel);        // Loop until Y == 0
+            .Label(skipLabel)      // X = X + 1
+            .INX()
+            .DEY()                 // Y = Y - 1
+            .BNE(loopLabel)        // Loop until Y == 0
 
-        // Call subroutine to flash border color
-        var flashBorderLabel = new Mos6502Label("FLASH_BORDER");
-        asm.JSR(flashBorderLabel);
+            // Call subroutine to flash border color
+            .LabelForward("FLASH_BORDER", out var flashBorderLabel)
+            .JSR(flashBorderLabel)
 
-        // Infinite loop
-        asm.Label("END", out var endLabel);
-        asm.JMP(endLabel);
+            // Infinite loop
+            .Label("END", out var endLabel)
+            .JMP(endLabel)
 
-        // ------------------------------
-        // Subroutine: FLASH_BORDER
-        // Cycles border color between 0–7
-        // (Useful on C64, otherwise dummy)
-        // ------------------------------
-        asm.Label(flashBorderLabel);
-        asm.LDX(0x00);
+            // ------------------------------
+            // Subroutine: FLASH_BORDER
+            // Cycles border color between 0–7
+            // (Useful on C64, otherwise dummy)
+            // -----------------------------
+            .Label(flashBorderLabel)
+            .LDX(0x00)
 
-        asm.Label("FLASH_LOOP", out var flashLoopLabel);
-        asm.STX(0xD020);           // C64 border color register
-        asm.INX();
-        asm.CPX(0x08);
-        asm.BNE(flashLoopLabel);
-        asm.RTS();
+            .Label("FLASH_LOOP", out var flashLoopLabel)
+            .STX(0xD020) // C64 border color register
+            .INX()
+            .CPX(0x08)
+            .BNE(flashLoopLabel)
+            .RTS()
 
-        asm.End();                 // Mark the end of the assembly (to resolve labels)
+            .End();                 // Mark the end of the assembly (to resolve labels)
 
         await VerifyAsm(asm);
     }
