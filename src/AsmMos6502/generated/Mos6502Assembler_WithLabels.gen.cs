@@ -15,282 +15,282 @@ namespace AsmMos6502;
 partial class Mos6502Assembler
 {
     /// <summary>
-    /// Add with carry. ADC instruction with addressing mode AbsoluteX.
+    /// Add with carry. ADC instruction (0x7d) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ADC(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.ADC((ushort)address.Address, x), address);
     /// <summary>
-    /// Add with carry. ADC instruction with addressing mode AbsoluteY.
+    /// Add with carry. ADC instruction (0x79) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler ADC(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.ADC((ushort)address.Address, y), address);
     /// <summary>
-    /// Add with carry. ADC instruction with addressing mode Absolute.
+    /// Add with carry. ADC instruction (0x6d) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler ADC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ADC((ushort)address.Address), address);
     /// <summary>
-    /// Logical AND. AND instruction with addressing mode AbsoluteX.
+    /// Logical AND. AND instruction (0x3d) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler AND(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.AND((ushort)address.Address, x), address);
     /// <summary>
-    /// Logical AND. AND instruction with addressing mode AbsoluteY.
+    /// Logical AND. AND instruction (0x39) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler AND(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.AND((ushort)address.Address, y), address);
     /// <summary>
-    /// Logical AND. AND instruction with addressing mode Absolute.
+    /// Logical AND. AND instruction (0x2d) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler AND(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.AND((ushort)address.Address), address);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction with addressing mode AbsoluteX.
+    /// Arithmetic shift left. ASL instruction (0x1e) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ASL(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.ASL((ushort)address.Address, x), address);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction with addressing mode Absolute.
+    /// Arithmetic shift left. ASL instruction (0x0e) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler ASL(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ASL((ushort)address.Address), address);
     /// <summary>
-    /// Branch if carry clear. BCC instruction with addressing mode Relative.
+    /// Branch if carry clear. BCC instruction (0x90) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BCC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BCC((sbyte)address.Address), address);
     /// <summary>
-    /// Branch if carry set. BCS instruction with addressing mode Relative.
+    /// Branch if carry set. BCS instruction (0xb0) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BCS(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BCS((sbyte)address.Address), address);
     /// <summary>
-    /// Branch if equal. BEQ instruction with addressing mode Relative.
+    /// Branch if equal. BEQ instruction (0xf0) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BEQ(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BEQ((sbyte)address.Address), address);
     /// <summary>
-    /// Bit test. BIT instruction with addressing mode Absolute.
+    /// Bit test. BIT instruction (0x2c) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler BIT(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BIT((ushort)address.Address), address);
     /// <summary>
-    /// Branch if minus. BMI instruction with addressing mode Relative.
+    /// Branch if minus. BMI instruction (0x30) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BMI(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BMI((sbyte)address.Address), address);
     /// <summary>
-    /// Branch if not equal. BNE instruction with addressing mode Relative.
+    /// Branch if not equal. BNE instruction (0xd0) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BNE(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BNE((sbyte)address.Address), address);
     /// <summary>
-    /// Branch if positive. BPL instruction with addressing mode Relative.
+    /// Branch if positive. BPL instruction (0x10) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BPL(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BPL((sbyte)address.Address), address);
     /// <summary>
-    /// Branch if overflow clear. BVC instruction with addressing mode Relative.
+    /// Branch if overflow clear. BVC instruction (0x50) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BVC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BVC((sbyte)address.Address), address);
     /// <summary>
-    /// Branch if overflow set. BVS instruction with addressing mode Relative.
+    /// Branch if overflow set. BVS instruction (0x70) with addressing mode Relative.
     /// </summary>
     public Mos6502Assembler BVS(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BVS((sbyte)address.Address), address);
     /// <summary>
-    /// Compare. CMP instruction with addressing mode AbsoluteX.
+    /// Compare. CMP instruction (0xdd) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler CMP(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.CMP((ushort)address.Address, x), address);
     /// <summary>
-    /// Compare. CMP instruction with addressing mode AbsoluteY.
+    /// Compare. CMP instruction (0xd9) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler CMP(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.CMP((ushort)address.Address, y), address);
     /// <summary>
-    /// Compare. CMP instruction with addressing mode Absolute.
+    /// Compare. CMP instruction (0xcd) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler CMP(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.CMP((ushort)address.Address), address);
     /// <summary>
-    /// Compare X register. CPX instruction with addressing mode Absolute.
+    /// Compare X register. CPX instruction (0xec) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler CPX(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.CPX((ushort)address.Address), address);
     /// <summary>
-    /// Compare Y register. CPY instruction with addressing mode Absolute.
+    /// Compare Y register. CPY instruction (0xcc) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler CPY(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.CPY((ushort)address.Address), address);
     /// <summary>
-    /// Decrement memory. DEC instruction with addressing mode AbsoluteX.
+    /// Decrement memory. DEC instruction (0xde) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler DEC(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.DEC((ushort)address.Address, x), address);
     /// <summary>
-    /// Decrement memory. DEC instruction with addressing mode Absolute.
+    /// Decrement memory. DEC instruction (0xce) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler DEC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.DEC((ushort)address.Address), address);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction with addressing mode AbsoluteX.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x5d) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler EOR(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.EOR((ushort)address.Address, x), address);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction with addressing mode AbsoluteY.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x59) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler EOR(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.EOR((ushort)address.Address, y), address);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction with addressing mode Absolute.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x4d) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler EOR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.EOR((ushort)address.Address), address);
     /// <summary>
-    /// Increment memory. INC instruction with addressing mode AbsoluteX.
+    /// Increment memory. INC instruction (0xfe) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler INC(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.INC((ushort)address.Address, x), address);
     /// <summary>
-    /// Increment memory. INC instruction with addressing mode Absolute.
+    /// Increment memory. INC instruction (0xee) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler INC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.INC((ushort)address.Address), address);
     /// <summary>
-    /// Unconditional Jump. JMP instruction with addressing mode Indirect.
+    /// Unconditional Jump. JMP instruction (0x6c) with addressing mode Indirect.
     /// </summary>
     public Mos6502Assembler JMP(Mos6502IndirectLabel address)
         => AddInstruction(Mos6502InstructionFactory.JMP(new Mos6502Indirect((byte)address.ZpLabel.Address)), address.ZpLabel);
     /// <summary>
-    /// Unconditional Jump. JMP instruction with addressing mode Absolute.
+    /// Unconditional Jump. JMP instruction (0x4c) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler JMP(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.JMP((ushort)address.Address), address);
     /// <summary>
-    /// Jump to subroutine. JSR instruction with addressing mode Absolute.
+    /// Jump to subroutine. JSR instruction (0x20) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler JSR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.JSR((ushort)address.Address), address);
     /// <summary>
-    /// Load accumulator. LDA instruction with addressing mode AbsoluteX.
+    /// Load accumulator. LDA instruction (0xbd) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler LDA(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.LDA((ushort)address.Address, x), address);
     /// <summary>
-    /// Load accumulator. LDA instruction with addressing mode AbsoluteY.
+    /// Load accumulator. LDA instruction (0xb9) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler LDA(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.LDA((ushort)address.Address, y), address);
     /// <summary>
-    /// Load accumulator. LDA instruction with addressing mode Absolute.
+    /// Load accumulator. LDA instruction (0xad) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler LDA(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.LDA((ushort)address.Address), address);
     /// <summary>
-    /// Load X register. LDX instruction with addressing mode AbsoluteY.
+    /// Load X register. LDX instruction (0xbe) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler LDX(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.LDX((ushort)address.Address, y), address);
     /// <summary>
-    /// Load X register. LDX instruction with addressing mode Absolute.
+    /// Load X register. LDX instruction (0xae) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler LDX(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.LDX((ushort)address.Address), address);
     /// <summary>
-    /// Load Y register. LDY instruction with addressing mode AbsoluteX.
+    /// Load Y register. LDY instruction (0xbc) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler LDY(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.LDY((ushort)address.Address, x), address);
     /// <summary>
-    /// Load Y register. LDY instruction with addressing mode Absolute.
+    /// Load Y register. LDY instruction (0xac) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler LDY(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.LDY((ushort)address.Address), address);
     /// <summary>
-    /// Logical shift right. LSR instruction with addressing mode AbsoluteX.
+    /// Logical shift right. LSR instruction (0x5e) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler LSR(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.LSR((ushort)address.Address, x), address);
     /// <summary>
-    /// Logical shift right. LSR instruction with addressing mode Absolute.
+    /// Logical shift right. LSR instruction (0x4e) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler LSR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.LSR((ushort)address.Address), address);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction with addressing mode AbsoluteX.
+    /// Logical Inclusive OR. ORA instruction (0x1d) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ORA(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.ORA((ushort)address.Address, x), address);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction with addressing mode AbsoluteY.
+    /// Logical Inclusive OR. ORA instruction (0x19) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler ORA(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.ORA((ushort)address.Address, y), address);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction with addressing mode Absolute.
+    /// Logical Inclusive OR. ORA instruction (0x0d) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler ORA(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ORA((ushort)address.Address), address);
     /// <summary>
-    /// Rotate left. ROL instruction with addressing mode AbsoluteX.
+    /// Rotate left. ROL instruction (0x3e) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ROL(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.ROL((ushort)address.Address, x), address);
     /// <summary>
-    /// Rotate left. ROL instruction with addressing mode Absolute.
+    /// Rotate left. ROL instruction (0x2e) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler ROL(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ROL((ushort)address.Address), address);
     /// <summary>
-    /// Rotate right. ROR instruction with addressing mode AbsoluteX.
+    /// Rotate right. ROR instruction (0x7e) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ROR(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.ROR((ushort)address.Address, x), address);
     /// <summary>
-    /// Rotate right. ROR instruction with addressing mode Absolute.
+    /// Rotate right. ROR instruction (0x6e) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler ROR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ROR((ushort)address.Address), address);
     /// <summary>
-    /// Subtract with carry. SBC instruction with addressing mode AbsoluteX.
+    /// Subtract with carry. SBC instruction (0xfd) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler SBC(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.SBC((ushort)address.Address, x), address);
     /// <summary>
-    /// Subtract with carry. SBC instruction with addressing mode AbsoluteY.
+    /// Subtract with carry. SBC instruction (0xf9) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler SBC(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.SBC((ushort)address.Address, y), address);
     /// <summary>
-    /// Subtract with carry. SBC instruction with addressing mode Absolute.
+    /// Subtract with carry. SBC instruction (0xed) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler SBC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.SBC((ushort)address.Address), address);
     /// <summary>
-    /// Store accumulator. STA instruction with addressing mode AbsoluteX.
+    /// Store accumulator. STA instruction (0x9d) with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler STA(Mos6502Label address, Mos6502RegisterX x)
         => AddInstruction(Mos6502InstructionFactory.STA((ushort)address.Address, x), address);
     /// <summary>
-    /// Store accumulator. STA instruction with addressing mode AbsoluteY.
+    /// Store accumulator. STA instruction (0x99) with addressing mode AbsoluteY.
     /// </summary>
     public Mos6502Assembler STA(Mos6502Label address, Mos6502RegisterY y)
         => AddInstruction(Mos6502InstructionFactory.STA((ushort)address.Address, y), address);
     /// <summary>
-    /// Store accumulator. STA instruction with addressing mode Absolute.
+    /// Store accumulator. STA instruction (0x8d) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler STA(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.STA((ushort)address.Address), address);
     /// <summary>
-    /// Store X register. STX instruction with addressing mode Absolute.
+    /// Store X register. STX instruction (0x8e) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler STX(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.STX((ushort)address.Address), address);
     /// <summary>
-    /// Store Y register. STY instruction with addressing mode Absolute.
+    /// Store Y register. STY instruction (0x8c) with addressing mode Absolute.
     /// </summary>
     public Mos6502Assembler STY(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.STY((ushort)address.Address), address);

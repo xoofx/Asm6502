@@ -329,8 +329,8 @@ internal class GeneratorApp
         {
             var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
             var mode = modes.First(x => x.Kind == opcode.AddressingMode);
-            writer.WriteSummary($"Creates the {opcode.Name} ({opcode.OpcodeHex}) instruction with addressing mode {opcode.AddressingMode}.");
-            writer.WriteDoc([$"<remarks>Cycles: {opcode.Cycles}, Size: {mode.SizeBytes} bytes</remarks>"]);
+            writer.WriteSummary($"Creates the {opcode.Name} instruction ({opcode.OpcodeHex}) instruction with addressing mode {opcode.AddressingMode}.");
+            writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {mode.SizeBytes} bytes</remarks>"]);
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             writer.Write($"public static Mos6502Instruction {signature} => new (Mos6502OpCode.{opcode.Name}_{opcode.AddressingMode}");
 
@@ -372,7 +372,7 @@ internal class GeneratorApp
         {
             var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
             var mode = modes.First(x => x.Kind == opcode.AddressingMode);
-            writer.WriteSummary($"Adds the {opcode.Name} ({opcode.OpcodeHex}) instruction with addressing mode {opcode.AddressingMode}.");
+            writer.WriteSummary($"{opcode.NameLong}. {opcode.Name} instruction ({opcode.OpcodeHex}) with addressing mode {opcode.AddressingMode}.");
             writer.WriteDoc([$"<remarks>Cycles: {opcode.Cycles}, Size: {mode.SizeBytes} bytes</remarks>"]);
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             writer.Write($"public Mos6502Assembler {signature} => AddInstruction(Mos6502InstructionFactory.{name}(");
@@ -446,7 +446,7 @@ internal class GeneratorApp
                 var signature = signaturePair.Key;
                 var (opcode, operands) = signaturePair.Value;
 
-                writer.WriteSummary($"{opcode.NameLong}. {mnemonic} instruction with addressing mode {opcode.AddressingMode}.");
+                writer.WriteSummary($"{opcode.NameLong}. {mnemonic} instruction ({opcode.OpcodeHex}) with addressing mode {opcode.AddressingMode}.");
                 writer.WriteLine($"public Mos6502Assembler {signature}");
                 writer.Indent();
 

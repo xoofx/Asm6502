@@ -15,1057 +15,1057 @@ namespace AsmMos6502;
 partial class Mos6502Assembler
 {
     /// <summary>
-    /// Adds the ADC (0x6d) instruction with addressing mode Absolute.
+    /// Add with carry. ADC instruction (0x6d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(ushort address) => AddInstruction(Mos6502InstructionFactory.ADC(address));
     
     /// <summary>
-    /// Adds the ADC (0x7d) instruction with addressing mode AbsoluteX.
+    /// Add with carry. ADC instruction (0x7d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ADC(address, x));
     
     /// <summary>
-    /// Adds the ADC (0x79) instruction with addressing mode AbsoluteY.
+    /// Add with carry. ADC instruction (0x79) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ADC(address, y));
     
     /// <summary>
-    /// Adds the ADC (0x69) instruction with addressing mode Immediate.
+    /// Add with carry. ADC instruction (0x69) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.ADC_Imm(immediate));
     
     /// <summary>
-    /// Adds the ADC (0x61) instruction with addressing mode IndirectX.
+    /// Add with carry. ADC instruction (0x61) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.ADC(indirect));
     
     /// <summary>
-    /// Adds the ADC (0x71) instruction with addressing mode IndirectY.
+    /// Add with carry. ADC instruction (0x71) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ADC(indirect, y));
     
     /// <summary>
-    /// Adds the ADC (0x65) instruction with addressing mode ZeroPage.
+    /// Add with carry. ADC instruction (0x65) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.ADC(zeroPage));
     
     /// <summary>
-    /// Adds the ADC (0x75) instruction with addressing mode ZeroPageX.
+    /// Add with carry. ADC instruction (0x75) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ADC(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ADC(zeroPage, x));
     
     /// <summary>
-    /// Adds the AND (0x2d) instruction with addressing mode Absolute.
+    /// Logical AND. AND instruction (0x2d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(ushort address) => AddInstruction(Mos6502InstructionFactory.AND(address));
     
     /// <summary>
-    /// Adds the AND (0x3d) instruction with addressing mode AbsoluteX.
+    /// Logical AND. AND instruction (0x3d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.AND(address, x));
     
     /// <summary>
-    /// Adds the AND (0x39) instruction with addressing mode AbsoluteY.
+    /// Logical AND. AND instruction (0x39) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.AND(address, y));
     
     /// <summary>
-    /// Adds the AND (0x29) instruction with addressing mode Immediate.
+    /// Logical AND. AND instruction (0x29) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.AND_Imm(immediate));
     
     /// <summary>
-    /// Adds the AND (0x21) instruction with addressing mode IndirectX.
+    /// Logical AND. AND instruction (0x21) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.AND(indirect));
     
     /// <summary>
-    /// Adds the AND (0x31) instruction with addressing mode IndirectY.
+    /// Logical AND. AND instruction (0x31) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.AND(indirect, y));
     
     /// <summary>
-    /// Adds the AND (0x25) instruction with addressing mode ZeroPage.
+    /// Logical AND. AND instruction (0x25) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.AND(zeroPage));
     
     /// <summary>
-    /// Adds the AND (0x35) instruction with addressing mode ZeroPageX.
+    /// Logical AND. AND instruction (0x35) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler AND(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.AND(zeroPage, x));
     
     /// <summary>
-    /// Adds the ASL (0x0e) instruction with addressing mode Absolute.
+    /// Arithmetic shift left. ASL instruction (0x0e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ASL(ushort address) => AddInstruction(Mos6502InstructionFactory.ASL(address));
     
     /// <summary>
-    /// Adds the ASL (0x1e) instruction with addressing mode AbsoluteX.
+    /// Arithmetic shift left. ASL instruction (0x1e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ASL(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ASL(address, x));
     
     /// <summary>
-    /// Adds the ASL (0x0a) instruction with addressing mode Accumulator.
+    /// Arithmetic shift left. ASL instruction (0x0a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ASL(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => AddInstruction(Mos6502InstructionFactory.ASL(accumulator));
     
     /// <summary>
-    /// Adds the ASL (0x06) instruction with addressing mode ZeroPage.
+    /// Arithmetic shift left. ASL instruction (0x06) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ASL(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.ASL(zeroPage));
     
     /// <summary>
-    /// Adds the ASL (0x16) instruction with addressing mode ZeroPageX.
+    /// Arithmetic shift left. ASL instruction (0x16) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ASL(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ASL(zeroPage, x));
     
     /// <summary>
-    /// Adds the BCC (0x90) instruction with addressing mode Relative.
+    /// Branch if carry clear. BCC instruction (0x90) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BCC(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BCC(relativeAddress));
     
     /// <summary>
-    /// Adds the BCS (0xb0) instruction with addressing mode Relative.
+    /// Branch if carry set. BCS instruction (0xb0) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BCS(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BCS(relativeAddress));
     
     /// <summary>
-    /// Adds the BEQ (0xf0) instruction with addressing mode Relative.
+    /// Branch if equal. BEQ instruction (0xf0) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BEQ(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BEQ(relativeAddress));
     
     /// <summary>
-    /// Adds the BIT (0x2c) instruction with addressing mode Absolute.
+    /// Bit test. BIT instruction (0x2c) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BIT(ushort address) => AddInstruction(Mos6502InstructionFactory.BIT(address));
     
     /// <summary>
-    /// Adds the BIT (0x24) instruction with addressing mode ZeroPage.
+    /// Bit test. BIT instruction (0x24) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BIT(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.BIT(zeroPage));
     
     /// <summary>
-    /// Adds the BMI (0x30) instruction with addressing mode Relative.
+    /// Branch if minus. BMI instruction (0x30) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BMI(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BMI(relativeAddress));
     
     /// <summary>
-    /// Adds the BNE (0xd0) instruction with addressing mode Relative.
+    /// Branch if not equal. BNE instruction (0xd0) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BNE(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BNE(relativeAddress));
     
     /// <summary>
-    /// Adds the BPL (0x10) instruction with addressing mode Relative.
+    /// Branch if positive. BPL instruction (0x10) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BPL(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BPL(relativeAddress));
     
     /// <summary>
-    /// Adds the BRK (0x00) instruction with addressing mode Implied.
+    /// Break / Software Interrupt. BRK instruction (0x00) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BRK() => AddInstruction(Mos6502InstructionFactory.BRK());
     
     /// <summary>
-    /// Adds the BVC (0x50) instruction with addressing mode Relative.
+    /// Branch if overflow clear. BVC instruction (0x50) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BVC(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BVC(relativeAddress));
     
     /// <summary>
-    /// Adds the BVS (0x70) instruction with addressing mode Relative.
+    /// Branch if overflow set. BVS instruction (0x70) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler BVS(sbyte relativeAddress) => AddInstruction(Mos6502InstructionFactory.BVS(relativeAddress));
     
     /// <summary>
-    /// Adds the CLC (0x18) instruction with addressing mode Implied.
+    /// Clear carry. CLC instruction (0x18) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CLC() => AddInstruction(Mos6502InstructionFactory.CLC());
     
     /// <summary>
-    /// Adds the CLD (0xd8) instruction with addressing mode Implied.
+    /// Clear decimal mode. CLD instruction (0xd8) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CLD() => AddInstruction(Mos6502InstructionFactory.CLD());
     
     /// <summary>
-    /// Adds the CLI (0x58) instruction with addressing mode Implied.
+    /// Clear interrupt disable. CLI instruction (0x58) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CLI() => AddInstruction(Mos6502InstructionFactory.CLI());
     
     /// <summary>
-    /// Adds the CLV (0xb8) instruction with addressing mode Implied.
+    /// Clear overflow flag. CLV instruction (0xb8) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CLV() => AddInstruction(Mos6502InstructionFactory.CLV());
     
     /// <summary>
-    /// Adds the CMP (0xcd) instruction with addressing mode Absolute.
+    /// Compare. CMP instruction (0xcd) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(ushort address) => AddInstruction(Mos6502InstructionFactory.CMP(address));
     
     /// <summary>
-    /// Adds the CMP (0xdd) instruction with addressing mode AbsoluteX.
+    /// Compare. CMP instruction (0xdd) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.CMP(address, x));
     
     /// <summary>
-    /// Adds the CMP (0xd9) instruction with addressing mode AbsoluteY.
+    /// Compare. CMP instruction (0xd9) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.CMP(address, y));
     
     /// <summary>
-    /// Adds the CMP (0xc9) instruction with addressing mode Immediate.
+    /// Compare. CMP instruction (0xc9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.CMP_Imm(immediate));
     
     /// <summary>
-    /// Adds the CMP (0xc1) instruction with addressing mode IndirectX.
+    /// Compare. CMP instruction (0xc1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.CMP(indirect));
     
     /// <summary>
-    /// Adds the CMP (0xd1) instruction with addressing mode IndirectY.
+    /// Compare. CMP instruction (0xd1) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.CMP(indirect, y));
     
     /// <summary>
-    /// Adds the CMP (0xc5) instruction with addressing mode ZeroPage.
+    /// Compare. CMP instruction (0xc5) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.CMP(zeroPage));
     
     /// <summary>
-    /// Adds the CMP (0xd5) instruction with addressing mode ZeroPageX.
+    /// Compare. CMP instruction (0xd5) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CMP(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.CMP(zeroPage, x));
     
     /// <summary>
-    /// Adds the CPX (0xec) instruction with addressing mode Absolute.
+    /// Compare X register. CPX instruction (0xec) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CPX(ushort address) => AddInstruction(Mos6502InstructionFactory.CPX(address));
     
     /// <summary>
-    /// Adds the CPX (0xe0) instruction with addressing mode Immediate.
+    /// Compare X register. CPX instruction (0xe0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CPX_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.CPX_Imm(immediate));
     
     /// <summary>
-    /// Adds the CPX (0xe4) instruction with addressing mode ZeroPage.
+    /// Compare X register. CPX instruction (0xe4) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CPX(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.CPX(zeroPage));
     
     /// <summary>
-    /// Adds the CPY (0xcc) instruction with addressing mode Absolute.
+    /// Compare Y register. CPY instruction (0xcc) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CPY(ushort address) => AddInstruction(Mos6502InstructionFactory.CPY(address));
     
     /// <summary>
-    /// Adds the CPY (0xc0) instruction with addressing mode Immediate.
+    /// Compare Y register. CPY instruction (0xc0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CPY_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.CPY_Imm(immediate));
     
     /// <summary>
-    /// Adds the CPY (0xc4) instruction with addressing mode ZeroPage.
+    /// Compare Y register. CPY instruction (0xc4) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler CPY(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.CPY(zeroPage));
     
     /// <summary>
-    /// Adds the DEC (0xce) instruction with addressing mode Absolute.
+    /// Decrement memory. DEC instruction (0xce) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler DEC(ushort address) => AddInstruction(Mos6502InstructionFactory.DEC(address));
     
     /// <summary>
-    /// Adds the DEC (0xde) instruction with addressing mode AbsoluteX.
+    /// Decrement memory. DEC instruction (0xde) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler DEC(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.DEC(address, x));
     
     /// <summary>
-    /// Adds the DEC (0xc6) instruction with addressing mode ZeroPage.
+    /// Decrement memory. DEC instruction (0xc6) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler DEC(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.DEC(zeroPage));
     
     /// <summary>
-    /// Adds the DEC (0xd6) instruction with addressing mode ZeroPageX.
+    /// Decrement memory. DEC instruction (0xd6) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler DEC(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.DEC(zeroPage, x));
     
     /// <summary>
-    /// Adds the DEX (0xca) instruction with addressing mode Implied.
+    /// Decrement X register. DEX instruction (0xca) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler DEX() => AddInstruction(Mos6502InstructionFactory.DEX());
     
     /// <summary>
-    /// Adds the DEY (0x88) instruction with addressing mode Implied.
+    /// Decrement Y register. DEY instruction (0x88) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler DEY() => AddInstruction(Mos6502InstructionFactory.DEY());
     
     /// <summary>
-    /// Adds the EOR (0x4d) instruction with addressing mode Absolute.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x4d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(ushort address) => AddInstruction(Mos6502InstructionFactory.EOR(address));
     
     /// <summary>
-    /// Adds the EOR (0x5d) instruction with addressing mode AbsoluteX.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x5d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.EOR(address, x));
     
     /// <summary>
-    /// Adds the EOR (0x59) instruction with addressing mode AbsoluteY.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x59) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.EOR(address, y));
     
     /// <summary>
-    /// Adds the EOR (0x49) instruction with addressing mode Immediate.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x49) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.EOR_Imm(immediate));
     
     /// <summary>
-    /// Adds the EOR (0x41) instruction with addressing mode IndirectX.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x41) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.EOR(indirect));
     
     /// <summary>
-    /// Adds the EOR (0x51) instruction with addressing mode IndirectY.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x51) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.EOR(indirect, y));
     
     /// <summary>
-    /// Adds the EOR (0x45) instruction with addressing mode ZeroPage.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x45) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.EOR(zeroPage));
     
     /// <summary>
-    /// Adds the EOR (0x55) instruction with addressing mode ZeroPageX.
+    /// Logical Exclusive OR (XOR). EOR instruction (0x55) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler EOR(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.EOR(zeroPage, x));
     
     /// <summary>
-    /// Adds the INC (0xee) instruction with addressing mode Absolute.
+    /// Increment memory. INC instruction (0xee) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler INC(ushort address) => AddInstruction(Mos6502InstructionFactory.INC(address));
     
     /// <summary>
-    /// Adds the INC (0xfe) instruction with addressing mode AbsoluteX.
+    /// Increment memory. INC instruction (0xfe) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler INC(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.INC(address, x));
     
     /// <summary>
-    /// Adds the INC (0xe6) instruction with addressing mode ZeroPage.
+    /// Increment memory. INC instruction (0xe6) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler INC(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.INC(zeroPage));
     
     /// <summary>
-    /// Adds the INC (0xf6) instruction with addressing mode ZeroPageX.
+    /// Increment memory. INC instruction (0xf6) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler INC(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.INC(zeroPage, x));
     
     /// <summary>
-    /// Adds the INX (0xe8) instruction with addressing mode Implied.
+    /// Increment X register. INX instruction (0xe8) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler INX() => AddInstruction(Mos6502InstructionFactory.INX());
     
     /// <summary>
-    /// Adds the INY (0xc8) instruction with addressing mode Implied.
+    /// Increment Y register. INY instruction (0xc8) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler INY() => AddInstruction(Mos6502InstructionFactory.INY());
     
     /// <summary>
-    /// Adds the JMP (0x4c) instruction with addressing mode Absolute.
+    /// Unconditional Jump. JMP instruction (0x4c) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler JMP(ushort address) => AddInstruction(Mos6502InstructionFactory.JMP(address));
     
     /// <summary>
-    /// Adds the JMP (0x6c) instruction with addressing mode Indirect.
+    /// Unconditional Jump. JMP instruction (0x6c) with addressing mode Indirect.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler JMP(Mos6502Indirect indirect) => AddInstruction(Mos6502InstructionFactory.JMP(indirect));
     
     /// <summary>
-    /// Adds the JSR (0x20) instruction with addressing mode Absolute.
+    /// Jump to subroutine. JSR instruction (0x20) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler JSR(ushort address) => AddInstruction(Mos6502InstructionFactory.JSR(address));
     
     /// <summary>
-    /// Adds the LDA (0xad) instruction with addressing mode Absolute.
+    /// Load accumulator. LDA instruction (0xad) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(ushort address) => AddInstruction(Mos6502InstructionFactory.LDA(address));
     
     /// <summary>
-    /// Adds the LDA (0xbd) instruction with addressing mode AbsoluteX.
+    /// Load accumulator. LDA instruction (0xbd) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.LDA(address, x));
     
     /// <summary>
-    /// Adds the LDA (0xb9) instruction with addressing mode AbsoluteY.
+    /// Load accumulator. LDA instruction (0xb9) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.LDA(address, y));
     
     /// <summary>
-    /// Adds the LDA (0xa9) instruction with addressing mode Immediate.
+    /// Load accumulator. LDA instruction (0xa9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.LDA_Imm(immediate));
     
     /// <summary>
-    /// Adds the LDA (0xa1) instruction with addressing mode IndirectX.
+    /// Load accumulator. LDA instruction (0xa1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.LDA(indirect));
     
     /// <summary>
-    /// Adds the LDA (0xb1) instruction with addressing mode IndirectY.
+    /// Load accumulator. LDA instruction (0xb1) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.LDA(indirect, y));
     
     /// <summary>
-    /// Adds the LDA (0xa5) instruction with addressing mode ZeroPage.
+    /// Load accumulator. LDA instruction (0xa5) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.LDA(zeroPage));
     
     /// <summary>
-    /// Adds the LDA (0xb5) instruction with addressing mode ZeroPageX.
+    /// Load accumulator. LDA instruction (0xb5) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDA(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.LDA(zeroPage, x));
     
     /// <summary>
-    /// Adds the LDX (0xae) instruction with addressing mode Absolute.
+    /// Load X register. LDX instruction (0xae) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDX(ushort address) => AddInstruction(Mos6502InstructionFactory.LDX(address));
     
     /// <summary>
-    /// Adds the LDX (0xbe) instruction with addressing mode AbsoluteY.
+    /// Load X register. LDX instruction (0xbe) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDX(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.LDX(address, y));
     
     /// <summary>
-    /// Adds the LDX (0xa2) instruction with addressing mode Immediate.
+    /// Load X register. LDX instruction (0xa2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDX_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.LDX_Imm(immediate));
     
     /// <summary>
-    /// Adds the LDX (0xa6) instruction with addressing mode ZeroPage.
+    /// Load X register. LDX instruction (0xa6) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDX(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.LDX(zeroPage));
     
     /// <summary>
-    /// Adds the LDX (0xb6) instruction with addressing mode ZeroPageY.
+    /// Load X register. LDX instruction (0xb6) with addressing mode ZeroPageY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDX(byte zeroPage, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.LDX(zeroPage, y));
     
     /// <summary>
-    /// Adds the LDY (0xac) instruction with addressing mode Absolute.
+    /// Load Y register. LDY instruction (0xac) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDY(ushort address) => AddInstruction(Mos6502InstructionFactory.LDY(address));
     
     /// <summary>
-    /// Adds the LDY (0xbc) instruction with addressing mode AbsoluteX.
+    /// Load Y register. LDY instruction (0xbc) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDY(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.LDY(address, x));
     
     /// <summary>
-    /// Adds the LDY (0xa0) instruction with addressing mode Immediate.
+    /// Load Y register. LDY instruction (0xa0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDY_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.LDY_Imm(immediate));
     
     /// <summary>
-    /// Adds the LDY (0xa4) instruction with addressing mode ZeroPage.
+    /// Load Y register. LDY instruction (0xa4) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDY(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.LDY(zeroPage));
     
     /// <summary>
-    /// Adds the LDY (0xb4) instruction with addressing mode ZeroPageX.
+    /// Load Y register. LDY instruction (0xb4) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LDY(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.LDY(zeroPage, x));
     
     /// <summary>
-    /// Adds the LSR (0x4e) instruction with addressing mode Absolute.
+    /// Logical shift right. LSR instruction (0x4e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LSR(ushort address) => AddInstruction(Mos6502InstructionFactory.LSR(address));
     
     /// <summary>
-    /// Adds the LSR (0x5e) instruction with addressing mode AbsoluteX.
+    /// Logical shift right. LSR instruction (0x5e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LSR(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.LSR(address, x));
     
     /// <summary>
-    /// Adds the LSR (0x4a) instruction with addressing mode Accumulator.
+    /// Logical shift right. LSR instruction (0x4a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LSR(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => AddInstruction(Mos6502InstructionFactory.LSR(accumulator));
     
     /// <summary>
-    /// Adds the LSR (0x46) instruction with addressing mode ZeroPage.
+    /// Logical shift right. LSR instruction (0x46) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LSR(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.LSR(zeroPage));
     
     /// <summary>
-    /// Adds the LSR (0x56) instruction with addressing mode ZeroPageX.
+    /// Logical shift right. LSR instruction (0x56) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler LSR(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.LSR(zeroPage, x));
     
     /// <summary>
-    /// Adds the NOP (0xea) instruction with addressing mode Implied.
+    /// No operation. NOP instruction (0xea) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler NOP() => AddInstruction(Mos6502InstructionFactory.NOP());
     
     /// <summary>
-    /// Adds the ORA (0x0d) instruction with addressing mode Absolute.
+    /// Logical Inclusive OR. ORA instruction (0x0d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(ushort address) => AddInstruction(Mos6502InstructionFactory.ORA(address));
     
     /// <summary>
-    /// Adds the ORA (0x1d) instruction with addressing mode AbsoluteX.
+    /// Logical Inclusive OR. ORA instruction (0x1d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ORA(address, x));
     
     /// <summary>
-    /// Adds the ORA (0x19) instruction with addressing mode AbsoluteY.
+    /// Logical Inclusive OR. ORA instruction (0x19) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ORA(address, y));
     
     /// <summary>
-    /// Adds the ORA (0x09) instruction with addressing mode Immediate.
+    /// Logical Inclusive OR. ORA instruction (0x09) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.ORA_Imm(immediate));
     
     /// <summary>
-    /// Adds the ORA (0x01) instruction with addressing mode IndirectX.
+    /// Logical Inclusive OR. ORA instruction (0x01) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.ORA(indirect));
     
     /// <summary>
-    /// Adds the ORA (0x11) instruction with addressing mode IndirectY.
+    /// Logical Inclusive OR. ORA instruction (0x11) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ORA(indirect, y));
     
     /// <summary>
-    /// Adds the ORA (0x05) instruction with addressing mode ZeroPage.
+    /// Logical Inclusive OR. ORA instruction (0x05) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.ORA(zeroPage));
     
     /// <summary>
-    /// Adds the ORA (0x15) instruction with addressing mode ZeroPageX.
+    /// Logical Inclusive OR. ORA instruction (0x15) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ORA(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ORA(zeroPage, x));
     
     /// <summary>
-    /// Adds the PHA (0x48) instruction with addressing mode Implied.
+    /// Push accumulator. PHA instruction (0x48) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler PHA() => AddInstruction(Mos6502InstructionFactory.PHA());
     
     /// <summary>
-    /// Adds the PHP (0x08) instruction with addressing mode Implied.
+    /// Push processor status. PHP instruction (0x08) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler PHP() => AddInstruction(Mos6502InstructionFactory.PHP());
     
     /// <summary>
-    /// Adds the PLA (0x68) instruction with addressing mode Implied.
+    /// Pull accumulator. PLA instruction (0x68) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler PLA() => AddInstruction(Mos6502InstructionFactory.PLA());
     
     /// <summary>
-    /// Adds the PLP (0x28) instruction with addressing mode Implied.
+    /// Pull processor status. PLP instruction (0x28) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler PLP() => AddInstruction(Mos6502InstructionFactory.PLP());
     
     /// <summary>
-    /// Adds the ROL (0x2e) instruction with addressing mode Absolute.
+    /// Rotate left. ROL instruction (0x2e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROL(ushort address) => AddInstruction(Mos6502InstructionFactory.ROL(address));
     
     /// <summary>
-    /// Adds the ROL (0x3e) instruction with addressing mode AbsoluteX.
+    /// Rotate left. ROL instruction (0x3e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROL(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ROL(address, x));
     
     /// <summary>
-    /// Adds the ROL (0x2a) instruction with addressing mode Accumulator.
+    /// Rotate left. ROL instruction (0x2a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROL(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => AddInstruction(Mos6502InstructionFactory.ROL(accumulator));
     
     /// <summary>
-    /// Adds the ROL (0x26) instruction with addressing mode ZeroPage.
+    /// Rotate left. ROL instruction (0x26) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROL(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.ROL(zeroPage));
     
     /// <summary>
-    /// Adds the ROL (0x36) instruction with addressing mode ZeroPageX.
+    /// Rotate left. ROL instruction (0x36) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROL(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ROL(zeroPage, x));
     
     /// <summary>
-    /// Adds the ROR (0x6e) instruction with addressing mode Absolute.
+    /// Rotate right. ROR instruction (0x6e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROR(ushort address) => AddInstruction(Mos6502InstructionFactory.ROR(address));
     
     /// <summary>
-    /// Adds the ROR (0x7e) instruction with addressing mode AbsoluteX.
+    /// Rotate right. ROR instruction (0x7e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROR(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ROR(address, x));
     
     /// <summary>
-    /// Adds the ROR (0x6a) instruction with addressing mode Accumulator.
+    /// Rotate right. ROR instruction (0x6a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROR(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => AddInstruction(Mos6502InstructionFactory.ROR(accumulator));
     
     /// <summary>
-    /// Adds the ROR (0x66) instruction with addressing mode ZeroPage.
+    /// Rotate right. ROR instruction (0x66) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROR(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.ROR(zeroPage));
     
     /// <summary>
-    /// Adds the ROR (0x76) instruction with addressing mode ZeroPageX.
+    /// Rotate right. ROR instruction (0x76) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler ROR(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.ROR(zeroPage, x));
     
     /// <summary>
-    /// Adds the RTI (0x40) instruction with addressing mode Implied.
+    /// Return from interrupt. RTI instruction (0x40) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler RTI() => AddInstruction(Mos6502InstructionFactory.RTI());
     
     /// <summary>
-    /// Adds the RTS (0x60) instruction with addressing mode Implied.
+    /// Return from subroutine. RTS instruction (0x60) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler RTS() => AddInstruction(Mos6502InstructionFactory.RTS());
     
     /// <summary>
-    /// Adds the SBC (0xed) instruction with addressing mode Absolute.
+    /// Subtract with carry. SBC instruction (0xed) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(ushort address) => AddInstruction(Mos6502InstructionFactory.SBC(address));
     
     /// <summary>
-    /// Adds the SBC (0xfd) instruction with addressing mode AbsoluteX.
+    /// Subtract with carry. SBC instruction (0xfd) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.SBC(address, x));
     
     /// <summary>
-    /// Adds the SBC (0xf9) instruction with addressing mode AbsoluteY.
+    /// Subtract with carry. SBC instruction (0xf9) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.SBC(address, y));
     
     /// <summary>
-    /// Adds the SBC (0xe9) instruction with addressing mode Immediate.
+    /// Subtract with carry. SBC instruction (0xe9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC_Imm(byte immediate) => AddInstruction(Mos6502InstructionFactory.SBC_Imm(immediate));
     
     /// <summary>
-    /// Adds the SBC (0xe1) instruction with addressing mode IndirectX.
+    /// Subtract with carry. SBC instruction (0xe1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.SBC(indirect));
     
     /// <summary>
-    /// Adds the SBC (0xf1) instruction with addressing mode IndirectY.
+    /// Subtract with carry. SBC instruction (0xf1) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.SBC(indirect, y));
     
     /// <summary>
-    /// Adds the SBC (0xe5) instruction with addressing mode ZeroPage.
+    /// Subtract with carry. SBC instruction (0xe5) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.SBC(zeroPage));
     
     /// <summary>
-    /// Adds the SBC (0xf5) instruction with addressing mode ZeroPageX.
+    /// Subtract with carry. SBC instruction (0xf5) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SBC(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.SBC(zeroPage, x));
     
     /// <summary>
-    /// Adds the SEC (0x38) instruction with addressing mode Implied.
+    /// Set carry. SEC instruction (0x38) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SEC() => AddInstruction(Mos6502InstructionFactory.SEC());
     
     /// <summary>
-    /// Adds the SED (0xf8) instruction with addressing mode Implied.
+    /// Set decimal flag. SED instruction (0xf8) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SED() => AddInstruction(Mos6502InstructionFactory.SED());
     
     /// <summary>
-    /// Adds the SEI (0x78) instruction with addressing mode Implied.
+    /// Set interrupt disable. SEI instruction (0x78) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler SEI() => AddInstruction(Mos6502InstructionFactory.SEI());
     
     /// <summary>
-    /// Adds the STA (0x8d) instruction with addressing mode Absolute.
+    /// Store accumulator. STA instruction (0x8d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(ushort address) => AddInstruction(Mos6502InstructionFactory.STA(address));
     
     /// <summary>
-    /// Adds the STA (0x9d) instruction with addressing mode AbsoluteX.
+    /// Store accumulator. STA instruction (0x9d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(ushort address, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.STA(address, x));
     
     /// <summary>
-    /// Adds the STA (0x99) instruction with addressing mode AbsoluteY.
+    /// Store accumulator. STA instruction (0x99) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(ushort address, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.STA(address, y));
     
     /// <summary>
-    /// Adds the STA (0x81) instruction with addressing mode IndirectX.
+    /// Store accumulator. STA instruction (0x81) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(Mos6502IndirectX indirect) => AddInstruction(Mos6502InstructionFactory.STA(indirect));
     
     /// <summary>
-    /// Adds the STA (0x91) instruction with addressing mode IndirectY.
+    /// Store accumulator. STA instruction (0x91) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.STA(indirect, y));
     
     /// <summary>
-    /// Adds the STA (0x85) instruction with addressing mode ZeroPage.
+    /// Store accumulator. STA instruction (0x85) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.STA(zeroPage));
     
     /// <summary>
-    /// Adds the STA (0x95) instruction with addressing mode ZeroPageX.
+    /// Store accumulator. STA instruction (0x95) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STA(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.STA(zeroPage, x));
     
     /// <summary>
-    /// Adds the STX (0x8e) instruction with addressing mode Absolute.
+    /// Store X register. STX instruction (0x8e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STX(ushort address) => AddInstruction(Mos6502InstructionFactory.STX(address));
     
     /// <summary>
-    /// Adds the STX (0x86) instruction with addressing mode ZeroPage.
+    /// Store X register. STX instruction (0x86) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STX(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.STX(zeroPage));
     
     /// <summary>
-    /// Adds the STX (0x96) instruction with addressing mode ZeroPageY.
+    /// Store X register. STX instruction (0x96) with addressing mode ZeroPageY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STX(byte zeroPage, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.STX(zeroPage, y));
     
     /// <summary>
-    /// Adds the STY (0x8c) instruction with addressing mode Absolute.
+    /// Store Y register. STY instruction (0x8c) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STY(ushort address) => AddInstruction(Mos6502InstructionFactory.STY(address));
     
     /// <summary>
-    /// Adds the STY (0x84) instruction with addressing mode ZeroPage.
+    /// Store Y register. STY instruction (0x84) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STY(byte zeroPage) => AddInstruction(Mos6502InstructionFactory.STY(zeroPage));
     
     /// <summary>
-    /// Adds the STY (0x94) instruction with addressing mode ZeroPageX.
+    /// Store Y register. STY instruction (0x94) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler STY(byte zeroPage, Mos6502RegisterX x) => AddInstruction(Mos6502InstructionFactory.STY(zeroPage, x));
     
     /// <summary>
-    /// Adds the TAX (0xaa) instruction with addressing mode Implied.
+    /// Transfer acc to X. TAX instruction (0xaa) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler TAX() => AddInstruction(Mos6502InstructionFactory.TAX());
     
     /// <summary>
-    /// Adds the TAY (0xa8) instruction with addressing mode Implied.
+    /// Transfer acc to Y. TAY instruction (0xa8) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler TAY() => AddInstruction(Mos6502InstructionFactory.TAY());
     
     /// <summary>
-    /// Adds the TSX (0xba) instruction with addressing mode Implied.
+    /// Transfer stack pointer to X. TSX instruction (0xba) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler TSX() => AddInstruction(Mos6502InstructionFactory.TSX());
     
     /// <summary>
-    /// Adds the TXA (0x8a) instruction with addressing mode Implied.
+    /// Transfer X to acc. TXA instruction (0x8a) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler TXA() => AddInstruction(Mos6502InstructionFactory.TXA());
     
     /// <summary>
-    /// Adds the TXS (0x9a) instruction with addressing mode Implied.
+    /// . TXS instruction (0x9a) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Assembler TXS() => AddInstruction(Mos6502InstructionFactory.TXS());
     
     /// <summary>
-    /// Adds the TYA (0x98) instruction with addressing mode Implied.
+    /// Transfer Y to acc. TYA instruction (0x98) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
