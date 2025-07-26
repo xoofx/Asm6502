@@ -52,35 +52,35 @@ C072  06 FE      ASL $FE
 C074  16 02      ASL $02,X
 C076  16 30      ASL $30,X
 C078  16 FB      ASL $FB,X
-C07A  90 10      BCC LL_09
+C07A  90 10      BCC LL_01
 
 C07C  90 DB      BCC $-37
 
-LL_23:
-C07E  B0 10      BCS LL_11
+LL_14:
+C07E  B0 10      BCS LL_03
 
 C080  B0 DB      BCS $-37
 
-LL_25:
-C082  F0 10      BEQ LL_13
+LL_16:
+C082  F0 10      BEQ LL_05
 
 C084  F0 DB      BEQ $-37
 
 C086  2C 34 12   BIT $1234
 C089  2C 01 FF   BIT $FF01
 
-LL_09:
+LL_01:
 C08C  24 03      BIT $03
 C08E  24 20      BIT $20
 
-LL_11:
+LL_03:
 C090  24 FE      BIT $FE
 C092  30 10      BMI $16
 
-LL_13:
+LL_05:
 C094  30 DB      BMI $-37
 
-C096  D0 10      BNE LL_18
+C096  D0 10      BNE LL_09
 
 C098  D0 DB      BNE $-37
 
@@ -89,24 +89,24 @@ C09A  10 10      BPL $16
 C09C  10 DB      BPL $-37
 
 C09E  00         BRK
-C09F  50 10      BVC LL_22
+C09F  50 10      BVC LL_13
 
-C0A1  50 DB      BVC LL_23
+C0A1  50 DB      BVC LL_14
 
 C0A3  70 10      BVS $16
 
-C0A5  70 DB      BVS LL_25
+C0A5  70 DB      BVS LL_16
 
 C0A7  18         CLC
 
-LL_18:
+LL_09:
 C0A8  D8         CLD
 C0A9  58         CLI
 C0AA  B8         CLV
 C0AB  CD 34 12   CMP $1234
 C0AE  CD 01 FF   CMP $FF01
 
-LL_22:
+LL_13:
 C0B1  DD 34 12   CMP $1234,X
 C0B4  DD 02 FF   CMP $FF02,X
 C0B7  D9 34 12   CMP $1234,Y

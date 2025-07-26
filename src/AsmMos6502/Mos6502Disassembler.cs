@@ -94,7 +94,7 @@ public class Mos6502Disassembler
                     addressOffset = instruction.Operand - Options.BaseAddress;
                 }
 
-                if (addressOffset >= 0)
+                if (addressOffset >= 0 && addressOffset <= buffer.Length)
                 {
                     var absoluteOffset = (ushort)addressOffset;
                     ++_internalLabelId;
@@ -129,7 +129,7 @@ public class Mos6502Disassembler
                     // If the current position matches a label offset, we can keep it
                     sortedIndex++;
                 }
-                else if (position > labelOffset)
+                else if (position > labelOffset && labelOffset < buffer.Length)
                 {
                     // Remove the label if it is not valid
                     _internalLabels.Remove(labelOffset);
@@ -144,7 +144,11 @@ public class Mos6502Disassembler
         for(int i = sortedLabels.Count - 1; i >= sortedIndex; i--)
         {
             // Remove any remaining labels that are not valid
-            _internalLabels.Remove(sortedLabels[i].Key);
+            var offset = sortedLabels[i].Key;
+            if (offset < buffer.Length) // We keep a label right after the last instruction as it is valid
+            {
+                _internalLabels.Remove(sortedLabels[i].Key);
+            }
         }
         
         // Process instructions

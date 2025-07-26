@@ -4,21 +4,6 @@
 
 namespace AsmMos6502.Tests;
 
-public partial class Mos6502AssemblerTests : VerifyBase
+public partial class Mos6502AssemblerTests : VerifyAsmBase
 {
-    private async Task VerifyAsm(Mos6502Assembler asm)
-    {
-        var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions()
-        {
-            PrintLabelBeforeFirstInstruction = false,
-            PrintAddress = true,
-            PrintAssemblyBytes = true,
-        });
-
-        var asmText = dis.Disassemble(asm.Buffer);
-        var allBytes = $"; {string.Join(" ", asm.Buffer.ToArray().Select(x => $"{x:X2}"))}";
-        var text = $"{asmText}{Environment.NewLine}{allBytes}";
-        
-        await Verify(text);
-    }
 }

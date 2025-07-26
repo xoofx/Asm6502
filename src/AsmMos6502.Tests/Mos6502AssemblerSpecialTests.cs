@@ -7,10 +7,10 @@ using static AsmMos6502.Mos6502Factory;
 namespace AsmMos6502.Tests;
 
 [TestClass]
-public class Class1Test
+public class Mos6502AssemblerSpecialTests : VerifyAsmBase
 {
     [TestMethod]
-    public void TestSimple()
+    public async Task TestSimple()
     {
         using var asm = new Mos6502Assembler();
 
@@ -28,14 +28,6 @@ public class Class1Test
             .Label(forwardLabel)
             .End();
 
-        Console.WriteLine(string.Join(" ", asm.Buffer.ToArray().Select(x => $"{x:X2}")));
-
-        var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions()
-        {
-            PrintAddress = true,
-            PrintAssemblyBytes = true,
-        });
-        var text = dis.Disassemble(asm.Buffer);
-        Console.WriteLine(text);
+        await VerifyAsm(asm);
     }
 }

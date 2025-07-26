@@ -14,7 +14,7 @@ using static AsmMos6502.Mos6502Factory;
 namespace AsmMos6502.Tests;
 
 [TestClass]
-public partial class Mos6502AssemblerTests : VerifyBase
+public partial class Mos6502AssemblerTests
 {
     [TestMethod]
     public async Task ADC_Absolute()

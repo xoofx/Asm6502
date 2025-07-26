@@ -566,7 +566,7 @@ internal class GeneratorApp
         writer.WriteLine("namespace AsmMos6502.Tests;");
         writer.WriteLine();
         writer.WriteLine("[TestClass]");
-        writer.WriteLine("public partial class Mos6502AssemblerTests : VerifyBase");
+        writer.WriteLine("public partial class Mos6502AssemblerTests");
         writer.OpenBraceBlock();
 
         foreach (var opcode in opcodes)
