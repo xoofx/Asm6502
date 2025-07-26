@@ -1,0 +1,10 @@
+﻿LDA $42
+LDA $1234
+LDA #$19
+LDA $19,X
+LDA $0019,Y
+ADC ($19,X)
+ADC ($19),Y
+JMP $1234
+JMP ($5678)
+BEQ $-5

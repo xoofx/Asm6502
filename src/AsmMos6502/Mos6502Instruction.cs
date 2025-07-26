@@ -17,30 +17,30 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
     internal Mos6502Instruction(uint raw) => _raw = raw;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal Mos6502Instruction(Mos6502OpCode opCode)
+    public Mos6502Instruction(Mos6502OpCode opCode)
     {
         _raw = ((uint)opCode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal Mos6502Instruction(Mos6502OpCode opCode, sbyte lowByte) : this(opCode, (byte)lowByte)
+    public Mos6502Instruction(Mos6502OpCode opCode, sbyte lowByte) : this(opCode, (byte)lowByte)
     {
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal Mos6502Instruction(Mos6502OpCode opCode, byte lowByte)
+    public Mos6502Instruction(Mos6502OpCode opCode, byte lowByte)
     {
         _raw = ((uint)opCode | ((uint)lowByte << 8));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal Mos6502Instruction(Mos6502OpCode opCode, ushort value)
+    public Mos6502Instruction(Mos6502OpCode opCode, ushort value)
     {
         _raw = ((uint)opCode | ((uint)value << 8));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal Mos6502Instruction(Mos6502OpCode opCode, byte lowByte, byte highByte)
+    public Mos6502Instruction(Mos6502OpCode opCode, byte lowByte, byte highByte)
     {
         _raw = ((uint)opCode | ((uint)lowByte << 8) | ((uint)highByte<< 16));
     }
@@ -63,17 +63,6 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
 
     public byte HighOperand => (byte)(_raw >> 16);
 
-    internal Mos6502AddressKind GetAddressKind()
-    {
-        return AddressingMode switch
-        {
-            Mos6502AddressingMode.Absolute or
-            Mos6502AddressingMode.AbsoluteX or
-            Mos6502AddressingMode.AbsoluteY => Mos6502AddressKind.Absolute,
-            Mos6502AddressingMode.Relative => Mos6502AddressKind.Relative,
-            _ => Mos6502AddressKind.None
-        };
-    }
     
     [UnscopedRef]
     public ReadOnlySpan<byte> AsSpan => MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<uint, byte>(ref Unsafe.AsRef(in _raw)), SizeInBytes);
@@ -120,9 +109,8 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
         return true;
     }
 
-    public static bool operator ==(Mos6502Instruction left, Mos6502Instruction right) => left.Equals(right);
+    public override string ToString() => ToString(null, null);
 
-    public static bool operator !=(Mos6502Instruction left, Mos6502Instruction right) => !left.Equals(right);
 
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
@@ -231,10 +219,20 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
                 throw new InvalidOperationException(); // Should never happen
         }
     }
-
-    public override string ToString()
+    
+    internal Mos6502AddressKind GetAddressKind()
     {
-        return
-            $"{nameof(_raw)}: {_raw}, {nameof(OpCode)}: {OpCode}, {nameof(Mnemonic)}: {Mnemonic}, {nameof(AddressingMode)}: {AddressingMode}, {nameof(SizeInBytes)}: {SizeInBytes}, {nameof(Operand)}: {Operand}, {nameof(LowOperand)}: {LowOperand}, {nameof(HighOperand)}: {HighOperand}";
+        return AddressingMode switch
+        {
+            Mos6502AddressingMode.Absolute or
+                Mos6502AddressingMode.AbsoluteX or
+                Mos6502AddressingMode.AbsoluteY => Mos6502AddressKind.Absolute,
+            Mos6502AddressingMode.Relative => Mos6502AddressKind.Relative,
+            _ => Mos6502AddressKind.None
+        };
     }
+
+    public static bool operator ==(Mos6502Instruction left, Mos6502Instruction right) => left.Equals(right);
+
+    public static bool operator !=(Mos6502Instruction left, Mos6502Instruction right) => !left.Equals(right);
 }
