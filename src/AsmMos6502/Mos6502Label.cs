@@ -13,7 +13,7 @@ public class Mos6502Label
     /// Creates an unbound label with the specified name.
     /// </summary>
     /// <remarks>
-    /// The label needs to be bound to an address with <see cref="Mos6502Assembler.BindLabel"/> before it can be used in an instruction.
+    /// The label needs to be bound to an address with <see cref="Mos6502Assembler.Label(AsmMos6502.Mos6502Label,bool)"/> before it can be used in an instruction.
     /// </remarks>
     /// <param name="name">The name of the label</param>
     public Mos6502Label(string? name = null)
@@ -23,10 +23,10 @@ public class Mos6502Label
     }
 
     /// <summary>
-    /// 
+    /// Creates a bound label with the specified name and address.
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="address"></param>
+    /// <param name="name">The name of the label</param>
+    /// <param name="address">The address of the label</param>
     public Mos6502Label(string? name, ushort address)
     {
         Name = name;

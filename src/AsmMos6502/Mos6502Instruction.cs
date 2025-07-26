@@ -9,72 +9,148 @@ using System.Runtime.InteropServices;
 
 namespace AsmMos6502;
 
+/// <summary>
+/// Represents a single 6502 instruction, including opcode and operands.
+/// </summary>
 public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpanFormattable
 {
     private readonly uint _raw;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Instruction"/> struct from a raw 32-bit value.
+    /// </summary>
+    /// <param name="raw">The raw 32-bit value encoding the instruction.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal Mos6502Instruction(uint raw) => _raw = raw;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Instruction"/> struct with the specified opcode.
+    /// </summary>
+    /// <param name="opCode">The opcode.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Instruction(Mos6502OpCode opCode)
     {
         _raw = ((uint)opCode);
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Instruction"/> struct with the specified opcode and signed operand.
+    /// </summary>
+    /// <param name="opCode">The opcode.</param>
+    /// <param name="lowByte">The signed operand byte.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Instruction(Mos6502OpCode opCode, sbyte lowByte) : this(opCode, (byte)lowByte)
     {
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Instruction"/> struct with the specified opcode and operand.
+    /// </summary>
+    /// <param name="opCode">The opcode.</param>
+    /// <param name="lowByte">The operand byte.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Instruction(Mos6502OpCode opCode, byte lowByte)
     {
         _raw = ((uint)opCode | ((uint)lowByte << 8));
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Instruction"/> struct with the specified opcode and 16-bit operand.
+    /// </summary>
+    /// <param name="opCode">The opcode.</param>
+    /// <param name="value">The 16-bit operand value.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Instruction(Mos6502OpCode opCode, ushort value)
     {
         _raw = ((uint)opCode | ((uint)value << 8));
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Instruction"/> struct with the specified opcode and two operand bytes.
+    /// </summary>
+    /// <param name="opCode">The opcode.</param>
+    /// <param name="lowByte">The low operand byte.</param>
+    /// <param name="highByte">The high operand byte.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Mos6502Instruction(Mos6502OpCode opCode, byte lowByte, byte highByte)
     {
         _raw = ((uint)opCode | ((uint)lowByte << 8) | ((uint)highByte<< 16));
     }
 
+    /// <summary>
+    /// Gets the opcode of the instruction.
+    /// </summary>
     public Mos6502OpCode OpCode => (Mos6502OpCode)(byte)_raw;
 
+    /// <summary>
+    /// Gets the mnemonic for the instruction.
+    /// </summary>
     public Mos6502Mnemonic Mnemonic => OpCode.ToMnemonic();
 
+    /// <summary>
+    /// Gets the addressing mode for the instruction.
+    /// </summary>
     public Mos6502AddressingMode AddressingMode => OpCode.ToAddressingMode();
 
+    /// <summary>
+    /// Gets a value indicating whether the instruction is valid.
+    /// </summary>
     public bool IsValid => AddressingMode != Mos6502AddressingMode.Unknown;
 
+    /// <summary>
+    /// Gets the cycle count for the instruction.
+    /// </summary>
     public int CycleCount => OpCode.ToCycleCount();
 
+    /// <summary>
+    /// Gets the size in bytes of the instruction.
+    /// </summary>
     public int SizeInBytes => AddressingMode.ToSizeInBytes();
 
+    /// <summary>
+    /// Gets the 16-bit operand value.
+    /// </summary>
     public ushort Operand => (ushort)(_raw >> 8);
-    
+
+    /// <summary>
+    /// Gets the low byte of the operand.
+    /// </summary>
     public byte LowOperand => (byte)(_raw >> 8);
 
+    /// <summary>
+    /// Gets the high byte of the operand.
+    /// </summary>
     public byte HighOperand => (byte)(_raw >> 16);
 
-    
+    /// <summary>
+    /// Gets a read-only span representing the instruction bytes.
+    /// </summary>
     [UnscopedRef]
     public ReadOnlySpan<byte> AsSpan => MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<uint, byte>(ref Unsafe.AsRef(in _raw)), SizeInBytes);
 
+    /// <inheritdoc/>
     public bool Equals(Mos6502Instruction other) => _raw == other._raw;
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj) => obj is Mos6502Instruction other && Equals(other);
 
+    /// <inheritdoc/>
     public override int GetHashCode() => (int)_raw;
-    
+
+    /// <summary>
+    /// Decodes a buffer into a <see cref="Mos6502Instruction"/>.
+    /// </summary>
+    /// <param name="buffer">The buffer containing the instruction bytes.</param>
+    /// <returns>The decoded instruction, or default if decoding fails.</returns>
     public static Mos6502Instruction Decode(ReadOnlySpan<byte> buffer) => TryDecode(buffer, out var instruction, out var count) ? instruction : default;
 
+    /// <summary>
+    /// Tries to decode a buffer into a <see cref="Mos6502Instruction"/>.
+    /// </summary>
+    /// <param name="buffer">The buffer containing the instruction bytes.</param>
+    /// <param name="instruction">The decoded instruction.</param>
+    /// <param name="sizeInBytes">The size in bytes of the instruction.</param>
+    /// <returns><c>true</c> if decoding was successful; otherwise, <c>false</c>.</returns>
     public static bool TryDecode(ReadOnlySpan<byte> buffer, out Mos6502Instruction instruction, out int sizeInBytes)
     {
         instruction = default;
@@ -109,9 +185,10 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
         return true;
     }
 
+    /// <inheritdoc/>
     public override string ToString() => ToString(null, null);
 
-
+    /// <inheritdoc/>
     public string ToString(string? format, IFormatProvider? formatProvider)
     {
         Span<char> destination = stackalloc char[64]; // Allocate a temporary buffer
@@ -128,9 +205,19 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
         return destination.Slice(0, charsWritten).ToString();
     }
 
+    /// <inheritdoc/>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
         => TryFormat(destination, out charsWritten, format, provider, null);
 
+    /// <summary>
+    /// Tries to format the instruction as a string.
+    /// </summary>
+    /// <param name="destination">The destination span for the formatted string.</param>
+    /// <param name="charsWritten">The number of characters written.</param>
+    /// <param name="format">The format string.</param>
+    /// <param name="provider">The format provider.</param>
+    /// <param name="tryFormatDelegate">An optional delegate for custom formatting.</param>
+    /// <returns><c>true</c> if formatting was successful; otherwise, <c>false</c>.</returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider, Mos6502TryFormatDelegate? tryFormatDelegate)
     {
         var mnemonic = Mnemonic;
@@ -219,7 +306,11 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
                 throw new InvalidOperationException(); // Should never happen
         }
     }
-    
+
+    /// <summary>
+    /// Gets the address kind for the instruction.
+    /// </summary>
+    /// <returns>The address kind.</returns>
     internal Mos6502AddressKind GetAddressKind()
     {
         return AddressingMode switch
@@ -232,7 +323,13 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
         };
     }
 
+    /// <summary>
+    /// Determines whether two instructions are equal.
+    /// </summary>
     public static bool operator ==(Mos6502Instruction left, Mos6502Instruction right) => left.Equals(right);
 
+    /// <summary>
+    /// Determines whether two instructions are not equal.
+    /// </summary>
     public static bool operator !=(Mos6502Instruction left, Mos6502Instruction right) => !left.Equals(right);
 }

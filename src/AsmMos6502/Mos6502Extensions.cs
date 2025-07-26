@@ -4,6 +4,9 @@
 
 namespace AsmMos6502;
 
+/// <summary>
+/// Various extensions methods for the MOS 6502 assembler and disassembler.
+/// </summary>
 public static class Mos6502Extensions
 {
     /// <summary>

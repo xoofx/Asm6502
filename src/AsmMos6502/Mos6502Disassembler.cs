@@ -4,10 +4,12 @@
 
 using System.Buffers;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace AsmMos6502;
 
+/// <summary>
+/// The MOS 6502 disassembler that converts a byte buffer into human-readable assembly instructions.
+/// </summary>
 public class Mos6502Disassembler
 {
     private readonly Dictionary<ushort, int> _internalLabels;

@@ -8,7 +8,7 @@ using System.Diagnostics;
 namespace AsmMos6502;
 
 /// <summary>
-/// Represents an ARM64 assembler.
+/// Represents a 6502 assembler for generating machine code and managing labels.
 /// </summary>
 public partial class Mos6502Assembler : IDisposable
 {
@@ -18,7 +18,7 @@ public partial class Mos6502Assembler : IDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="Mos6502Assembler"/> class.
     /// </summary>
-    /// <param name="baseAddress">The base address.</param>
+    /// <param name="baseAddress">The base address for code generation.</param>
     public Mos6502Assembler(ushort baseAddress = 0xC000)
     {
         _buffer = [];
@@ -27,7 +27,7 @@ public partial class Mos6502Assembler : IDisposable
     }
 
     /// <summary>
-    /// Gets or sets the base address.
+    /// Gets or sets the base address for code generation.
     /// </summary>
     public ushort BaseAddress { get; set; }
 
@@ -42,16 +42,16 @@ public partial class Mos6502Assembler : IDisposable
     public ushort SizeInBytes { get; private set; }
 
     /// <summary>
-    /// Gets the current cycle count.
+    /// Gets the current cycle count for the assembled instructions.
     /// </summary>
     public int CurrentCycleCount { get; private set; }
 
     /// <summary>
     /// Gets the buffer containing the assembled instructions.
     /// </summary>
-    /// <returns>The buffer containing the assembled instructions</returns>
     /// <remarks>
-    /// The buffer is a shared buffer that can be used to retrieve the assembled instructions. The method <see cref="End"/> must be called before using this buffer (if there are labels to patch).
+    /// The buffer is a shared buffer that can be used to retrieve the assembled instructions.
+    /// The method <see cref="End"/> must be called before using this buffer (if there are labels to patch).
     /// </remarks>
     public Span<byte> Buffer => _buffer.AsSpan(0, (int)SizeInBytes);
 
@@ -59,6 +59,7 @@ public partial class Mos6502Assembler : IDisposable
     /// Writes a buffer of bytes to the assembler's internal buffer.
     /// </summary>
     /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler AppendBuffer(ReadOnlySpan<byte> input)
     {
         var newSizeInBytes = SafeAddress(SizeInBytes + input.Length);
@@ -77,6 +78,7 @@ public partial class Mos6502Assembler : IDisposable
     /// </summary>
     /// <param name="length">The number of bytes to write.</param>
     /// <param name="c">The byte value to fill the buffer with. Default is 0.</param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler AppendBytes(int length, byte c = 0)
     {
         if (length <= 0) return this;
@@ -86,7 +88,7 @@ public partial class Mos6502Assembler : IDisposable
         SizeInBytes = newSizeInBytes;
         return this;
     }
-    
+
     /// <summary>
     /// Resets the assembler state.
     /// </summary>
@@ -102,8 +104,9 @@ public partial class Mos6502Assembler : IDisposable
     /// Assembles the instructions and patches the labels.
     /// </summary>
     /// <remarks>
-    /// The buffer <see cref="Buffer"/>  be used to retrieve the assembled instructions after calling this method.
+    /// The buffer <see cref="Buffer"/> can be used to retrieve the assembled instructions after calling this method.
     /// </remarks>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler End()
     {
         for (var i = 0; i < _instructionsWithLabelToPatch.Count; i++)
@@ -147,6 +150,7 @@ public partial class Mos6502Assembler : IDisposable
     /// </summary>
     /// <param name="label">The label identifier.</param>
     /// <param name="force"><c>true</c> to force rebinding an existing label. Default is <c>false</c></param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler Label(Mos6502Label label, bool force = false)
     {
         if (!force && label.IsBound) throw new InvalidOperationException($"Label {label.Name} is already bound");
@@ -156,22 +160,29 @@ public partial class Mos6502Assembler : IDisposable
     }
 
     /// <summary>
-    /// Binds a label to the current address.
+    /// Binds a new label to the current address.
     /// </summary>
-    /// <param name="label">The label identifier.</param>
+    /// <param name="label">The label identifier (output).</param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler Label(out Mos6502Label label) => Label(null, out label);
 
     /// <summary>
-    /// Binds a label to the current address.
+    /// Binds a new label with a specified name to the current address.
     /// </summary>
     /// <param name="name">The name of the label.</param>
-    /// <param name="label">The label identifier.</param>
+    /// <param name="label">The label identifier (output).</param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler Label(string? name, out Mos6502Label label)
     {
         label = new Mos6502Label(name); // Create an anonymous label
         return Label(label);
     }
-    
+
+    /// <summary>
+    /// Adds an instruction to the assembler.
+    /// </summary>
+    /// <param name="instruction">The instruction to add.</param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler AddInstruction(Mos6502Instruction instruction)
     {
         if (!instruction.IsValid) throw new ArgumentException("Invalid instruction", nameof(instruction));
@@ -185,7 +196,13 @@ public partial class Mos6502Assembler : IDisposable
 
         return this;
     }
-    
+
+    /// <summary>
+    /// Adds an instruction to the assembler, possibly referencing a label.
+    /// </summary>
+    /// <param name="instruction">The instruction to add.</param>
+    /// <param name="label">The label to reference.</param>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Label label)
     {
         if (label.IsBound)
@@ -205,11 +222,14 @@ public partial class Mos6502Assembler : IDisposable
         return this;
     }
 
+    /// <summary>
+    /// Releases resources used by the assembler.
+    /// </summary>
     public void Dispose()
     {
         ReleaseSharedBuffer();
     }
-    
+
     private Span<byte> GetBuffer(int minimumSize)
     {
         if (SizeInBytes + minimumSize > _buffer.Length)
@@ -233,7 +253,7 @@ public partial class Mos6502Assembler : IDisposable
             _buffer = [];
         }
     }
-    
+
     private record struct UnboundInstructionLabel(ushort InstructionOffset, Mos6502Label Label, Mos6502AddressKind AddressKind);
 
     private static ushort SafeAddress(int address)
