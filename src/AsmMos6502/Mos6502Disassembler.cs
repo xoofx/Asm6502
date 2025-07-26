@@ -72,13 +72,13 @@ public class Mos6502Disassembler
         while (position < buffer.Length)
         {
             var instruction = Mos6502Instruction.Decode(buffer.Slice(position));
+            var instructionSizeInBytes = instruction.SizeInBytes;
 
             if (!instruction.IsValid)
             {
-                break; // Invalid instruction, stop disassembling
+                instructionSizeInBytes = 1; // Skip invalid instructions
             }
-
-            if (CanHaveLabel(instruction.AddressingMode))
+            else if (CanHaveLabel(instruction.AddressingMode))
             {
                 int addressOffset;
                 if (instruction.AddressingMode == Mos6502AddressingMode.Relative)
@@ -97,7 +97,7 @@ public class Mos6502Disassembler
                 }
             }
 
-            position += instruction.SizeInBytes;
+            position += instructionSizeInBytes;
         }
 
         var textBuffer = ArrayPool<char>.Shared.Rent(Options.FormatLineBufferLength);
@@ -113,11 +113,14 @@ public class Mos6502Disassembler
             {
                 position = _currentOffset; // Save the current position
                 var instruction = Mos6502Instruction.Decode(buffer.Slice(position));
+                var instructionSizeInBytes = instruction.SizeInBytes;
+
+                var bytes = instruction.AsSpan;
 
                 if (!instruction.IsValid)
                 {
-                    writer.WriteLine($"Invalid instruction (0x{buffer[position]:X2}) found at {position}");
-                    break; // Invalid instruction, stop disassembling
+                    bytes = buffer.Slice(position, 1);
+                    instructionSizeInBytes = 1;
                 }
 
                 PrintLabel(_currentOffset, textSpan, writer, nextNewLine, position == 0, false);
@@ -148,7 +151,6 @@ public class Mos6502Disassembler
 
                     if (Options.PrintAssemblyBytes)
                     {
-                        var bytes = instruction.AsSpan;
                         int localCharsWritten = 0;
                         switch (bytes.Length)
                         {
@@ -180,12 +182,20 @@ public class Mos6502Disassembler
 
                 // Write the instruction
                 {
-                    _currentPc = (ushort)(_currentOffset + instruction.SizeInBytes); // Check overflow
+                    _currentPc = (ushort)(_currentOffset + instructionSizeInBytes); // Check overflow
                     _isOperandRelative = instruction.AddressingMode == Mos6502AddressingMode.Relative;
+
                     int instructionCharsWritten = 0;
                     try
                     {
-                        instruction.TryFormat(runningSpan, out instructionCharsWritten, null, Options.FormatProvider, _tryFormatLabelDelegate);
+                        if (instruction.IsValid)
+                        {
+                            instruction.TryFormat(runningSpan, out instructionCharsWritten, null, Options.FormatProvider, _tryFormatLabelDelegate);
+                        }
+                        else
+                        {
+                            runningSpan.TryWrite($"???", out instructionCharsWritten);
+                        }
                     }
                     finally
                     {
@@ -207,10 +217,10 @@ public class Mos6502Disassembler
                         charsWritten += 4;
                         runningSpan = runningSpan.Slice(4);
 
-                        if ("// ".TryCopyTo(runningSpan))
+                        if ("; ".TryCopyTo(runningSpan))
                         {
-                            charsWritten += 3;
-                            runningSpan = runningSpan.Slice(3);
+                            charsWritten += 2;
+                            runningSpan = runningSpan.Slice(2);
                             if (Options.TryFormatComment(_currentOffset, instruction, runningSpan, out var commentsCharsWritten))
                             {
                                 charsWritten += commentsCharsWritten;
