@@ -6,7 +6,7 @@ AsmMos6502 is a lightweight and efficient C# library to assemble and disassemble
 
 ## ✨ Features
 
-- **Full support** for all **core 6502 instructions
+- **Full support** for all core 6502 instructions
 - Unique **strongly typed** assembler API
 - **Easily disassemble** instructions and operand.
 - **High performance** / **zero allocation** library for disassembling / assembling instructions.
