@@ -15,16 +15,6 @@ namespace AsmMos6502;
 partial class Mos6502Assembler
 {
     /// <summary>
-    /// Add with carry. ADC instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler ADC(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.ADC(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Add with carry. ADC instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler ADC(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.ADC(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
-    /// <summary>
     /// Add with carry. ADC instruction with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ADC(Mos6502Label address, Mos6502RegisterX x)
@@ -39,16 +29,6 @@ partial class Mos6502Assembler
     /// </summary>
     public Mos6502Assembler ADC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ADC((ushort)address.Address), address);
-    /// <summary>
-    /// Logical AND. AND instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler AND(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.AND(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Logical AND. AND instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler AND(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.AND(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
     /// <summary>
     /// Logical AND. AND instruction with addressing mode AbsoluteX.
     /// </summary>
@@ -120,16 +100,6 @@ partial class Mos6502Assembler
     public Mos6502Assembler BVS(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.BVS((sbyte)address.Address), address);
     /// <summary>
-    /// Compare. CMP instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler CMP(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.CMP(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Compare. CMP instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler CMP(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.CMP(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
-    /// <summary>
     /// Compare. CMP instruction with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler CMP(Mos6502Label address, Mos6502RegisterX x)
@@ -164,16 +134,6 @@ partial class Mos6502Assembler
     /// </summary>
     public Mos6502Assembler DEC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.DEC((ushort)address.Address), address);
-    /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler EOR(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.EOR(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler EOR(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.EOR(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction with addressing mode AbsoluteX.
     /// </summary>
@@ -214,16 +174,6 @@ partial class Mos6502Assembler
     /// </summary>
     public Mos6502Assembler JSR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.JSR((ushort)address.Address), address);
-    /// <summary>
-    /// Load accumulator. LDA instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler LDA(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.LDA(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Load accumulator. LDA instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler LDA(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.LDA(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
     /// <summary>
     /// Load accumulator. LDA instruction with addressing mode AbsoluteX.
     /// </summary>
@@ -270,16 +220,6 @@ partial class Mos6502Assembler
     public Mos6502Assembler LSR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.LSR((ushort)address.Address), address);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler ORA(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.ORA(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Logical Inclusive OR. ORA instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler ORA(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.ORA(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
-    /// <summary>
     /// Logical Inclusive OR. ORA instruction with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler ORA(Mos6502Label address, Mos6502RegisterX x)
@@ -315,16 +255,6 @@ partial class Mos6502Assembler
     public Mos6502Assembler ROR(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.ROR((ushort)address.Address), address);
     /// <summary>
-    /// Subtract with carry. SBC instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler SBC(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.SBC(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Subtract with carry. SBC instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler SBC(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.SBC(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
-    /// <summary>
     /// Subtract with carry. SBC instruction with addressing mode AbsoluteX.
     /// </summary>
     public Mos6502Assembler SBC(Mos6502Label address, Mos6502RegisterX x)
@@ -339,16 +269,6 @@ partial class Mos6502Assembler
     /// </summary>
     public Mos6502Assembler SBC(Mos6502Label address)
         => AddInstruction(Mos6502InstructionFactory.SBC((ushort)address.Address), address);
-    /// <summary>
-    /// Store accumulator. STA instruction with addressing mode IndirectY.
-    /// </summary>
-    public Mos6502Assembler STA(Mos6502IndirectLabel address, Mos6502RegisterY y)
-        => AddInstruction(Mos6502InstructionFactory.STA(new Mos6502Indirect((byte)address.ZpLabel.Address), y), address.ZpLabel);
-    /// <summary>
-    /// Store accumulator. STA instruction with addressing mode IndirectX.
-    /// </summary>
-    public Mos6502Assembler STA(Mos6502IndirectLabelX address)
-        => AddInstruction(Mos6502InstructionFactory.STA(new Mos6502IndirectX((byte)address.ZpLabel.Address)), address.ZpLabel);
     /// <summary>
     /// Store accumulator. STA instruction with addressing mode AbsoluteX.
     /// </summary>

@@ -54,7 +54,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler ADC(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ADC(indirect, y));
+    public Mos6502Assembler ADC(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ADC(indirect, y));
     
     /// <summary>
     /// Adds the ADC (0x65) instruction with addressing mode ZeroPage.
@@ -110,7 +110,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler AND(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.AND(indirect, y));
+    public Mos6502Assembler AND(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.AND(indirect, y));
     
     /// <summary>
     /// Adds the AND (0x25) instruction with addressing mode ZeroPage.
@@ -306,7 +306,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler CMP(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.CMP(indirect, y));
+    public Mos6502Assembler CMP(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.CMP(indirect, y));
     
     /// <summary>
     /// Adds the CMP (0xc5) instruction with addressing mode ZeroPage.
@@ -446,7 +446,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler EOR(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.EOR(indirect, y));
+    public Mos6502Assembler EOR(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.EOR(indirect, y));
     
     /// <summary>
     /// Adds the EOR (0x45) instruction with addressing mode ZeroPage.
@@ -565,7 +565,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler LDA(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.LDA(indirect, y));
+    public Mos6502Assembler LDA(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.LDA(indirect, y));
     
     /// <summary>
     /// Adds the LDA (0xa5) instruction with addressing mode ZeroPage.
@@ -733,7 +733,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler ORA(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ORA(indirect, y));
+    public Mos6502Assembler ORA(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.ORA(indirect, y));
     
     /// <summary>
     /// Adds the ORA (0x05) instruction with addressing mode ZeroPage.
@@ -901,7 +901,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler SBC(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.SBC(indirect, y));
+    public Mos6502Assembler SBC(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.SBC(indirect, y));
     
     /// <summary>
     /// Adds the SBC (0xe5) instruction with addressing mode ZeroPage.
@@ -971,7 +971,7 @@ partial class Mos6502Assembler
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Mos6502Assembler STA(Mos6502Indirect indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.STA(indirect, y));
+    public Mos6502Assembler STA(Mos6502IndirectY indirect, Mos6502RegisterY y) => AddInstruction(Mos6502InstructionFactory.STA(indirect, y));
     
     /// <summary>
     /// Adds the STA (0x85) instruction with addressing mode ZeroPage.

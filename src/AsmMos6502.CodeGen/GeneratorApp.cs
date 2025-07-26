@@ -298,7 +298,7 @@ internal class GeneratorApp
                 operandKind = OperandValueKind.Indirect;
                 break;
             case "IndirectY":
-                argumentTypes = ( [new("indirect", "Mos6502Indirect"), new("y", Mos6502RegisterY)]);
+                argumentTypes = ( [new("indirect", "Mos6502IndirectY"), new("y", Mos6502RegisterY)]);
                 operandKind = OperandValueKind.Indirect;
                 break;
             default:
@@ -339,7 +339,7 @@ internal class GeneratorApp
                 case OperandValueKind.None:
                     break;
                 case OperandValueKind.Indirect:
-                    writer.Write($", {arguments[0].Name}.ZpAddress");
+                    writer.Write($", {arguments[0].Name}.Address");
                     break;
                 default:
                     writer.Write($", {arguments[0].Name}");
@@ -422,7 +422,7 @@ internal class GeneratorApp
         foreach (var opcode in opcodes)
         {
             var (name, arguments, _, operandKind) = GetInstructionSignature(opcode);
-            if (operandKind != OperandValueKind.None && operandKind != OperandValueKind.Zp)
+            if (operandKind != OperandValueKind.None && operandKind != OperandValueKind.Zp && opcode.AddressingMode != "IndirectX" && opcode.AddressingMode != "IndirectY")
             {
                 arguments[0] = new Operand6502("address", operandKind == OperandValueKind.Indirect ? arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : "Mos6502Label");
                 var signature = $"{name}({string.Join(", ", arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null ? $" = {arg.DefaultValue}" : "")}"))})";

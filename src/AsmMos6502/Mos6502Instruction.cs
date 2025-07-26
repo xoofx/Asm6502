@@ -199,7 +199,7 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
             case Mos6502AddressingMode.Accumulator:
                 return lowercase ? destination.TryWrite(provider, $"{mnemonicText} a", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} A", out charsWritten);
             case Mos6502AddressingMode.Immediate:
-                return destination.TryWrite(provider, $"{mnemonicText} #${Operand:X2}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} #${LowOperand:X2}", out charsWritten);
             case Mos6502AddressingMode.Implied:
                 return destination.TryWrite(provider, $"{mnemonicText}", out charsWritten);
             case Mos6502AddressingMode.Indirect:
