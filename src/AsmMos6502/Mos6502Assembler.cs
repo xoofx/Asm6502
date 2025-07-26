@@ -52,7 +52,7 @@ public partial class Mos6502Assembler : IDisposable
     /// <remarks>
     /// The buffer is a shared buffer that can be used to retrieve the assembled instructions. The method <see cref="End"/> must be called before using this buffer (if there are labels to patch).
     /// </remarks>
-    public Span<byte> AsSpan => _buffer.AsSpan(0, (int)SizeInBytes);
+    public Span<byte> Buffer => _buffer.AsSpan(0, (int)SizeInBytes);
 
     /// <summary>
     /// Resets the assembler state.
@@ -69,7 +69,7 @@ public partial class Mos6502Assembler : IDisposable
     /// Assembles the instructions and patches the labels.
     /// </summary>
     /// <remarks>
-    /// The buffer <see cref="AsSpan"/>  be used to retrieve the assembled instructions after calling this method.
+    /// The buffer <see cref="Buffer"/>  be used to retrieve the assembled instructions after calling this method.
     /// </remarks>
     public Mos6502Assembler End()
     {
@@ -83,7 +83,7 @@ public partial class Mos6502Assembler : IDisposable
                 throw new InvalidOperationException($"Label number #{i} `{label}` is not bound. Please bind it before assembling.");
             }
 
-            var instruction = Mos6502Instruction.Decode(AsSpan.Slice(unboundLabel.InstructionOffset));
+            var instruction = Mos6502Instruction.Decode(Buffer.Slice(unboundLabel.InstructionOffset));
 
             // TODO: adjust cycle count based on the target address (if it crosses a page boundary)
             switch (unboundLabel.AddressKind)
@@ -101,7 +101,7 @@ public partial class Mos6502Assembler : IDisposable
                     break;
             }
 
-            instruction.AsSpan.CopyTo(AsSpan.Slice((int)unboundLabel.InstructionOffset));
+            instruction.AsSpan.CopyTo(Buffer.Slice((int)unboundLabel.InstructionOffset));
         }
 
         _instructionsWithLabelToPatch.Clear();
