@@ -61,10 +61,10 @@ FLASH_LOOP:
 
 The following C# assembly would assemble this code using the `AsmMos6502` library:
 ```csharp
-// Start address (for example, on C64 this is an available memory area)
-using var asm = new Mos6502Assembler(0xc000);
+using var asm = new Mos6502Assembler();
 
 asm
+    .Begin(0xc000)         // Start address (for example, on C64 this is an available memory area)
     .Label("START", out var startLabel)
     .LDX(0x00)             // X = 0, index into buffer
     .LDY(0x10)             // Y = 16, number of bytes to process

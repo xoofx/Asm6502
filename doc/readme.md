@@ -32,8 +32,10 @@ This document provides a small user guide for the AsmMos6502 library.
 using AsmMos6502;
 using static AsmMos6502.Mos6502Factory;
 
-// Create an assembler with a base address (e.g., $C000)
-using var asm = new Mos6502Assembler(0xC000);
+// Create an assembler 
+using var asm = new Mos6502Assembler();
+
+asm.Begin(0xC000);  // With a base address (e.g., $C000)
 
 asm.LDX(0x00);      // LDX #$00
 asm.LDY(0x10);      // LDY #$10
@@ -56,6 +58,8 @@ using static AsmMos6502.Mos6502Factory;
 using var asm = new Mos6502Assembler(0xC000);
 
 asm
+    .Begin()        // Start assembling
+
     .LDX(0x00)      // LDX #$00
     .LDY(0x10)      // LDY #$10
     .LDA(0x0200, X) // LDA $0200,X
@@ -93,9 +97,10 @@ The `Mos6502Assembler` class provides a fluent API for generating 6502 machine c
 ### Example: Loop with Labels
 
 ```csharp
-using var asm = new Mos6502Assembler(0xC000);
+using var asm = new Mos6502Assembler();
 
 asm
+    .Begin(0xC000)                // Start assembling at address $C000
     .Label("START", out var startLabel)
     .LDX(0x00)             // X = 0
     .LDY(0x10)             // Y = 16
@@ -215,7 +220,7 @@ The assembler can generate debug line information that includes C# source file n
 
 ```csharp
 var debugMap = new Mos6502AssemblerDebugMap();
-var asm = new Mos6502Assembler(0xC000) 
+var asm = new Mos6502Assembler() 
 {
     DebugMap = debugMap
 };
@@ -223,6 +228,7 @@ var asm = new Mos6502Assembler(0xC000)
 var forwardLabel = new Mos6502Label();
 
 asm
+    .Begin(0xC000)
     .LDA(0x5)
     .STA(0x1000)
     .Label(out var label)
@@ -242,7 +248,7 @@ will print something like:
 
 ```
 Debug Info (Program: TestSimple)
-- Program Start Address: 0000
+- Program Start Address: 0xC000
 - Program End Address: C00E
 - Debug Line Count: 7
 
