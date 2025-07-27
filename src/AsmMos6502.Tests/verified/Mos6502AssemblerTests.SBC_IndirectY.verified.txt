@@ -3,3 +3,12 @@ C002  F1 30      SBC ($30),Y
 C004  F1 FE      SBC ($FE),Y
 
 ; F1 06 F1 30 F1 FE
+
+Debug Info (Program: SBC_IndirectY)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1322
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1323
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1324

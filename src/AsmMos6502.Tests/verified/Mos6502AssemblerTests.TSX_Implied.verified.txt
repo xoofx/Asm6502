@@ -1,3 +1,10 @@
 ﻿C000  BA         TSX
 
 ; BA
+
+Debug Info (Program: TSX_Implied)
+- Program Start Address: 0000
+- Program End Address: C001
+- Debug Line Count: 1
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1538

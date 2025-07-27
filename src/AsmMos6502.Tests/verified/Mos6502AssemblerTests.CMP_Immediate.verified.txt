@@ -3,3 +3,12 @@ C002  C9 42      CMP #$42
 C004  C9 FF      CMP #$FF
 
 ; C9 01 C9 42 C9 FF
+
+Debug Info (Program: CMP_Immediate)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:421
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:422
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:423

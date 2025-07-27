@@ -3,3 +3,11 @@
 C002  B0 DB      BCS $-37
 
 ; B0 10 B0 DB
+
+Debug Info (Program: BCS_Relative)
+- Program Start Address: 0000
+- Program End Address: C004
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:255
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:256

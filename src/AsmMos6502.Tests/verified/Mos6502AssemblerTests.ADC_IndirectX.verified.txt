@@ -3,3 +3,12 @@ C002  61 20      ADC ($20,X)
 C004  61 FF      ADC ($FF,X)
 
 ; 61 05 61 20 61 FF
+
+Debug Info (Program: ADC_IndirectX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:64
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:65
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:66

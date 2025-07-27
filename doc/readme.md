@@ -18,12 +18,11 @@ This document provides a small user guide for the AsmMos6502 library.
   - [Customizing Output](#customizing-output)
 - [Advanced Usage](#advanced-usage)
   - [Labels and Branches](#labels-and-branches)
-  - [Appending Raw Bytes](#appending-raw-bytes-1)
   - [Customizing Disassembly Output](#customizing-disassembly-output)
+  - [Assembler Debug Line Information](#assembler-debug-line-information)
 - [Tips and Best Practices](#tips-and-best-practices)
 
 ---
-
 
 ## Quick Start
 
@@ -31,6 +30,7 @@ This document provides a small user guide for the AsmMos6502 library.
 
 ```csharp
 using AsmMos6502;
+using static AsmMos6502.Mos6502Factory;
 
 // Create an assembler with a base address (e.g., $C000)
 using var asm = new Mos6502Assembler(0xC000);
@@ -50,6 +50,7 @@ var buffer = asm.Buffer;
 With a more fluent syntax:
 ```csharp
 using AsmMos6502;
+using static AsmMos6502.Mos6502Factory;
 
 // Create an assembler with a base address (e.g., $C000)
 using var asm = new Mos6502Assembler(0xC000);
@@ -71,6 +72,7 @@ var buffer = asm.Buffer;
 
 ```csharp
 using AsmMos6502;
+using static AsmMos6502.Mos6502Factory;
 
 var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions {
     PrintLabelBeforeFirstInstruction = false,
@@ -207,7 +209,51 @@ var options = new Mos6502DisassemblerOptions {
 };
 ```
 
----
+### Assembler Debug Line Information
+
+The assembler can generate debug line information that includes C# source file names and line numbers. It simply requires to add a derived class from `IMos6502AssemblerDebugMap` or use the default `Mos6502AssemblerDebugMap` implementation.
+
+```csharp
+var debugMap = new Mos6502AssemblerDebugMap();
+var asm = new Mos6502Assembler(0xC000) 
+{
+    DebugMap = debugMap
+};
+
+var forwardLabel = new Mos6502Label();
+
+asm
+    .LDA(0x5)
+    .STA(0x1000)
+    .Label(out var label)
+    .LDA(_[0x1, X])
+    .LDA(_[0x2], Y)
+    .BEQ(label)
+    .BCC(forwardLabel)
+    .RTS()
+    .Label(forwardLabel)
+    .End();
+
+var toString = asm.DebugMap.ToString();
+Console.WriteLine(toString);
+```
+
+will print something like:
+
+```
+Debug Info (Program: TestSimple)
+- Program Start Address: 0000
+- Program End Address: C00E
+- Debug Line Count: 7
+
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:51
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:52
+C005 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:54
+C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:55
+C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:56
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:57
+C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:58
+```
 
 ## Tips and Best Practices
 

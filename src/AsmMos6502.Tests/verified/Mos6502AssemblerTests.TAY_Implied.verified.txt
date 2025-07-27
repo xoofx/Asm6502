@@ -1,3 +1,10 @@
 ﻿C000  A8         TAY
 
 ; A8
+
+Debug Info (Program: TAY_Implied)
+- Program Start Address: 0000
+- Program End Address: C001
+- Debug Line Count: 1
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1529

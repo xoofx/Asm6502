@@ -3,3 +3,12 @@ C002  C6 20      DEC $20
 C004  C6 FE      DEC $FE
 
 ; C6 03 C6 20 C6 FE
+
+Debug Info (Program: DEC_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:560
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:561
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:562

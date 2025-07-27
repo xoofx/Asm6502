@@ -3,3 +3,12 @@ C002  86 20      STX $20
 C004  86 FE      STX $FE
 
 ; 86 03 86 20 86 FE
+
+Debug Info (Program: STX_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1466
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1467
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1468

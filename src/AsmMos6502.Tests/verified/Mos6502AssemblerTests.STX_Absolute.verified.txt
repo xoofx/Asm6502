@@ -2,3 +2,11 @@
 C003  8E 01 FF   STX $FF01
 
 ; 8E 34 12 8E 01 FF
+
+Debug Info (Program: STX_Absolute)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1456
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1457

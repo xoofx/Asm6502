@@ -2,3 +2,11 @@
 C001  0A         ASL A
 
 ; 0A 0A
+
+Debug Info (Program: ASL_Accumulator)
+- Program Start Address: 0000
+- Program End Address: C002
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:213
+C001 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:214

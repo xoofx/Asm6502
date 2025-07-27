@@ -3,3 +3,12 @@ C002  A2 42      LDX #$42
 C004  A2 FF      LDX #$FF
 
 ; A2 01 A2 42 A2 FF
+
+Debug Info (Program: LDX_Immediate)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:880
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:881
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:882

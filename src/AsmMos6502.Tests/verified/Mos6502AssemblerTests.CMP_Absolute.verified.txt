@@ -2,3 +2,11 @@
 C003  CD 01 FF   CMP $FF01
 
 ; CD 34 12 CD 01 FF
+
+Debug Info (Program: CMP_Absolute)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:391
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:392

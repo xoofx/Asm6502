@@ -43,7 +43,7 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmBase
     [TestMethod]
     public async Task TestSimple()
     {
-        using var asm = new Mos6502Assembler();
+        using var asm = CreateAsm();
 
         var forwardLabel = new Mos6502Label();
 
@@ -66,7 +66,7 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmBase
     public async Task TestComplex()
     {
         // Start address (for example, on C64 this is an available memory area)
-        using var asm = new Mos6502Assembler(0xc000);
+        using var asm = CreateAsm(0xc000);
 
         asm
             .Label("START", out var startLabel)

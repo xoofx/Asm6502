@@ -3,3 +3,11 @@
 C002  50 DB      BVC $-37
 
 ; 50 10 50 DB
+
+Debug Info (Program: BVC_Relative)
+- Program Start Address: 0000
+- Program End Address: C004
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:335
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:336

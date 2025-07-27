@@ -315,7 +315,7 @@ internal class GeneratorApp
                 throw new NotSupportedException($"Addressing mode '{opcode.AddressingMode}' is not supported for opcode '{opcode.Name}'");
         }
 
-        var signature = $"{opName}({string.Join(", ", argumentTypes.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null?$" = {arg.DefaultValue}":"")}"))})";
+        var signature = $"{opName}({string.Join(", ", argumentTypes.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null?$" = {arg.DefaultValue}":"")}"))}{(argumentTypes.Count > 0 ? ", " : "")}[CallerFilePath] string debugFilePath = \"\", [CallerLineNumber] int debugLineNumber = 0)";
         return (opName, argumentTypes, signature, operandKind);
     }
 
@@ -397,7 +397,7 @@ internal class GeneratorApp
                 writer.Write($", {arguments[1].Name}");
             }
 
-            writer.WriteLine($"));");
+            writer.WriteLine($"), debugFilePath, debugLineNumber);");
 
             writer.WriteLine();
         }
@@ -431,7 +431,7 @@ internal class GeneratorApp
                 opcode.AddressingMode != "IndirectY")
             {
                 arguments[0] = new Operand6502("address", operandKind == OperandValueKind.Indirect ? arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : "Mos6502Label");
-                var signature = $"{name}({string.Join(", ", arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null ? $" = {arg.DefaultValue}" : "")}"))})";
+                var signature = $"{name}({string.Join(", ", arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null ? $" = {arg.DefaultValue}" : "")}"))}, [CallerFilePath] string debugFilePath = \"\", [CallerLineNumber] int debugLineNumber = 0)";
 
                 if (!mnemonicToSignatureToOpcodes.TryGetValue(opcode.Name, out var opcodeWithAddress))
                 {
@@ -484,7 +484,7 @@ internal class GeneratorApp
                 writer.Write($", {arguments[1].Name}");
             }
 
-            writer.WriteLine(operandKind == OperandValueKind.Indirect ? $"), {arguments[0].Name}.ZpLabel);" : $"), {arguments[0].Name});");
+            writer.WriteLine(operandKind == OperandValueKind.Indirect ? $"), {arguments[0].Name}.ZpLabel, debugFilePath, debugLineNumber);" : $"), {arguments[0].Name}, debugFilePath, debugLineNumber);");
         }
     }
 
@@ -575,7 +575,7 @@ internal class GeneratorApp
             writer.WriteLine($"public async Task {opcode.Name}_{opcode.AddressingMode}()");
             writer.OpenBraceBlock();
 
-            writer.WriteLine("using var asm = new Mos6502Assembler()");
+            writer.WriteLine("using var asm = CreateAsm()");
             writer.Indent();
 
             var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
@@ -599,7 +599,7 @@ internal class GeneratorApp
             writer.WriteLine("[TestMethod]");
             writer.WriteLine($"public async Task AllInstructions()");
             writer.OpenBraceBlock();
-            writer.WriteLine("using var asm = new Mos6502Assembler()");
+            writer.WriteLine("using var asm = CreateAsm()");
             writer.Indent();
             foreach (var opcode in opcodes)
             {

@@ -3,3 +3,12 @@ C002  69 42      ADC #$42
 C004  69 FF      ADC #$FF
 
 ; 69 01 69 42 69 FF
+
+Debug Info (Program: ADC_Immediate)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:53
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:54
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:55

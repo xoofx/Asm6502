@@ -3,3 +3,12 @@ C002  C0 42      CPY #$42
 C004  C0 FF      CPY #$FF
 
 ; C0 01 C0 42 C0 FF
+
+Debug Info (Program: CPY_Immediate)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:518
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:519
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:520

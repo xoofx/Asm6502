@@ -3,3 +3,12 @@ C002  41 20      EOR ($20,X)
 C004  41 FF      EOR ($FF,X)
 
 ; 41 05 41 20 41 FF
+
+Debug Info (Program: EOR_IndirectX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:641
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:642
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:643

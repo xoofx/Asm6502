@@ -3,3 +3,11 @@
 C003  20 01 FF   JSR $FF01
 
 ; 20 34 12 20 01 FF
+
+Debug Info (Program: JSR_Absolute)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:765
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:766

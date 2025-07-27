@@ -4,6 +4,7 @@
 
 using System.Buffers;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace AsmMos6502;
 
@@ -45,7 +46,12 @@ public partial class Mos6502Assembler : IDisposable
     /// Gets the current cycle count for the assembled instructions.
     /// </summary>
     public int CurrentCycleCount { get; private set; }
-
+    
+    /// <summary>
+    /// Gets or sets the debug map for the assembler.
+    /// </summary>
+    public IMos6502AssemblerDebugMap? DebugMap { get; set; }
+    
     /// <summary>
     /// Gets the buffer containing the assembled instructions.
     /// </summary>
@@ -98,6 +104,9 @@ public partial class Mos6502Assembler : IDisposable
         _instructionsWithLabelToPatch.Clear();
         SizeInBytes = 0;
         CurrentCycleCount = 0;
+
+        // Reset the base address to the default value
+        DebugMap?.BeginProgram(BaseAddress);
     }
 
     /// <summary>
@@ -141,6 +150,9 @@ public partial class Mos6502Assembler : IDisposable
         }
 
         _instructionsWithLabelToPatch.Clear();
+
+        // Notifies the current address
+        DebugMap?.EndProgram(CurrentAddress);
 
         return this;
     }
@@ -194,17 +206,31 @@ public partial class Mos6502Assembler : IDisposable
     /// Adds an instruction to the assembler.
     /// </summary>
     /// <param name="instruction">The instruction to add.</param>
+    /// <param name="debugFilePath">The file path for debugging information (optional).</param>
+    /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction)
+    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
         if (!instruction.IsValid) throw new ArgumentException("Invalid instruction", nameof(instruction));
 
         var sizeInBytes = instruction.SizeInBytes;
         Debug.Assert(sizeInBytes > 0);
+
+        var totalSizeInBytes = SafeAddress(SizeInBytes + (byte)sizeInBytes);
+        var currentAddress = CurrentAddress;
+
         var span = GetBuffer(sizeInBytes);
         instruction.AsSpan.CopyTo(span);
-        SizeInBytes = SafeAddress(SizeInBytes + (byte)sizeInBytes);
+        SizeInBytes = totalSizeInBytes;
         CurrentCycleCount += instruction.CycleCount;
+
+        var debugMap = DebugMap;
+        if (debugMap != null)
+        {
+            // Log debug information for the instruction
+            var debugLineInfo = new Mos6502AssemblerDebugLineInfo(currentAddress, debugFilePath ?? string.Empty, debugLineNumber);
+            debugMap.LogDebugLineInfo(debugLineInfo);
+        }
 
         return this;
     }
@@ -214,8 +240,10 @@ public partial class Mos6502Assembler : IDisposable
     /// </summary>
     /// <param name="instruction">The instruction to add.</param>
     /// <param name="label">The label to reference.</param>
+    /// <param name="debugFilePath">The file path for debugging information (optional).</param>
+    /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Label label)
+    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Label label, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
         if (label.IsBound)
         {
@@ -223,7 +251,9 @@ public partial class Mos6502Assembler : IDisposable
         }
 
         var offset = SizeInBytes;
-        AddInstruction(instruction);
+        // ReSharper disable ExplicitCallerInfoArgument
+        AddInstruction(instruction, debugFilePath, debugLineNumber);
+        // ReSharper restore ExplicitCallerInfoArgument
 
         var addressKind = instruction.GetAddressKind();
         if (!label.IsBound || addressKind == Mos6502AddressKind.Relative)

@@ -2,3 +2,11 @@
 C003  7D 02 FF   ADC $FF02,X
 
 ; 7D 34 12 7D 02 FF
+
+Debug Info (Program: ADC_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:33
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:34

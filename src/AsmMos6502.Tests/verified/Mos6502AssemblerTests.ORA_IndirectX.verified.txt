@@ -3,3 +3,12 @@ C002  01 20      ORA ($20,X)
 C004  01 FF      ORA ($FF,X)
 
 ; 01 05 01 20 01 FF
+
+Debug Info (Program: ORA_IndirectX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1068
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1069
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1070

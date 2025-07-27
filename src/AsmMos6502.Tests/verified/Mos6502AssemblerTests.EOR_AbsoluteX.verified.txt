@@ -2,3 +2,11 @@
 C003  5D 02 FF   EOR $FF02,X
 
 ; 5D 34 12 5D 02 FF
+
+Debug Info (Program: EOR_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:610
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:611

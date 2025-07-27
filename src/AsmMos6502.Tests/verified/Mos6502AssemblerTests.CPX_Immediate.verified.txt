@@ -3,3 +3,12 @@ C002  E0 42      CPX #$42
 C004  E0 FF      CPX #$FF
 
 ; E0 01 E0 42 E0 FF
+
+Debug Info (Program: CPX_Immediate)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:486
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:487
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:488

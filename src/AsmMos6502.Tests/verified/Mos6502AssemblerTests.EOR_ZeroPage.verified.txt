@@ -3,3 +3,12 @@ C002  45 20      EOR $20
 C004  45 FE      EOR $FE
 
 ; 45 03 45 20 45 FE
+
+Debug Info (Program: EOR_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:663
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:664
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:665

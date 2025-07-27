@@ -6,6 +6,17 @@ namespace AsmMos6502.Tests;
 
 public abstract class VerifyAsmBase : VerifyBase
 {
+    protected Mos6502Assembler CreateAsm(ushort address = 0xc000)
+    {
+        return new Mos6502Assembler(address)
+        {
+            DebugMap = new Mos6502AssemblerDebugMap()
+            {
+                Name = TestContext.TestName
+            }
+        };
+    }
+    
     protected async Task VerifyAsm(Mos6502Assembler asm)
     {
         var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions()
@@ -15,9 +26,13 @@ public abstract class VerifyAsmBase : VerifyBase
             PrintAssemblyBytes = true,
         });
 
+       
         var asmText = dis.Disassemble(asm.Buffer);
         var allBytes = $"; {string.Join(" ", asm.Buffer.ToArray().Select(x => $"{x:X2}"))}";
-        var text = $"{asmText}{Environment.NewLine}{allBytes}";
+
+        // Extract the debug map as a string
+        var debugMapText = asm.DebugMap is not null ? $"{Environment.NewLine}{Environment.NewLine}{asm.DebugMap!.ToString()!.Replace("\\", "/")}" : string.Empty;
+        var text = $"{asmText}{Environment.NewLine}{allBytes}{debugMapText}";
         
         await Verify(text);
     }

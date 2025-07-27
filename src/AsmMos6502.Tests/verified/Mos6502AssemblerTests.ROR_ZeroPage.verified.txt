@@ -3,3 +3,12 @@ C002  66 20      ROR $20
 C004  66 FE      ROR $FE
 
 ; 66 03 66 20 66 FE
+
+Debug Info (Program: ROR_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1230
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1231
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1232

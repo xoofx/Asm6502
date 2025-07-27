@@ -2,3 +2,11 @@
 C003  BC 02 FF   LDY $FF02,X
 
 ; BC 34 12 BC 02 FF
+
+Debug Info (Program: LDY_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:923
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:924

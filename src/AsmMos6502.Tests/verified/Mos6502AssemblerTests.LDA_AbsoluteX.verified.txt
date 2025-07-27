@@ -2,3 +2,11 @@
 C003  BD 02 FF   LDA $FF02,X
 
 ; BD 34 12 BD 02 FF
+
+Debug Info (Program: LDA_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:785
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:786

@@ -3,3 +3,12 @@ C002  E5 20      SBC $20
 C004  E5 FE      SBC $FE
 
 ; E5 03 E5 20 E5 FE
+
+Debug Info (Program: SBC_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1333
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1334
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1335

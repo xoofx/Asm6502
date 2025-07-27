@@ -3,3 +3,12 @@ C002  24 20      BIT $20
 C004  24 FE      BIT $FE
 
 ; 24 03 24 20 24 FE
+
+Debug Info (Program: BIT_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:285
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:286
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:287

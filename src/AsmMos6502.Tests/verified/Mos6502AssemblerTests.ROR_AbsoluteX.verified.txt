@@ -2,3 +2,11 @@
 C003  7E 02 FF   ROR $FF02,X
 
 ; 7E 34 12 7E 02 FF
+
+Debug Info (Program: ROR_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1210
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1211

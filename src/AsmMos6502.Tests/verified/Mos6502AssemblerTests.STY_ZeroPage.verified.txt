@@ -3,3 +3,12 @@ C002  84 20      STY $20
 C004  84 FE      STY $FE
 
 ; 84 03 84 20 84 FE
+
+Debug Info (Program: STY_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1498
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1499
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1500

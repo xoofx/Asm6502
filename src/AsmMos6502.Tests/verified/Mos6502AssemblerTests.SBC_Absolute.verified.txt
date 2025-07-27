@@ -2,3 +2,11 @@
 C003  ED 01 FF   SBC $FF01
 
 ; ED 34 12 ED 01 FF
+
+Debug Info (Program: SBC_Absolute)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1270
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1271

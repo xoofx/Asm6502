@@ -3,3 +3,12 @@ C002  B6 40      LDX $40,Y
 C004  B6 FC      LDX $FC,Y
 
 ; B6 01 B6 40 B6 FC
+
+Debug Info (Program: LDX_ZeroPageY)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:902
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:903
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:904

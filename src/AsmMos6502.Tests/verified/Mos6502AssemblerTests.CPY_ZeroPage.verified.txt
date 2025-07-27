@@ -3,3 +3,12 @@ C002  C4 20      CPY $20
 C004  C4 FE      CPY $FE
 
 ; C4 03 C4 20 C4 FE
+
+Debug Info (Program: CPY_ZeroPage)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:529
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:530
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:531

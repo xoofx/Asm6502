@@ -3,3 +3,12 @@ C002  C1 20      CMP ($20,X)
 C004  C1 FF      CMP ($FF,X)
 
 ; C1 05 C1 20 C1 FF
+
+Debug Info (Program: CMP_IndirectX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:432
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:433
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:434

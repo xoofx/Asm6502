@@ -13,3 +13,16 @@ C00D  60         RTS
 LL_02:
 
 ; A5 05 8D 00 10 A1 01 B1 02 F0 FA 90 01 60
+
+Debug Info (Program: TestSimple)
+- Program Start Address: 0000
+- Program End Address: C00E
+- Debug Line Count: 7
+
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:51
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:52
+C005 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:54
+C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:55
+C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:56
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:57
+C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:58

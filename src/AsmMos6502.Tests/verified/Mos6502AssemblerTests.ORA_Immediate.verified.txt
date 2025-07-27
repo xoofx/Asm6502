@@ -3,3 +3,12 @@ C002  09 42      ORA #$42
 C004  09 FF      ORA #$FF
 
 ; 09 01 09 42 09 FF
+
+Debug Info (Program: ORA_Immediate)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1057
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1058
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1059

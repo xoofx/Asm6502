@@ -3,3 +3,12 @@ C002  91 30      STA ($30),Y
 C004  91 FE      STA ($FE),Y
 
 ; 91 06 91 30 91 FE
+
+Debug Info (Program: STA_IndirectY)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1423
+C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1424
+C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1425

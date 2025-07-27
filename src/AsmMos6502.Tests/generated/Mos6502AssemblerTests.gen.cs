@@ -19,7 +19,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(0x1234)
             .ADC(0xFF01)
             .End();
@@ -29,7 +29,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(0x1234, X)
             .ADC(0xFF02, X)
             .End();
@@ -39,7 +39,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(0x1234, Y)
             .ADC(0xFF03, Y)
             .End();
@@ -49,7 +49,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC_Imm(0x01)
             .ADC_Imm(0x42)
             .ADC_Imm(0xFF)
@@ -60,7 +60,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(_[0x05, X])
             .ADC(_[0x20, X])
             .ADC(_[0xFF, X])
@@ -71,7 +71,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(_[0x06], Y)
             .ADC(_[0x30], Y)
             .ADC(_[0xFE], Y)
@@ -82,7 +82,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(0x03)
             .ADC(0x20)
             .ADC(0xFE)
@@ -93,7 +93,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ADC_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(0x02, X)
             .ADC(0x30, X)
             .ADC(0xFB, X)
@@ -104,7 +104,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(0x1234)
             .AND(0xFF01)
             .End();
@@ -114,7 +114,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(0x1234, X)
             .AND(0xFF02, X)
             .End();
@@ -124,7 +124,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(0x1234, Y)
             .AND(0xFF03, Y)
             .End();
@@ -134,7 +134,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND_Imm(0x01)
             .AND_Imm(0x42)
             .AND_Imm(0xFF)
@@ -145,7 +145,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(_[0x05, X])
             .AND(_[0x20, X])
             .AND(_[0xFF, X])
@@ -156,7 +156,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(_[0x06], Y)
             .AND(_[0x30], Y)
             .AND(_[0xFE], Y)
@@ -167,7 +167,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(0x03)
             .AND(0x20)
             .AND(0xFE)
@@ -178,7 +178,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AND_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .AND(0x02, X)
             .AND(0x30, X)
             .AND(0xFB, X)
@@ -189,7 +189,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ASL_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ASL(0x1234)
             .ASL(0xFF01)
             .End();
@@ -199,7 +199,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ASL_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ASL(0x1234, X)
             .ASL(0xFF02, X)
             .End();
@@ -209,7 +209,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ASL_Accumulator()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ASL(A)
             .ASL()
             .End();
@@ -219,7 +219,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ASL_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ASL(0x03)
             .ASL(0x20)
             .ASL(0xFE)
@@ -230,7 +230,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ASL_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ASL(0x02, X)
             .ASL(0x30, X)
             .ASL(0xFB, X)
@@ -241,7 +241,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BCC_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BCC(0x10)
             .BCC(-37)
             .End();
@@ -251,7 +251,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BCS_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BCS(0x10)
             .BCS(-37)
             .End();
@@ -261,7 +261,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BEQ_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BEQ(0x10)
             .BEQ(-37)
             .End();
@@ -271,7 +271,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BIT_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BIT(0x1234)
             .BIT(0xFF01)
             .End();
@@ -281,7 +281,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BIT_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BIT(0x03)
             .BIT(0x20)
             .BIT(0xFE)
@@ -292,7 +292,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BMI_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BMI(0x10)
             .BMI(-37)
             .End();
@@ -302,7 +302,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BNE_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BNE(0x10)
             .BNE(-37)
             .End();
@@ -312,7 +312,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BPL_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BPL(0x10)
             .BPL(-37)
             .End();
@@ -322,7 +322,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BRK_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BRK()
             .End();
         await VerifyAsm(asm);
@@ -331,7 +331,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BVC_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BVC(0x10)
             .BVC(-37)
             .End();
@@ -341,7 +341,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task BVS_Relative()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .BVS(0x10)
             .BVS(-37)
             .End();
@@ -351,7 +351,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CLC_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CLC()
             .End();
         await VerifyAsm(asm);
@@ -360,7 +360,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CLD_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CLD()
             .End();
         await VerifyAsm(asm);
@@ -369,7 +369,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CLI_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CLI()
             .End();
         await VerifyAsm(asm);
@@ -378,7 +378,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CLV_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CLV()
             .End();
         await VerifyAsm(asm);
@@ -387,7 +387,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(0x1234)
             .CMP(0xFF01)
             .End();
@@ -397,7 +397,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(0x1234, X)
             .CMP(0xFF02, X)
             .End();
@@ -407,7 +407,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(0x1234, Y)
             .CMP(0xFF03, Y)
             .End();
@@ -417,7 +417,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP_Imm(0x01)
             .CMP_Imm(0x42)
             .CMP_Imm(0xFF)
@@ -428,7 +428,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(_[0x05, X])
             .CMP(_[0x20, X])
             .CMP(_[0xFF, X])
@@ -439,7 +439,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(_[0x06], Y)
             .CMP(_[0x30], Y)
             .CMP(_[0xFE], Y)
@@ -450,7 +450,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(0x03)
             .CMP(0x20)
             .CMP(0xFE)
@@ -461,7 +461,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CMP_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CMP(0x02, X)
             .CMP(0x30, X)
             .CMP(0xFB, X)
@@ -472,7 +472,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CPX_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CPX(0x1234)
             .CPX(0xFF01)
             .End();
@@ -482,7 +482,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CPX_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CPX_Imm(0x01)
             .CPX_Imm(0x42)
             .CPX_Imm(0xFF)
@@ -493,7 +493,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CPX_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CPX(0x03)
             .CPX(0x20)
             .CPX(0xFE)
@@ -504,7 +504,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CPY_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CPY(0x1234)
             .CPY(0xFF01)
             .End();
@@ -514,7 +514,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CPY_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CPY_Imm(0x01)
             .CPY_Imm(0x42)
             .CPY_Imm(0xFF)
@@ -525,7 +525,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task CPY_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .CPY(0x03)
             .CPY(0x20)
             .CPY(0xFE)
@@ -536,7 +536,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task DEC_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .DEC(0x1234)
             .DEC(0xFF01)
             .End();
@@ -546,7 +546,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task DEC_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .DEC(0x1234, X)
             .DEC(0xFF02, X)
             .End();
@@ -556,7 +556,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task DEC_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .DEC(0x03)
             .DEC(0x20)
             .DEC(0xFE)
@@ -567,7 +567,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task DEC_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .DEC(0x02, X)
             .DEC(0x30, X)
             .DEC(0xFB, X)
@@ -578,7 +578,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task DEX_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .DEX()
             .End();
         await VerifyAsm(asm);
@@ -587,7 +587,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task DEY_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .DEY()
             .End();
         await VerifyAsm(asm);
@@ -596,7 +596,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(0x1234)
             .EOR(0xFF01)
             .End();
@@ -606,7 +606,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(0x1234, X)
             .EOR(0xFF02, X)
             .End();
@@ -616,7 +616,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(0x1234, Y)
             .EOR(0xFF03, Y)
             .End();
@@ -626,7 +626,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR_Imm(0x01)
             .EOR_Imm(0x42)
             .EOR_Imm(0xFF)
@@ -637,7 +637,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(_[0x05, X])
             .EOR(_[0x20, X])
             .EOR(_[0xFF, X])
@@ -648,7 +648,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(_[0x06], Y)
             .EOR(_[0x30], Y)
             .EOR(_[0xFE], Y)
@@ -659,7 +659,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(0x03)
             .EOR(0x20)
             .EOR(0xFE)
@@ -670,7 +670,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task EOR_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .EOR(0x02, X)
             .EOR(0x30, X)
             .EOR(0xFB, X)
@@ -681,7 +681,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task INC_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .INC(0x1234)
             .INC(0xFF01)
             .End();
@@ -691,7 +691,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task INC_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .INC(0x1234, X)
             .INC(0xFF02, X)
             .End();
@@ -701,7 +701,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task INC_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .INC(0x03)
             .INC(0x20)
             .INC(0xFE)
@@ -712,7 +712,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task INC_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .INC(0x02, X)
             .INC(0x30, X)
             .INC(0xFB, X)
@@ -723,7 +723,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task INX_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .INX()
             .End();
         await VerifyAsm(asm);
@@ -732,7 +732,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task INY_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .INY()
             .End();
         await VerifyAsm(asm);
@@ -741,7 +741,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task JMP_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .JMP(0x1234)
             .JMP(0xFF01)
             .End();
@@ -751,7 +751,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task JMP_Indirect()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .JMP(_[0x1234])
             .JMP(_[0xFF04])
             .End();
@@ -761,7 +761,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task JSR_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .JSR(0x1234)
             .JSR(0xFF01)
             .End();
@@ -771,7 +771,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(0x1234)
             .LDA(0xFF01)
             .End();
@@ -781,7 +781,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(0x1234, X)
             .LDA(0xFF02, X)
             .End();
@@ -791,7 +791,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(0x1234, Y)
             .LDA(0xFF03, Y)
             .End();
@@ -801,7 +801,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA_Imm(0x01)
             .LDA_Imm(0x42)
             .LDA_Imm(0xFF)
@@ -812,7 +812,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(_[0x05, X])
             .LDA(_[0x20, X])
             .LDA(_[0xFF, X])
@@ -823,7 +823,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(_[0x06], Y)
             .LDA(_[0x30], Y)
             .LDA(_[0xFE], Y)
@@ -834,7 +834,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(0x03)
             .LDA(0x20)
             .LDA(0xFE)
@@ -845,7 +845,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDA_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDA(0x02, X)
             .LDA(0x30, X)
             .LDA(0xFB, X)
@@ -856,7 +856,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDX_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDX(0x1234)
             .LDX(0xFF01)
             .End();
@@ -866,7 +866,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDX_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDX(0x1234, Y)
             .LDX(0xFF03, Y)
             .End();
@@ -876,7 +876,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDX_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDX_Imm(0x01)
             .LDX_Imm(0x42)
             .LDX_Imm(0xFF)
@@ -887,7 +887,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDX_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDX(0x03)
             .LDX(0x20)
             .LDX(0xFE)
@@ -898,7 +898,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDX_ZeroPageY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDX(0x01, Y)
             .LDX(0x40, Y)
             .LDX(0xFC, Y)
@@ -909,7 +909,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDY_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDY(0x1234)
             .LDY(0xFF01)
             .End();
@@ -919,7 +919,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDY_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDY(0x1234, X)
             .LDY(0xFF02, X)
             .End();
@@ -929,7 +929,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDY_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDY_Imm(0x01)
             .LDY_Imm(0x42)
             .LDY_Imm(0xFF)
@@ -940,7 +940,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDY_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDY(0x03)
             .LDY(0x20)
             .LDY(0xFE)
@@ -951,7 +951,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LDY_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LDY(0x02, X)
             .LDY(0x30, X)
             .LDY(0xFB, X)
@@ -962,7 +962,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LSR_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LSR(0x1234)
             .LSR(0xFF01)
             .End();
@@ -972,7 +972,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LSR_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LSR(0x1234, X)
             .LSR(0xFF02, X)
             .End();
@@ -982,7 +982,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LSR_Accumulator()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LSR(A)
             .LSR()
             .End();
@@ -992,7 +992,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LSR_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LSR(0x03)
             .LSR(0x20)
             .LSR(0xFE)
@@ -1003,7 +1003,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task LSR_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .LSR(0x02, X)
             .LSR(0x30, X)
             .LSR(0xFB, X)
@@ -1014,7 +1014,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task NOP_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .NOP()
             .End();
         await VerifyAsm(asm);
@@ -1023,7 +1023,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(0x1234)
             .ORA(0xFF01)
             .End();
@@ -1033,7 +1033,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(0x1234, X)
             .ORA(0xFF02, X)
             .End();
@@ -1043,7 +1043,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(0x1234, Y)
             .ORA(0xFF03, Y)
             .End();
@@ -1053,7 +1053,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA_Imm(0x01)
             .ORA_Imm(0x42)
             .ORA_Imm(0xFF)
@@ -1064,7 +1064,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(_[0x05, X])
             .ORA(_[0x20, X])
             .ORA(_[0xFF, X])
@@ -1075,7 +1075,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(_[0x06], Y)
             .ORA(_[0x30], Y)
             .ORA(_[0xFE], Y)
@@ -1086,7 +1086,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(0x03)
             .ORA(0x20)
             .ORA(0xFE)
@@ -1097,7 +1097,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ORA_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ORA(0x02, X)
             .ORA(0x30, X)
             .ORA(0xFB, X)
@@ -1108,7 +1108,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task PHA_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .PHA()
             .End();
         await VerifyAsm(asm);
@@ -1117,7 +1117,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task PHP_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .PHP()
             .End();
         await VerifyAsm(asm);
@@ -1126,7 +1126,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task PLA_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .PLA()
             .End();
         await VerifyAsm(asm);
@@ -1135,7 +1135,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task PLP_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .PLP()
             .End();
         await VerifyAsm(asm);
@@ -1144,7 +1144,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROL_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROL(0x1234)
             .ROL(0xFF01)
             .End();
@@ -1154,7 +1154,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROL_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROL(0x1234, X)
             .ROL(0xFF02, X)
             .End();
@@ -1164,7 +1164,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROL_Accumulator()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROL(A)
             .ROL()
             .End();
@@ -1174,7 +1174,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROL_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROL(0x03)
             .ROL(0x20)
             .ROL(0xFE)
@@ -1185,7 +1185,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROL_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROL(0x02, X)
             .ROL(0x30, X)
             .ROL(0xFB, X)
@@ -1196,7 +1196,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROR_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROR(0x1234)
             .ROR(0xFF01)
             .End();
@@ -1206,7 +1206,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROR_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROR(0x1234, X)
             .ROR(0xFF02, X)
             .End();
@@ -1216,7 +1216,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROR_Accumulator()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROR(A)
             .ROR()
             .End();
@@ -1226,7 +1226,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROR_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROR(0x03)
             .ROR(0x20)
             .ROR(0xFE)
@@ -1237,7 +1237,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task ROR_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ROR(0x02, X)
             .ROR(0x30, X)
             .ROR(0xFB, X)
@@ -1248,7 +1248,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task RTI_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .RTI()
             .End();
         await VerifyAsm(asm);
@@ -1257,7 +1257,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task RTS_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .RTS()
             .End();
         await VerifyAsm(asm);
@@ -1266,7 +1266,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(0x1234)
             .SBC(0xFF01)
             .End();
@@ -1276,7 +1276,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(0x1234, X)
             .SBC(0xFF02, X)
             .End();
@@ -1286,7 +1286,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(0x1234, Y)
             .SBC(0xFF03, Y)
             .End();
@@ -1296,7 +1296,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_Immediate()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC_Imm(0x01)
             .SBC_Imm(0x42)
             .SBC_Imm(0xFF)
@@ -1307,7 +1307,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(_[0x05, X])
             .SBC(_[0x20, X])
             .SBC(_[0xFF, X])
@@ -1318,7 +1318,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(_[0x06], Y)
             .SBC(_[0x30], Y)
             .SBC(_[0xFE], Y)
@@ -1329,7 +1329,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(0x03)
             .SBC(0x20)
             .SBC(0xFE)
@@ -1340,7 +1340,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SBC_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SBC(0x02, X)
             .SBC(0x30, X)
             .SBC(0xFB, X)
@@ -1351,7 +1351,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SEC_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SEC()
             .End();
         await VerifyAsm(asm);
@@ -1360,7 +1360,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SED_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SED()
             .End();
         await VerifyAsm(asm);
@@ -1369,7 +1369,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task SEI_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .SEI()
             .End();
         await VerifyAsm(asm);
@@ -1378,7 +1378,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(0x1234)
             .STA(0xFF01)
             .End();
@@ -1388,7 +1388,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_AbsoluteX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(0x1234, X)
             .STA(0xFF02, X)
             .End();
@@ -1398,7 +1398,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_AbsoluteY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(0x1234, Y)
             .STA(0xFF03, Y)
             .End();
@@ -1408,7 +1408,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_IndirectX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(_[0x05, X])
             .STA(_[0x20, X])
             .STA(_[0xFF, X])
@@ -1419,7 +1419,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_IndirectY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(_[0x06], Y)
             .STA(_[0x30], Y)
             .STA(_[0xFE], Y)
@@ -1430,7 +1430,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(0x03)
             .STA(0x20)
             .STA(0xFE)
@@ -1441,7 +1441,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STA_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STA(0x02, X)
             .STA(0x30, X)
             .STA(0xFB, X)
@@ -1452,7 +1452,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STX_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STX(0x1234)
             .STX(0xFF01)
             .End();
@@ -1462,7 +1462,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STX_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STX(0x03)
             .STX(0x20)
             .STX(0xFE)
@@ -1473,7 +1473,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STX_ZeroPageY()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STX(0x01, Y)
             .STX(0x40, Y)
             .STX(0xFC, Y)
@@ -1484,7 +1484,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STY_Absolute()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STY(0x1234)
             .STY(0xFF01)
             .End();
@@ -1494,7 +1494,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STY_ZeroPage()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STY(0x03)
             .STY(0x20)
             .STY(0xFE)
@@ -1505,7 +1505,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task STY_ZeroPageX()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .STY(0x02, X)
             .STY(0x30, X)
             .STY(0xFB, X)
@@ -1516,7 +1516,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task TAX_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .TAX()
             .End();
         await VerifyAsm(asm);
@@ -1525,7 +1525,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task TAY_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .TAY()
             .End();
         await VerifyAsm(asm);
@@ -1534,7 +1534,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task TSX_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .TSX()
             .End();
         await VerifyAsm(asm);
@@ -1543,7 +1543,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task TXA_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .TXA()
             .End();
         await VerifyAsm(asm);
@@ -1552,7 +1552,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task TXS_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .TXS()
             .End();
         await VerifyAsm(asm);
@@ -1561,7 +1561,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task TYA_Implied()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .TYA()
             .End();
         await VerifyAsm(asm);
@@ -1570,7 +1570,7 @@ public partial class Mos6502AssemblerTests
     [TestMethod]
     public async Task AllInstructions()
     {
-        using var asm = new Mos6502Assembler()
+        using var asm = CreateAsm()
             .ADC(0x1234)
             .ADC(0xFF01)
             .ADC(0x1234, X)

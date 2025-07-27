@@ -2,3 +2,11 @@
 C003  9D 02 FF   STA $FF02,X
 
 ; 9D 34 12 9D 02 FF
+
+Debug Info (Program: STA_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1392
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1393

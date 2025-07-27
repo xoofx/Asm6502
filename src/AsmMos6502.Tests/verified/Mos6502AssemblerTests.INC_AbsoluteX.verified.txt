@@ -2,3 +2,11 @@
 C003  FE 02 FF   INC $FF02,X
 
 ; FE 34 12 FE 02 FF
+
+Debug Info (Program: INC_AbsoluteX)
+- Program Start Address: 0000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:695
+C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:696

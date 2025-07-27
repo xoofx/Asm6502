@@ -32,3 +32,28 @@ C023  D0 F8      BNE LL_05
 C025  60         RTS
 
 ; A6 00 A4 10 BD 00 02 C5 FF F0 06 18 65 01 9D 00 02 E8 88 D0 EF 20 1B C0 4C 18 C0 A6 00 8E 20 D0 E8 E4 08 D0 F8 60
+
+Debug Info (Program: TestComplex)
+- Program Start Address: 0000
+- Program End Address: C026
+- Debug Line Count: 19
+
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:73
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:74
+C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:77
+C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:78
+C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:81
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:82
+C00C {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:83
+C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:84
+C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:87
+C012 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:88
+C013 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:89
+C015 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:93
+C018 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:97
+C01B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:105
+C01D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:108
+C020 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:109
+C021 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:110
+C023 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:111
+C025 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:112
