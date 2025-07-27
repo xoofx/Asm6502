@@ -5,7 +5,7 @@ C002  50 DB      BVC $-37
 ; 50 10 50 DB
 
 Debug Info (Program: BVC_Relative)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C004
 - Debug Line Count: 2
 

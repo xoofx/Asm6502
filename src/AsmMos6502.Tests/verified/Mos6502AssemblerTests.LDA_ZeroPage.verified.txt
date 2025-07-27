@@ -5,7 +5,7 @@ C004  A5 FE      LDA $FE
 ; A5 03 A5 20 A5 FE
 
 Debug Info (Program: LDA_ZeroPage)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

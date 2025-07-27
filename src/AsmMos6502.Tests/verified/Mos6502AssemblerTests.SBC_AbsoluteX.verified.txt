@@ -4,7 +4,7 @@ C003  FD 02 FF   SBC $FF02,X
 ; FD 34 12 FD 02 FF
 
 Debug Info (Program: SBC_AbsoluteX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

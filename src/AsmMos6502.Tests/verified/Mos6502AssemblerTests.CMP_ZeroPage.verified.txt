@@ -5,7 +5,7 @@ C004  C5 FE      CMP $FE
 ; C5 03 C5 20 C5 FE
 
 Debug Info (Program: CMP_ZeroPage)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

@@ -5,7 +5,7 @@ C004  D5 FB      CMP $FB,X
 ; D5 02 D5 30 D5 FB
 
 Debug Info (Program: CMP_ZeroPageX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

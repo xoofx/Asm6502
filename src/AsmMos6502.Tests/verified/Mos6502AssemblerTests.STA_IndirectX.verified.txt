@@ -5,7 +5,7 @@ C004  81 FF      STA ($FF,X)
 ; 81 05 81 20 81 FF
 
 Debug Info (Program: STA_IndirectX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

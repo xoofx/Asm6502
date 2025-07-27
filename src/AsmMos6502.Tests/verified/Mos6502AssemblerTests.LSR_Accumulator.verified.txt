@@ -4,7 +4,7 @@ C001  4A         LSR A
 ; 4A 4A
 
 Debug Info (Program: LSR_Accumulator)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C002
 - Debug Line Count: 2
 

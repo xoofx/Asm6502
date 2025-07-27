@@ -5,7 +5,7 @@ C002  D0 DB      BNE $-37
 ; D0 10 D0 DB
 
 Debug Info (Program: BNE_Relative)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C004
 - Debug Line Count: 2
 

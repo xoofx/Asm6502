@@ -5,7 +5,7 @@ C004  75 FB      ADC $FB,X
 ; 75 02 75 30 75 FB
 
 Debug Info (Program: ADC_ZeroPageX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

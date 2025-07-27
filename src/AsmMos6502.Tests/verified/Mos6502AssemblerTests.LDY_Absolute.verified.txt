@@ -4,7 +4,7 @@ C003  AC 01 FF   LDY $FF01
 ; AC 34 12 AC 01 FF
 
 Debug Info (Program: LDY_Absolute)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

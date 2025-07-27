@@ -5,7 +5,7 @@ C004  55 FB      EOR $FB,X
 ; 55 02 55 30 55 FB
 
 Debug Info (Program: EOR_ZeroPageX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

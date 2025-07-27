@@ -4,7 +4,7 @@ C003  0D 01 FF   ORA $FF01
 ; 0D 34 12 0D 01 FF
 
 Debug Info (Program: ORA_Absolute)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

@@ -4,7 +4,7 @@ C003  F9 03 FF   SBC $FF03,Y
 ; F9 34 12 F9 03 FF
 
 Debug Info (Program: SBC_AbsoluteY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

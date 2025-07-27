@@ -5,7 +5,7 @@ C004  F5 FB      SBC $FB,X
 ; F5 02 F5 30 F5 FB
 
 Debug Info (Program: SBC_ZeroPageX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

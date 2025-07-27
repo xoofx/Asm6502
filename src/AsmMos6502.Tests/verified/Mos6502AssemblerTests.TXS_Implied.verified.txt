@@ -3,7 +3,7 @@
 ; 9A
 
 Debug Info (Program: TXS_Implied)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C001
 - Debug Line Count: 1
 

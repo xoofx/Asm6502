@@ -5,7 +5,7 @@ C004  21 FF      AND ($FF,X)
 ; 21 05 21 20 21 FF
 
 Debug Info (Program: AND_IndirectX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

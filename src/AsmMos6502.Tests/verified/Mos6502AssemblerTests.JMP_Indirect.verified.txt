@@ -5,7 +5,7 @@ C003  6C 04 FF   JMP ($FF04)
 ; 6C 34 12 6C 04 FF
 
 Debug Info (Program: JMP_Indirect)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

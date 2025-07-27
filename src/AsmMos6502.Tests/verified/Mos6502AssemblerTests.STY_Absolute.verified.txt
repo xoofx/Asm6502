@@ -4,7 +4,7 @@ C003  8C 01 FF   STY $FF01
 ; 8C 34 12 8C 01 FF
 
 Debug Info (Program: STY_Absolute)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

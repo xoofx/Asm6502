@@ -98,8 +98,9 @@ public partial class Mos6502Assembler : IDisposable
     /// <summary>
     /// Resets the assembler state.
     /// </summary>
-    public void Begin()
+    public Mos6502Assembler Begin(ushort address = 0xc000)
     {
+        BaseAddress = address;
         ReleaseSharedBuffer();
         _instructionsWithLabelToPatch.Clear();
         SizeInBytes = 0;
@@ -107,6 +108,7 @@ public partial class Mos6502Assembler : IDisposable
 
         // Reset the base address to the default value
         DebugMap?.BeginProgram(BaseAddress);
+        return this;
     }
 
     /// <summary>

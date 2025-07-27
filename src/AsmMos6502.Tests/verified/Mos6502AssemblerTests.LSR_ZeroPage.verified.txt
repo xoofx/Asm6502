@@ -5,7 +5,7 @@ C004  46 FE      LSR $FE
 ; 46 03 46 20 46 FE
 
 Debug Info (Program: LSR_ZeroPage)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

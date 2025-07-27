@@ -4,7 +4,7 @@ C003  DE 02 FF   DEC $FF02,X
 ; DE 34 12 DE 02 FF
 
 Debug Info (Program: DEC_AbsoluteX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

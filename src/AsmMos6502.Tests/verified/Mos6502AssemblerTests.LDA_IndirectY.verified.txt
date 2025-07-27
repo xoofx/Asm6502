@@ -5,7 +5,7 @@ C004  B1 FE      LDA ($FE),Y
 ; B1 06 B1 30 B1 FE
 
 Debug Info (Program: LDA_IndirectY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

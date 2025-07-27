@@ -4,7 +4,7 @@ C003  59 03 FF   EOR $FF03,Y
 ; 59 34 12 59 03 FF
 
 Debug Info (Program: EOR_AbsoluteY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

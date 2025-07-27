@@ -5,7 +5,7 @@ C004  91 FE      STA ($FE),Y
 ; 91 06 91 30 91 FE
 
 Debug Info (Program: STA_IndirectY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

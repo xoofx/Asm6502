@@ -5,7 +5,7 @@ C004  61 FF      ADC ($FF,X)
 ; 61 05 61 20 61 FF
 
 Debug Info (Program: ADC_IndirectX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

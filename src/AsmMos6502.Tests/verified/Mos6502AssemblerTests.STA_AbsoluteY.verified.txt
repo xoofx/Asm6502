@@ -4,7 +4,7 @@ C003  99 03 FF   STA $FF03,Y
 ; 99 34 12 99 03 FF
 
 Debug Info (Program: STA_AbsoluteY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

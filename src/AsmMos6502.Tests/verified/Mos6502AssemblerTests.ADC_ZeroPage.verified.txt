@@ -5,7 +5,7 @@ C004  65 FE      ADC $FE
 ; 65 03 65 20 65 FE
 
 Debug Info (Program: ADC_ZeroPage)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

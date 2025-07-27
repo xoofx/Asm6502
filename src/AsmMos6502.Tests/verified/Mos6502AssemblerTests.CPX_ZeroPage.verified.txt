@@ -5,7 +5,7 @@ C004  E4 FE      CPX $FE
 ; E4 03 E4 20 E4 FE
 
 Debug Info (Program: CPX_ZeroPage)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

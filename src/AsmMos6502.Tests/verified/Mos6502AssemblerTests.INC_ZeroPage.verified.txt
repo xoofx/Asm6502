@@ -5,7 +5,7 @@ C004  E6 FE      INC $FE
 ; E6 03 E6 20 E6 FE
 
 Debug Info (Program: INC_ZeroPage)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

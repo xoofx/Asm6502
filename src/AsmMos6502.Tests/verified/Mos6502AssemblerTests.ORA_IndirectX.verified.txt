@@ -5,7 +5,7 @@ C004  01 FF      ORA ($FF,X)
 ; 01 05 01 20 01 FF
 
 Debug Info (Program: ORA_IndirectX)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

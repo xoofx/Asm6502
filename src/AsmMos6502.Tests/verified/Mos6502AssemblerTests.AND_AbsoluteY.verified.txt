@@ -4,7 +4,7 @@ C003  39 03 FF   AND $FF03,Y
 ; 39 34 12 39 03 FF
 
 Debug Info (Program: AND_AbsoluteY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

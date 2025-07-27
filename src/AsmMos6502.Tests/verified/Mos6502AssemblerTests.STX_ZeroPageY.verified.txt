@@ -5,7 +5,7 @@ C004  96 FC      STX $FC,Y
 ; 96 01 96 40 96 FC
 
 Debug Info (Program: STX_ZeroPageY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 3
 

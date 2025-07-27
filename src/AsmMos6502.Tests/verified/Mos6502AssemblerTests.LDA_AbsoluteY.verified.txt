@@ -4,7 +4,7 @@ C003  B9 03 FF   LDA $FF03,Y
 ; B9 34 12 B9 03 FF
 
 Debug Info (Program: LDA_AbsoluteY)
-- Program Start Address: 0000
+- Program Start Address: C000
 - Program End Address: C006
 - Debug Line Count: 2
 

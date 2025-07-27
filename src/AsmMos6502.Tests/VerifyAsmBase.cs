@@ -8,13 +8,13 @@ public abstract class VerifyAsmBase : VerifyBase
 {
     protected Mos6502Assembler CreateAsm(ushort address = 0xc000)
     {
-        return new Mos6502Assembler(address)
+        return new Mos6502Assembler()
         {
             DebugMap = new Mos6502AssemblerDebugMap()
             {
                 Name = TestContext.TestName
             }
-        };
+        }.Begin(address);
     }
     
     protected async Task VerifyAsm(Mos6502Assembler asm)

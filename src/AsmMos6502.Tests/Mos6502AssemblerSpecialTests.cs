@@ -48,6 +48,7 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmBase
         var forwardLabel = new Mos6502Label();
 
         asm
+            .Begin()
             .LDA(0x5)
             .STA(0x1000)
             .Label(out var label)
@@ -66,9 +67,10 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmBase
     public async Task TestComplex()
     {
         // Start address (for example, on C64 this is an available memory area)
-        using var asm = CreateAsm(0xc000);
+        using var asm = CreateAsm();
 
         asm
+            .Begin(0xc000)
             .Label("START", out var startLabel)
             .LDX(0x00)             // X = 0, index into buffer
             .LDY(0x10)             // Y = 16, number of bytes to process
