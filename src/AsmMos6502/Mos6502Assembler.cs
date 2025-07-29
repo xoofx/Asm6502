@@ -5,6 +5,7 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using AsmMos6502.Expressions;
 
 namespace AsmMos6502;
 
@@ -14,7 +15,7 @@ namespace AsmMos6502;
 public partial class Mos6502Assembler : IDisposable
 {
     private byte[] _buffer;
-    private readonly List<UnboundInstructionLabel> _instructionsWithLabelToPatch;
+    private readonly List<Patch> _patches;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Mos6502Assembler"/> class.
@@ -23,7 +24,7 @@ public partial class Mos6502Assembler : IDisposable
     public Mos6502Assembler(ushort baseAddress = 0xC000)
     {
         _buffer = [];
-        _instructionsWithLabelToPatch = new();
+        _patches = new();
         BaseAddress = baseAddress;
     }
 
@@ -80,6 +81,43 @@ public partial class Mos6502Assembler : IDisposable
     }
 
     /// <summary>
+    /// Appends an 8-bit expression to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="expression">An 16-bit expression to append.</param>
+    /// <returns>The current assembler instance.</returns>
+    /// <exception cref="ArgumentNullException">if expression is null</exception>
+    public Mos6502Assembler Append(Expressions.Mos6502ExpressionU8 expression)
+    {
+        ArgumentNullException.ThrowIfNull(expression);
+        var sizeInBytes = SizeInBytes;
+        var newSizeInBytes = SafeAddress(sizeInBytes + 1);
+        var span = GetBuffer(1);
+        span[0] = 0; // Initialize with zero
+        _patches.Add(new(sizeInBytes, Mos6502AddressingMode.Immediate, expression));
+        SizeInBytes = newSizeInBytes;
+        return this;
+    }
+
+    /// <summary>
+    /// Appends an 16-bit expression to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="expression">An 16-bit expression to append.</param>
+    /// <returns>The current assembler instance.</returns>
+    /// <exception cref="ArgumentNullException">if expression is null</exception>
+    public Mos6502Assembler Append(Expressions.Mos6502ExpressionU16 expression)
+    {
+        ArgumentNullException.ThrowIfNull(expression);
+        var sizeInBytes = SizeInBytes;
+        var newSizeInBytes = SafeAddress(sizeInBytes + 2);
+        var span = GetBuffer(2);
+        span[0] = 0; // Initialize with zero
+        span[1] = 0;
+        _patches.Add(new(sizeInBytes, Mos6502AddressingMode.Absolute, expression));
+        SizeInBytes = newSizeInBytes;
+        return this;
+    }
+    
+    /// <summary>
     /// Writes a number of bytes to the assembler's internal buffer, filling them with a specified byte value.
     /// </summary>
     /// <param name="length">The number of bytes to write.</param>
@@ -102,7 +140,7 @@ public partial class Mos6502Assembler : IDisposable
     {
         BaseAddress = address;
         ReleaseSharedBuffer();
-        _instructionsWithLabelToPatch.Clear();
+        _patches.Clear();
         SizeInBytes = 0;
         CurrentCycleCount = 0;
 
@@ -120,38 +158,59 @@ public partial class Mos6502Assembler : IDisposable
     /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler End()
     {
-        for (var i = 0; i < _instructionsWithLabelToPatch.Count; i++)
+        for (var i = 0; i < _patches.Count; i++)
         {
-            var unboundLabel = _instructionsWithLabelToPatch[i];
-            var label = unboundLabel.Label;
+            var patch = _patches[i];
+            var expression = patch.Expression;
 
-            if (!label.IsBound)
+            ushort resolved;
+            switch (expression)
             {
-                throw new InvalidOperationException($"Label number #{i} `{label}` is not bound. Please bind it before assembling.");
-            }
-
-            var instruction = Mos6502Instruction.Decode(Buffer.Slice(unboundLabel.InstructionOffset));
-
-            // TODO: adjust cycle count based on the target address (if it crosses a page boundary)
-            switch (unboundLabel.AddressKind)
-            {
-                case Mos6502AddressKind.None:
-                case Mos6502AddressKind.Absolute:
-                    instruction = new(instruction.OpCode, (ushort)label.Address);
+                case Mos6502Label label:
+                    if (!label.IsBound)
+                    {
+                        throw new InvalidOperationException($"Label number #{i} `{label}` is not bound. Please bind it before assembling.");
+                    }
+                    resolved = label.Address;
                     break;
-                case Mos6502AddressKind.Relative:
-                    var deltaPc = label.Address - (BaseAddress + unboundLabel.InstructionOffset + instruction.SizeInBytes);
+                case Mos6502ExpressionU8 exprU8:
+                    resolved = exprU8.Evaluate();
+                    break;
+
+                case Mos6502ExpressionU16 exprU16:
+                    resolved = exprU16.Evaluate();
+                    break;
+                default:
+                    throw new InvalidOperationException($"Unsupported expression type `{expression.GetType()}` for patch at offset 0x{patch.Offset:X4} with expression `{expression}`");
+            }
+            
+            var patchRef = Buffer.Slice(patch.Offset);
+
+            switch (patch.AddressingMode)
+            {
+                case Mos6502AddressingMode.Immediate:
+                    patchRef[0] = (byte)(resolved); // Low byte
+                    break;
+                case Mos6502AddressingMode.Indirect:
+                case Mos6502AddressingMode.Absolute:
+                case Mos6502AddressingMode.AbsoluteX:
+                case Mos6502AddressingMode.AbsoluteY:
+                    patchRef[0] = (byte)(resolved); // Low byte
+                    patchRef[1] = (byte)(resolved >> 8); // High byte
+                    break;
+                case Mos6502AddressingMode.Relative:
+                    var deltaPc = resolved - (BaseAddress + patch.Offset + 1);
                     if (deltaPc < sbyte.MinValue || deltaPc > sbyte.MaxValue)
-                        throw new InvalidOperationException($"Relative address for label `{label}` at instruction `{instruction}` is out of range: {deltaPc}. Must be [-128, 127] ");
+                        throw new InvalidOperationException($"Relative address for expression `{expression}` at instruction offset 0x`{patch.Offset - 1:X4}` is out of range: {deltaPc}. Must be [-128, 127] ");
 
-                    instruction = new(instruction.OpCode, (byte)deltaPc);
+                    patchRef[0] = (byte)deltaPc;
                     break;
+                default:
+                    throw new InvalidOperationException($"Unsupported addressing mode {patch.AddressingMode} for patch at offset 0x{patch.Offset:X4} with expression `{expression}`");
             }
-
-            instruction.AsSpan.CopyTo(Buffer.Slice((int)unboundLabel.InstructionOffset));
         }
 
-        _instructionsWithLabelToPatch.Clear();
+        _patches.Clear();
 
         // Notifies the current address
         DebugMap?.EndProgram(CurrentAddress);
@@ -201,6 +260,17 @@ public partial class Mos6502Assembler : IDisposable
     public Mos6502Assembler LabelForward(string? name, out Mos6502Label label)
     {
         label = new Mos6502Label(name); // Create an anonymous label
+        return this;
+    }
+
+    /// <summary>
+    /// Creates a new anonymous forward label that will need to be bound later via <see cref="Label(AsmMos6502.Mos6502Label,bool)"/>.
+    /// </summary>
+    /// <param name="label">The label identifier (output).</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502Assembler LabelForward(out Mos6502Label label)
+    {
+        label = new Mos6502Label(); // Create an anonymous label
         return this;
     }
 
@@ -257,11 +327,31 @@ public partial class Mos6502Assembler : IDisposable
         AddInstruction(instruction, debugFilePath, debugLineNumber);
         // ReSharper restore ExplicitCallerInfoArgument
 
-        var addressKind = instruction.GetAddressKind();
-        if (!label.IsBound || addressKind == Mos6502AddressKind.Relative)
+        var addressKind = instruction.AddressingMode;
+        if (!label.IsBound || addressKind == Mos6502AddressingMode.Relative)
         {
-            _instructionsWithLabelToPatch.Add(new(offset, label, addressKind));
+            _patches.Add(new((ushort)(offset + 1), addressKind, label));
         }
+
+        return this;
+    }
+
+    /// <summary>
+    /// Adds an instruction to the assembler, possibly referencing a label.
+    /// </summary>
+    /// <param name="instruction">The instruction to add.</param>
+    /// <param name="expression">The expression.</param>
+    /// <param name="debugFilePath">The file path for debugging information (optional).</param>
+    /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+    {
+        var offset = SizeInBytes;
+        // ReSharper disable ExplicitCallerInfoArgument
+        AddInstruction(instruction, debugFilePath, debugLineNumber);
+        // ReSharper restore ExplicitCallerInfoArgument
+
+        _patches.Add(new((ushort)(offset + 1), instruction.AddressingMode, expression));
 
         return this;
     }
@@ -298,12 +388,19 @@ public partial class Mos6502Assembler : IDisposable
         }
     }
 
-    private record struct UnboundInstructionLabel(ushort InstructionOffset, Mos6502Label Label, Mos6502AddressKind AddressKind);
-
     private static ushort SafeAddress(int address)
     {
         if (address > ushort.MaxValue)
             throw new ArgumentOutOfRangeException(nameof(address), $"Address {address} is out of range for a 16-bit address space.");
         return (ushort)address;
     }
+
+    /// <summary>
+    /// Represents a patch that needs to be applied to a memory location after labels have been bound.
+    /// </summary>
+    /// <param name="Offset">The offset in the buffer where the patch should be applied.</param>
+    /// <param name="AddressingMode">The kind of address for the patch (8 bit, 16 bit).</param>
+    /// <param name="Expression">Either a <see cref="Mos6502Label"/> or a <see cref="Mos6502Expression"/>.</param>
+    private record struct Patch(ushort Offset, Mos6502AddressingMode AddressingMode, object Expression);
+
 }

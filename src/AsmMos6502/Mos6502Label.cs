@@ -2,6 +2,8 @@
 // Licensed under the BSD-Clause 2 license.
 // See license.txt file in the project root for full license information.
 
+using AsmMos6502.Expressions;
+
 namespace AsmMos6502;
 
 /// <summary>
@@ -51,4 +53,28 @@ public class Mos6502Label
     
     /// <inheritdoc />
     public override string ToString() => Name ?? (IsBound ? $"0x{Address:X4}" : $"0x????");
+
+    /// <summary>
+    /// Subtracts one <see cref="Mos6502Label"/> from another and returns the resulting 16-bit expression.
+    /// </summary>
+    /// <param name="left">The label to subtract from.</param>
+    /// <param name="right">The label to subtract.</param>
+    /// <returns>A <see cref="Mos6502ExpressionU16"/> representing the difference between the two labels.</returns>
+    public static Mos6502ExpressionU16 operator -(Mos6502Label left, Mos6502Label right) => left.ToExpression() - right.ToExpression();
+    
+    /// <summary>
+    /// Subtracts one 16-bit MOS 6502 expression from a const.
+    /// </summary>
+    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
+    /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
+    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the subtraction.</returns>
+    public static Mos6502ExpressionU16 operator -(Mos6502Label left, int right) => new Mos6502ExpressionAddConstU16(left.ToExpression(), (short)-right);
+
+    /// <summary>
+    /// Adds one 16-bit MOS 6502 expression to const.
+    /// </summary>
+    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
+    /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
+    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the addition.</returns>
+    public static Mos6502ExpressionU16 operator +(Mos6502Label left, int right) => new Mos6502ExpressionAddConstU16(left.ToExpression(), (short)right);
 }

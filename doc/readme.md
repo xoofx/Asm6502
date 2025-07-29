@@ -18,6 +18,7 @@ This document provides a small user guide for the AsmMos6502 library.
   - [Customizing Output](#customizing-output)
 - [Advanced Usage](#advanced-usage)
   - [Labels and Branches](#labels-and-branches)
+  - [Expressions](#expressions)
   - [Customizing Disassembly Output](#customizing-disassembly-output)
   - [Assembler Debug Line Information](#assembler-debug-line-information)
 - [Tips and Best Practices](#tips-and-best-practices)
@@ -189,6 +190,58 @@ asm
     .LDA(0xFF)         // Load accumulator with 0xFF
     .Label(skipLabel)  // Bind SKIP label later
 ```
+
+### Expressions
+
+It is possible to use expressions for memory addresses and immediate values, such as:
+
+- Storing the low byte and high byte of an address
+  ```csharp
+  asm
+      .Begin()
+      .LabelForward(out var forwardLabel)
+      .LDA_Imm(forwardLabel.LowByte())
+      .STA(0x1000)
+      .LDA_Imm(forwardLabel.HighByte())
+      .STA(0x1001)
+      .RTS()
+      .Label(forwardLabel)
+      .End();
+  ```
+- Storing the difference of value between two labels
+  ```csharp
+  asm
+    .Begin()
+    .Label("start", out var startLabel)
+    .LabelForward("end", out var endLabel)
+    .LDA_Imm((endLabel - startLabel).LowByte()) // Store the size of this code
+    .STA(0x1000)
+    .RTS()
+    .Label(endLabel)
+    .End();
+  ```
+- The address of label + a const value
+  ```csharp
+  asm
+    .Begin()
+    .LabelForward("end", out var endLabel)
+    .LDA(endLabel + 1) // Load A with the address of endLabel + 1
+    .RTS()
+    .Label(endLabel)
+    .End();
+  ```
+- Appending as raw data an address or the difference between two labels
+  ```csharp
+  asm
+    .Begin()
+    .Label("start", out var startLabel)
+    .LabelForward("end", out var endLabel)
+    .RTS()
+    .Label(endLabel)
+    .Append(startLabel) // The address of the label
+    .Append((endLabel - startLabel).LowByte()) // The size of the code
+    .End();
+  ```
 
 ### Customizing Disassembly Output
 

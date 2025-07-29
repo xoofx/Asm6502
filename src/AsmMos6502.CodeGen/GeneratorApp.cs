@@ -5,6 +5,8 @@
 using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
+using System.Text;
+using System.Xml.Linq;
 
 namespace AsmMos6502.CodeGen;
 
@@ -38,8 +40,9 @@ internal class GeneratorApp
         GenerateMnemonics(mnemonics);
         GenerateTables(opcodes, modes, modeMapping, mnemonics);
         GenerateInstructionFactory(opcodes, modes);
-        GenerateAssemblerFactory(opcodes, modes);
-        GenerateAssemblerFactoryWithLabel(opcodes, modes);
+        GenerateAssemblerFactory(opcodes);
+        GenerateAssemblerFactoryWithLabel(opcodes);
+        GenerateAssemblerFactoryWithExpressions(opcodes);
         GenerateAssemblyTests(opcodes);
     }
 
@@ -241,7 +244,36 @@ internal class GeneratorApp
     private const string Mos6502RegisterY = nameof(Mos6502RegisterY);
 
 
-    private record Operand6502(string Name, string Type, string? DefaultValue = null);
+    private record Operand6502(string Name, string Type, string? DefaultValue = null, string? Attributes = null, bool IsDebug = false)
+    {
+        public string? ArgumentPath { get; set; }
+
+        public bool IsArgumentOnly { get; set; }
+        
+        public string ParameterDeclaration()
+        {
+            var builder = new StringBuilder();
+            if (Attributes is not null)
+            {
+                builder.Append(Attributes);
+                builder.Append(' ');
+            }
+
+            builder.Append(Type);
+
+            builder.Append(' ');
+
+            builder.Append(Name);
+
+            if (DefaultValue is not null)
+            {
+                builder.Append(" = ");
+                builder.Append(DefaultValue);
+            }
+
+            return builder.ToString();
+        }
+    }
 
     private enum OperandValueKind
     {
@@ -251,9 +283,28 @@ internal class GeneratorApp
         Zp,
         Address,
         Indirect,
+        Implied,
+        Accumulator,
+        ZpX,
+        ZpY,
+        AddressX,
+        AddressY,
+        IndirectX,
+        IndirectY
+    }
+
+    private record OpcodeSignature(JsonAsm6502Opcode Opcode, string Name, int OperandCount, List<Operand6502> Arguments, OperandValueKind OperandKind)
+    {
+        public void AddDebugAttributes()
+        {
+            Arguments.Add(new Operand6502("debugFilePath", "string", "\"\"", "[CallerFilePath]"));
+            Arguments.Add(new Operand6502("debugLineNumber", "int", "0", "[CallerLineNumber]"));
+        }
+
+        public string Signature => $"{Name}({string.Join(", ", Arguments.Where(x => !x.IsArgumentOnly).Select(arg => arg.ParameterDeclaration()))})";
     }
     
-    private static (string Name, List<Operand6502> Arguments, string Signature, OperandValueKind OperandKind) GetInstructionSignature(JsonAsm6502Opcode opcode)
+    private static OpcodeSignature GetOpcodeSignature(JsonAsm6502Opcode opcode)
     {
         var opName = opcode.Name;
         var operandKind = OperandValueKind.None;
@@ -262,6 +313,7 @@ internal class GeneratorApp
         {
             case "Implied":
                 argumentTypes = new List<Operand6502>();
+                operandKind = OperandValueKind.Implied;
                 break;
             case "Relative":
                 argumentTypes = [new("relativeAddress", "sbyte")];
@@ -269,6 +321,7 @@ internal class GeneratorApp
                 break;
             case "Accumulator":
                 argumentTypes = [new("accumulator", Mos6502RegisterA, "Mos6502RegisterA.A")];
+                operandKind = OperandValueKind.Accumulator;
                 break;
             case "Immediate":
                 argumentTypes = ( [new("immediate", "byte")]);
@@ -281,11 +334,11 @@ internal class GeneratorApp
                 break;
             case "ZeroPageX":
                 argumentTypes = ( [new("zeroPage", "byte"), new("x", Mos6502RegisterX)]);
-                operandKind = OperandValueKind.Zp;
+                operandKind = OperandValueKind.ZpX;
                 break;
             case "ZeroPageY":
                 argumentTypes = ( [new("zeroPage", "byte"), new("y", Mos6502RegisterY)]);
-                operandKind = OperandValueKind.Zp;
+                operandKind = OperandValueKind.ZpY;
                 break;
             case "Absolute":
                 argumentTypes = ( [new("address", "ushort")]);
@@ -293,11 +346,11 @@ internal class GeneratorApp
                 break;
             case "AbsoluteX":
                 argumentTypes = ( [new("address", "ushort"), new("x", Mos6502RegisterX)]);
-                operandKind = OperandValueKind.Address;
+                operandKind = OperandValueKind.AddressX;
                 break;
             case "AbsoluteY":
                 argumentTypes = ( [new("address", "ushort"), new("y", Mos6502RegisterY)]);
-                operandKind = OperandValueKind.Address;
+                operandKind = OperandValueKind.AddressY;
                 break;
             case "Indirect":
                 argumentTypes = ( [new("indirect", "Mos6502Indirect")]);
@@ -305,18 +358,18 @@ internal class GeneratorApp
                 break;
             case "IndirectX":
                 argumentTypes = ( [new("indirect", "Mos6502IndirectX")]);
-                operandKind = OperandValueKind.Indirect;
+                operandKind = OperandValueKind.IndirectX;
                 break;
             case "IndirectY":
                 argumentTypes = ( [new("indirect", "Mos6502IndirectY"), new("y", Mos6502RegisterY)]);
-                operandKind = OperandValueKind.Indirect;
+                operandKind = OperandValueKind.IndirectY;
                 break;
             default:
                 throw new NotSupportedException($"Addressing mode '{opcode.AddressingMode}' is not supported for opcode '{opcode.Name}'");
         }
 
-        var signature = $"{opName}({string.Join(", ", argumentTypes.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null?$" = {arg.DefaultValue}":"")}"))}{(argumentTypes.Count > 0 ? ", " : "")}[CallerFilePath] string debugFilePath = \"\", [CallerLineNumber] int debugLineNumber = 0)";
-        return (opName, argumentTypes, signature, operandKind);
+        var operandCount = argumentTypes.Count;
+        return new(opcode, opName, operandCount, argumentTypes, operandKind);
     }
 
     
@@ -337,22 +390,29 @@ internal class GeneratorApp
 
         foreach (var opcode in opcodes)
         {
-            var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
+            var opcodeSignature = GetOpcodeSignature(opcode);
             var mode = modes.First(x => x.Kind == opcode.AddressingMode);
             writer.WriteSummary($"Creates the {opcode.Name} instruction ({opcode.OpcodeHex}) instruction with addressing mode {opcode.AddressingMode}.");
             writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {mode.SizeBytes} bytes</remarks>"]);
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.Write($"public static Mos6502Instruction {signature} => new (Mos6502OpCode.{opcode.Name}_{opcode.AddressingMode}");
+            writer.Write($"public static Mos6502Instruction {opcodeSignature.Signature} => new (Mos6502OpCode.{opcode.Name}_{opcode.AddressingMode}");
 
-            switch (operandKind)
+            switch (opcodeSignature.OperandKind)
             {
                 case OperandValueKind.None:
                     break;
+                case OperandValueKind.Accumulator:
+                    break;
                 case OperandValueKind.Indirect:
-                    writer.Write($", {arguments[0].Name}.Address");
+                case OperandValueKind.IndirectX:
+                case OperandValueKind.IndirectY:
+                    writer.Write($", {opcodeSignature.Arguments[0].Name}.Address");
                     break;
                 default:
-                    writer.Write($", {arguments[0].Name}");
+                    if (opcodeSignature.Arguments.Count > 0)
+                    {
+                        writer.Write($", {opcodeSignature.Arguments[0].Name}");
+                    }
                     break;
             }
 
@@ -364,51 +424,71 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
 
-    private static void GenerateAssemblerFactory(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes)
+    private static void GenerateAssemblerFactory(List<JsonAsm6502Opcode> opcodes)
     {
-
-        var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Assembler.gen.cs");
-        using var writer = CreateCodeWriter(filePath);
-
-        writer.WriteLine("using System.Runtime.CompilerServices;");
-        writer.WriteLine();
-
-        writer.WriteLine("namespace AsmMos6502;");
-        writer.WriteLine();
-        writer.WriteLine("partial class Mos6502Assembler");
-        writer.OpenBraceBlock();
-        
-        foreach (var opcode in opcodes)
-        {
-            var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
-            var mode = modes.First(x => x.Kind == opcode.AddressingMode);
-            writer.WriteSummary($"{opcode.NameLong}. {opcode.Name} instruction ({opcode.OpcodeHex}) with addressing mode {opcode.AddressingMode}.");
-            writer.WriteDoc([$"<remarks>Cycles: {opcode.Cycles}, Size: {mode.SizeBytes} bytes</remarks>"]);
-            writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.Write($"public Mos6502Assembler {signature} => AddInstruction(Mos6502InstructionFactory.{name}(");
-
-            if (arguments.Count > 0)
+        // Generate all assembler instruction
+        GenerateAssemblerFactoryGeneric("Mos6502Assembler",
+            opcodes,
+            opcodeSignature => true,
+            opcodeSignature =>
             {
-                writer.Write($"{arguments[0].Name}");
+                opcodeSignature.AddDebugAttributes();
             }
-
-            if (arguments.Count == 2)
-            {
-                writer.Write($", {arguments[1].Name}");
-            }
-
-            writer.WriteLine($"), debugFilePath, debugLineNumber);");
-
-            writer.WriteLine();
-        }
-
-        writer.CloseBraceBlock();
+        );
     }
 
-    private static void GenerateAssemblerFactoryWithLabel(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes)
+    private static void GenerateAssemblerFactoryWithLabel(List<JsonAsm6502Opcode> opcodes)
+    {
+        GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithLabels",
+            opcodes,
+            opcodeSignature => opcodeSignature.OperandKind == OperandValueKind.Address ||
+                               opcodeSignature.OperandKind == OperandValueKind.AddressX ||
+                               opcodeSignature.OperandKind == OperandValueKind.AddressY ||
+                               opcodeSignature.OperandKind == OperandValueKind.Relative ||
+                               opcodeSignature.OperandKind == OperandValueKind.Indirect,
+            opcodeSignature =>
+            {
+                var originalOperand = opcodeSignature.Arguments[0];
+                var operand0 = new Operand6502("address", opcodeSignature.OperandKind == OperandValueKind.Indirect ? opcodeSignature.Arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : "Mos6502Label");
+                operand0.ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"new {originalOperand.Type}({operand0.Name}.ZpLabel.Address)" : $"({originalOperand.Type}){operand0.Name}.Address";
+
+                opcodeSignature.Arguments[0] = operand0;
+
+                opcodeSignature.Arguments.Add(new Operand6502(operand0.Name, operand0.Type)
+                {
+                    ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"{operand0.Name}.ZpLabel" : null,
+                    IsArgumentOnly = true
+                } ); // Pass the label as an additional argument to the assembler AddInstruction
+                opcodeSignature.AddDebugAttributes();
+            });
+    }
+
+    private static void GenerateAssemblerFactoryWithExpressions(List<JsonAsm6502Opcode> opcodes)
+    {
+        GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithExpressions",
+            opcodes,
+            opcodeSignature =>
+                                opcodeSignature.OperandKind == OperandValueKind.Immediate ||
+                                opcodeSignature.OperandKind == OperandValueKind.Address ||
+                               opcodeSignature.OperandKind == OperandValueKind.AddressX ||
+                               opcodeSignature.OperandKind == OperandValueKind.AddressY ||
+                               opcodeSignature.OperandKind == OperandValueKind.Indirect,
+            opcodeSignature =>
+            {
+                var originalOperand = opcodeSignature.Arguments[0];
+                var operand0 = new Operand6502(opcodeSignature.Arguments[0].Name, opcodeSignature.OperandKind == OperandValueKind.Indirect ? "Expressions.Mos6502ExpressionIndirect" : opcodeSignature.OperandKind == OperandValueKind.Immediate ? "Expressions.Mos6502ExpressionU8" : "Expressions.Mos6502ExpressionU16");
+                opcodeSignature.Arguments[0] = operand0;
+                operand0.ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"new {originalOperand.Type}(0)" : $"({originalOperand.Type})0";
+
+                opcodeSignature.Arguments.Add(new Operand6502(operand0.Name, operand0.Type) { IsArgumentOnly = true }); // Pass the label as an additional argument to the assembler AddInstruction
+                opcodeSignature.AddDebugAttributes();
+            });
+    }
+
+    private static void GenerateAssemblerFactoryGeneric(string fileName, List<JsonAsm6502Opcode> opcodes, Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)
     {
 
-        var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Assembler_WithLabels.gen.cs");
+        var filePath = Path.Combine(GeneratedFolderPath, $"{fileName}.gen.cs");
         using var writer = CreateCodeWriter(filePath);
 
         writer.WriteLine("using System.Runtime.CompilerServices;");
@@ -419,27 +499,22 @@ internal class GeneratorApp
         writer.WriteLine("partial class Mos6502Assembler");
         writer.OpenBraceBlock();
 
-        var mnemonicToSignatureToOpcodes = new Dictionary<string, Dictionary<string, (JsonAsm6502Opcode, List<Operand6502>)>>();
+        var mnemonicToSignatureToOpcodes = new Dictionary<string, Dictionary<string, OpcodeSignature>>();
 
         foreach (var opcode in opcodes)
         {
-            var (name, arguments, _, operandKind) = GetInstructionSignature(opcode);
-            if (operandKind != OperandValueKind.None &&
-                operandKind != OperandValueKind.Immediate &&
-                operandKind != OperandValueKind.Zp &&
-                opcode.AddressingMode != "IndirectX" &&
-                opcode.AddressingMode != "IndirectY")
+            var opcodeSignature = GetOpcodeSignature(opcode);
+            if (filter(opcodeSignature))
             {
-                arguments[0] = new Operand6502("address", operandKind == OperandValueKind.Indirect ? arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : "Mos6502Label");
-                var signature = $"{name}({string.Join(", ", arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.DefaultValue != null ? $" = {arg.DefaultValue}" : "")}"))}, [CallerFilePath] string debugFilePath = \"\", [CallerLineNumber] int debugLineNumber = 0)";
+                modify(opcodeSignature);
 
                 if (!mnemonicToSignatureToOpcodes.TryGetValue(opcode.Name, out var opcodeWithAddress))
                 {
-                    opcodeWithAddress = new Dictionary<string, (JsonAsm6502Opcode, List<Operand6502>)>();
+                    opcodeWithAddress = new Dictionary<string, OpcodeSignature>();
                     mnemonicToSignatureToOpcodes[opcode.Name] = opcodeWithAddress;
                 }
 
-                opcodeWithAddress[signature] = (opcode, arguments);
+                opcodeWithAddress[opcodeSignature.Signature] = opcodeSignature;
             }
         }
 
@@ -450,44 +525,44 @@ internal class GeneratorApp
             foreach (var signaturePair in signatureToOpcodes.OrderBy(x => x.Key))
             {
                 var signature = signaturePair.Key;
-                var (opcode, operands) = signaturePair.Value;
+                var opcodeSignature = signaturePair.Value;
 
-                writer.WriteSummary($"{opcode.NameLong}. {mnemonic} instruction ({opcode.OpcodeHex}) with addressing mode {opcode.AddressingMode}.");
+                writer.WriteSummary($"{opcodeSignature.Opcode.NameLong}. {mnemonic} instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}.");
                 writer.WriteLine($"public Mos6502Assembler {signature}");
                 writer.Indent();
 
-                var (_, originalParameterTypes, _, operandKind) = GetInstructionSignature(opcode);
-                AppendInstructionWithLabel(opcode.Name, operands, originalParameterTypes[0], operandKind);
+                writer.Write($"=> AddInstruction(Mos6502InstructionFactory.{opcodeSignature.Name}(");
+
+                if (opcodeSignature.OperandKind != OperandValueKind.Accumulator)
+                {
+                    for (int i = 0; i < opcodeSignature.OperandCount; i++)
+                    {
+                        var arg = opcodeSignature.Arguments[i];
+                        if (i > 0)
+                        {
+                            writer.Write(", ");
+                        }
+
+                        writer.Write(arg.ArgumentPath ?? arg.Name);
+                    }
+                }
+
+                writer.Write(")");
+
+                for (int i = opcodeSignature.OperandCount; i < opcodeSignature.Arguments.Count; i++)
+                {
+                    var arg = opcodeSignature.Arguments[i];
+                    writer.Write($", {arg.ArgumentPath ?? arg.Name}");
+                }
+
+                writer.WriteLine(");");
+
                 writer.UnIndent();
             }
         }
 
         writer.CloseBraceBlock();
-
-
-        void AppendInstructionWithLabel(string instructionName, List<Operand6502> arguments, Operand6502 originalAddressType, OperandValueKind operandKind)
-        {
-            writer.Write($"=> AddInstruction(Mos6502InstructionFactory.{instructionName}(");
-
-            switch (operandKind)
-            {
-                case OperandValueKind.Indirect:
-                    writer.Write($"new {originalAddressType.Type}((byte){arguments[0].Name}.ZpLabel.Address)");
-                    break;
-                default:
-                    writer.Write($"({originalAddressType.Type}){arguments[0].Name}.Address");
-
-                    break;
-            }
-            if (arguments.Count == 2)
-            {
-                writer.Write($", {arguments[1].Name}");
-            }
-
-            writer.WriteLine(operandKind == OperandValueKind.Indirect ? $"), {arguments[0].Name}.ZpLabel, debugFilePath, debugLineNumber);" : $"), {arguments[0].Name}, debugFilePath, debugLineNumber);");
-        }
     }
-
 
     private static IEnumerable<string> GetTestVariations(JsonAsm6502Opcode opcode)
     {
@@ -578,10 +653,10 @@ internal class GeneratorApp
             writer.WriteLine("using var asm = CreateAsm()");
             writer.Indent();
 
-            var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
+            var opcodeSignature = GetOpcodeSignature(opcode);
             foreach (var testItem in GetTestVariations(opcode))
             {
-                writer.WriteLine($".{name}({testItem})");
+                writer.WriteLine($".{opcodeSignature.Name}({testItem})");
             }
 
             writer.WriteLine(".End();");
@@ -603,10 +678,10 @@ internal class GeneratorApp
             writer.Indent();
             foreach (var opcode in opcodes)
             {
-                var (name, arguments, signature, operandKind) = GetInstructionSignature(opcode);
+                var opcodeSignature = GetOpcodeSignature(opcode);
                 foreach (var testItem in GetTestVariations(opcode))
                 {
-                    writer.WriteLine($".{name}({testItem})");
+                    writer.WriteLine($".{opcodeSignature.Name}({testItem})");
                 }
             }
 

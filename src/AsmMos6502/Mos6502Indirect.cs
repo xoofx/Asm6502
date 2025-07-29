@@ -2,6 +2,8 @@
 // Licensed under the BSD-Clause 2 license.
 // See license.txt file in the project root for full license information.
 
+using AsmMos6502.Expressions;
+
 namespace AsmMos6502;
 
 /// <summary>
@@ -33,14 +35,6 @@ public readonly record struct Mos6502IndirectX(byte Address);
 public readonly record struct Mos6502IndirectY(byte Address);
 
 /// <summary>
-/// Represents the addressing mode for the 6502 CPU's Indirect Indexed (X) operation.
-/// </summary>
-/// <remarks>This addressing mode uses the provided zero-page address as the base, adds the X register value, and
-/// dereferences the resulting address to obtain the effective memory location.</remarks>
-/// <param name="ZpLabel">The zero-page address (low byte) used as the base for the Indirect Indexed (X) operation.</param>
-public readonly record struct Mos6502IndirectLabelX(Mos6502Label ZpLabel);
-
-/// <summary>
 /// A factory class for creating instances of <see cref="Mos6502Indirect"/> and <see cref="Mos6502IndirectX"/> addressing modes.
 /// </summary>
 public struct Mos6502IndirectFactory
@@ -51,6 +45,20 @@ public struct Mos6502IndirectFactory
     /// <param name="address">The address.</param>
     /// <returns>An indirect address</returns>
     public Mos6502Indirect this[ushort address] => new(address);
+    
+    /// <summary>
+    /// Accessor for creating an instance of <see cref="Mos6502Indirect"/>.
+    /// </summary>
+    /// <param name="address">The address.</param>
+    /// <returns>An indirect address</returns>
+    public Mos6502IndirectLabel this[Mos6502Label address] => new(address);
+    
+    /// <summary>
+    /// Accessor for creating an instance of <see cref="Mos6502Indirect"/>.
+    /// </summary>
+    /// <param name="address">The address.</param>
+    /// <returns>An indirect address</returns>
+    public Mos6502ExpressionIndirect this[Mos6502ExpressionU16 address] => new(address);
 
     /// <summary>
     /// Accessor for creating an instance of <see cref="Mos6502IndirectX"/> using a zero-page Indirect Indexed (X) address.

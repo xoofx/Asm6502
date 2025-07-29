@@ -163,7 +163,7 @@ partial class Mos6502Assembler
     /// Unconditional Jump. JMP instruction (0x6c) with addressing mode Indirect.
     /// </summary>
     public Mos6502Assembler JMP(Mos6502IndirectLabel address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6502InstructionFactory.JMP(new Mos6502Indirect((byte)address.ZpLabel.Address)), address.ZpLabel, debugFilePath, debugLineNumber);
+        => AddInstruction(Mos6502InstructionFactory.JMP(new Mos6502Indirect(address.ZpLabel.Address)), address.ZpLabel, debugFilePath, debugLineNumber);
     /// <summary>
     /// Unconditional Jump. JMP instruction (0x4c) with addressing mode Absolute.
     /// </summary>

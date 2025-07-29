@@ -1,0 +1,18 @@
+﻿C000  A9 0B      LDA #$0B
+C002  8D 00 10   STA $1000
+C005  A9 0C      LDA #$0C
+C007  8D 01 10   STA $1001
+C00A  60         RTS
+
+; A9 0B 8D 00 10 A9 0C 8D 01 10 60
+
+Debug Info (Program: TestSubtract)
+- Program Start Address: C000
+- Program End Address: C00B
+- Debug Line Count: 5
+
+C000 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:40
+C002 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:41
+C005 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:42
+C007 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:43
+C00A {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:44

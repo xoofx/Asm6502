@@ -308,22 +308,6 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
     }
 
     /// <summary>
-    /// Gets the address kind for the instruction.
-    /// </summary>
-    /// <returns>The address kind.</returns>
-    internal Mos6502AddressKind GetAddressKind()
-    {
-        return AddressingMode switch
-        {
-            Mos6502AddressingMode.Absolute or
-                Mos6502AddressingMode.AbsoluteX or
-                Mos6502AddressingMode.AbsoluteY => Mos6502AddressKind.Absolute,
-            Mos6502AddressingMode.Relative => Mos6502AddressKind.Relative,
-            _ => Mos6502AddressKind.None
-        };
-    }
-
-    /// <summary>
     /// Determines whether two instructions are equal.
     /// </summary>
     public static bool operator ==(Mos6502Instruction left, Mos6502Instruction right) => left.Equals(right);
