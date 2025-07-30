@@ -17,756 +17,907 @@ partial class Mos6502Assembler
     /// <summary>
     /// Add with carry. ADC instruction (0x69) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler ADC_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x65) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler ADC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x75) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler ADC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x61) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler ADC(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x71) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler ADC(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x6d) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler ADC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x7d) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler ADC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Add with carry. ADC instruction (0x79) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler ADC(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x29) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler AND_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x25) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler AND(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x35) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler AND(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x21) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler AND(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x31) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler AND(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x2d) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler AND(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x3d) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler AND(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x39) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler AND(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Arithmetic shift left. ASL instruction (0x06) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler ASL(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Arithmetic shift left. ASL instruction (0x16) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler ASL(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Arithmetic shift left. ASL instruction (0x0a) with addressing mode Accumulator.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler ASL(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Arithmetic shift left. ASL instruction (0x0e) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler ASL(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Arithmetic shift left. ASL instruction (0x1e) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     public Mos6502Assembler ASL(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if carry clear. BCC instruction (0x90) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BCC(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BCC(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if carry set. BCS instruction (0xb0) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BCS(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BCS(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if equal. BEQ instruction (0xf0) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BEQ(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BEQ(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Bit test. BIT instruction (0x24) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler BIT(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BIT(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Bit test. BIT instruction (0x2c) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler BIT(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BIT(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if minus. BMI instruction (0x30) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BMI(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BMI(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if not equal. BNE instruction (0xd0) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BNE(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BNE(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if positive. BPL instruction (0x10) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BPL(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BPL(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Break / Software Interrupt. BRK instruction (0x00) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 1 byte</remarks>
     public Mos6502Assembler BRK([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BRK(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if overflow clear. BVC instruction (0x50) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BVC(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BVC(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if overflow set. BVS instruction (0x70) with addressing mode Relative.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler BVS(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BVS(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
     /// Clear carry. CLC instruction (0x18) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler CLC([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLC(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Clear decimal mode. CLD instruction (0xd8) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler CLD([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLD(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Clear interrupt disable. CLI instruction (0x58) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler CLI([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLI(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Clear overflow flag. CLV instruction (0xb8) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler CLV([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLV(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xc9) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler CMP_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xc5) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler CMP(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xd5) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler CMP(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xc1) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler CMP(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xd1) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler CMP(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xcd) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler CMP(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xdd) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler CMP(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xd9) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler CMP(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare X register. CPX instruction (0xe0) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler CPX_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPX_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare X register. CPX instruction (0xe4) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler CPX(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPX(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare X register. CPX instruction (0xec) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler CPX(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPX(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Y register. CPY instruction (0xc0) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler CPY_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPY_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Y register. CPY instruction (0xc4) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler CPY(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPY(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Y register. CPY instruction (0xcc) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler CPY(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPY(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Decrement memory. DEC instruction (0xc6) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler DEC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Decrement memory. DEC instruction (0xd6) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler DEC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Decrement memory. DEC instruction (0xce) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler DEC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Decrement memory. DEC instruction (0xde) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     public Mos6502Assembler DEC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Decrement X register. DEX instruction (0xca) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler DEX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEX(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Decrement Y register. DEY instruction (0x88) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler DEY([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEY(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x49) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler EOR_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x45) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler EOR(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x55) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler EOR(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x41) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler EOR(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x51) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler EOR(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x4d) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler EOR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x5d) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler EOR(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x59) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler EOR(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment memory. INC instruction (0xe6) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler INC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment memory. INC instruction (0xf6) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler INC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment memory. INC instruction (0xee) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler INC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment memory. INC instruction (0xfe) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     public Mos6502Assembler INC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment X register. INX instruction (0xe8) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler INX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INX(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment Y register. INY instruction (0xc8) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler INY([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INY(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Unconditional Jump. JMP instruction (0x6c) with addressing mode Indirect.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes</remarks>
     public Mos6502Assembler JMP(Mos6502Indirect indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.JMP(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Unconditional Jump. JMP instruction (0x4c) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 3 bytes</remarks>
     public Mos6502Assembler JMP(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.JMP(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Jump to subroutine. JSR instruction (0x20) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler JSR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.JSR(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xa9) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler LDA_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xa5) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler LDA(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xb5) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler LDA(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xa1) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler LDA(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xb1) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler LDA(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xad) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDA(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xbd) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDA(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xb9) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDA(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX instruction (0xa2) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler LDX_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX instruction (0xa6) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler LDX(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX instruction (0xb6) with addressing mode ZeroPageY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler LDX(byte zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(zeroPage, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX instruction (0xae) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDX(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX instruction (0xbe) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDX(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Y register. LDY instruction (0xa0) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler LDY_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Y register. LDY instruction (0xa4) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler LDY(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Y register. LDY instruction (0xb4) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler LDY(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Y register. LDY instruction (0xac) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDY(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Y register. LDY instruction (0xbc) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler LDY(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical shift right. LSR instruction (0x46) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler LSR(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical shift right. LSR instruction (0x56) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler LSR(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical shift right. LSR instruction (0x4a) with addressing mode Accumulator.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler LSR(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical shift right. LSR instruction (0x4e) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler LSR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical shift right. LSR instruction (0x5e) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     public Mos6502Assembler LSR(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// No operation. NOP instruction (0xea) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler NOP([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.NOP(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x09) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler ORA_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x05) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler ORA(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x15) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler ORA(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x01) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler ORA(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x11) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler ORA(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x0d) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler ORA(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x1d) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler ORA(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x19) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler ORA(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Push accumulator. PHA instruction (0x48) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 1 byte</remarks>
     public Mos6502Assembler PHA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PHA(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Push processor status. PHP instruction (0x08) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 1 byte</remarks>
     public Mos6502Assembler PHP([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PHP(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Pull accumulator. PLA instruction (0x68) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 1 byte</remarks>
     public Mos6502Assembler PLA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PLA(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Pull processor status. PLP instruction (0x28) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 1 byte</remarks>
     public Mos6502Assembler PLP([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PLP(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate left. ROL instruction (0x26) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler ROL(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate left. ROL instruction (0x36) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler ROL(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate left. ROL instruction (0x2a) with addressing mode Accumulator.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler ROL(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate left. ROL instruction (0x2e) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler ROL(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate left. ROL instruction (0x3e) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     public Mos6502Assembler ROL(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate right. ROR instruction (0x66) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler ROR(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate right. ROR instruction (0x76) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler ROR(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate right. ROR instruction (0x6a) with addressing mode Accumulator.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler ROR(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate right. ROR instruction (0x6e) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes</remarks>
     public Mos6502Assembler ROR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Rotate right. ROR instruction (0x7e) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes</remarks>
     public Mos6502Assembler ROR(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Return from interrupt. RTI instruction (0x40) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 1 byte</remarks>
     public Mos6502Assembler RTI([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.RTI(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Return from subroutine. RTS instruction (0x60) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 1 byte</remarks>
     public Mos6502Assembler RTS([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.RTS(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xe9) with addressing mode Immediate.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes</remarks>
     public Mos6502Assembler SBC_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xe5) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler SBC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xf5) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler SBC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xe1) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler SBC(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xf1) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 2 bytes</remarks>
     public Mos6502Assembler SBC(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xed) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler SBC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xfd) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler SBC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xf9) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler SBC(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Set carry. SEC instruction (0x38) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler SEC([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SEC(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Set decimal flag. SED instruction (0xf8) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler SED([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SED(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Set interrupt disable. SEI instruction (0x78) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler SEI([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SEI(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x85) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler STA(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x95) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler STA(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x81) with addressing mode IndirectX.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler STA(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(indirect), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x91) with addressing mode IndirectY.
     /// </summary>
+    /// <remarks>Cycles: 6, Size: 2 bytes</remarks>
     public Mos6502Assembler STA(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x8d) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler STA(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x9d) with addressing mode AbsoluteX.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes</remarks>
     public Mos6502Assembler STA(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(address, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x99) with addressing mode AbsoluteY.
     /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes</remarks>
     public Mos6502Assembler STA(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(address, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store X register. STX instruction (0x86) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler STX(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STX(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store X register. STX instruction (0x96) with addressing mode ZeroPageY.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler STX(byte zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STX(zeroPage, y), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store X register. STX instruction (0x8e) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler STX(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STX(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store Y register. STY instruction (0x84) with addressing mode ZeroPage.
     /// </summary>
+    /// <remarks>Cycles: 3, Size: 2 bytes</remarks>
     public Mos6502Assembler STY(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STY(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store Y register. STY instruction (0x94) with addressing mode ZeroPageX.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 2 bytes</remarks>
     public Mos6502Assembler STY(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STY(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store Y register. STY instruction (0x8c) with addressing mode Absolute.
     /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes</remarks>
     public Mos6502Assembler STY(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STY(address), debugFilePath, debugLineNumber);
     /// <summary>
     /// Transfer acc to X. TAX instruction (0xaa) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler TAX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TAX(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Transfer acc to Y. TAY instruction (0xa8) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler TAY([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TAY(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Transfer stack pointer to X. TSX instruction (0xba) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler TSX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TSX(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Transfer X to acc. TXA instruction (0x8a) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler TXA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TXA(), debugFilePath, debugLineNumber);
     /// <summary>
     /// . TXS instruction (0x9a) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler TXS([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TXS(), debugFilePath, debugLineNumber);
     /// <summary>
     /// Transfer Y to acc. TYA instruction (0x98) with addressing mode Implied.
     /// </summary>
+    /// <remarks>Cycles: 2, Size: 1 byte</remarks>
     public Mos6502Assembler TYA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TYA(), debugFilePath, debugLineNumber);
 }

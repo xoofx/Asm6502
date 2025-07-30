@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace AsmMos6502.CodeGen;
@@ -14,6 +15,8 @@ internal class GeneratorApp
 {
     private static readonly string GeneratedFolderPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "AsmMos6502", "generated"));
     private static readonly string GeneratedTestsFolderPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "AsmMos6502.Tests", "generated"));
+
+    private readonly Dictionary<string, JsonAsm6502AddressingMode> _mapAddressingMode = new();
 
     public void Run()
     {
@@ -33,20 +36,25 @@ internal class GeneratorApp
             .OrderBy(x => x.Name).ThenBy(x => x.AddressingMode).ToList();
 
         var modes = model.Modes;
+        _mapAddressingMode.Clear();
+        foreach (var mode in modes)
+        {
+            _mapAddressingMode[mode.Kind] = mode;
+        }
 
         var modeMapping = GenerateAddressingModes(modes);
         GenerateOpCodes(opcodes);
         var mnemonics = opcodes.Select(op => op.Name).Distinct().OrderBy(name => name).ToList();
         GenerateMnemonics(mnemonics);
         GenerateTables(opcodes, modes, modeMapping, mnemonics);
-        GenerateInstructionFactory(opcodes, modes);
+        GenerateInstructionFactory(opcodes);
         GenerateAssemblerFactory(opcodes);
         GenerateAssemblerFactoryWithLabel(opcodes);
         GenerateAssemblerFactoryWithExpressions(opcodes);
         GenerateAssemblyTests(opcodes);
     }
 
-    private static Dictionary<string, int> GenerateAddressingModes(List<JsonAsm6502AddressingMode> addressingModes)
+    private Dictionary<string, int> GenerateAddressingModes(List<JsonAsm6502AddressingMode> addressingModes)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502AddressingMode.gen.cs");
         using var writer = CreateCodeWriter(filePath);
@@ -62,7 +70,7 @@ internal class GeneratorApp
         {
             var mode = addressingModes[i];
             writer.WriteSummary($"{mode.Kind}");
-            writer.WriteDoc([$"<remarks>Size: {mode.SizeBytes} bytes, Cycles: {mode.Cycles}</remarks>"]);
+            writer.WriteDoc([$"<remarks>Size: {BytesText(mode.SizeBytes)}, Cycles: {mode.Cycles}</remarks>"]);
             writer.WriteLine($"{mode.Kind} = {i + 1},");
             mapNameToValue[mode.Kind] = i + 1;
         }
@@ -71,7 +79,7 @@ internal class GeneratorApp
         return mapNameToValue;
     }
 
-    private static void GenerateOpCodes(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateOpCodes(List<JsonAsm6502Opcode> opcodes)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502OpCode.gen.cs");
         using var writer = CreateCodeWriter(filePath);
@@ -91,7 +99,7 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
     
-    private static void GenerateTables(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, int> mapAddressingModeToValue, List<string> mnemonics)
+    private void GenerateTables(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, int> mapAddressingModeToValue, List<string> mnemonics)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Tables.gen.cs");
         using var writer = CreateCodeWriter(filePath);
@@ -219,7 +227,7 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
     
-    private static void GenerateMnemonics(List<string> mnemonics)
+    private void GenerateMnemonics(List<string> mnemonics)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Mnemonic.gen.cs");
         using var writer = CreateCodeWriter(filePath);
@@ -304,7 +312,7 @@ internal class GeneratorApp
         public string Signature => $"{Name}({string.Join(", ", Arguments.Where(x => !x.IsArgumentOnly).Select(arg => arg.ParameterDeclaration()))})";
     }
     
-    private static OpcodeSignature GetOpcodeSignature(JsonAsm6502Opcode opcode)
+    private OpcodeSignature GetOpcodeSignature(JsonAsm6502Opcode opcode)
     {
         var opName = opcode.Name;
         var operandKind = OperandValueKind.None;
@@ -373,7 +381,7 @@ internal class GeneratorApp
     }
 
     
-    private static void GenerateInstructionFactory(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes)
+    private void GenerateInstructionFactory(List<JsonAsm6502Opcode> opcodes)
     {
 
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502InstructionFactory.gen.cs");
@@ -391,9 +399,9 @@ internal class GeneratorApp
         foreach (var opcode in opcodes)
         {
             var opcodeSignature = GetOpcodeSignature(opcode);
-            var mode = modes.First(x => x.Kind == opcode.AddressingMode);
+            var mode = _mapAddressingMode[opcode.AddressingMode];
             writer.WriteSummary($"Creates the {opcode.Name} instruction ({opcode.OpcodeHex}) instruction with addressing mode {opcode.AddressingMode}.");
-            writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {mode.SizeBytes} bytes</remarks>"]);
+            writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}</remarks>"]);
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             writer.Write($"public static Mos6502Instruction {opcodeSignature.Signature} => new (Mos6502OpCode.{opcode.Name}_{opcode.AddressingMode}");
 
@@ -424,7 +432,7 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
 
-    private static void GenerateAssemblerFactory(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblerFactory(List<JsonAsm6502Opcode> opcodes)
     {
         // Generate all assembler instruction
         GenerateAssemblerFactoryGeneric("Mos6502Assembler",
@@ -437,7 +445,7 @@ internal class GeneratorApp
         );
     }
 
-    private static void GenerateAssemblerFactoryWithLabel(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblerFactoryWithLabel(List<JsonAsm6502Opcode> opcodes)
     {
         GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithLabels",
             opcodes,
@@ -463,7 +471,7 @@ internal class GeneratorApp
             });
     }
 
-    private static void GenerateAssemblerFactoryWithExpressions(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblerFactoryWithExpressions(List<JsonAsm6502Opcode> opcodes)
     {
         GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithExpressions",
             opcodes,
@@ -485,7 +493,7 @@ internal class GeneratorApp
             });
     }
 
-    private static void GenerateAssemblerFactoryGeneric(string fileName, List<JsonAsm6502Opcode> opcodes, Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)
+    private void GenerateAssemblerFactoryGeneric(string fileName, List<JsonAsm6502Opcode> opcodes, Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)
     {
 
         var filePath = Path.Combine(GeneratedFolderPath, $"{fileName}.gen.cs");
@@ -526,8 +534,10 @@ internal class GeneratorApp
             {
                 var signature = signaturePair.Key;
                 var opcodeSignature = signaturePair.Value;
-
+                var mode = _mapAddressingMode[opcodeSignature.Opcode.AddressingMode];
+                
                 writer.WriteSummary($"{opcodeSignature.Opcode.NameLong}. {mnemonic} instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}.");
+                writer.WriteDoc([$"<remarks>Cycles: {opcodeSignature.Opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}</remarks>"]);
                 writer.WriteLine($"public Mos6502Assembler {signature}");
                 writer.Indent();
 
@@ -630,7 +640,7 @@ internal class GeneratorApp
         }
     }
     
-    private static void GenerateAssemblyTests(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblyTests(List<JsonAsm6502Opcode> opcodes)
     {
         using var writer = CreateCodeWriter("Mos6502AssemblerTests.gen.cs", true);
 
@@ -697,9 +707,8 @@ internal class GeneratorApp
 
         writer.CloseBraceBlock();
     }
-
-
-    private static CodeWriter CreateCodeWriter(string fileName, bool test = false)
+    
+    private CodeWriter CreateCodeWriter(string fileName, bool test = false)
     {
         var filePath = Path.Combine(test ? GeneratedTestsFolderPath : GeneratedFolderPath, fileName);
         var writer = new CodeWriter(new StreamWriter(filePath), autoDispose: true);
@@ -715,4 +724,6 @@ internal class GeneratorApp
         writer.WriteLine("// ------------------------------------------------------------------------------");
         return writer;
     }
+
+    private static string BytesText(int value) => value > 1 ? $"{value} bytes" : $"{value} byte";
 }

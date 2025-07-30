@@ -146,7 +146,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the ASL instruction (0x0a) instruction with addressing mode Accumulator.
     /// </summary>
-    /// <remarks>Arithmetic shift left. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Arithmetic shift left. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction ASL(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => new (Mos6502OpCode.ASL_Accumulator);
     
@@ -223,7 +223,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the BRK instruction (0x00) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Break / Software Interrupt. Cycles: 7, Size: 1 bytes</remarks>
+    /// <remarks>Break / Software Interrupt. Cycles: 7, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction BRK() => new (Mos6502OpCode.BRK_Implied);
     
@@ -244,28 +244,28 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the CLC instruction (0x18) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Clear carry. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Clear carry. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction CLC() => new (Mos6502OpCode.CLC_Implied);
     
     /// <summary>
     /// Creates the CLD instruction (0xd8) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Clear decimal mode. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Clear decimal mode. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction CLD() => new (Mos6502OpCode.CLD_Implied);
     
     /// <summary>
     /// Creates the CLI instruction (0x58) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Clear interrupt disable. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Clear interrupt disable. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction CLI() => new (Mos6502OpCode.CLI_Implied);
     
     /// <summary>
     /// Creates the CLV instruction (0xb8) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Clear overflow flag. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Clear overflow flag. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction CLV() => new (Mos6502OpCode.CLV_Implied);
     
@@ -398,14 +398,14 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the DEX instruction (0xca) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Decrement X register. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Decrement X register. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction DEX() => new (Mos6502OpCode.DEX_Implied);
     
     /// <summary>
     /// Creates the DEY instruction (0x88) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Decrement Y register. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Decrement Y register. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction DEY() => new (Mos6502OpCode.DEY_Implied);
     
@@ -496,14 +496,14 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the INX instruction (0xe8) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Increment X register. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Increment X register. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction INX() => new (Mos6502OpCode.INX_Implied);
     
     /// <summary>
     /// Creates the INY instruction (0xc8) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Increment Y register. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Increment Y register. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction INY() => new (Mos6502OpCode.INY_Implied);
     
@@ -671,7 +671,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the LSR instruction (0x4a) instruction with addressing mode Accumulator.
     /// </summary>
-    /// <remarks>Logical shift right. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Logical shift right. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction LSR(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => new (Mos6502OpCode.LSR_Accumulator);
     
@@ -692,7 +692,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the NOP instruction (0xea) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>No operation. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>No operation. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction NOP() => new (Mos6502OpCode.NOP_Implied);
     
@@ -755,28 +755,28 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the PHA instruction (0x48) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Push accumulator. Cycles: 3, Size: 1 bytes</remarks>
+    /// <remarks>Push accumulator. Cycles: 3, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction PHA() => new (Mos6502OpCode.PHA_Implied);
     
     /// <summary>
     /// Creates the PHP instruction (0x08) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Push processor status. Cycles: 3, Size: 1 bytes</remarks>
+    /// <remarks>Push processor status. Cycles: 3, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction PHP() => new (Mos6502OpCode.PHP_Implied);
     
     /// <summary>
     /// Creates the PLA instruction (0x68) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Pull accumulator. Cycles: 4, Size: 1 bytes</remarks>
+    /// <remarks>Pull accumulator. Cycles: 4, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction PLA() => new (Mos6502OpCode.PLA_Implied);
     
     /// <summary>
     /// Creates the PLP instruction (0x28) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Pull processor status. Cycles: 4, Size: 1 bytes</remarks>
+    /// <remarks>Pull processor status. Cycles: 4, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction PLP() => new (Mos6502OpCode.PLP_Implied);
     
@@ -797,7 +797,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the ROL instruction (0x2a) instruction with addressing mode Accumulator.
     /// </summary>
-    /// <remarks>Rotate left. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Rotate left. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction ROL(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => new (Mos6502OpCode.ROL_Accumulator);
     
@@ -832,7 +832,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the ROR instruction (0x6a) instruction with addressing mode Accumulator.
     /// </summary>
-    /// <remarks>Rotate right. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Rotate right. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction ROR(Mos6502RegisterA accumulator = Mos6502RegisterA.A) => new (Mos6502OpCode.ROR_Accumulator);
     
@@ -853,14 +853,14 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the RTI instruction (0x40) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Return from interrupt. Cycles: 6, Size: 1 bytes</remarks>
+    /// <remarks>Return from interrupt. Cycles: 6, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction RTI() => new (Mos6502OpCode.RTI_Implied);
     
     /// <summary>
     /// Creates the RTS instruction (0x60) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Return from subroutine. Cycles: 6, Size: 1 bytes</remarks>
+    /// <remarks>Return from subroutine. Cycles: 6, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction RTS() => new (Mos6502OpCode.RTS_Implied);
     
@@ -923,21 +923,21 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the SEC instruction (0x38) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Set carry. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Set carry. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction SEC() => new (Mos6502OpCode.SEC_Implied);
     
     /// <summary>
     /// Creates the SED instruction (0xf8) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Set decimal flag. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Set decimal flag. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction SED() => new (Mos6502OpCode.SED_Implied);
     
     /// <summary>
     /// Creates the SEI instruction (0x78) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Set interrupt disable. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Set interrupt disable. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction SEI() => new (Mos6502OpCode.SEI_Implied);
     
@@ -1035,42 +1035,42 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the TAX instruction (0xaa) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Transfer acc to X. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Transfer acc to X. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TAX() => new (Mos6502OpCode.TAX_Implied);
     
     /// <summary>
     /// Creates the TAY instruction (0xa8) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Transfer acc to Y. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Transfer acc to Y. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TAY() => new (Mos6502OpCode.TAY_Implied);
     
     /// <summary>
     /// Creates the TSX instruction (0xba) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Transfer stack pointer to X. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Transfer stack pointer to X. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TSX() => new (Mos6502OpCode.TSX_Implied);
     
     /// <summary>
     /// Creates the TXA instruction (0x8a) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Transfer X to acc. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Transfer X to acc. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TXA() => new (Mos6502OpCode.TXA_Implied);
     
     /// <summary>
     /// Creates the TXS instruction (0x9a) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TXS() => new (Mos6502OpCode.TXS_Implied);
     
     /// <summary>
     /// Creates the TYA instruction (0x98) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>Transfer Y to acc. Cycles: 2, Size: 1 bytes</remarks>
+    /// <remarks>Transfer Y to acc. Cycles: 2, Size: 1 byte</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TYA() => new (Mos6502OpCode.TYA_Implied);
     

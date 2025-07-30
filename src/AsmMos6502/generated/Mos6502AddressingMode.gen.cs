@@ -37,7 +37,7 @@ public enum Mos6502AddressingMode : byte
     /// <summary>
     /// Accumulator
     /// </summary>
-    /// <remarks>Size: 1 bytes, Cycles: 2</remarks>
+    /// <remarks>Size: 1 byte, Cycles: 2</remarks>
     Accumulator = 4,
     /// <summary>
     /// Immediate
@@ -47,7 +47,7 @@ public enum Mos6502AddressingMode : byte
     /// <summary>
     /// Implied
     /// </summary>
-    /// <remarks>Size: 1 bytes, Cycles: 2</remarks>
+    /// <remarks>Size: 1 byte, Cycles: 2</remarks>
     Implied = 6,
     /// <summary>
     /// Indirect
