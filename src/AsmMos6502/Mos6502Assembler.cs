@@ -173,6 +173,13 @@ public partial class Mos6502Assembler : IDisposable
                     }
                     resolved = label.Address;
                     break;
+                case Mos6502LabelZp label:
+                    if (!label.IsBound)
+                    {
+                        throw new InvalidOperationException($"ZeroPage Label number #{i} `{label}` is not bound. Please bind it before assembling.");
+                    }
+                    resolved = label.Address;
+                    break;
                 case Mos6502ExpressionU8 exprU8:
                     resolved = exprU8.Evaluate();
                     break;
@@ -189,6 +196,11 @@ public partial class Mos6502Assembler : IDisposable
             switch (patch.AddressingMode)
             {
                 case Mos6502AddressingMode.Immediate:
+                case Mos6502AddressingMode.ZeroPage:
+                case Mos6502AddressingMode.ZeroPageX:
+                case Mos6502AddressingMode.ZeroPageY:
+                case Mos6502AddressingMode.IndirectX:
+                case Mos6502AddressingMode.IndirectY:
                     patchRef[0] = (byte)(resolved); // Low byte
                     break;
                 case Mos6502AddressingMode.Indirect:
@@ -215,6 +227,21 @@ public partial class Mos6502Assembler : IDisposable
         // Notifies the current address
         DebugMap?.EndProgram(CurrentAddress);
 
+        return this;
+    }
+
+    /// <summary>
+    /// Collects all labels used in the assembler's patches.
+    /// </summary>
+    /// <param name="labels">The labels set to populate.</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502Assembler CollectLabels(HashSet<IMos6502Label> labels)
+    {
+        var patches = _patches;
+        foreach (var patch in patches)
+        {
+            patch.Expression.CollectLabels(labels);
+        }
         return this;
     }
 
@@ -311,35 +338,6 @@ public partial class Mos6502Assembler : IDisposable
     /// Adds an instruction to the assembler, possibly referencing a label.
     /// </summary>
     /// <param name="instruction">The instruction to add.</param>
-    /// <param name="label">The label to reference.</param>
-    /// <param name="debugFilePath">The file path for debugging information (optional).</param>
-    /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
-    /// <returns>The current assembler instance.</returns>
-    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Label label, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-    {
-        if (label.IsBound)
-        {
-            instruction = new Mos6502Instruction(instruction.OpCode, (ushort)label.Address);
-        }
-
-        var offset = SizeInBytes;
-        // ReSharper disable ExplicitCallerInfoArgument
-        AddInstruction(instruction, debugFilePath, debugLineNumber);
-        // ReSharper restore ExplicitCallerInfoArgument
-
-        var addressKind = instruction.AddressingMode;
-        if (!label.IsBound || addressKind == Mos6502AddressingMode.Relative)
-        {
-            _patches.Add(new((ushort)(offset + 1), addressKind, label));
-        }
-
-        return this;
-    }
-
-    /// <summary>
-    /// Adds an instruction to the assembler, possibly referencing a label.
-    /// </summary>
-    /// <param name="instruction">The instruction to add.</param>
     /// <param name="expression">The expression.</param>
     /// <param name="debugFilePath">The file path for debugging information (optional).</param>
     /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
@@ -400,7 +398,7 @@ public partial class Mos6502Assembler : IDisposable
     /// </summary>
     /// <param name="Offset">The offset in the buffer where the patch should be applied.</param>
     /// <param name="AddressingMode">The kind of address for the patch (8 bit, 16 bit).</param>
-    /// <param name="Expression">Either a <see cref="Mos6502Label"/> or a <see cref="Mos6502Expression"/>.</param>
-    private record struct Patch(ushort Offset, Mos6502AddressingMode AddressingMode, object Expression);
+    /// <param name="Expression">An expression (U8 or U16).</param>
+    private record struct Patch(ushort Offset, Mos6502AddressingMode AddressingMode, Mos6502Expression Expression);
 
 }

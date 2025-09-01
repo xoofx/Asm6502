@@ -49,7 +49,7 @@ internal class GeneratorApp
         GenerateTables(opcodes, modes, modeMapping, mnemonics);
         GenerateInstructionFactory(opcodes);
         GenerateAssemblerFactory(opcodes);
-        GenerateAssemblerFactoryWithLabel(opcodes);
+        //GenerateAssemblerFactoryWithLabel(opcodes);
         GenerateAssemblerFactoryWithExpressions(opcodes);
         GenerateAssemblyTests(opcodes);
     }
@@ -445,46 +445,85 @@ internal class GeneratorApp
         );
     }
 
-    private void GenerateAssemblerFactoryWithLabel(List<JsonAsm6502Opcode> opcodes)
-    {
-        GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithLabels",
-            opcodes,
-            opcodeSignature => opcodeSignature.OperandKind == OperandValueKind.Address ||
-                               opcodeSignature.OperandKind == OperandValueKind.AddressX ||
-                               opcodeSignature.OperandKind == OperandValueKind.AddressY ||
-                               opcodeSignature.OperandKind == OperandValueKind.Relative ||
-                               opcodeSignature.OperandKind == OperandValueKind.Indirect,
-            opcodeSignature =>
-            {
-                var originalOperand = opcodeSignature.Arguments[0];
-                var operand0 = new Operand6502("address", opcodeSignature.OperandKind == OperandValueKind.Indirect ? opcodeSignature.Arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : "Mos6502Label");
-                operand0.ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"new {originalOperand.Type}({operand0.Name}.ZpLabel.Address)" : $"({originalOperand.Type}){operand0.Name}.Address";
+    //private void GenerateAssemblerFactoryWithLabel(List<JsonAsm6502Opcode> opcodes)
+    //{
+    //    GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithLabels",
+    //        opcodes,
+    //        opcodeSignature => opcodeSignature.OperandKind == OperandValueKind.Address ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.AddressX ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.AddressY ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.Relative ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.Indirect ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.Zp ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.ZpX ||
+    //                           opcodeSignature.OperandKind == OperandValueKind.ZpY,
+    //        opcodeSignature =>
+    //        {
+    //            var originalOperand = opcodeSignature.Arguments[0];
+    //            bool isZp = opcodeSignature.OperandKind == OperandValueKind.Zp || opcodeSignature.OperandKind == OperandValueKind.ZpX || opcodeSignature.OperandKind == OperandValueKind.ZpY;
+    //            var operand0 = new Operand6502("address", opcodeSignature.OperandKind == OperandValueKind.Indirect ? opcodeSignature.Arguments[0].Type.Replace("Mos6502Indirect", "Mos6502IndirectLabel") : isZp ? "Mos6502LabelZp" : "Mos6502Label");
+    //            operand0.ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"new {originalOperand.Type}({operand0.Name}.ZpLabel.Address)" : $"({originalOperand.Type}){operand0.Name}.Address";
 
-                opcodeSignature.Arguments[0] = operand0;
+    //            opcodeSignature.Arguments[0] = operand0;
 
-                opcodeSignature.Arguments.Add(new Operand6502(operand0.Name, operand0.Type)
-                {
-                    ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"{operand0.Name}.ZpLabel" : null,
-                    IsArgumentOnly = true
-                } ); // Pass the label as an additional argument to the assembler AddInstruction
-                opcodeSignature.AddDebugAttributes();
-            });
-    }
+    //            opcodeSignature.Arguments.Add(new Operand6502(operand0.Name, operand0.Type)
+    //            {
+    //                ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"{operand0.Name}.ZpLabel" : null,
+    //                IsArgumentOnly = true
+    //            } ); // Pass the label as an additional argument to the assembler AddInstruction
+    //            opcodeSignature.AddDebugAttributes();
+    //        });
+    //}
 
     private void GenerateAssemblerFactoryWithExpressions(List<JsonAsm6502Opcode> opcodes)
     {
         GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithExpressions",
             opcodes,
             opcodeSignature =>
+                                opcodeSignature.OperandKind == OperandValueKind.Relative ||
                                 opcodeSignature.OperandKind == OperandValueKind.Immediate ||
                                 opcodeSignature.OperandKind == OperandValueKind.Address ||
                                opcodeSignature.OperandKind == OperandValueKind.AddressX ||
                                opcodeSignature.OperandKind == OperandValueKind.AddressY ||
-                               opcodeSignature.OperandKind == OperandValueKind.Indirect,
+                               opcodeSignature.OperandKind == OperandValueKind.Indirect ||
+                               opcodeSignature.OperandKind == OperandValueKind.IndirectX ||
+                               opcodeSignature.OperandKind == OperandValueKind.IndirectY ||
+                               opcodeSignature.OperandKind == OperandValueKind.Zp ||
+                               opcodeSignature.OperandKind == OperandValueKind.ZpX ||
+                               opcodeSignature.OperandKind == OperandValueKind.ZpY,
             opcodeSignature =>
             {
                 var originalOperand = opcodeSignature.Arguments[0];
-                var operand0 = new Operand6502(opcodeSignature.Arguments[0].Name, opcodeSignature.OperandKind == OperandValueKind.Indirect ? "Expressions.Mos6502ExpressionIndirect" : opcodeSignature.OperandKind == OperandValueKind.Immediate ? "Expressions.Mos6502ExpressionU8" : "Expressions.Mos6502ExpressionU16");
+                bool isZp = opcodeSignature.OperandKind == OperandValueKind.Zp || opcodeSignature.OperandKind == OperandValueKind.ZpX || opcodeSignature.OperandKind == OperandValueKind.ZpY;
+                string type;
+                switch (opcodeSignature.OperandKind)
+                {
+                    case OperandValueKind.Immediate:
+                    case OperandValueKind.Zp:
+                    case OperandValueKind.ZpX:
+                    case OperandValueKind.ZpY:
+                        type = "Expressions.Mos6502ExpressionU8";
+                        break;
+                    case OperandValueKind.Relative:
+                    case OperandValueKind.Address:
+                    case OperandValueKind.AddressX:
+                    case OperandValueKind.AddressY:
+                        type = "Expressions.Mos6502ExpressionU16";
+                        break;
+                    case OperandValueKind.Indirect:
+                        type = "Expressions.Mos6502ExpressionIndirectU16";
+                        break;
+                    case OperandValueKind.IndirectX:
+                        type = "Expressions.Mos6502ExpressionIndirectX";
+                        break;
+                    case OperandValueKind.IndirectY:
+                        type = "Expressions.Mos6502ExpressionIndirectY";
+                        break;
+                    default:
+                        throw new NotSupportedException($"Operand kind '{opcodeSignature.OperandKind}' is not supported for opcode '{opcodeSignature.Opcode.Name}'");
+                }
+                
+                var operand0 = new Operand6502(opcodeSignature.Arguments[0].Name, type);
                 opcodeSignature.Arguments[0] = operand0;
                 operand0.ArgumentPath = opcodeSignature.OperandKind == OperandValueKind.Indirect ? $"new {originalOperand.Type}(0)" : $"({originalOperand.Type})0";
 

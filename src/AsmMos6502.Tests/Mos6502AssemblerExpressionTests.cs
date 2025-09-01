@@ -65,4 +65,26 @@ public class Mos6502AssemblerExpressionTests : VerifyAsmBase
         await VerifyAsm(asm);
     }
 
+    [TestMethod]
+    public async Task TestZeroPage()
+    {
+        using var asm = CreateAsm();
+
+        var zp1 = new Mos6502LabelZp("zp1", 0x01);
+        var zp2 = new Mos6502LabelZp("zp1", 0x02);
+
+        asm
+            .Begin()
+            .LDA(zp1)
+            .STA(zp2)
+            .RTS();
+
+        var labels = new HashSet<IMos6502Label>();
+        asm.CollectLabels(labels);
+        CollectionAssert.AreEqual(new [] { zp1, zp2 }, labels.Cast<Mos6502LabelZp>().ToArray());
+
+        asm.End();
+
+        await VerifyAsm(asm);
+    }
 }

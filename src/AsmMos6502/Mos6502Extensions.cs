@@ -75,27 +75,6 @@ public static class Mos6502Extensions
     /// <param name="opcode">The opcode.</param>
     /// <returns>The addressing mode for the specified opcode.</returns>
     public static Mos6502AddressingMode ToAddressingMode(this Mos6502OpCode opcode) => Mos6502Tables.GetAddressingModeFromOpcode((byte)opcode);
-    
-    /// <summary>
-    /// Converts a <see cref="Mos6502Label"/> to a <see cref="Mos6502ExpressionU16FromLabel"/> expression.
-    /// </summary>
-    /// <param name="label">The label to convert.</param>
-    /// <returns>A <see cref="Mos6502ExpressionU16FromLabel"/> representing the label as a 16-bit expression.</returns>
-    public static Mos6502ExpressionU16FromLabel ToExpression(this Mos6502Label label) => new(label);
-
-    /// <summary>
-    /// Gets the low byte of the address represented by the specified <see cref="Mos6502Label"/>.
-    /// </summary>
-    /// <param name="label">The label whose low byte is to be extracted.</param>
-    /// <returns>A <see cref="Mos6502ExpressionLowByte"/> representing the low byte of the label's address.</returns>
-    public static Mos6502ExpressionLowByte LowByte(this Mos6502Label label) => label.ToExpression().LowByte();
-
-    /// <summary>
-    /// Gets the high byte of the address represented by the specified <see cref="Mos6502Label"/>.
-    /// </summary>
-    /// <param name="label">The label whose high byte is to be extracted.</param>
-    /// <returns>A <see cref="Mos6502ExpressionHighByte"/> representing the high byte of the label's address.</returns>
-    public static Mos6502ExpressionHighByte HighByte(this Mos6502Label label) => label.ToExpression().HighByte();
 
     /// <summary>
     /// Gets the low byte of the specified 16-bit expression.

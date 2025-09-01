@@ -1,0 +1,14 @@
+﻿C000  A5 01      LDA $01
+C002  85 02      STA $02
+C004  60         RTS
+
+; A5 01 85 02 60
+
+Debug Info (Program: TestZeroPage)
+- Program Start Address: C000
+- Program End Address: C005
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:78
+C002 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:79
+C004 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:80

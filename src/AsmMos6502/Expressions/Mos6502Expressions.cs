@@ -7,7 +7,14 @@ namespace AsmMos6502.Expressions;
 /// <summary>
 /// Base class for all 6502 memory expressions.
 /// </summary>
-public abstract record Mos6502Expression();
+public abstract record Mos6502Expression()
+{
+    /// <summary>
+    /// Collects all labels used in this expression.
+    /// </summary>
+    /// <param name="labels">The set to collect labels into.</param>
+    public abstract void CollectLabels(HashSet<IMos6502Label> labels);
+}
 
 /// <summary>
 /// Base class for all 6502 memory expressions that evaluate to a byte (8 bits).
@@ -25,6 +32,30 @@ public abstract record Mos6502ExpressionU8 : Mos6502Expression
     /// </summary>
     /// <param name="evaluateFunc">A function that evaluates to a byte value.</param>
     public static implicit operator Mos6502ExpressionU8(Func<byte> evaluateFunc) => new Mos6502ExpressionFuncU8(evaluateFunc);
+
+    /// <summary>
+    /// Subtracts one 16-bit MOS 6502 expression from another.
+    /// </summary>
+    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
+    /// <param name="right">The subtrahend, representing the 16-bit expression to subtract.</param>
+    /// <returns>A new <see cref="Mos6502ExpressionU8"/> representing the result of the subtraction.</returns>
+    public static Mos6502ExpressionU8 operator -(Mos6502ExpressionU8 left, Mos6502ExpressionU8 right) => new Mos6502ExpressionSubtractU8(left, right);
+
+    /// <summary>
+    /// Subtracts one 16-bit MOS 6502 expression from a const.
+    /// </summary>
+    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
+    /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
+    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the subtraction.</returns>
+    public static Mos6502ExpressionU8 operator -(Mos6502ExpressionU8 left, byte right) => new Mos6502ExpressionAddConstU8(left, (sbyte)-right);
+
+    /// <summary>
+    /// Adds one 16-bit MOS 6502 expression to const.
+    /// </summary>
+    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
+    /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
+    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the addition.</returns>
+    public static Mos6502ExpressionU8 operator +(Mos6502ExpressionU8 left, byte right) => new Mos6502ExpressionAddConstU8(left, (sbyte)right);
 }
 
 /// <summary>
@@ -37,14 +68,6 @@ public abstract record Mos6502ExpressionU16 : Mos6502Expression
     /// </summary>
     /// <returns>The evaluated 16 bits unsigned integer value.</returns>
     public abstract ushort Evaluate();
-
-
-    /// <summary>
-    /// Implicitly converts a label to a <see cref="Mos6502ExpressionU16"/>.
-    /// </summary>
-    /// <param name="label">The label to convert.</param>
-    /// <returns>The <see cref="Mos6502ExpressionU16"/> representation of the label.</returns>
-    public static implicit operator Mos6502ExpressionU16(Mos6502Label label) => new Mos6502ExpressionU16FromLabel(label);
 
     /// <summary>
     /// Converts a function that evaluates to a 16 bits unsigned integer into a <see cref="Mos6502ExpressionU16"/>.
@@ -59,22 +82,6 @@ public abstract record Mos6502ExpressionU16 : Mos6502Expression
     /// <param name="right">The subtrahend, representing the 16-bit expression to subtract.</param>
     /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the subtraction.</returns>
     public static Mos6502ExpressionU16 operator -(Mos6502ExpressionU16 left, Mos6502ExpressionU16 right) => new Mos6502ExpressionSubtractU16(left, right);
-
-    /// <summary>
-    /// Subtracts one 16-bit MOS 6502 expression from another.
-    /// </summary>
-    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
-    /// <param name="right">The subtrahend, representing the 16-bit expression to subtract.</param>
-    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the subtraction.</returns>
-    public static Mos6502ExpressionU16 operator -(Mos6502Label left, Mos6502ExpressionU16 right) => new Mos6502ExpressionSubtractU16(left.ToExpression(), right);
-
-    /// <summary>
-    /// Subtracts one 16-bit MOS 6502 expression from another.
-    /// </summary>
-    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
-    /// <param name="right">The subtrahend, representing the 16-bit expression to subtract.</param>
-    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the subtraction.</returns>
-    public static Mos6502ExpressionU16 operator -(Mos6502ExpressionU16 left, Mos6502Label right) => new Mos6502ExpressionSubtractU16(left, right.ToExpression());
 
     /// <summary>
     /// Subtracts one 16-bit MOS 6502 expression from a const.
@@ -103,6 +110,9 @@ public record Mos6502ExpressionLowByte(Mos6502ExpressionU16 Expression) : Mos650
 {
     /// <inheritdoc />
     public override byte Evaluate() => (byte)(Expression.Evaluate());
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -115,6 +125,53 @@ public record Mos6502ExpressionHighByte(Mos6502ExpressionU16 Expression) : Mos65
 {
     /// <inheritdoc />
     public override byte Evaluate() => (byte)(Expression.Evaluate() >> 8);
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+}
+
+/// <summary>
+/// Represents an expression that performs a subtraction operation between an 8-bit expression and an 8-bit subtrahend,
+/// resulting in a 8-bit value.
+/// </summary>
+/// <remarks>This expression evaluates to the result of subtracting the value of the <see cref="Right"/> from
+/// the value of the <see cref="Left"/>. The result is computed as an unsigned 8-bit integer, and any overflow or
+/// underflow will wrap around according to standard unsigned arithmetic rules.</remarks>
+/// <param name="Left">The 8-bit expression that serves as the left operand (the value from which another value is subtracted).</param>
+/// <param name="Right">The 8-bit expression that serves as the right operand (the value to be subtracted from the left operand).</param>
+public record Mos6502ExpressionSubtractU8(Mos6502ExpressionU8 Left, Mos6502ExpressionU8 Right) : Mos6502ExpressionU8
+{
+    /// <inheritdoc />
+    public override byte Evaluate()
+    {
+        var result = (byte)(Left.Evaluate() - Right.Evaluate());
+        return result;
+    }
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    {
+        Left.CollectLabels(labels);
+        Right.CollectLabels(labels);
+    }
+}
+
+/// <summary>
+/// An 8-bit expression that adds a constant value to another 8-bit expression in the MOS 6502 architecture.
+/// </summary>
+/// <param name="Left">The left operand, which is an 8-bit expression.</param>
+/// <param name="Right">The right operand, which is a constant 8-bit value to be added to the left operand.</param>
+public record Mos6502ExpressionAddConstU8(Mos6502ExpressionU8 Left, sbyte Right) : Mos6502ExpressionU8
+{
+    /// <inheritdoc />
+    public override byte Evaluate()
+    {
+        var result = (byte)(Left.Evaluate() + Right);
+        return result;
+    }
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
 }
 
 /// <summary>
@@ -134,23 +191,12 @@ public record Mos6502ExpressionSubtractU16(Mos6502ExpressionU16 Left, Mos6502Exp
         var result = (ushort)(Left.Evaluate() - Right.Evaluate());
         return result;
     }
-}
 
-/// <summary>
-/// Represents a 16-bit expression that is derived from a label in the MOS 6502 architecture.
-/// </summary>
-/// <param name="Label">The label that resolves to a 16-bit address.</param>
-public record Mos6502ExpressionU16FromLabel(Mos6502Label Label) : Mos6502ExpressionU16
-{
     /// <inheritdoc />
-    public override ushort Evaluate()
+    public override void CollectLabels(HashSet<IMos6502Label> labels)
     {
-        // The label should have been resolved to a 16-bit address
-        if (!Label.IsBound)
-        {
-            throw new InvalidOperationException($"Label {Label.Name} has not been resolved to an address.");
-        }
-        return Label.Address;
+        Left.CollectLabels(labels);
+        Right.CollectLabels(labels);
     }
 }
 
@@ -167,16 +213,47 @@ public record Mos6502ExpressionAddConstU16(Mos6502ExpressionU16 Left, short Righ
         var result = (ushort)(Left.Evaluate() + Right);
         return result;
     }
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
 }
 
 /// <summary>
 /// Represents a 16-bit expression that evaluates to an indirect address in the MOS 6502 architecture.
 /// </summary>
 /// <param name="Expression">The 16-bit expression that resolves to an indirect address.</param>
-public record Mos6502ExpressionIndirect(Mos6502ExpressionU16 Expression) : Mos6502ExpressionU16
+public record Mos6502ExpressionIndirectU16(Mos6502ExpressionU16 Expression) : Mos6502ExpressionU16
 {
     /// <inheritdoc />
     public override ushort Evaluate() => Expression.Evaluate();
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+}
+
+/// <summary>
+/// Represents an 8-bit expression that evaluates to an indirect X address in the MOS 6502 architecture.
+/// </summary>
+/// <param name="Expression">The 8-bit expression that resolves to an indirect X address.</param>
+public record Mos6502ExpressionIndirectX(Mos6502ExpressionU8 Expression) : Mos6502ExpressionU8
+{
+    /// <inheritdoc />
+    public override byte Evaluate() => Expression.Evaluate();
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+}
+
+/// <summary>
+/// Represents an 8-bit expression that evaluates to an indirect Y address in the MOS 6502 architecture.
+/// </summary>
+/// <param name="Expression">The 8-bit expression that resolves to an indirect Y address.</param>
+public record Mos6502ExpressionIndirectY(Mos6502ExpressionU8 Expression) : Mos6502ExpressionU8
+{
+    /// <inheritdoc />
+    public override byte Evaluate() => Expression.Evaluate();
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -187,6 +264,11 @@ public record Mos6502ExpressionFuncU8(Func<byte> EvaluateFunc) : Mos6502Expressi
 {
     /// <inheritdoc />
     public override byte Evaluate() => EvaluateFunc();
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    {
+    }
 }
 
 /// <summary>
@@ -197,4 +279,9 @@ public record Mos6502ExpressionFuncU16(Func<ushort> EvaluateFunc) : Mos6502Expre
 {
     /// <inheritdoc />
     public override ushort Evaluate() => EvaluateFunc();
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    {
+    }
 }
