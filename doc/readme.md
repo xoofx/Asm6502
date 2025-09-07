@@ -16,11 +16,13 @@ This document provides a small user guide for the AsmMos6502 library.
 - [Disassembling 6502 Code](#disassembling-6502-code-1)
   - [Basic Disassembly](#basic-disassembly)
   - [Customizing Output](#customizing-output)
+  - [Addressing Modes](#addressing-modes)
 - [Advanced Usage](#advanced-usage)
   - [Labels and Branches](#labels-and-branches)
   - [Expressions](#expressions)
   - [Customizing Disassembly Output](#customizing-disassembly-output)
   - [Assembler Debug Line Information](#assembler-debug-line-information)
+  - [6510 Support](#6510-support)
 - [Tips and Best Practices](#tips-and-best-practices)
 
 ---
