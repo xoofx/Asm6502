@@ -2,11 +2,11 @@
 
 <img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/AsmMos6502/main/img/AsmMos6502.png">
 
-AsmMos6502 is a lightweight and efficient C# library to assemble and disassemble 6502 assembly code. It provides a fluent API to create 6502 assembly code (e.g. a CPU powering the Commodore 64), and can be used to generate binary files or disassemble existing binaries into assembly code.
+AsmMos6502 is a lightweight and efficient C# library to assemble and disassemble 6502/6510 assembly code. It provides a fluent API to create 6502/6510 assembly code (e.g. a CPU powering the Commodore 64), and can be used to generate binary files or disassemble existing binaries into assembly code.
 
 ## ✨ Features
 
-- **Full support** for all core 6502 instructions
+- **Full support** for all core 6502 instructions and 6510 instructions (6502 + illegal opcodes)
 - Unique **strongly typed** and fluent assembler API
 - Support producing **debug information** (C# file and line numbers) for each instruction
 - **Easily disassemble** instructions and operand.

@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>AsmMos6502 is a lightweight and efficient C# library to assemble and disassemble 6502 assembly code.</Description>
+    <Description>AsmMos6502 is a lightweight and efficient C# library to assemble and disassemble 6502/6510 assembly code.</Description>
     <Copyright>Alexandre Mutel</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Alexandre Mutel</Authors>
-    <PackageTags>assembler;disassembler;6502;c64</PackageTags>
+    <PackageTags>assembler;disassembler;6502;6510;c64</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageIcon>AsmMos6502.png</PackageIcon>
     <PackageProjectUrl>https://github.com/xoofx/AsmMos6502</PackageProjectUrl>

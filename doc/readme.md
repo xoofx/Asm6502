@@ -314,6 +314,10 @@ C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:57
 C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:58
 ```
 
+### 6510 Support
+
+The library also supports the 6510 CPU, which is a variant of the 6502 used in the Commodore 64. For simplicity, it contains all the 6502 instructions including the illegal opcodes. You can use the `Mos6510Assembler` and `Mos6510Disassembler` classes in the same way as the 6502 counterparts.
+
 ## Tips and Best Practices
 
 - Always call `End()` after assembling to resolve labels and finalize the buffer.
