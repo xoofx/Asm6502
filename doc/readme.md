@@ -168,6 +168,32 @@ var options = new Mos6502DisassemblerOptions {
 var dis = new Mos6502Disassembler(options);
 ```
 
+### Addressing Modes
+
+The assembler supports all 6502 addressing modes. Below is a summary of the addressing modes with examples in both assembly and C# syntax:
+
+
+| Addressing Mode | ASM Example       | C# Example              | Description                          |
+|-----------------|-------------------|-------------------------|--------------------------------------|
+| Immediate       | `LDA #$10`        | `asm.LDA_Imm(0x10)`     | Load immediate value into A          |
+| Zero Page       | `LDA $10`         | `asm.LDA(0x10)`         | Load from zero page address          |
+| Zero Page,X     | `LDA $10,X`       | `asm.LDA(0x10, X)`      | Load from zero page address + X      |
+| Zero Page,Y     | `LDX $10,Y`       | `asm.LDX(0x10, Y)`      | Load from zero page address + Y      |
+| Absolute        | `LDA $1234`       | `asm.LDA(0x1234)`       | Load from absolute address           |
+| Absolute,X      | `LDA $1234,X`     | `asm.LDA(0x1234, X)`    | Load from absolute address + X       |
+| Absolute,Y      | `LDA $1234,Y`     | `asm.LDA(0x1234, Y)`    | Load from absolute address + Y       |
+| Indirect        | `JMP ($1234)`     | `asm.JMP(_[0x1234])`    | Jump to address stored at $1234      |
+| (Indirect,X)    | `LDA ($10,X)`     | `asm.LDA(_[0x10, X])`   | Load from address at (zero page + X) |
+| (Indirect),Y    | `LDA ($10),Y`     | `asm.LDA(_[0x10], Y)`   | Load from address at (zero page) + Y |
+
+Notice that immediate values are suffixed with `_Imm`, and indirect addressing uses the `_[]` syntax. The registers `X` and `Y` are used directly in the method calls.
+
+In order to access the X and Y registers as well as the indirect addressing modes, the following syntax is used in C#:
+
+```csharp
+using static AsmMos6502.Mos6502Factory;
+```
+
 ---
 
 ## Advanced Usage
