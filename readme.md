@@ -64,19 +64,19 @@ The following C# assembly would assemble this code using the `AsmMos6502` librar
 using var asm = new Mos6502Assembler();
 
 asm
-    .Begin(0xc000)         // Start address (for example, on C64 this is an available memory area)
+    .Begin(0xc000)
     .Label("START", out var startLabel)
-    .LDX(0x00)             // X = 0, index into buffer
-    .LDY(0x10)             // Y = 16, number of bytes to process
+    .LDX_Imm(0x00)             // X = 0, index into buffer
+    .LDY_Imm(0x10)             // Y = 16, number of bytes to process
 
     .Label("LOOP", out var loopLabel)
     .LDA(0x0200, X) // Load byte at $0200 + X
-    .CMP(0xFF)             // Check if byte is already 0xFF
+    .CMP_Imm(0xFF)             // Check if byte is already 0xFF
 
     .LabelForward("SKIP", out var skipLabel)
     .BEQ(skipLabel)        // If so, skip incrementing
     .CLC()                 // Clear carry before addition
-    .ADC(0x01)             // Add 1
+    .ADC_Imm(0x01)             // Add 1
     .STA(0x0200, X) // Store result back to memory
 
     .Label(skipLabel)      // X = X + 1
@@ -98,12 +98,12 @@ asm
     // (Useful on C64, otherwise dummy)
     // -----------------------------
     .Label(flashBorderLabel)
-    .LDX(0x00)
+    .LDX_Imm(0x00)
 
     .Label("FLASH_LOOP", out var flashLoopLabel)
     .STX(0xD020) // C64 border color register
     .INX()
-    .CPX(0x08)
+    .CPX_Imm(0x08)
     .BNE(flashLoopLabel)
     .RTS()
 
@@ -128,16 +128,16 @@ Console.WriteLine(asmText);
 Will generate the following disassembled code:
 
 ```
-C000  A6 00      LDX $00
-C002  A4 10      LDY $10
+C000  A2 00      LDX #$00
+C002  A0 10      LDY #$10
 
 LL_02:
 C004  BD 00 02   LDA $0200,X
-C007  C5 FF      CMP $FF
+C007  C9 FF      CMP #$FF
 C009  F0 06      BEQ LL_01
 
 C00B  18         CLC
-C00C  65 01      ADC $01
+C00C  69 01      ADC #$01
 C00E  9D 00 02   STA $0200,X
 
 LL_01:
@@ -151,12 +151,12 @@ LL_04:
 C018  4C 18 C0   JMP LL_04
 
 LL_03:
-C01B  A6 00      LDX $00
+C01B  A2 00      LDX #$00
 
 LL_05:
 C01D  8E 20 D0   STX $D020
 C020  E8         INX
-C021  E4 08      CPX $08
+C021  E0 08      CPX #$08
 C023  D0 F8      BNE LL_05
 
 C025  60         RTS

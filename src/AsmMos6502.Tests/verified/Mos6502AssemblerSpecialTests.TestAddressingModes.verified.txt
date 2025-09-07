@@ -1,0 +1,29 @@
+﻿C000  A9 10      LDA #$10
+C002  A5 10      LDA $10
+C004  B5 10      LDA $10,X
+C006  B6 10      LDX $10,Y
+C008  AD 34 12   LDA $1234
+C00B  BD 34 12   LDA $1234,X
+C00E  B9 34 12   LDA $1234,Y
+C011  6C 34 12   JMP ($1234)
+
+C014  A1 10      LDA ($10,X)
+C016  B1 10      LDA ($10),Y
+
+; A9 10 A5 10 B5 10 B6 10 AD 34 12 BD 34 12 B9 34 12 6C 34 12 A1 10 B1 10
+
+Debug Info (Program: TestAddressingModes)
+- Program Start Address: C000
+- Program End Address: C018
+- Debug Line Count: 10
+
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:127
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:128
+C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:129
+C006 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:130
+C008 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:131
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:132
+C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:133
+C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:134
+C014 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:135
+C016 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:136

@@ -72,17 +72,17 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
         asm
             .Begin(0xc000)
             .Label("START", out var startLabel)
-            .LDX(0x00)             // X = 0, index into buffer
-            .LDY(0x10)             // Y = 16, number of bytes to process
+            .LDX_Imm(0x00)             // X = 0, index into buffer
+            .LDY_Imm(0x10)             // Y = 16, number of bytes to process
 
             .Label("LOOP", out var loopLabel)
             .LDA(0x0200, X) // Load byte at $0200 + X
-            .CMP(0xFF)             // Check if byte is already 0xFF
+            .CMP_Imm(0xFF)             // Check if byte is already 0xFF
 
             .LabelForward("SKIP", out var skipLabel)
             .BEQ(skipLabel)        // If so, skip incrementing
             .CLC()                 // Clear carry before addition
-            .ADC(0x01)             // Add 1
+            .ADC_Imm(0x01)             // Add 1
             .STA(0x0200, X) // Store result back to memory
 
             .Label(skipLabel)      // X = X + 1
@@ -104,17 +104,37 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
             // (Useful on C64, otherwise dummy)
             // -----------------------------
             .Label(flashBorderLabel)
-            .LDX(0x00)
+            .LDX_Imm(0x00)
 
             .Label("FLASH_LOOP", out var flashLoopLabel)
             .STX(0xD020) // C64 border color register
             .INX()
-            .CPX(0x08)
+            .CPX_Imm(0x08)
             .BNE(flashLoopLabel)
             .RTS()
 
             .End();                 // Mark the end of the assembly (to resolve labels)
 
+        await VerifyAsm(asm);
+    }
+    
+    [TestMethod]
+    public async Task TestAddressingModes()
+    {
+        using var asm = CreateAsm();
+        asm
+            .Begin()
+            .LDA_Imm(0x10)   // Immediate
+            .LDA(0x10)        // Zero Page
+            .LDA(0x10, X)     // Zero Page,X
+            .LDX(0x10, Y)     // Zero Page,Y
+            .LDA(0x1234)       // Absolute
+            .LDA(0x1234, X)    // Absolute,X
+            .LDA(0x1234, Y)    // Absolute,Y
+            .JMP(_[0x1234])           // Indirect
+            .LDA(_[0x10, X])          // Indirect,X
+            .LDA(_[0x10], Y)          // Indirect,Y
+            .End();
         await VerifyAsm(asm);
     }
 }

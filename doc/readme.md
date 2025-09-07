@@ -38,8 +38,8 @@ using var asm = new Mos6502Assembler();
 
 asm.Begin(0xC000);  // With a base address (e.g., $C000)
 
-asm.LDX(0x00);      // LDX #$00
-asm.LDY(0x10);      // LDY #$10
+asm.LDX_Imm(0x00);      // LDX #$00
+asm.LDY_Imm(0x10);      // LDY #$10
 asm.LDA(0x0200, X); // LDA $0200,X
 asm.STA(0x0200, X); // STA $0200,X
 asm.RTS();          // RTS
@@ -61,8 +61,8 @@ using var asm = new Mos6502Assembler(0xC000);
 asm
     .Begin()        // Start assembling
 
-    .LDX(0x00)      // LDX #$00
-    .LDY(0x10)      // LDY #$10
+    .LDX_Imm(0x00)      // LDX #$00
+    .LDY_Imm(0x10)      // LDY #$10
     .LDA(0x0200, X) // LDA $0200,X
     .STA(0x0200, X) // STA $0200,X
     .RTS()          // RTS
@@ -101,17 +101,17 @@ The `Mos6502Assembler` class provides a fluent API for generating 6502 machine c
 using var asm = new Mos6502Assembler();
 
 asm
-    .Begin(0xC000)                // Start assembling at address $C000
+    .Begin(0xC000)         // Start assembling at address $C000
     .Label("START", out var startLabel)
-    .LDX(0x00)             // X = 0
-    .LDY(0x10)             // Y = 16
+    .LDX_Imm(0x00)         // X = 0
+    .LDY_Imm(0x10)         // Y = 16
     .Label("LOOP", out var loopLabel)
     .LDA(0x0200, X)        // LDA $0200,X
     .CMP(0xFF)             // CMP #$FF
     .ForwardLabel("SKIP", out var skipLabel)
     .BEQ(skipLabel)        // BEQ SKIP
     .CLC()                 // CLC
-    .ADC(0x01)             // ADC #$01
+    .ADC_Imm(0x01)         // ADC #$01
     .STA(0x0200, X)        // STA $0200,X
     .Label(skipLabel)
     .INX()                 // INX
@@ -187,7 +187,7 @@ You can also create forward labels that are resolved later:
 asm
     .ForwardLabel("SKIP", out var skipLabel)
     .BEQ(skipLabel)    // Branch to SKIP if condition met
-    .LDA(0xFF)         // Load accumulator with 0xFF
+    .LDA_Imm(0xFF)     // Load accumulator with 0xFF
     .Label(skipLabel)  // Bind SKIP label later
 ```
 
@@ -282,7 +282,7 @@ var forwardLabel = new Mos6502Label();
 
 asm
     .Begin(0xC000)
-    .LDA(0x5)
+    .LDA(0x5) // Zero page load
     .STA(0x1000)
     .Label(out var label)
     .LDA(_[0x1, X])
