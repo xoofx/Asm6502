@@ -72,6 +72,8 @@ internal class GeneratorApp
         var opcodes6510 = opcodes6502.Concat(illegalOpcodes).ToList();
         
         var modes = model.Modes;
+        modes.RemoveAt(modes.Count - 1); // Remove the W65c02 modes
+        modes.RemoveAt(modes.Count - 1);
 
         Dictionary<string, JsonAsm6502AddressingMode> modeMapping = new();
         _mapAddressingMode.Clear();

@@ -116,6 +116,24 @@
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#modes_zeropage_indexed"
       ]
+    },
+    {
+      "kind": "ZeroPageIndirect",
+      "size_bytes": 2,
+      "cycles": 5,
+      "dummy_reads": "Never",
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#modes_zeropage_indirect"
+      ]
+    },
+    {
+      "kind": "AbsoluteIndirectX",
+      "size_bytes": 3,
+      "cycles": 6,
+      "dummy_reads": "Always",
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#modes_absolute_indexed_indirect"
+      ]
     }
   ],
   "opcodes": [
@@ -5230,6 +5248,291 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
+      ]
+    },
+    {
+      "name": "ADC",
+      "name_long": "Add Memory to Accumulator with Carry",
+      "opcode": 114,
+      "opcode_hex": "0x72",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_ADC"
+      ]
+    },
+    {
+      "name": "AND",
+      "name_long": "AND Memory with Accumulator",
+      "opcode": 50,
+      "opcode_hex": "0x32",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_AND"
+      ]
+    },
+    {
+      "name": "BIT",
+      "name_long": "Test Bits in Memory with Accumulator",
+      "opcode": 137,
+      "opcode_hex": "0x89",
+      "addressing_mode": "Immediate",
+      "cycles": 2,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N7",
+        "V6",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
+      ]
+    },
+    {
+      "name": "BIT",
+      "name_long": "Test Bits in Memory with Accumulator",
+      "opcode": 60,
+      "opcode_hex": "0x3C",
+      "addressing_mode": "AbsoluteX",
+      "cycles": 4,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N7",
+        "V6",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
+      ]
+    },
+    {
+      "name": "BIT",
+      "name_long": "Test Bits in Memory with Accumulator",
+      "opcode": 36,
+      "opcode_hex": "0x24",
+      "addressing_mode": "ZeroPage",
+      "cycles": 3,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N7",
+        "V6",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
+      ]
+    },
+    {
+      "name": "BIT",
+      "name_long": "Test Bits in Memory with Accumulator",
+      "opcode": 52,
+      "opcode_hex": "0x34",
+      "addressing_mode": "ZeroPageX",
+      "cycles": 4,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N7",
+        "V6",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
+      ]
+    },
+    {
+      "name": "CMP",
+      "name_long": "Compare Memory with Accumulator",
+      "opcode": 210,
+      "opcode_hex": "0xD2",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_CMP"
+      ]
+    },
+    {
+      "name": "DEC",
+      "name_long": "Decrement by One (Accumulator)",
+      "opcode": 58,
+      "opcode_hex": "0x3A",
+      "addressing_mode": "Accumulator",
+      "cycles": 2,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_DEC"
+      ]
+    },
+    {
+      "name": "EOR",
+      "name_long": "Exclusive-OR Memory with Accumulator",
+      "opcode": 82,
+      "opcode_hex": "0x52",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_EOR"
+      ]
+    },
+    {
+      "name": "INC",
+      "name_long": "Increment by One (Accumulator)",
+      "opcode": 26,
+      "opcode_hex": "0x1A",
+      "addressing_mode": "Accumulator",
+      "cycles": 2,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_INC"
+      ]
+    },
+    {
+      "name": "JMP",
+      "name_long": "Jump to New Location",
+      "opcode": 124,
+      "opcode_hex": "0x7C",
+      "addressing_mode": "AbsoluteIndirectX",
+      "cycles": 6,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_JMP"
+      ]
+    },
+    {
+      "name": "LDA",
+      "name_long": "Load Accumulator with Memory",
+      "opcode": 82,
+      "opcode_hex": "0x52",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_LDA"
+      ]
+    },
+    {
+      "name": "ORA",
+      "name_long": "OR Memory with Accumulator",
+      "opcode": 18,
+      "opcode_hex": "0x12",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_ORA"
+      ]
+    },
+    {
+      "name": "SBC",
+      "name_long": "Subtract Memory from Accumulator with Borrow",
+      "opcode": 242,
+      "opcode_hex": "0xF2",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_SBC"
+      ]
+    },
+    {
+      "name": "STA",
+      "name_long": "Store Accumulator in Memory",
+      "opcode": 146,
+      "opcode_hex": "0x92",
+      "addressing_mode": "ZeroPageIndirect",
+      "cycles": 5,
+      "dummy_reads": false,
+      "dummy_writes": false,
+      "all_names": [],
+      "status_flags": [],
+      "w65c02": true,
+      "online_documentation": [
+        "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_STA"
       ]
     }
   ]
