@@ -2894,6 +2894,7 @@
       ],
       "status_flags": [],
       "illegal": true,
+      "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ANE"
       ]
@@ -3044,6 +3045,7 @@
       ],
       "status_flags": [],
       "illegal": true,
+      "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHA"
       ]
@@ -3192,6 +3194,7 @@
       ],
       "status_flags": [],
       "illegal": true,
+      "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#TAS"
       ]
@@ -3213,6 +3216,7 @@
       ],
       "status_flags": [],
       "illegal": true,
+      "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHY"
       ]
@@ -3252,6 +3256,7 @@
       ],
       "status_flags": [],
       "illegal": true,
+      "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHX"
       ]
@@ -3511,6 +3516,7 @@
       ],
       "status_flags": [],
       "illegal": true,
+      "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LXA"
       ]

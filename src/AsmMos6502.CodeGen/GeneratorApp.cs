@@ -5,6 +5,7 @@
 using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -32,9 +33,38 @@ internal class GeneratorApp
         
         var model = JsonAsm6502Instructions.ReadJson("6502.json");
 
-        var opcodes = model.Opcodes.Where(op => !op.Illegal).OrderBy(x => x.Opcode)
+        var opcodes6502 = model.Opcodes.Where(x => !x.Illegal).OrderBy(x => x.Opcode)
+            .OrderBy(x => x.Name).ThenBy(x => x.AddressingMode).ToList();
+        opcodes6502.ForEach(x => x.OpcodeUniqueName = $"{x.Name}_{x.AddressingMode}");
+
+        var illegalOpcodes = model.Opcodes.Where(x => x.Illegal).OrderBy(x => x.Opcode)
             .OrderBy(x => x.Name).ThenBy(x => x.AddressingMode).ToList();
 
+        // Append a unique suffix to illegal opcodes that have the same name and addressing mode
+        for (var i = 0; i < illegalOpcodes.Count; i++)
+        {
+            var illegal = illegalOpcodes[i];
+
+            illegal.OpcodeUniqueName = $"{illegal.Name}_{illegal.AddressingMode}";
+            bool opcodeNameIsAlreadyUsed = opcodes6502.Any(x => x.OpcodeUniqueName == illegal.OpcodeUniqueName);
+            for (int j = 0; j < i; j++)
+            {
+                var previous = illegalOpcodes[j];
+                if (previous.OpcodeUniqueName == illegal.OpcodeUniqueName)
+                {
+                    opcodeNameIsAlreadyUsed = true;
+                    break;
+                }
+            }
+
+            if (opcodeNameIsAlreadyUsed)
+            {
+                illegal.OpcodeUniqueName = $"{illegal.Name}_{illegal.AddressingMode}_{illegal.Opcode:X2}";
+            }
+        }
+        
+        var opcodes6510 = opcodes6502.Concat(illegalOpcodes).ToList();
+        
         var modes = model.Modes;
         _mapAddressingMode.Clear();
         foreach (var mode in modes)
@@ -43,16 +73,48 @@ internal class GeneratorApp
         }
 
         var modeMapping = GenerateAddressingModes(modes);
-        GenerateOpCodes(opcodes);
-        var mnemonics = opcodes.Select(op => op.Name).Distinct().OrderBy(name => name).ToList();
-        GenerateMnemonics(mnemonics);
-        GenerateTables(opcodes, modes, modeMapping, mnemonics);
-        GenerateInstructionFactory(opcodes);
-        GenerateAssemblerFactory(opcodes);
+        var mnemonics6502Names = opcodes6502.Select(op => op.Name).Distinct().OrderBy(name => name).ToList();
+        List<Mnemonic> mnemonics6502 = new();
+        for (var i = 0; i < mnemonics6502Names.Count; i++)
+        {
+            var name = mnemonics6502Names[i];
+            mnemonics6502.Add(new(i + 1, name, false, false));
+        }
+
+        var illegalMnemonicsNames = illegalOpcodes.Where(op => mnemonics6502.All(x => x.Name != op.Name)).OrderBy(op => op.Name).ToList();
+        List<Mnemonic> illegalMnemonics = new();
+        for (var i = 0; i < illegalMnemonicsNames.Count; i++)
+        {
+            var op = illegalMnemonicsNames[i];
+            var name = op.Name;
+            if (illegalMnemonics.All(x => x.Name != name))
+            {
+                illegalMnemonics.Add(new(mnemonics6502.Count + i + 1, name, true, op.Unstable));
+            }
+        }
+        
+        var mnemonics6510 = mnemonics6502.Concat(illegalMnemonics).ToList();
+
+        GenerateOpCodes(opcodes6502, "Mos6502OpCode", "6502 opcodes.");
+        GenerateMnemonics(mnemonics6502, "Mos6502Mnemonic", "6502 mnemonics.");
+
+        GenerateOpCodes(opcodes6510, "Mos6510OpCode", "6510 opcodes (6502 + illegal opcodes).");
+        GenerateMnemonics(mnemonics6510, "Mos6510Mnemonic", "6510 mnemonics (6502 + illegals).");
+        
+        GenerateTables(opcodes6502, modes, modeMapping, mnemonics6502);
+        GenerateInstructionFactory(opcodes6502);
+        GenerateAssemblerFactory(opcodes6502);
         //GenerateAssemblerFactoryWithLabel(opcodes);
-        GenerateAssemblerFactoryWithExpressions(opcodes);
-        GenerateAssemblyTests(opcodes);
+        GenerateAssemblerFactoryWithExpressions(opcodes6502);
+        GenerateAssemblyTests(opcodes6502);
     }
+
+    // 6510
+    // Mos6510Mnemonic.gen
+    // Mos6510OpCode.gen
+    // Mos6510Tables.gen
+    // Mos6510Assembler.gen => Inherit from Mos6502Assembler
+    // Mos6510Assembler_WithExpressions.gen
 
     private Dictionary<string, int> GenerateAddressingModes(List<JsonAsm6502AddressingMode> addressingModes)
     {
@@ -79,27 +141,35 @@ internal class GeneratorApp
         return mapNameToValue;
     }
 
-    private void GenerateOpCodes(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateOpCodes(List<JsonAsm6502Opcode> opcodes, string className, string comment)
     {
-        var filePath = Path.Combine(GeneratedFolderPath, "Mos6502OpCode.gen.cs");
+        var filePath = Path.Combine(GeneratedFolderPath, $"{className}.gen.cs");
         using var writer = CreateCodeWriter(filePath);
         writer.WriteLine("namespace AsmMos6502;");
         writer.WriteLine();
-        writer.WriteSummary("6502 opcodes.");
-        writer.WriteLine("public enum Mos6502OpCode : byte");
+        writer.WriteSummary(comment);
+        writer.WriteLine($"public enum {className} : byte");
         writer.OpenBraceBlock();
         for (var i = 0; i < opcodes.Count; i++)
         {
             var opcode = opcodes[i];
             writer.WriteSummary($"{opcode.NameLong} - {opcode.Name}");
-            writer.WriteDoc([$"<remarks>AddressingMode: {opcode.AddressingMode}</remarks>"]);
-            writer.WriteLine($"{opcode.Name}_{opcode.AddressingMode} = {opcode.OpcodeHex},");
+            if (opcode.Illegal)
+            {
+                var unstable = opcode.Unstable ? " (unstable)" : string.Empty;
+                writer.WriteDoc([$"<remarks>AddressingMode: {opcode.AddressingMode}. This is an illegal{unstable} opcode.</remarks>"]);
+            }
+            else
+            {
+                writer.WriteDoc([$"<remarks>AddressingMode: {opcode.AddressingMode}</remarks>"]);
+            }
+            writer.WriteLine($"{opcode.OpcodeUniqueName} = {opcode.OpcodeHex},");
         }
 
         writer.CloseBraceBlock();
     }
     
-    private void GenerateTables(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, int> mapAddressingModeToValue, List<string> mnemonics)
+    private void GenerateTables(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, int> mapAddressingModeToValue, List<Mnemonic> mnemonics)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Tables.gen.cs");
         using var writer = CreateCodeWriter(filePath);
@@ -140,8 +210,8 @@ internal class GeneratorApp
                 }
                 else
                 {
-                    var mnemonicIndex = mnemonics.FindIndex(x => x == opcode.Name);
-                    writer.WriteLine($"{mnemonicIndex + 1,-2}, // [0x{i:X2}] {opcode.Name}_{opcode.AddressingMode} ");
+                    var mnemonicIndex = mnemonics.First(x => x.Name == opcode.Name).Id;
+                    writer.WriteLine($"{mnemonicIndex,-2}, // [0x{i:X2}] {opcode.OpcodeUniqueName} ");
                 }
             }
             writer.CloseBraceBlockStatement();
@@ -155,7 +225,7 @@ internal class GeneratorApp
             writer.WriteLine("\"???\", // Unknown mnemonic");
             foreach (var mnemonic in mnemonics)
             {
-                writer.WriteLine($"\"{mnemonic.ToUpperInvariant()}\", // {mnemonic}");
+                writer.WriteLine($"\"{mnemonic.Name.ToUpperInvariant()}\", // {mnemonic.Name}");
             }
             writer.CloseBraceBlockStatement();
 
@@ -168,7 +238,7 @@ internal class GeneratorApp
             writer.WriteLine("\"???\", // Unknown mnemonic");
             foreach (var mnemonic in mnemonics)
             {
-                writer.WriteLine($"\"{mnemonic.ToLowerInvariant()}\", // {mnemonic}");
+                writer.WriteLine($"\"{mnemonic.Name.ToLowerInvariant()}\", // {mnemonic.Name}");
             }
             writer.CloseBraceBlockStatement();
 
@@ -227,22 +297,31 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
     
-    private void GenerateMnemonics(List<string> mnemonics)
+    private void GenerateMnemonics(List<Mnemonic> mnemonics, string className, string comment)
     {
-        var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Mnemonic.gen.cs");
+        var filePath = Path.Combine(GeneratedFolderPath, $"{className}.gen.cs");
         using var writer = CreateCodeWriter(filePath);
         writer.WriteLine("namespace AsmMos6502;");
         writer.WriteLine();
-        writer.WriteSummary("6502 mnemonics.");
-        writer.WriteLine("public enum Mos6502Mnemonic : byte");
+        writer.WriteSummary(comment);
+        writer.WriteLine($"public enum {className} : byte");
         writer.OpenBraceBlock();
         writer.WriteSummary("Undefined mnemonic.");
         writer.WriteLine("Unknown = 0,");
         for (var i = 0; i < mnemonics.Count; i++)
         {
             var mnemonic = mnemonics[i];
-            writer.WriteSummary($"{mnemonic}.");
-            writer.WriteLine($"{mnemonic} = {i + 1},");
+            if (mnemonic.Illegal)
+            {
+                var unstable = mnemonic.Unstable ? " (and unstable)" : string.Empty;
+                writer.WriteSummary($"{mnemonic.Name}. This mnemonic is part of the illegal{unstable} instructions.");
+            }
+            else
+            {
+                writer.WriteSummary($"{mnemonic.Name}.");
+            }
+                
+            writer.WriteLine($"{mnemonic.Name} = {mnemonic.Id},");
         }
         writer.CloseBraceBlock();
     }
@@ -765,4 +844,6 @@ internal class GeneratorApp
     }
 
     private static string BytesText(int value) => value > 1 ? $"{value} bytes" : $"{value} byte";
+
+    private record Mnemonic(int Id, string Name, bool Illegal, bool Unstable);
 }

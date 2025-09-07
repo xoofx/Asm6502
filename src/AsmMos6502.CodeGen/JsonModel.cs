@@ -55,6 +55,7 @@ public class JsonAsm6502Opcode
     public string Name { get; set; } = string.Empty;
     public string NameLong { get; set; } = string.Empty;
     public int Opcode { get; set; }
+    public string? OpcodeUniqueName { get; set; } = string.Empty;
     public string OpcodeHex { get; set; } = string.Empty;
     public string AddressingMode { get; set; } = string.Empty;
     public int Cycles { get; set; }
@@ -65,6 +66,8 @@ public class JsonAsm6502Opcode
     [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
     public List<string> StatusFlags { get; } = new();
     public bool Illegal { get; set; }
+    public bool Unstable { get; set; }
+    
     [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
     public List<string> OnlineDocumentation { get; } = new();
 }
