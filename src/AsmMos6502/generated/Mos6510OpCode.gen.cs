@@ -784,7 +784,7 @@ public enum Mos6510OpCode : byte
     ///  - ANC
     /// </summary>
     /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
-    ANC_Immediate_2B = 0x2b,
+    ANC_2B_Immediate = 0x2b,
     /// <summary>
     ///  - ANE
     /// </summary>
@@ -874,57 +874,57 @@ public enum Mos6510OpCode : byte
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_12 = 0x12,
+    JAM_12_Implied = 0x12,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_22 = 0x22,
+    JAM_22_Implied = 0x22,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_32 = 0x32,
+    JAM_32_Implied = 0x32,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_42 = 0x42,
+    JAM_42_Implied = 0x42,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_52 = 0x52,
+    JAM_52_Implied = 0x52,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_62 = 0x62,
+    JAM_62_Implied = 0x62,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_72 = 0x72,
+    JAM_72_Implied = 0x72,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_92 = 0x92,
+    JAM_92_Implied = 0x92,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_B2 = 0xb2,
+    JAM_B2_Implied = 0xb2,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_D2 = 0xd2,
+    JAM_D2_Implied = 0xd2,
     /// <summary>
     ///  - JAM
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    JAM_Implied_F2 = 0xf2,
+    JAM_F2_Implied = 0xf2,
     /// <summary>
     ///  - LAS
     /// </summary>
@@ -979,27 +979,27 @@ public enum Mos6510OpCode : byte
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
-    NOP_AbsoluteX_3C = 0x3c,
+    NOP_3C_AbsoluteX = 0x3c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
-    NOP_AbsoluteX_5C = 0x5c,
+    NOP_5C_AbsoluteX = 0x5c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
-    NOP_AbsoluteX_7C = 0x7c,
+    NOP_7C_AbsoluteX = 0x7c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
-    NOP_AbsoluteX_DC = 0xdc,
+    NOP_DC_AbsoluteX = 0xdc,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
-    NOP_AbsoluteX_FC = 0xfc,
+    NOP_FC_AbsoluteX = 0xfc,
     /// <summary>
     /// No operation - NOP
     /// </summary>
@@ -1009,52 +1009,52 @@ public enum Mos6510OpCode : byte
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
-    NOP_Immediate_82 = 0x82,
+    NOP_82_Immediate = 0x82,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
-    NOP_Immediate_89 = 0x89,
+    NOP_89_Immediate = 0x89,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
-    NOP_Immediate_C2 = 0xc2,
+    NOP_C2_Immediate = 0xc2,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
-    NOP_Immediate_E2 = 0xe2,
+    NOP_E2_Immediate = 0xe2,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    NOP_Implied_1A = 0x1a,
+    NOP_1A_Implied = 0x1a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    NOP_Implied_3A = 0x3a,
+    NOP_3A_Implied = 0x3a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    NOP_Implied_5A = 0x5a,
+    NOP_5A_Implied = 0x5a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    NOP_Implied_7A = 0x7a,
+    NOP_7A_Implied = 0x7a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    NOP_Implied_DA = 0xda,
+    NOP_DA_Implied = 0xda,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
-    NOP_Implied_FA = 0xfa,
+    NOP_FA_Implied = 0xfa,
     /// <summary>
     /// No operation - NOP
     /// </summary>
@@ -1064,12 +1064,12 @@ public enum Mos6510OpCode : byte
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
-    NOP_ZeroPage_44 = 0x44,
+    NOP_44_ZeroPage = 0x44,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
-    NOP_ZeroPage_64 = 0x64,
+    NOP_64_ZeroPage = 0x64,
     /// <summary>
     /// No operation - NOP
     /// </summary>
@@ -1079,27 +1079,27 @@ public enum Mos6510OpCode : byte
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
-    NOP_ZeroPageX_34 = 0x34,
+    NOP_34_ZeroPageX = 0x34,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
-    NOP_ZeroPageX_54 = 0x54,
+    NOP_54_ZeroPageX = 0x54,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
-    NOP_ZeroPageX_74 = 0x74,
+    NOP_74_ZeroPageX = 0x74,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
-    NOP_ZeroPageX_D4 = 0xd4,
+    NOP_D4_ZeroPageX = 0xd4,
     /// <summary>
     /// No operation - NOP
     /// </summary>
     /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
-    NOP_ZeroPageX_F4 = 0xf4,
+    NOP_F4_ZeroPageX = 0xf4,
     /// <summary>
     ///  - RLA
     /// </summary>

@@ -254,77 +254,77 @@ public enum Mos6510Mnemonic : byte
     /// <summary>
     /// ANE. This mnemonic is part of the illegal (and unstable) instructions.
     /// </summary>
-    ANE = 60,
+    ANE = 59,
     /// <summary>
     /// ARR. This mnemonic is part of the illegal instructions.
     /// </summary>
-    ARR = 61,
+    ARR = 60,
     /// <summary>
     /// DCP. This mnemonic is part of the illegal instructions.
     /// </summary>
-    DCP = 62,
+    DCP = 61,
     /// <summary>
     /// ISC. This mnemonic is part of the illegal instructions.
     /// </summary>
-    ISC = 69,
+    ISC = 62,
     /// <summary>
     /// JAM. This mnemonic is part of the illegal instructions.
     /// </summary>
-    JAM = 76,
+    JAM = 63,
     /// <summary>
     /// LAS. This mnemonic is part of the illegal instructions.
     /// </summary>
-    LAS = 88,
+    LAS = 64,
     /// <summary>
     /// LAX. This mnemonic is part of the illegal instructions.
     /// </summary>
-    LAX = 89,
+    LAX = 65,
     /// <summary>
     /// LXA. This mnemonic is part of the illegal (and unstable) instructions.
     /// </summary>
-    LXA = 95,
+    LXA = 66,
     /// <summary>
     /// RLA. This mnemonic is part of the illegal instructions.
     /// </summary>
-    RLA = 96,
+    RLA = 67,
     /// <summary>
     /// RRA. This mnemonic is part of the illegal instructions.
     /// </summary>
-    RRA = 103,
+    RRA = 68,
     /// <summary>
     /// SAX. This mnemonic is part of the illegal instructions.
     /// </summary>
-    SAX = 110,
+    SAX = 69,
     /// <summary>
     /// SBX. This mnemonic is part of the illegal instructions.
     /// </summary>
-    SBX = 114,
+    SBX = 70,
     /// <summary>
     /// SHA. This mnemonic is part of the illegal instructions.
     /// </summary>
-    SHA = 115,
+    SHA = 71,
     /// <summary>
     /// SHX. This mnemonic is part of the illegal (and unstable) instructions.
     /// </summary>
-    SHX = 117,
+    SHX = 72,
     /// <summary>
     /// SHY. This mnemonic is part of the illegal (and unstable) instructions.
     /// </summary>
-    SHY = 118,
+    SHY = 73,
     /// <summary>
     /// SLO. This mnemonic is part of the illegal instructions.
     /// </summary>
-    SLO = 119,
+    SLO = 74,
     /// <summary>
     /// SRE. This mnemonic is part of the illegal instructions.
     /// </summary>
-    SRE = 126,
+    SRE = 75,
     /// <summary>
     /// TAS. This mnemonic is part of the illegal (and unstable) instructions.
     /// </summary>
-    TAS = 133,
+    TAS = 76,
     /// <summary>
     /// USBC. This mnemonic is part of the illegal instructions.
     /// </summary>
-    USBC = 134,
+    USBC = 77,
 }

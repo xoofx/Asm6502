@@ -1,0 +1,12 @@
+﻿C000  5E 34 12   LSR $1234,X
+C003  5E 02 FF   LSR $FF02,X
+
+; 5E 34 12 5E 02 FF
+
+Debug Info (Program: LSR_AbsoluteX)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:976
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:977

@@ -1,0 +1,12 @@
+﻿C000  6F 34 12   RRA $1234
+C003  6F 01 FF   RRA $FF01
+
+; 6F 34 12 6F 01 FF
+
+Debug Info (Program: RRA_Absolute)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2322
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2323

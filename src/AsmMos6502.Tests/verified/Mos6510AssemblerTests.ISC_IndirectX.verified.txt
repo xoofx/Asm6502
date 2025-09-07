@@ -1,0 +1,14 @@
+﻿C000  E3 05      ISC ($05,X)
+C002  E3 20      ISC ($20,X)
+C004  E3 FF      ISC ($FF,X)
+
+; E3 05 E3 20 E3 FF
+
+Debug Info (Program: ISC_IndirectX)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1733
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1734
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1735

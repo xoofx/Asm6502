@@ -1,0 +1,14 @@
+﻿C000  E6 03      INC $03
+C002  E6 20      INC $20
+C004  E6 FE      INC $FE
+
+; E6 03 E6 20 E6 FE
+
+Debug Info (Program: INC_ZeroPage)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:705
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:706
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:707

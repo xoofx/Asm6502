@@ -1,0 +1,14 @@
+﻿C000  14 02      NOP $02,X
+C002  14 30      NOP $30,X
+C004  14 FB      NOP $FB,X
+
+; 14 02 14 30 14 FB
+
+Debug Info (Program: NOP_ZeroPageX)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2182
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2183
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2184

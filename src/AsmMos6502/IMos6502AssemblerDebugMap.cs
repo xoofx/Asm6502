@@ -5,7 +5,7 @@
 namespace AsmMos6502;
 
 /// <summary>
-/// Provides methods for tracking debug information during MOS 6502 assembly. Set via <see cref="Mos6502Assembler.DebugMap"/>.
+/// Provides methods for tracking debug information during MOS 6502 assembly. Set via <see cref="Mos6502AssemblerBase.DebugMap"/>.
 /// Implementations can log program start/end addresses and per-line debug info.
 /// </summary>
 public interface IMos6502AssemblerDebugMap

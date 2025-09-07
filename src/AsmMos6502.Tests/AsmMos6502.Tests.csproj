@@ -22,4 +22,28 @@
     <Folder Include="generated\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="VerifyAsmMos6502Base.gen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VerifyAsmMos6502Base.gen.cs</LastGenOutput>
+    </None>
+    <None Update="VerifyAsmMos6502Base.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VerifyAsmMos6502Base.gen.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="VerifyAsmMos6502Base.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VerifyAsmMos6502Base.gen.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -32,12 +32,16 @@ internal class GeneratorApp
         }
         
         var model = JsonAsm6502Instructions.ReadJson("6502.json");
-
-        var opcodes6502 = model.Opcodes.Where(x => !x.Illegal).OrderBy(x => x.Opcode)
+        
+        var opcodes6502 = model.Opcodes.Where(x => !x.W65c02 && !x.Illegal).OrderBy(x => x.Opcode)
             .OrderBy(x => x.Name).ThenBy(x => x.AddressingMode).ToList();
-        opcodes6502.ForEach(x => x.OpcodeUniqueName = $"{x.Name}_{x.AddressingMode}");
+        opcodes6502.ForEach(x =>
+        {
+            x.UniqueName = x.Name;
+            x.OpcodeUniqueName = $"{x.Name}_{x.AddressingMode}";
+        });
 
-        var illegalOpcodes = model.Opcodes.Where(x => x.Illegal).OrderBy(x => x.Opcode)
+        var illegalOpcodes = model.Opcodes.Where(x => !x.W65c02 && x.Illegal).OrderBy(x => x.Opcode)
             .OrderBy(x => x.Name).ThenBy(x => x.AddressingMode).ToList();
 
         // Append a unique suffix to illegal opcodes that have the same name and addressing mode
@@ -45,6 +49,7 @@ internal class GeneratorApp
         {
             var illegal = illegalOpcodes[i];
 
+            illegal.UniqueName = illegal.Name;
             illegal.OpcodeUniqueName = $"{illegal.Name}_{illegal.AddressingMode}";
             bool opcodeNameIsAlreadyUsed = opcodes6502.Any(x => x.OpcodeUniqueName == illegal.OpcodeUniqueName);
             for (int j = 0; j < i; j++)
@@ -59,26 +64,32 @@ internal class GeneratorApp
 
             if (opcodeNameIsAlreadyUsed)
             {
-                illegal.OpcodeUniqueName = $"{illegal.Name}_{illegal.AddressingMode}_{illegal.Opcode:X2}";
+                illegal.UniqueName = $"{illegal.Name}_{illegal.Opcode:X2}";
+                illegal.OpcodeUniqueName = $"{illegal.UniqueName}_{illegal.AddressingMode}";
             }
         }
         
         var opcodes6510 = opcodes6502.Concat(illegalOpcodes).ToList();
         
         var modes = model.Modes;
+
+        Dictionary<string, JsonAsm6502AddressingMode> modeMapping = new();
         _mapAddressingMode.Clear();
-        foreach (var mode in modes)
+        for (var i = 0; i < modes.Count; i++)
         {
+            var mode = modes[i];
             _mapAddressingMode[mode.Kind] = mode;
+            mode.Id = i + 1; // 0 is unknown
+            modeMapping[mode.Kind] = mode;
         }
 
-        var modeMapping = GenerateAddressingModes(modes);
+        GenerateAddressingModes(modes);
         var mnemonics6502Names = opcodes6502.Select(op => op.Name).Distinct().OrderBy(name => name).ToList();
         List<Mnemonic> mnemonics6502 = new();
         for (var i = 0; i < mnemonics6502Names.Count; i++)
         {
             var name = mnemonics6502Names[i];
-            mnemonics6502.Add(new(i + 1, name, false, false));
+            mnemonics6502.Add(new(mnemonics6502.Count + 1, name, false, false));
         }
 
         var illegalMnemonicsNames = illegalOpcodes.Where(op => mnemonics6502.All(x => x.Name != op.Name)).OrderBy(op => op.Name).ToList();
@@ -89,24 +100,32 @@ internal class GeneratorApp
             var name = op.Name;
             if (illegalMnemonics.All(x => x.Name != name))
             {
-                illegalMnemonics.Add(new(mnemonics6502.Count + i + 1, name, true, op.Unstable));
+                illegalMnemonics.Add(new(mnemonics6502.Count + illegalMnemonics.Count + 1, name, true, op.Unstable));
             }
         }
         
         var mnemonics6510 = mnemonics6502.Concat(illegalMnemonics).ToList();
 
         GenerateOpCodes(opcodes6502, "Mos6502OpCode", "6502 opcodes.");
-        GenerateMnemonics(mnemonics6502, "Mos6502Mnemonic", "6502 mnemonics.");
-
         GenerateOpCodes(opcodes6510, "Mos6510OpCode", "6510 opcodes (6502 + illegal opcodes).");
+
+        GenerateMnemonics(mnemonics6502, "Mos6502Mnemonic", "6502 mnemonics.");
         GenerateMnemonics(mnemonics6510, "Mos6510Mnemonic", "6510 mnemonics (6502 + illegals).");
         
-        GenerateTables(opcodes6502, modes, modeMapping, mnemonics6502);
-        GenerateInstructionFactory(opcodes6502);
-        GenerateAssemblerFactory(opcodes6502);
-        //GenerateAssemblerFactoryWithLabel(opcodes);
-        GenerateAssemblerFactoryWithExpressions(opcodes6502);
-        GenerateAssemblyTests(opcodes6502);
+        GenerateTables("Mos6502", opcodes6502, modes, modeMapping, mnemonics6502);
+        GenerateTables("Mos6510", opcodes6510, modes, modeMapping, mnemonics6510);
+
+        GenerateInstructionFactory("Mos6502", opcodes6502);
+        GenerateInstructionFactory("Mos6510", opcodes6510);
+
+        GenerateAssemblerFactory("Mos6502", opcodes6502);
+        GenerateAssemblerFactory("Mos6510", opcodes6510);
+
+        GenerateAssemblerFactoryWithExpressions("Mos6502", opcodes6502);
+        GenerateAssemblerFactoryWithExpressions("Mos6510", opcodes6510);
+
+        GenerateAssemblyTests("Mos6502", opcodes6502);
+        GenerateAssemblyTests("Mos6510", opcodes6510);
     }
 
     // 6510
@@ -116,7 +135,7 @@ internal class GeneratorApp
     // Mos6510Assembler.gen => Inherit from Mos6502Assembler
     // Mos6510Assembler_WithExpressions.gen
 
-    private Dictionary<string, int> GenerateAddressingModes(List<JsonAsm6502AddressingMode> addressingModes)
+    private void GenerateAddressingModes(List<JsonAsm6502AddressingMode> addressingModes)
     {
         var filePath = Path.Combine(GeneratedFolderPath, "Mos6502AddressingMode.gen.cs");
         using var writer = CreateCodeWriter(filePath);
@@ -127,18 +146,15 @@ internal class GeneratorApp
         writer.OpenBraceBlock();
         writer.WriteSummary("Undefined mode");
         writer.WriteLine("Unknown = 0,");
-        var mapNameToValue = new Dictionary<string, int>();
         for (var i = 0; i < addressingModes.Count; i++)
         {
             var mode = addressingModes[i];
             writer.WriteSummary($"{mode.Kind}");
             writer.WriteDoc([$"<remarks>Size: {BytesText(mode.SizeBytes)}, Cycles: {mode.Cycles}</remarks>"]);
             writer.WriteLine($"{mode.Kind} = {i + 1},");
-            mapNameToValue[mode.Kind] = i + 1;
         }
 
         writer.CloseBraceBlock();
-        return mapNameToValue;
     }
 
     private void GenerateOpCodes(List<JsonAsm6502Opcode> opcodes, string className, string comment)
@@ -169,14 +185,14 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
     
-    private void GenerateTables(List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, int> mapAddressingModeToValue, List<Mnemonic> mnemonics)
+    private void GenerateTables(string className, List<JsonAsm6502Opcode> opcodes, List<JsonAsm6502AddressingMode> modes, Dictionary<string, JsonAsm6502AddressingMode> modeMapping, List<Mnemonic> mnemonics)
     {
-        var filePath = Path.Combine(GeneratedFolderPath, "Mos6502Tables.gen.cs");
+        var filePath = Path.Combine(GeneratedFolderPath, $"{className}Tables.gen.cs");
         using var writer = CreateCodeWriter(filePath);
         writer.WriteLine("namespace AsmMos6502;");
         writer.WriteLine();
-        writer.WriteSummary("Internal tables to help decoding <see cref=\"Mos6502OpCode\"/>.");
-        writer.WriteLine("internal static partial class Mos6502Tables");
+        writer.WriteSummary($"Internal tables to help decoding <see cref=\"{className}OpCode\"/>.");
+        writer.WriteLine($"internal static partial class {className}Tables");
         writer.OpenBraceBlock();
 
         {
@@ -185,7 +201,7 @@ internal class GeneratorApp
             for (var i = 0; i < 0x100; i++)
             {
                 var opcode = opcodes.FirstOrDefault(x => x.Opcode == i);
-                writer.Write(opcode is null ? "0x00, " : $"0x{mapAddressingModeToValue[opcode.AddressingMode]:X2}, ");
+                writer.Write(opcode is null ? "0x00, " : $"0x{modeMapping[opcode.AddressingMode].Id:X2}, ");
                 if ((i + 1) % 16 == 0)
                 {
                     writer.WriteLine();
@@ -196,8 +212,7 @@ internal class GeneratorApp
 
             writer.WriteLine();
         }
-
-
+        
         {
             writer.WriteLine($"private static ReadOnlySpan<byte> MapOpCodeToMnemonic => new byte[256]");
             writer.OpenBraceBlock();
@@ -225,7 +240,7 @@ internal class GeneratorApp
             writer.WriteLine("\"???\", // Unknown mnemonic");
             foreach (var mnemonic in mnemonics)
             {
-                writer.WriteLine($"\"{mnemonic.Name.ToUpperInvariant()}\", // {mnemonic.Name}");
+                writer.WriteLine($"\"{mnemonic.Name.ToUpperInvariant()}\", // {mnemonic.Id,2} - {mnemonic.Name}");
             }
             writer.CloseBraceBlockStatement();
 
@@ -236,10 +251,12 @@ internal class GeneratorApp
             writer.WriteLine($"private static readonly string[] MapMnemonicToTextLowercase = new string[{mnemonics.Count + 1}]");
             writer.OpenBraceBlock();
             writer.WriteLine("\"???\", // Unknown mnemonic");
-            foreach (var mnemonic in mnemonics)
+            for (var i = 0; i < mnemonics.Count; i++)
             {
-                writer.WriteLine($"\"{mnemonic.Name.ToLowerInvariant()}\", // {mnemonic.Name}");
+                var mnemonic = mnemonics[i];
+                writer.WriteLine($"\"{mnemonic.Name.ToLowerInvariant()}\", // {mnemonic.Id,2} - {mnemonic.Name}");
             }
+
             writer.CloseBraceBlockStatement();
 
             writer.WriteLine();
@@ -264,33 +281,36 @@ internal class GeneratorApp
             writer.WriteLine();
         }
 
+        if (className == "Mos6502")
         {
-            writer.WriteLine($"private static ReadOnlySpan<byte> MapAddressingModeToBytes => new byte[16]");
-            writer.OpenBraceBlock();
-            writer.WriteLine("0, // Undefined");
-            Debug.Assert(modes.Count == 13);
-            foreach (var mode in modes)
             {
-                writer.WriteLine($"{mode.SizeBytes}, // {mode.Kind}");
+                writer.WriteLine($"private static ReadOnlySpan<byte> MapAddressingModeToBytes => new byte[16]");
+                writer.OpenBraceBlock();
+                writer.WriteLine("0, // Undefined");
+                Debug.Assert(modes.Count == 13);
+                foreach (var mode in modes)
+                {
+                    writer.WriteLine($"{mode.SizeBytes}, // {mode.Kind}");
+                }
+
+                writer.WriteLine("0, // Undefined");
+                writer.WriteLine("0, // Undefined");
+                writer.CloseBraceBlockStatement();
             }
 
-            writer.WriteLine("0, // Undefined");
-            writer.WriteLine("0, // Undefined");
-            writer.CloseBraceBlockStatement();
-        }
-
-        {
-            writer.WriteLine($"private static ReadOnlySpan<byte> MapAddressingModeToCycles => new byte[16]");
-            writer.OpenBraceBlock();
-            writer.WriteLine("0, // Undefined");
-            foreach (var mode in modes)
             {
-                writer.WriteLine($"{mode.Cycles}, // {mode.Kind}");
-            }
+                writer.WriteLine($"private static ReadOnlySpan<byte> MapAddressingModeToCycles => new byte[16]");
+                writer.OpenBraceBlock();
+                writer.WriteLine("0, // Undefined");
+                foreach (var mode in modes)
+                {
+                    writer.WriteLine($"{mode.Cycles}, // {mode.Kind}");
+                }
 
-            writer.WriteLine("0, // Undefined");
-            writer.WriteLine("0, // Undefined");
-            writer.CloseBraceBlockStatement();
+                writer.WriteLine("0, // Undefined");
+                writer.WriteLine("0, // Undefined");
+                writer.CloseBraceBlockStatement();
+            }
         }
 
 
@@ -393,7 +413,7 @@ internal class GeneratorApp
     
     private OpcodeSignature GetOpcodeSignature(JsonAsm6502Opcode opcode)
     {
-        var opName = opcode.Name;
+        var opName = opcode.UniqueName;
         var operandKind = OperandValueKind.None;
         List<Operand6502> argumentTypes;
         switch (opcode.AddressingMode)
@@ -460,10 +480,10 @@ internal class GeneratorApp
     }
 
     
-    private void GenerateInstructionFactory(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateInstructionFactory(string className, List<JsonAsm6502Opcode> opcodes)
     {
 
-        var filePath = Path.Combine(GeneratedFolderPath, "Mos6502InstructionFactory.gen.cs");
+        var filePath = Path.Combine(GeneratedFolderPath, $"{className}InstructionFactory.gen.cs");
         using var writer = CreateCodeWriter(filePath);
 
         writer.WriteLine("using System.Runtime.CompilerServices;");
@@ -471,8 +491,8 @@ internal class GeneratorApp
 
         writer.WriteLine("namespace AsmMos6502;");
         writer.WriteLine();
-        writer.WriteSummary("Factory for all 6502 instructions.");
-        writer.WriteLine("public static partial class Mos6502InstructionFactory");
+        writer.WriteSummary($"Factory for all {className} instructions.");
+        writer.WriteLine($"public static partial class {className}InstructionFactory");
         writer.OpenBraceBlock();
 
         foreach (var opcode in opcodes)
@@ -480,9 +500,18 @@ internal class GeneratorApp
             var opcodeSignature = GetOpcodeSignature(opcode);
             var mode = _mapAddressingMode[opcode.AddressingMode];
             writer.WriteSummary($"Creates the {opcode.Name} instruction ({opcode.OpcodeHex}) instruction with addressing mode {opcode.AddressingMode}.");
-            writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}</remarks>"]);
+            string special = string.Empty;
+            if (opcode.Illegal)
+            {
+                special = opcode.Unstable ? " This is an illegal and unstable instruction." : " This is an illegal instruction.";
+            }
+            writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}.{special}</remarks>"]);
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.Write($"public static Mos6502Instruction {opcodeSignature.Signature} => new (Mos6502OpCode.{opcode.Name}_{opcode.AddressingMode}");
+            if (opcode.Unstable)
+            {
+                writer.WriteLine("[Obsolete(\"This instruction is unstable and may not behave as expected.\", false)]");
+            }
+            writer.Write($"public static {className}Instruction {opcodeSignature.Signature} => new ({className}OpCode.{opcode.OpcodeUniqueName}");
 
             switch (opcodeSignature.OperandKind)
             {
@@ -511,10 +540,10 @@ internal class GeneratorApp
         writer.CloseBraceBlock();
     }
 
-    private void GenerateAssemblerFactory(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblerFactory(string className, List<JsonAsm6502Opcode> opcodes)
     {
         // Generate all assembler instruction
-        GenerateAssemblerFactoryGeneric("Mos6502Assembler",
+        GenerateAssemblerFactoryGeneric(className, $"{className}Assembler",
             opcodes,
             opcodeSignature => true,
             opcodeSignature =>
@@ -554,9 +583,9 @@ internal class GeneratorApp
     //        });
     //}
 
-    private void GenerateAssemblerFactoryWithExpressions(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblerFactoryWithExpressions(string className, List<JsonAsm6502Opcode> opcodes)
     {
-        GenerateAssemblerFactoryGeneric("Mos6502Assembler_WithExpressions",
+        GenerateAssemblerFactoryGeneric(className,$"{className}Assembler_WithExpressions",
             opcodes,
             opcodeSignature =>
                                 opcodeSignature.OperandKind == OperandValueKind.Relative ||
@@ -611,7 +640,7 @@ internal class GeneratorApp
             });
     }
 
-    private void GenerateAssemblerFactoryGeneric(string fileName, List<JsonAsm6502Opcode> opcodes, Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)
+    private void GenerateAssemblerFactoryGeneric(string className, string fileName, List<JsonAsm6502Opcode> opcodes, Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)
     {
 
         var filePath = Path.Combine(GeneratedFolderPath, $"{fileName}.gen.cs");
@@ -622,7 +651,7 @@ internal class GeneratorApp
 
         writer.WriteLine("namespace AsmMos6502;");
         writer.WriteLine();
-        writer.WriteLine("partial class Mos6502Assembler");
+        writer.WriteLine($"partial class {className}Assembler");
         writer.OpenBraceBlock();
 
         var mnemonicToSignatureToOpcodes = new Dictionary<string, Dictionary<string, OpcodeSignature>>();
@@ -634,10 +663,10 @@ internal class GeneratorApp
             {
                 modify(opcodeSignature);
 
-                if (!mnemonicToSignatureToOpcodes.TryGetValue(opcode.Name, out var opcodeWithAddress))
+                if (!mnemonicToSignatureToOpcodes.TryGetValue(opcode.UniqueName, out var opcodeWithAddress))
                 {
                     opcodeWithAddress = new Dictionary<string, OpcodeSignature>();
-                    mnemonicToSignatureToOpcodes[opcode.Name] = opcodeWithAddress;
+                    mnemonicToSignatureToOpcodes[opcode.UniqueName] = opcodeWithAddress;
                 }
 
                 opcodeWithAddress[opcodeSignature.Signature] = opcodeSignature;
@@ -652,14 +681,24 @@ internal class GeneratorApp
             {
                 var signature = signaturePair.Key;
                 var opcodeSignature = signaturePair.Value;
+                var opcode = opcodeSignature.Opcode;
                 var mode = _mapAddressingMode[opcodeSignature.Opcode.AddressingMode];
-                
+
+                string special = string.Empty;
+                if (opcode.Illegal)
+                {
+                    special = opcode.Unstable ? " This is an illegal and unstable instruction." : " This is an illegal instruction.";
+                }
                 writer.WriteSummary($"{opcodeSignature.Opcode.NameLong}. {mnemonic} instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}.");
-                writer.WriteDoc([$"<remarks>Cycles: {opcodeSignature.Opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}</remarks>"]);
-                writer.WriteLine($"public Mos6502Assembler {signature}");
+                writer.WriteDoc([$"<remarks>Cycles: {opcodeSignature.Opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}.{special}</remarks>"]);
+                if (opcode.Unstable)
+                {
+                    writer.WriteLine("[Obsolete(\"This instruction is unstable and may not behave as expected.\", false)]");
+                }
+                writer.WriteLine($"public {className}Assembler {signature}");
                 writer.Indent();
 
-                writer.Write($"=> AddInstruction(Mos6502InstructionFactory.{opcodeSignature.Name}(");
+                writer.Write($"=> AddInstruction({className}InstructionFactory.{opcodeSignature.Name}(");
 
                 if (opcodeSignature.OperandKind != OperandValueKind.Accumulator)
                 {
@@ -758,24 +797,24 @@ internal class GeneratorApp
         }
     }
     
-    private void GenerateAssemblyTests(List<JsonAsm6502Opcode> opcodes)
+    private void GenerateAssemblyTests(string className, List<JsonAsm6502Opcode> opcodes)
     {
-        using var writer = CreateCodeWriter("Mos6502AssemblerTests.gen.cs", true);
+        using var writer = CreateCodeWriter($"{className}AssemblerTests.gen.cs", true);
 
         writer.WriteLine("using System.Runtime.CompilerServices;");
         writer.WriteLine("using static AsmMos6502.Mos6502Factory;");
-        writer.WriteLine();
+        writer.WriteLine("#pragma warning disable CS0618 // We are still validating Unstable API in our tests even if it's marked as obsolete.");
 
         writer.WriteLine("namespace AsmMos6502.Tests;");
         writer.WriteLine();
         writer.WriteLine("[TestClass]");
-        writer.WriteLine("public partial class Mos6502AssemblerTests");
+        writer.WriteLine($"public partial class {className}AssemblerTests");
         writer.OpenBraceBlock();
 
         foreach (var opcode in opcodes)
         {
             writer.WriteLine("[TestMethod]");
-            writer.WriteLine($"public async Task {opcode.Name}_{opcode.AddressingMode}()");
+            writer.WriteLine($"public async Task {opcode.OpcodeUniqueName}()");
             writer.OpenBraceBlock();
 
             writer.WriteLine("using var asm = CreateAsm()");
@@ -790,7 +829,7 @@ internal class GeneratorApp
             writer.WriteLine(".End();");
             writer.UnIndent();
 
-            writer.WriteLine("await VerifyAsm(asm);");
+            writer.WriteLine($"await VerifyAsm(asm);");
 
             writer.CloseBraceBlock();
 

@@ -1,0 +1,12 @@
+﻿C000  0C 34 12   NOP $1234
+C003  0C 01 FF   NOP $FF01
+
+; 0C 34 12 0C 01 FF
+
+Debug Info (Program: NOP_Absolute)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1970
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1971

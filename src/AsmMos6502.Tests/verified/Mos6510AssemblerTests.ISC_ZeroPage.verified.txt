@@ -1,0 +1,14 @@
+﻿C000  E7 03      ISC $03
+C002  E7 20      ISC $20
+C004  E7 FE      ISC $FE
+
+; E7 03 E7 20 E7 FE
+
+Debug Info (Program: ISC_ZeroPage)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1755
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1756
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1757

@@ -1,0 +1,14 @@
+﻿C000  D3 06      DCP ($06),Y
+C002  D3 30      DCP ($30),Y
+C004  D3 FE      DCP ($FE),Y
+
+; D3 06 D3 30 D3 FE
+
+Debug Info (Program: DCP_IndirectY)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1670
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1671
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1672

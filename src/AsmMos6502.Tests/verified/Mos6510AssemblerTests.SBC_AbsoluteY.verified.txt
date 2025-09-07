@@ -1,0 +1,12 @@
+﻿C000  F9 34 12   SBC $1234,Y
+C003  F9 03 FF   SBC $FF03,Y
+
+; F9 34 12 F9 03 FF
+
+Debug Info (Program: SBC_AbsoluteY)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1290
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1291

@@ -9,7 +9,7 @@ using static AsmMos6502.Mos6502Factory;
 namespace AsmMos6502.Tests;
 
 [TestClass]
-public class Mos6502InstructionTests : VerifyAsmBase
+public class Mos6502InstructionTests : VerifyAsmMos6502Base
 {
     [TestMethod]
     public void TestFactory()

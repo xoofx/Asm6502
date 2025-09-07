@@ -1,0 +1,14 @@
+﻿C000  0B 01      ANC #$01
+C002  0B 42      ANC #$42
+C004  0B FF      ANC #$FF
+
+; 0B 01 0B 42 0B FF
+
+Debug Info (Program: ANC_Immediate)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1585
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1586
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1587

@@ -1,0 +1,14 @@
+﻿C000  D7 02      DCP $02,X
+C002  D7 30      DCP $30,X
+C004  D7 FB      DCP $FB,X
+
+; D7 02 D7 30 D7 FB
+
+Debug Info (Program: DCP_ZeroPageX)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1692
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1693
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1694

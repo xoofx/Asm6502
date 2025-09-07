@@ -130,3 +130,24 @@ public class Mos6502DisassemblerOptions
     /// </summary>
     public IFormatProvider? FormatProvider { get; set; }
 }
+
+/// <summary>
+/// Options for configuring the ARM64 disassembler.
+/// </summary>
+public class Mos6510DisassemblerOptions : Mos6502DisassemblerOptions
+{
+    /// <summary>
+    /// Gets or sets the delegate to format instruction comments.
+    /// </summary>
+    public new Mos6510TryFormatInstructionCommentDelegate? TryFormatComment { get; set; }
+
+    /// <summary>
+    /// Gets or sets the delegate to print a text before the instruction being printed.
+    /// </summary>
+    public new Mos6510InstructionPrinterDelegate? PreInstructionPrinter { get; set; }
+
+    /// <summary>
+    /// Gets or sets the delegate to print a text after the instruction being printed.
+    /// </summary>
+    public new Mos6510InstructionPrinterDelegate? PostInstructionPrinter { get; set; }
+}

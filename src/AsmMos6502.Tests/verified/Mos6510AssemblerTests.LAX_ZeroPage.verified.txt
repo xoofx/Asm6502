@@ -1,0 +1,14 @@
+﻿C000  A7 03      LAX $03
+C002  A7 20      LAX $20
+C004  A7 FE      LAX $FE
+
+; A7 03 A7 20 A7 FE
+
+Debug Info (Program: LAX_ZeroPage)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1937
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1938
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1939

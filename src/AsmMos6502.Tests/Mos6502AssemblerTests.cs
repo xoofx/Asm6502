@@ -4,6 +4,10 @@
 
 namespace AsmMos6502.Tests;
 
-public partial class Mos6502AssemblerTests : VerifyAsmBase
+public partial class Mos6502AssemblerTests : VerifyAsmMos6502Base
+{
+}
+
+public partial class Mos6510AssemblerTests : VerifyAsmMos6510Base
 {
 }

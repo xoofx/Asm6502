@@ -1,0 +1,50 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+    var procs = new string[] { "Mos6502", "Mos6510" };
+#>
+// Copyright (c) Alexandre Mutel. All rights reserved.
+// Licensed under the BSD-Clause 2 license.
+// See license.txt file in the project root for full license information.
+
+namespace AsmMos6502.Tests;
+<# foreach(var proc in procs) { #>
+
+public abstract class VerifyAsm<#= proc #>Base : VerifyBase
+{
+    protected <#= proc #>Assembler CreateAsm(ushort address = 0xc000)
+    {
+        return new <#= proc #>Assembler()
+        {
+            DebugMap = new Mos6502AssemblerDebugMap()
+            {
+                Name = TestContext.TestName
+            }
+        }.Begin(address);
+    }
+    
+    protected async Task VerifyAsm(<#= proc #>Assembler asm)
+    {
+        var dis = new <#= proc #>Disassembler(new <#= proc #>DisassemblerOptions()
+        {
+            PrintLabelBeforeFirstInstruction = false,
+            PrintAddress = true,
+            PrintAssemblyBytes = true,
+        });
+
+       
+        var asmText = dis.Disassemble(asm.Buffer);
+        var allBytes = $"; {string.Join(" ", asm.Buffer.ToArray().Select(x => $"{x:X2}"))}";
+
+        // Extract the debug map as a string
+        var debugMapText = asm.DebugMap is not null ? $"{Environment.NewLine}{Environment.NewLine}{asm.DebugMap!.ToString()!.Replace("\\", "/")}" : string.Empty;
+        var text = $"{asmText}{Environment.NewLine}{allBytes}{debugMapText}";
+        
+        await Verify(text);
+    }
+}
+<# } #>

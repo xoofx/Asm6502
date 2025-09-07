@@ -7,7 +7,7 @@ using AsmMos6502.Expressions;
 namespace AsmMos6502.Tests;
 
 [TestClass]
-public class Mos6502AssemblerExpressionTests : VerifyAsmBase
+public class Mos6502AssemblerExpressionTests : VerifyAsmMos6502Base
 {
     [TestMethod]
     public async Task TestLowHighBytes()

@@ -1,0 +1,1221 @@
+﻿C000  6D 34 12   ADC $1234
+C003  6D 01 FF   ADC $FF01
+C006  7D 34 12   ADC $1234,X
+C009  7D 02 FF   ADC $FF02,X
+C00C  79 34 12   ADC $1234,Y
+C00F  79 03 FF   ADC $FF03,Y
+C012  69 01      ADC #$01
+C014  69 42      ADC #$42
+C016  69 FF      ADC #$FF
+C018  61 05      ADC ($05,X)
+C01A  61 20      ADC ($20,X)
+C01C  61 FF      ADC ($FF,X)
+C01E  71 06      ADC ($06),Y
+C020  71 30      ADC ($30),Y
+C022  71 FE      ADC ($FE),Y
+C024  65 03      ADC $03
+C026  65 20      ADC $20
+C028  65 FE      ADC $FE
+C02A  75 02      ADC $02,X
+C02C  75 30      ADC $30,X
+C02E  75 FB      ADC $FB,X
+C030  2D 34 12   AND $1234
+C033  2D 01 FF   AND $FF01
+C036  3D 34 12   AND $1234,X
+C039  3D 02 FF   AND $FF02,X
+C03C  39 34 12   AND $1234,Y
+C03F  39 03 FF   AND $FF03,Y
+C042  29 01      AND #$01
+C044  29 42      AND #$42
+C046  29 FF      AND #$FF
+C048  21 05      AND ($05,X)
+C04A  21 20      AND ($20,X)
+C04C  21 FF      AND ($FF,X)
+C04E  31 06      AND ($06),Y
+C050  31 30      AND ($30),Y
+C052  31 FE      AND ($FE),Y
+C054  25 03      AND $03
+C056  25 20      AND $20
+C058  25 FE      AND $FE
+C05A  35 02      AND $02,X
+C05C  35 30      AND $30,X
+C05E  35 FB      AND $FB,X
+C060  0E 34 12   ASL $1234
+C063  0E 01 FF   ASL $FF01
+C066  1E 34 12   ASL $1234,X
+C069  1E 02 FF   ASL $FF02,X
+C06C  0A         ASL A
+C06D  0A         ASL A
+C06E  06 03      ASL $03
+C070  06 20      ASL $20
+C072  06 FE      ASL $FE
+C074  16 02      ASL $02,X
+C076  16 30      ASL $30,X
+C078  16 FB      ASL $FB,X
+C07A  90 10      BCC LL_01
+
+C07C  90 DB      BCC $-37
+
+LL_14:
+C07E  B0 10      BCS LL_03
+
+C080  B0 DB      BCS $-37
+
+LL_16:
+C082  F0 10      BEQ LL_05
+
+C084  F0 DB      BEQ $-37
+
+C086  2C 34 12   BIT $1234
+C089  2C 01 FF   BIT $FF01
+
+LL_01:
+C08C  24 03      BIT $03
+C08E  24 20      BIT $20
+
+LL_03:
+C090  24 FE      BIT $FE
+C092  30 10      BMI $16
+
+LL_05:
+C094  30 DB      BMI $-37
+
+C096  D0 10      BNE LL_09
+
+C098  D0 DB      BNE $-37
+
+C09A  10 10      BPL $16
+
+C09C  10 DB      BPL $-37
+
+C09E  00         BRK
+C09F  50 10      BVC LL_13
+
+C0A1  50 DB      BVC LL_14
+
+C0A3  70 10      BVS $16
+
+C0A5  70 DB      BVS LL_16
+
+C0A7  18         CLC
+
+LL_09:
+C0A8  D8         CLD
+C0A9  58         CLI
+C0AA  B8         CLV
+C0AB  CD 34 12   CMP $1234
+C0AE  CD 01 FF   CMP $FF01
+
+LL_13:
+C0B1  DD 34 12   CMP $1234,X
+C0B4  DD 02 FF   CMP $FF02,X
+C0B7  D9 34 12   CMP $1234,Y
+C0BA  D9 03 FF   CMP $FF03,Y
+C0BD  C9 01      CMP #$01
+C0BF  C9 42      CMP #$42
+C0C1  C9 FF      CMP #$FF
+C0C3  C1 05      CMP ($05,X)
+C0C5  C1 20      CMP ($20,X)
+C0C7  C1 FF      CMP ($FF,X)
+C0C9  D1 06      CMP ($06),Y
+C0CB  D1 30      CMP ($30),Y
+C0CD  D1 FE      CMP ($FE),Y
+C0CF  C5 03      CMP $03
+C0D1  C5 20      CMP $20
+C0D3  C5 FE      CMP $FE
+C0D5  D5 02      CMP $02,X
+C0D7  D5 30      CMP $30,X
+C0D9  D5 FB      CMP $FB,X
+C0DB  EC 34 12   CPX $1234
+C0DE  EC 01 FF   CPX $FF01
+C0E1  E0 01      CPX #$01
+C0E3  E0 42      CPX #$42
+C0E5  E0 FF      CPX #$FF
+C0E7  E4 03      CPX $03
+C0E9  E4 20      CPX $20
+C0EB  E4 FE      CPX $FE
+C0ED  CC 34 12   CPY $1234
+C0F0  CC 01 FF   CPY $FF01
+C0F3  C0 01      CPY #$01
+C0F5  C0 42      CPY #$42
+C0F7  C0 FF      CPY #$FF
+C0F9  C4 03      CPY $03
+C0FB  C4 20      CPY $20
+C0FD  C4 FE      CPY $FE
+C0FF  CE 34 12   DEC $1234
+C102  CE 01 FF   DEC $FF01
+C105  DE 34 12   DEC $1234,X
+C108  DE 02 FF   DEC $FF02,X
+C10B  C6 03      DEC $03
+C10D  C6 20      DEC $20
+C10F  C6 FE      DEC $FE
+C111  D6 02      DEC $02,X
+C113  D6 30      DEC $30,X
+C115  D6 FB      DEC $FB,X
+C117  CA         DEX
+C118  88         DEY
+C119  4D 34 12   EOR $1234
+C11C  4D 01 FF   EOR $FF01
+C11F  5D 34 12   EOR $1234,X
+C122  5D 02 FF   EOR $FF02,X
+C125  59 34 12   EOR $1234,Y
+C128  59 03 FF   EOR $FF03,Y
+C12B  49 01      EOR #$01
+C12D  49 42      EOR #$42
+C12F  49 FF      EOR #$FF
+C131  41 05      EOR ($05,X)
+C133  41 20      EOR ($20,X)
+C135  41 FF      EOR ($FF,X)
+C137  51 06      EOR ($06),Y
+C139  51 30      EOR ($30),Y
+C13B  51 FE      EOR ($FE),Y
+C13D  45 03      EOR $03
+C13F  45 20      EOR $20
+C141  45 FE      EOR $FE
+C143  55 02      EOR $02,X
+C145  55 30      EOR $30,X
+C147  55 FB      EOR $FB,X
+C149  EE 34 12   INC $1234
+C14C  EE 01 FF   INC $FF01
+C14F  FE 34 12   INC $1234,X
+C152  FE 02 FF   INC $FF02,X
+C155  E6 03      INC $03
+C157  E6 20      INC $20
+C159  E6 FE      INC $FE
+C15B  F6 02      INC $02,X
+C15D  F6 30      INC $30,X
+C15F  F6 FB      INC $FB,X
+C161  E8         INX
+C162  C8         INY
+C163  4C 34 12   JMP $1234
+
+C166  4C 01 FF   JMP $FF01
+
+C169  6C 34 12   JMP ($1234)
+
+C16C  6C 04 FF   JMP ($FF04)
+
+C16F  20 34 12   JSR $1234
+
+C172  20 01 FF   JSR $FF01
+
+C175  AD 34 12   LDA $1234
+C178  AD 01 FF   LDA $FF01
+C17B  BD 34 12   LDA $1234,X
+C17E  BD 02 FF   LDA $FF02,X
+C181  B9 34 12   LDA $1234,Y
+C184  B9 03 FF   LDA $FF03,Y
+C187  A9 01      LDA #$01
+C189  A9 42      LDA #$42
+C18B  A9 FF      LDA #$FF
+C18D  A1 05      LDA ($05,X)
+C18F  A1 20      LDA ($20,X)
+C191  A1 FF      LDA ($FF,X)
+C193  B1 06      LDA ($06),Y
+C195  B1 30      LDA ($30),Y
+C197  B1 FE      LDA ($FE),Y
+C199  A5 03      LDA $03
+C19B  A5 20      LDA $20
+C19D  A5 FE      LDA $FE
+C19F  B5 02      LDA $02,X
+C1A1  B5 30      LDA $30,X
+C1A3  B5 FB      LDA $FB,X
+C1A5  AE 34 12   LDX $1234
+C1A8  AE 01 FF   LDX $FF01
+C1AB  BE 34 12   LDX $1234,Y
+C1AE  BE 03 FF   LDX $FF03,Y
+C1B1  A2 01      LDX #$01
+C1B3  A2 42      LDX #$42
+C1B5  A2 FF      LDX #$FF
+C1B7  A6 03      LDX $03
+C1B9  A6 20      LDX $20
+C1BB  A6 FE      LDX $FE
+C1BD  B6 01      LDX $01,Y
+C1BF  B6 40      LDX $40,Y
+C1C1  B6 FC      LDX $FC,Y
+C1C3  AC 34 12   LDY $1234
+C1C6  AC 01 FF   LDY $FF01
+C1C9  BC 34 12   LDY $1234,X
+C1CC  BC 02 FF   LDY $FF02,X
+C1CF  A0 01      LDY #$01
+C1D1  A0 42      LDY #$42
+C1D3  A0 FF      LDY #$FF
+C1D5  A4 03      LDY $03
+C1D7  A4 20      LDY $20
+C1D9  A4 FE      LDY $FE
+C1DB  B4 02      LDY $02,X
+C1DD  B4 30      LDY $30,X
+C1DF  B4 FB      LDY $FB,X
+C1E1  4E 34 12   LSR $1234
+C1E4  4E 01 FF   LSR $FF01
+C1E7  5E 34 12   LSR $1234,X
+C1EA  5E 02 FF   LSR $FF02,X
+C1ED  4A         LSR A
+C1EE  4A         LSR A
+C1EF  46 03      LSR $03
+C1F1  46 20      LSR $20
+C1F3  46 FE      LSR $FE
+C1F5  56 02      LSR $02,X
+C1F7  56 30      LSR $30,X
+C1F9  56 FB      LSR $FB,X
+C1FB  EA         NOP
+C1FC  0D 34 12   ORA $1234
+C1FF  0D 01 FF   ORA $FF01
+C202  1D 34 12   ORA $1234,X
+C205  1D 02 FF   ORA $FF02,X
+C208  19 34 12   ORA $1234,Y
+C20B  19 03 FF   ORA $FF03,Y
+C20E  09 01      ORA #$01
+C210  09 42      ORA #$42
+C212  09 FF      ORA #$FF
+C214  01 05      ORA ($05,X)
+C216  01 20      ORA ($20,X)
+C218  01 FF      ORA ($FF,X)
+C21A  11 06      ORA ($06),Y
+C21C  11 30      ORA ($30),Y
+C21E  11 FE      ORA ($FE),Y
+C220  05 03      ORA $03
+C222  05 20      ORA $20
+C224  05 FE      ORA $FE
+C226  15 02      ORA $02,X
+C228  15 30      ORA $30,X
+C22A  15 FB      ORA $FB,X
+C22C  48         PHA
+C22D  08         PHP
+C22E  68         PLA
+C22F  28         PLP
+C230  2E 34 12   ROL $1234
+C233  2E 01 FF   ROL $FF01
+C236  3E 34 12   ROL $1234,X
+C239  3E 02 FF   ROL $FF02,X
+C23C  2A         ROL A
+C23D  2A         ROL A
+C23E  26 03      ROL $03
+C240  26 20      ROL $20
+C242  26 FE      ROL $FE
+C244  36 02      ROL $02,X
+C246  36 30      ROL $30,X
+C248  36 FB      ROL $FB,X
+C24A  6E 34 12   ROR $1234
+C24D  6E 01 FF   ROR $FF01
+C250  7E 34 12   ROR $1234,X
+C253  7E 02 FF   ROR $FF02,X
+C256  6A         ROR A
+C257  6A         ROR A
+C258  66 03      ROR $03
+C25A  66 20      ROR $20
+C25C  66 FE      ROR $FE
+C25E  76 02      ROR $02,X
+C260  76 30      ROR $30,X
+C262  76 FB      ROR $FB,X
+C264  40         RTI
+
+C265  60         RTS
+
+C266  ED 34 12   SBC $1234
+C269  ED 01 FF   SBC $FF01
+C26C  FD 34 12   SBC $1234,X
+C26F  FD 02 FF   SBC $FF02,X
+C272  F9 34 12   SBC $1234,Y
+C275  F9 03 FF   SBC $FF03,Y
+C278  E9 01      SBC #$01
+C27A  E9 42      SBC #$42
+C27C  E9 FF      SBC #$FF
+C27E  E1 05      SBC ($05,X)
+C280  E1 20      SBC ($20,X)
+C282  E1 FF      SBC ($FF,X)
+C284  F1 06      SBC ($06),Y
+C286  F1 30      SBC ($30),Y
+C288  F1 FE      SBC ($FE),Y
+C28A  E5 03      SBC $03
+C28C  E5 20      SBC $20
+C28E  E5 FE      SBC $FE
+C290  F5 02      SBC $02,X
+C292  F5 30      SBC $30,X
+C294  F5 FB      SBC $FB,X
+C296  38         SEC
+C297  F8         SED
+C298  78         SEI
+C299  8D 34 12   STA $1234
+C29C  8D 01 FF   STA $FF01
+C29F  9D 34 12   STA $1234,X
+C2A2  9D 02 FF   STA $FF02,X
+C2A5  99 34 12   STA $1234,Y
+C2A8  99 03 FF   STA $FF03,Y
+C2AB  81 05      STA ($05,X)
+C2AD  81 20      STA ($20,X)
+C2AF  81 FF      STA ($FF,X)
+C2B1  91 06      STA ($06),Y
+C2B3  91 30      STA ($30),Y
+C2B5  91 FE      STA ($FE),Y
+C2B7  85 03      STA $03
+C2B9  85 20      STA $20
+C2BB  85 FE      STA $FE
+C2BD  95 02      STA $02,X
+C2BF  95 30      STA $30,X
+C2C1  95 FB      STA $FB,X
+C2C3  8E 34 12   STX $1234
+C2C6  8E 01 FF   STX $FF01
+C2C9  86 03      STX $03
+C2CB  86 20      STX $20
+C2CD  86 FE      STX $FE
+C2CF  96 01      STX $01,Y
+C2D1  96 40      STX $40,Y
+C2D3  96 FC      STX $FC,Y
+C2D5  8C 34 12   STY $1234
+C2D8  8C 01 FF   STY $FF01
+C2DB  84 03      STY $03
+C2DD  84 20      STY $20
+C2DF  84 FE      STY $FE
+C2E1  94 02      STY $02,X
+C2E3  94 30      STY $30,X
+C2E5  94 FB      STY $FB,X
+C2E7  AA         TAX
+C2E8  A8         TAY
+C2E9  BA         TSX
+C2EA  8A         TXA
+C2EB  9A         TXS
+C2EC  98         TYA
+C2ED  4B 01      ALR #$01
+C2EF  4B 42      ALR #$42
+C2F1  4B FF      ALR #$FF
+C2F3  0B 01      ANC #$01
+C2F5  0B 42      ANC #$42
+C2F7  0B FF      ANC #$FF
+C2F9  2B 01      ANC #$01
+C2FB  2B 42      ANC #$42
+C2FD  2B FF      ANC #$FF
+C2FF  8B 01      ANE #$01
+C301  8B 42      ANE #$42
+C303  8B FF      ANE #$FF
+C305  6B 01      ARR #$01
+C307  6B 42      ARR #$42
+C309  6B FF      ARR #$FF
+C30B  CF 34 12   DCP $1234
+C30E  CF 01 FF   DCP $FF01
+C311  DF 34 12   DCP $1234,X
+C314  DF 02 FF   DCP $FF02,X
+C317  DB 34 12   DCP $1234,Y
+C31A  DB 03 FF   DCP $FF03,Y
+C31D  C3 05      DCP ($05,X)
+C31F  C3 20      DCP ($20,X)
+C321  C3 FF      DCP ($FF,X)
+C323  D3 06      DCP ($06),Y
+C325  D3 30      DCP ($30),Y
+C327  D3 FE      DCP ($FE),Y
+C329  C7 03      DCP $03
+C32B  C7 20      DCP $20
+C32D  C7 FE      DCP $FE
+C32F  D7 02      DCP $02,X
+C331  D7 30      DCP $30,X
+C333  D7 FB      DCP $FB,X
+C335  EF 34 12   ISC $1234
+C338  EF 01 FF   ISC $FF01
+C33B  FF 34 12   ISC $1234,X
+C33E  FF 02 FF   ISC $FF02,X
+C341  FB 34 12   ISC $1234,Y
+C344  FB 03 FF   ISC $FF03,Y
+C347  E3 05      ISC ($05,X)
+C349  E3 20      ISC ($20,X)
+C34B  E3 FF      ISC ($FF,X)
+C34D  F3 06      ISC ($06),Y
+C34F  F3 30      ISC ($30),Y
+C351  F3 FE      ISC ($FE),Y
+C353  E7 03      ISC $03
+C355  E7 20      ISC $20
+C357  E7 FE      ISC $FE
+C359  F7 02      ISC $02,X
+C35B  F7 30      ISC $30,X
+C35D  F7 FB      ISC $FB,X
+C35F  02         JAM
+C360  12         JAM
+C361  22         JAM
+C362  32         JAM
+C363  42         JAM
+C364  52         JAM
+C365  62         JAM
+C366  72         JAM
+C367  92         JAM
+C368  B2         JAM
+C369  D2         JAM
+C36A  F2         JAM
+C36B  BB 34 12   LAS $1234,Y
+C36E  BB 03 FF   LAS $FF03,Y
+C371  AF 34 12   LAX $1234
+C374  AF 01 FF   LAX $FF01
+C377  BF 34 12   LAX $1234,Y
+C37A  BF 03 FF   LAX $FF03,Y
+C37D  A3 05      LAX ($05,X)
+C37F  A3 20      LAX ($20,X)
+C381  A3 FF      LAX ($FF,X)
+C383  B3 06      LAX ($06),Y
+C385  B3 30      LAX ($30),Y
+C387  B3 FE      LAX ($FE),Y
+C389  A7 03      LAX $03
+C38B  A7 20      LAX $20
+C38D  A7 FE      LAX $FE
+C38F  B7 01      LAX $01,Y
+C391  B7 40      LAX $40,Y
+C393  B7 FC      LAX $FC,Y
+C395  AB 01      LXA #$01
+C397  AB 42      LXA #$42
+C399  AB FF      LXA #$FF
+C39B  0C 34 12   NOP $1234
+C39E  0C 01 FF   NOP $FF01
+C3A1  1C 34 12   NOP $1234,X
+C3A4  1C 02 FF   NOP $FF02,X
+C3A7  3C 34 12   NOP $1234,X
+C3AA  3C 02 FF   NOP $FF02,X
+C3AD  5C 34 12   NOP $1234,X
+C3B0  5C 02 FF   NOP $FF02,X
+C3B3  7C 34 12   NOP $1234,X
+C3B6  7C 02 FF   NOP $FF02,X
+C3B9  DC 34 12   NOP $1234,X
+C3BC  DC 02 FF   NOP $FF02,X
+C3BF  FC 34 12   NOP $1234,X
+C3C2  FC 02 FF   NOP $FF02,X
+C3C5  80 01      NOP #$01
+C3C7  80 42      NOP #$42
+C3C9  80 FF      NOP #$FF
+C3CB  82 01      NOP #$01
+C3CD  82 42      NOP #$42
+C3CF  82 FF      NOP #$FF
+C3D1  89 01      NOP #$01
+C3D3  89 42      NOP #$42
+C3D5  89 FF      NOP #$FF
+C3D7  C2 01      NOP #$01
+C3D9  C2 42      NOP #$42
+C3DB  C2 FF      NOP #$FF
+C3DD  E2 01      NOP #$01
+C3DF  E2 42      NOP #$42
+C3E1  E2 FF      NOP #$FF
+C3E3  1A         NOP
+C3E4  3A         NOP
+C3E5  5A         NOP
+C3E6  7A         NOP
+C3E7  DA         NOP
+C3E8  FA         NOP
+C3E9  04 03      NOP $03
+C3EB  04 20      NOP $20
+C3ED  04 FE      NOP $FE
+C3EF  44 03      NOP $03
+C3F1  44 20      NOP $20
+C3F3  44 FE      NOP $FE
+C3F5  64 03      NOP $03
+C3F7  64 20      NOP $20
+C3F9  64 FE      NOP $FE
+C3FB  14 02      NOP $02,X
+C3FD  14 30      NOP $30,X
+C3FF  14 FB      NOP $FB,X
+C401  34 02      NOP $02,X
+C403  34 30      NOP $30,X
+C405  34 FB      NOP $FB,X
+C407  54 02      NOP $02,X
+C409  54 30      NOP $30,X
+C40B  54 FB      NOP $FB,X
+C40D  74 02      NOP $02,X
+C40F  74 30      NOP $30,X
+C411  74 FB      NOP $FB,X
+C413  D4 02      NOP $02,X
+C415  D4 30      NOP $30,X
+C417  D4 FB      NOP $FB,X
+C419  F4 02      NOP $02,X
+C41B  F4 30      NOP $30,X
+C41D  F4 FB      NOP $FB,X
+C41F  2F 34 12   RLA $1234
+C422  2F 01 FF   RLA $FF01
+C425  3F 34 12   RLA $1234,X
+C428  3F 02 FF   RLA $FF02,X
+C42B  3B 34 12   RLA $1234,Y
+C42E  3B 03 FF   RLA $FF03,Y
+C431  23 05      RLA ($05,X)
+C433  23 20      RLA ($20,X)
+C435  23 FF      RLA ($FF,X)
+C437  33 06      RLA ($06),Y
+C439  33 30      RLA ($30),Y
+C43B  33 FE      RLA ($FE),Y
+C43D  27 03      RLA $03
+C43F  27 20      RLA $20
+C441  27 FE      RLA $FE
+C443  37 02      RLA $02,X
+C445  37 30      RLA $30,X
+C447  37 FB      RLA $FB,X
+C449  6F 34 12   RRA $1234
+C44C  6F 01 FF   RRA $FF01
+C44F  7F 34 12   RRA $1234,X
+C452  7F 02 FF   RRA $FF02,X
+C455  7B 34 12   RRA $1234,Y
+C458  7B 03 FF   RRA $FF03,Y
+C45B  63 05      RRA ($05,X)
+C45D  63 20      RRA ($20,X)
+C45F  63 FF      RRA ($FF,X)
+C461  73 06      RRA ($06),Y
+C463  73 30      RRA ($30),Y
+C465  73 FE      RRA ($FE),Y
+C467  67 03      RRA $03
+C469  67 20      RRA $20
+C46B  67 FE      RRA $FE
+C46D  77 02      RRA $02,X
+C46F  77 30      RRA $30,X
+C471  77 FB      RRA $FB,X
+C473  8F 34 12   SAX $1234
+C476  8F 01 FF   SAX $FF01
+C479  83 05      SAX ($05,X)
+C47B  83 20      SAX ($20,X)
+C47D  83 FF      SAX ($FF,X)
+C47F  87 03      SAX $03
+C481  87 20      SAX $20
+C483  87 FE      SAX $FE
+C485  97 01      SAX $01,Y
+C487  97 40      SAX $40,Y
+C489  97 FC      SAX $FC,Y
+C48B  CB 01      SBX #$01
+C48D  CB 42      SBX #$42
+C48F  CB FF      SBX #$FF
+C491  9F 34 12   SHA $1234,Y
+C494  9F 03 FF   SHA $FF03,Y
+C497  93 06      SHA ($06),Y
+C499  93 30      SHA ($30),Y
+C49B  93 FE      SHA ($FE),Y
+C49D  9E 34 12   SHX $1234,Y
+C4A0  9E 03 FF   SHX $FF03,Y
+C4A3  9C 34 12   SHY $1234,X
+C4A6  9C 02 FF   SHY $FF02,X
+C4A9  0F 34 12   SLO $1234
+C4AC  0F 01 FF   SLO $FF01
+C4AF  1F 34 12   SLO $1234,X
+C4B2  1F 02 FF   SLO $FF02,X
+C4B5  1B 34 12   SLO $1234,Y
+C4B8  1B 03 FF   SLO $FF03,Y
+C4BB  03 05      SLO ($05,X)
+C4BD  03 20      SLO ($20,X)
+C4BF  03 FF      SLO ($FF,X)
+C4C1  13 06      SLO ($06),Y
+C4C3  13 30      SLO ($30),Y
+C4C5  13 FE      SLO ($FE),Y
+C4C7  07 03      SLO $03
+C4C9  07 20      SLO $20
+C4CB  07 FE      SLO $FE
+C4CD  17 02      SLO $02,X
+C4CF  17 30      SLO $30,X
+C4D1  17 FB      SLO $FB,X
+C4D3  4F 34 12   SRE $1234
+C4D6  4F 01 FF   SRE $FF01
+C4D9  5F 34 12   SRE $1234,X
+C4DC  5F 02 FF   SRE $FF02,X
+C4DF  5B 34 12   SRE $1234,Y
+C4E2  5B 03 FF   SRE $FF03,Y
+C4E5  43 05      SRE ($05,X)
+C4E7  43 20      SRE ($20,X)
+C4E9  43 FF      SRE ($FF,X)
+C4EB  53 06      SRE ($06),Y
+C4ED  53 30      SRE ($30),Y
+C4EF  53 FE      SRE ($FE),Y
+C4F1  47 03      SRE $03
+C4F3  47 20      SRE $20
+C4F5  47 FE      SRE $FE
+C4F7  57 02      SRE $02,X
+C4F9  57 30      SRE $30,X
+C4FB  57 FB      SRE $FB,X
+C4FD  9B 34 12   TAS $1234,Y
+C500  9B 03 FF   TAS $FF03,Y
+C503  EB 01      USBC #$01
+C505  EB 42      USBC #$42
+C507  EB FF      USBC #$FF
+
+; 6D 34 12 6D 01 FF 7D 34 12 7D 02 FF 79 34 12 79 03 FF 69 01 69 42 69 FF 61 05 61 20 61 FF 71 06 71 30 71 FE 65 03 65 20 65 FE 75 02 75 30 75 FB 2D 34 12 2D 01 FF 3D 34 12 3D 02 FF 39 34 12 39 03 FF 29 01 29 42 29 FF 21 05 21 20 21 FF 31 06 31 30 31 FE 25 03 25 20 25 FE 35 02 35 30 35 FB 0E 34 12 0E 01 FF 1E 34 12 1E 02 FF 0A 0A 06 03 06 20 06 FE 16 02 16 30 16 FB 90 10 90 DB B0 10 B0 DB F0 10 F0 DB 2C 34 12 2C 01 FF 24 03 24 20 24 FE 30 10 30 DB D0 10 D0 DB 10 10 10 DB 00 50 10 50 DB 70 10 70 DB 18 D8 58 B8 CD 34 12 CD 01 FF DD 34 12 DD 02 FF D9 34 12 D9 03 FF C9 01 C9 42 C9 FF C1 05 C1 20 C1 FF D1 06 D1 30 D1 FE C5 03 C5 20 C5 FE D5 02 D5 30 D5 FB EC 34 12 EC 01 FF E0 01 E0 42 E0 FF E4 03 E4 20 E4 FE CC 34 12 CC 01 FF C0 01 C0 42 C0 FF C4 03 C4 20 C4 FE CE 34 12 CE 01 FF DE 34 12 DE 02 FF C6 03 C6 20 C6 FE D6 02 D6 30 D6 FB CA 88 4D 34 12 4D 01 FF 5D 34 12 5D 02 FF 59 34 12 59 03 FF 49 01 49 42 49 FF 41 05 41 20 41 FF 51 06 51 30 51 FE 45 03 45 20 45 FE 55 02 55 30 55 FB EE 34 12 EE 01 FF FE 34 12 FE 02 FF E6 03 E6 20 E6 FE F6 02 F6 30 F6 FB E8 C8 4C 34 12 4C 01 FF 6C 34 12 6C 04 FF 20 34 12 20 01 FF AD 34 12 AD 01 FF BD 34 12 BD 02 FF B9 34 12 B9 03 FF A9 01 A9 42 A9 FF A1 05 A1 20 A1 FF B1 06 B1 30 B1 FE A5 03 A5 20 A5 FE B5 02 B5 30 B5 FB AE 34 12 AE 01 FF BE 34 12 BE 03 FF A2 01 A2 42 A2 FF A6 03 A6 20 A6 FE B6 01 B6 40 B6 FC AC 34 12 AC 01 FF BC 34 12 BC 02 FF A0 01 A0 42 A0 FF A4 03 A4 20 A4 FE B4 02 B4 30 B4 FB 4E 34 12 4E 01 FF 5E 34 12 5E 02 FF 4A 4A 46 03 46 20 46 FE 56 02 56 30 56 FB EA 0D 34 12 0D 01 FF 1D 34 12 1D 02 FF 19 34 12 19 03 FF 09 01 09 42 09 FF 01 05 01 20 01 FF 11 06 11 30 11 FE 05 03 05 20 05 FE 15 02 15 30 15 FB 48 08 68 28 2E 34 12 2E 01 FF 3E 34 12 3E 02 FF 2A 2A 26 03 26 20 26 FE 36 02 36 30 36 FB 6E 34 12 6E 01 FF 7E 34 12 7E 02 FF 6A 6A 66 03 66 20 66 FE 76 02 76 30 76 FB 40 60 ED 34 12 ED 01 FF FD 34 12 FD 02 FF F9 34 12 F9 03 FF E9 01 E9 42 E9 FF E1 05 E1 20 E1 FF F1 06 F1 30 F1 FE E5 03 E5 20 E5 FE F5 02 F5 30 F5 FB 38 F8 78 8D 34 12 8D 01 FF 9D 34 12 9D 02 FF 99 34 12 99 03 FF 81 05 81 20 81 FF 91 06 91 30 91 FE 85 03 85 20 85 FE 95 02 95 30 95 FB 8E 34 12 8E 01 FF 86 03 86 20 86 FE 96 01 96 40 96 FC 8C 34 12 8C 01 FF 84 03 84 20 84 FE 94 02 94 30 94 FB AA A8 BA 8A 9A 98 4B 01 4B 42 4B FF 0B 01 0B 42 0B FF 2B 01 2B 42 2B FF 8B 01 8B 42 8B FF 6B 01 6B 42 6B FF CF 34 12 CF 01 FF DF 34 12 DF 02 FF DB 34 12 DB 03 FF C3 05 C3 20 C3 FF D3 06 D3 30 D3 FE C7 03 C7 20 C7 FE D7 02 D7 30 D7 FB EF 34 12 EF 01 FF FF 34 12 FF 02 FF FB 34 12 FB 03 FF E3 05 E3 20 E3 FF F3 06 F3 30 F3 FE E7 03 E7 20 E7 FE F7 02 F7 30 F7 FB 02 12 22 32 42 52 62 72 92 B2 D2 F2 BB 34 12 BB 03 FF AF 34 12 AF 01 FF BF 34 12 BF 03 FF A3 05 A3 20 A3 FF B3 06 B3 30 B3 FE A7 03 A7 20 A7 FE B7 01 B7 40 B7 FC AB 01 AB 42 AB FF 0C 34 12 0C 01 FF 1C 34 12 1C 02 FF 3C 34 12 3C 02 FF 5C 34 12 5C 02 FF 7C 34 12 7C 02 FF DC 34 12 DC 02 FF FC 34 12 FC 02 FF 80 01 80 42 80 FF 82 01 82 42 82 FF 89 01 89 42 89 FF C2 01 C2 42 C2 FF E2 01 E2 42 E2 FF 1A 3A 5A 7A DA FA 04 03 04 20 04 FE 44 03 44 20 44 FE 64 03 64 20 64 FE 14 02 14 30 14 FB 34 02 34 30 34 FB 54 02 54 30 54 FB 74 02 74 30 74 FB D4 02 D4 30 D4 FB F4 02 F4 30 F4 FB 2F 34 12 2F 01 FF 3F 34 12 3F 02 FF 3B 34 12 3B 03 FF 23 05 23 20 23 FF 33 06 33 30 33 FE 27 03 27 20 27 FE 37 02 37 30 37 FB 6F 34 12 6F 01 FF 7F 34 12 7F 02 FF 7B 34 12 7B 03 FF 63 05 63 20 63 FF 73 06 73 30 73 FE 67 03 67 20 67 FE 77 02 77 30 77 FB 8F 34 12 8F 01 FF 83 05 83 20 83 FF 87 03 87 20 87 FE 97 01 97 40 97 FC CB 01 CB 42 CB FF 9F 34 12 9F 03 FF 93 06 93 30 93 FE 9E 34 12 9E 03 FF 9C 34 12 9C 02 FF 0F 34 12 0F 01 FF 1F 34 12 1F 02 FF 1B 34 12 1B 03 FF 03 05 03 20 03 FF 13 06 13 30 13 FE 07 03 07 20 07 FE 17 02 17 30 17 FB 4F 34 12 4F 01 FF 5F 34 12 5F 02 FF 5B 34 12 5B 03 FF 43 05 43 20 43 FF 53 06 53 30 53 FE 47 03 47 20 47 FE 57 02 57 30 57 FB 9B 34 12 9B 03 FF EB 01 EB 42 EB FF
+
+Debug Info (Program: AllInstructions)
+- Program Start Address: C000
+- Program End Address: C509
+- Debug Line Count: 589
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2660
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2661
+C006 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2662
+C009 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2663
+C00C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2664
+C00F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2665
+C012 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2666
+C014 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2667
+C016 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2668
+C018 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2669
+C01A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2670
+C01C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2671
+C01E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2672
+C020 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2673
+C022 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2674
+C024 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2675
+C026 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2676
+C028 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2677
+C02A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2678
+C02C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2679
+C02E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2680
+C030 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2681
+C033 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2682
+C036 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2683
+C039 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2684
+C03C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2685
+C03F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2686
+C042 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2687
+C044 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2688
+C046 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2689
+C048 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2690
+C04A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2691
+C04C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2692
+C04E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2693
+C050 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2694
+C052 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2695
+C054 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2696
+C056 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2697
+C058 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2698
+C05A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2699
+C05C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2700
+C05E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2701
+C060 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2702
+C063 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2703
+C066 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2704
+C069 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2705
+C06C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2706
+C06D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2707
+C06E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2708
+C070 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2709
+C072 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2710
+C074 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2711
+C076 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2712
+C078 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2713
+C07A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2714
+C07C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2715
+C07E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2716
+C080 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2717
+C082 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2718
+C084 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2719
+C086 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2720
+C089 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2721
+C08C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2722
+C08E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2723
+C090 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2724
+C092 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2725
+C094 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2726
+C096 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2727
+C098 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2728
+C09A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2729
+C09C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2730
+C09E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2731
+C09F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2732
+C0A1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2733
+C0A3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2734
+C0A5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2735
+C0A7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2736
+C0A8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2737
+C0A9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2738
+C0AA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2739
+C0AB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2740
+C0AE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2741
+C0B1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2742
+C0B4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2743
+C0B7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2744
+C0BA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2745
+C0BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2746
+C0BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2747
+C0C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2748
+C0C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2749
+C0C5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2750
+C0C7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2751
+C0C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2752
+C0CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2753
+C0CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2754
+C0CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2755
+C0D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2756
+C0D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2757
+C0D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2758
+C0D7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2759
+C0D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2760
+C0DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2761
+C0DE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2762
+C0E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2763
+C0E3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2764
+C0E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2765
+C0E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2766
+C0E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2767
+C0EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2768
+C0ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2769
+C0F0 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2770
+C0F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2771
+C0F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2772
+C0F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2773
+C0F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2774
+C0FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2775
+C0FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2776
+C0FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2777
+C102 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2778
+C105 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2779
+C108 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2780
+C10B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2781
+C10D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2782
+C10F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2783
+C111 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2784
+C113 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2785
+C115 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2786
+C117 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2787
+C118 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2788
+C119 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2789
+C11C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2790
+C11F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2791
+C122 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2792
+C125 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2793
+C128 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2794
+C12B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2795
+C12D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2796
+C12F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2797
+C131 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2798
+C133 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2799
+C135 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2800
+C137 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2801
+C139 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2802
+C13B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2803
+C13D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2804
+C13F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2805
+C141 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2806
+C143 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2807
+C145 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2808
+C147 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2809
+C149 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2810
+C14C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2811
+C14F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2812
+C152 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2813
+C155 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2814
+C157 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2815
+C159 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2816
+C15B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2817
+C15D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2818
+C15F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2819
+C161 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2820
+C162 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2821
+C163 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2822
+C166 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2823
+C169 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2824
+C16C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2825
+C16F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2826
+C172 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2827
+C175 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2828
+C178 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2829
+C17B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2830
+C17E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2831
+C181 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2832
+C184 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2833
+C187 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2834
+C189 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2835
+C18B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2836
+C18D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2837
+C18F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2838
+C191 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2839
+C193 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2840
+C195 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2841
+C197 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2842
+C199 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2843
+C19B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2844
+C19D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2845
+C19F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2846
+C1A1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2847
+C1A3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2848
+C1A5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2849
+C1A8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2850
+C1AB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2851
+C1AE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2852
+C1B1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2853
+C1B3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2854
+C1B5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2855
+C1B7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2856
+C1B9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2857
+C1BB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2858
+C1BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2859
+C1BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2860
+C1C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2861
+C1C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2862
+C1C6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2863
+C1C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2864
+C1CC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2865
+C1CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2866
+C1D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2867
+C1D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2868
+C1D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2869
+C1D7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2870
+C1D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2871
+C1DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2872
+C1DD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2873
+C1DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2874
+C1E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2875
+C1E4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2876
+C1E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2877
+C1EA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2878
+C1ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2879
+C1EE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2880
+C1EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2881
+C1F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2882
+C1F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2883
+C1F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2884
+C1F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2885
+C1F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2886
+C1FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2887
+C1FC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2888
+C1FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2889
+C202 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2890
+C205 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2891
+C208 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2892
+C20B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2893
+C20E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2894
+C210 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2895
+C212 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2896
+C214 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2897
+C216 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2898
+C218 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2899
+C21A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2900
+C21C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2901
+C21E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2902
+C220 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2903
+C222 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2904
+C224 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2905
+C226 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2906
+C228 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2907
+C22A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2908
+C22C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2909
+C22D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2910
+C22E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2911
+C22F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2912
+C230 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2913
+C233 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2914
+C236 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2915
+C239 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2916
+C23C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2917
+C23D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2918
+C23E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2919
+C240 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2920
+C242 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2921
+C244 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2922
+C246 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2923
+C248 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2924
+C24A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2925
+C24D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2926
+C250 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2927
+C253 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2928
+C256 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2929
+C257 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2930
+C258 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2931
+C25A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2932
+C25C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2933
+C25E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2934
+C260 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2935
+C262 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2936
+C264 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2937
+C265 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2938
+C266 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2939
+C269 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2940
+C26C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2941
+C26F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2942
+C272 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2943
+C275 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2944
+C278 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2945
+C27A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2946
+C27C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2947
+C27E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2948
+C280 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2949
+C282 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2950
+C284 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2951
+C286 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2952
+C288 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2953
+C28A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2954
+C28C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2955
+C28E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2956
+C290 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2957
+C292 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2958
+C294 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2959
+C296 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2960
+C297 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2961
+C298 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2962
+C299 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2963
+C29C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2964
+C29F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2965
+C2A2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2966
+C2A5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2967
+C2A8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2968
+C2AB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2969
+C2AD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2970
+C2AF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2971
+C2B1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2972
+C2B3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2973
+C2B5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2974
+C2B7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2975
+C2B9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2976
+C2BB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2977
+C2BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2978
+C2BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2979
+C2C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2980
+C2C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2981
+C2C6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2982
+C2C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2983
+C2CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2984
+C2CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2985
+C2CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2986
+C2D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2987
+C2D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2988
+C2D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2989
+C2D8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2990
+C2DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2991
+C2DD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2992
+C2DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2993
+C2E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2994
+C2E3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2995
+C2E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2996
+C2E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2997
+C2E8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2998
+C2E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2999
+C2EA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3000
+C2EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3001
+C2EC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3002
+C2ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3003
+C2EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3004
+C2F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3005
+C2F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3006
+C2F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3007
+C2F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3008
+C2F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3009
+C2FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3010
+C2FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3011
+C2FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3012
+C301 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3013
+C303 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3014
+C305 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3015
+C307 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3016
+C309 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3017
+C30B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3018
+C30E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3019
+C311 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3020
+C314 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3021
+C317 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3022
+C31A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3023
+C31D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3024
+C31F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3025
+C321 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3026
+C323 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3027
+C325 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3028
+C327 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3029
+C329 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3030
+C32B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3031
+C32D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3032
+C32F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3033
+C331 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3034
+C333 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3035
+C335 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3036
+C338 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3037
+C33B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3038
+C33E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3039
+C341 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3040
+C344 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3041
+C347 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3042
+C349 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3043
+C34B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3044
+C34D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3045
+C34F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3046
+C351 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3047
+C353 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3048
+C355 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3049
+C357 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3050
+C359 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3051
+C35B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3052
+C35D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3053
+C35F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3054
+C360 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3055
+C361 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3056
+C362 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3057
+C363 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3058
+C364 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3059
+C365 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3060
+C366 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3061
+C367 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3062
+C368 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3063
+C369 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3064
+C36A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3065
+C36B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3066
+C36E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3067
+C371 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3068
+C374 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3069
+C377 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3070
+C37A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3071
+C37D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3072
+C37F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3073
+C381 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3074
+C383 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3075
+C385 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3076
+C387 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3077
+C389 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3078
+C38B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3079
+C38D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3080
+C38F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3081
+C391 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3082
+C393 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3083
+C395 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3084
+C397 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3085
+C399 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3086
+C39B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3087
+C39E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3088
+C3A1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3089
+C3A4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3090
+C3A7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3091
+C3AA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3092
+C3AD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3093
+C3B0 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3094
+C3B3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3095
+C3B6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3096
+C3B9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3097
+C3BC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3098
+C3BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3099
+C3C2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3100
+C3C5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3101
+C3C7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3102
+C3C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3103
+C3CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3104
+C3CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3105
+C3CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3106
+C3D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3107
+C3D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3108
+C3D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3109
+C3D7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3110
+C3D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3111
+C3DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3112
+C3DD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3113
+C3DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3114
+C3E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3115
+C3E3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3116
+C3E4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3117
+C3E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3118
+C3E6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3119
+C3E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3120
+C3E8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3121
+C3E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3122
+C3EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3123
+C3ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3124
+C3EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3125
+C3F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3126
+C3F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3127
+C3F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3128
+C3F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3129
+C3F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3130
+C3FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3131
+C3FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3132
+C3FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3133
+C401 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3134
+C403 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3135
+C405 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3136
+C407 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3137
+C409 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3138
+C40B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3139
+C40D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3140
+C40F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3141
+C411 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3142
+C413 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3143
+C415 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3144
+C417 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3145
+C419 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3146
+C41B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3147
+C41D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3148
+C41F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3149
+C422 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3150
+C425 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3151
+C428 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3152
+C42B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3153
+C42E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3154
+C431 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3155
+C433 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3156
+C435 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3157
+C437 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3158
+C439 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3159
+C43B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3160
+C43D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3161
+C43F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3162
+C441 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3163
+C443 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3164
+C445 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3165
+C447 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3166
+C449 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3167
+C44C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3168
+C44F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3169
+C452 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3170
+C455 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3171
+C458 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3172
+C45B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3173
+C45D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3174
+C45F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3175
+C461 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3176
+C463 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3177
+C465 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3178
+C467 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3179
+C469 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3180
+C46B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3181
+C46D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3182
+C46F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3183
+C471 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3184
+C473 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3185
+C476 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3186
+C479 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3187
+C47B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3188
+C47D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3189
+C47F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3190
+C481 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3191
+C483 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3192
+C485 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3193
+C487 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3194
+C489 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3195
+C48B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3196
+C48D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3197
+C48F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3198
+C491 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3199
+C494 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3200
+C497 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3201
+C499 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3202
+C49B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3203
+C49D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3204
+C4A0 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3205
+C4A3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3206
+C4A6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3207
+C4A9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3208
+C4AC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3209
+C4AF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3210
+C4B2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3211
+C4B5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3212
+C4B8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3213
+C4BB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3214
+C4BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3215
+C4BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3216
+C4C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3217
+C4C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3218
+C4C5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3219
+C4C7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3220
+C4C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3221
+C4CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3222
+C4CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3223
+C4CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3224
+C4D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3225
+C4D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3226
+C4D6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3227
+C4D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3228
+C4DC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3229
+C4DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3230
+C4E2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3231
+C4E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3232
+C4E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3233
+C4E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3234
+C4EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3235
+C4ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3236
+C4EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3237
+C4F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3238
+C4F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3239
+C4F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3240
+C4F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3241
+C4F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3242
+C4FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3243
+C4FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3244
+C500 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3245
+C503 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3246
+C505 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3247
+C507 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3248

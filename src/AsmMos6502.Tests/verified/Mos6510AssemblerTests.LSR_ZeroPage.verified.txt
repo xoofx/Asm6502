@@ -1,0 +1,14 @@
+﻿C000  46 03      LSR $03
+C002  46 20      LSR $20
+C004  46 FE      LSR $FE
+
+; 46 03 46 20 46 FE
+
+Debug Info (Program: LSR_ZeroPage)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:996
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:997
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:998

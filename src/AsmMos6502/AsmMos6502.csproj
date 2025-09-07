@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
@@ -36,5 +36,71 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Mos6502Assembler.gen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mos6502Assembler.gen.cs</LastGenOutput>
+    </None>
+    <None Update="Mos6502Assembler.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Assembler.gen.tt</DependentUpon>
+    </None>
+    <None Update="Mos6502Disassembler.gen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mos6502Disassembler.gen.cs</LastGenOutput>
+    </None>
+    <None Update="Mos6502Disassembler.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Disassembler.gen.tt</DependentUpon>
+    </None>
+    <None Update="Mos6502Instruction.gen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mos6502Instruction.gen.cs</LastGenOutput>
+    </None>
+    <None Update="Mos6502Instruction.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Instruction.tt</DependentUpon>
+    </None>
+    <None Update="Mos6502Tables.gen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mos6502Tables.gen.cs</LastGenOutput>
+    </None>
+    <None Update="Mos6502Tables.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Tables.gen.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Mos6502Assembler.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Assembler.gen.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Mos6502Disassembler.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Disassembler.gen.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Mos6502Instruction.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Instruction.gen.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Mos6502Tables.gen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mos6502Tables.gen.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

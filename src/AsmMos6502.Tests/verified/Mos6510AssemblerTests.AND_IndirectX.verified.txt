@@ -1,0 +1,14 @@
+﻿C000  21 05      AND ($05,X)
+C002  21 20      AND ($20,X)
+C004  21 FF      AND ($FF,X)
+
+; 21 05 21 20 21 FF
+
+Debug Info (Program: AND_IndirectX)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 3
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:149
+C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:150
+C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:151

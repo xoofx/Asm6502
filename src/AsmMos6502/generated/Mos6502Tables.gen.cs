@@ -298,123 +298,123 @@ internal static partial class Mos6502Tables
     private static readonly string[] MapMnemonicToTextUppercase = new string[57]
     {
         "???", // Unknown mnemonic
-        "ADC", // ADC
-        "AND", // AND
-        "ASL", // ASL
-        "BCC", // BCC
-        "BCS", // BCS
-        "BEQ", // BEQ
-        "BIT", // BIT
-        "BMI", // BMI
-        "BNE", // BNE
-        "BPL", // BPL
-        "BRK", // BRK
-        "BVC", // BVC
-        "BVS", // BVS
-        "CLC", // CLC
-        "CLD", // CLD
-        "CLI", // CLI
-        "CLV", // CLV
-        "CMP", // CMP
-        "CPX", // CPX
-        "CPY", // CPY
-        "DEC", // DEC
-        "DEX", // DEX
-        "DEY", // DEY
-        "EOR", // EOR
-        "INC", // INC
-        "INX", // INX
-        "INY", // INY
-        "JMP", // JMP
-        "JSR", // JSR
-        "LDA", // LDA
-        "LDX", // LDX
-        "LDY", // LDY
-        "LSR", // LSR
-        "NOP", // NOP
-        "ORA", // ORA
-        "PHA", // PHA
-        "PHP", // PHP
-        "PLA", // PLA
-        "PLP", // PLP
-        "ROL", // ROL
-        "ROR", // ROR
-        "RTI", // RTI
-        "RTS", // RTS
-        "SBC", // SBC
-        "SEC", // SEC
-        "SED", // SED
-        "SEI", // SEI
-        "STA", // STA
-        "STX", // STX
-        "STY", // STY
-        "TAX", // TAX
-        "TAY", // TAY
-        "TSX", // TSX
-        "TXA", // TXA
-        "TXS", // TXS
-        "TYA", // TYA
+        "ADC", //  1 - ADC
+        "AND", //  2 - AND
+        "ASL", //  3 - ASL
+        "BCC", //  4 - BCC
+        "BCS", //  5 - BCS
+        "BEQ", //  6 - BEQ
+        "BIT", //  7 - BIT
+        "BMI", //  8 - BMI
+        "BNE", //  9 - BNE
+        "BPL", // 10 - BPL
+        "BRK", // 11 - BRK
+        "BVC", // 12 - BVC
+        "BVS", // 13 - BVS
+        "CLC", // 14 - CLC
+        "CLD", // 15 - CLD
+        "CLI", // 16 - CLI
+        "CLV", // 17 - CLV
+        "CMP", // 18 - CMP
+        "CPX", // 19 - CPX
+        "CPY", // 20 - CPY
+        "DEC", // 21 - DEC
+        "DEX", // 22 - DEX
+        "DEY", // 23 - DEY
+        "EOR", // 24 - EOR
+        "INC", // 25 - INC
+        "INX", // 26 - INX
+        "INY", // 27 - INY
+        "JMP", // 28 - JMP
+        "JSR", // 29 - JSR
+        "LDA", // 30 - LDA
+        "LDX", // 31 - LDX
+        "LDY", // 32 - LDY
+        "LSR", // 33 - LSR
+        "NOP", // 34 - NOP
+        "ORA", // 35 - ORA
+        "PHA", // 36 - PHA
+        "PHP", // 37 - PHP
+        "PLA", // 38 - PLA
+        "PLP", // 39 - PLP
+        "ROL", // 40 - ROL
+        "ROR", // 41 - ROR
+        "RTI", // 42 - RTI
+        "RTS", // 43 - RTS
+        "SBC", // 44 - SBC
+        "SEC", // 45 - SEC
+        "SED", // 46 - SED
+        "SEI", // 47 - SEI
+        "STA", // 48 - STA
+        "STX", // 49 - STX
+        "STY", // 50 - STY
+        "TAX", // 51 - TAX
+        "TAY", // 52 - TAY
+        "TSX", // 53 - TSX
+        "TXA", // 54 - TXA
+        "TXS", // 55 - TXS
+        "TYA", // 56 - TYA
     };
     
     private static readonly string[] MapMnemonicToTextLowercase = new string[57]
     {
         "???", // Unknown mnemonic
-        "adc", // ADC
-        "and", // AND
-        "asl", // ASL
-        "bcc", // BCC
-        "bcs", // BCS
-        "beq", // BEQ
-        "bit", // BIT
-        "bmi", // BMI
-        "bne", // BNE
-        "bpl", // BPL
-        "brk", // BRK
-        "bvc", // BVC
-        "bvs", // BVS
-        "clc", // CLC
-        "cld", // CLD
-        "cli", // CLI
-        "clv", // CLV
-        "cmp", // CMP
-        "cpx", // CPX
-        "cpy", // CPY
-        "dec", // DEC
-        "dex", // DEX
-        "dey", // DEY
-        "eor", // EOR
-        "inc", // INC
-        "inx", // INX
-        "iny", // INY
-        "jmp", // JMP
-        "jsr", // JSR
-        "lda", // LDA
-        "ldx", // LDX
-        "ldy", // LDY
-        "lsr", // LSR
-        "nop", // NOP
-        "ora", // ORA
-        "pha", // PHA
-        "php", // PHP
-        "pla", // PLA
-        "plp", // PLP
-        "rol", // ROL
-        "ror", // ROR
-        "rti", // RTI
-        "rts", // RTS
-        "sbc", // SBC
-        "sec", // SEC
-        "sed", // SED
-        "sei", // SEI
-        "sta", // STA
-        "stx", // STX
-        "sty", // STY
-        "tax", // TAX
-        "tay", // TAY
-        "tsx", // TSX
-        "txa", // TXA
-        "txs", // TXS
-        "tya", // TYA
+        "adc", //  1 - ADC
+        "and", //  2 - AND
+        "asl", //  3 - ASL
+        "bcc", //  4 - BCC
+        "bcs", //  5 - BCS
+        "beq", //  6 - BEQ
+        "bit", //  7 - BIT
+        "bmi", //  8 - BMI
+        "bne", //  9 - BNE
+        "bpl", // 10 - BPL
+        "brk", // 11 - BRK
+        "bvc", // 12 - BVC
+        "bvs", // 13 - BVS
+        "clc", // 14 - CLC
+        "cld", // 15 - CLD
+        "cli", // 16 - CLI
+        "clv", // 17 - CLV
+        "cmp", // 18 - CMP
+        "cpx", // 19 - CPX
+        "cpy", // 20 - CPY
+        "dec", // 21 - DEC
+        "dex", // 22 - DEX
+        "dey", // 23 - DEY
+        "eor", // 24 - EOR
+        "inc", // 25 - INC
+        "inx", // 26 - INX
+        "iny", // 27 - INY
+        "jmp", // 28 - JMP
+        "jsr", // 29 - JSR
+        "lda", // 30 - LDA
+        "ldx", // 31 - LDX
+        "ldy", // 32 - LDY
+        "lsr", // 33 - LSR
+        "nop", // 34 - NOP
+        "ora", // 35 - ORA
+        "pha", // 36 - PHA
+        "php", // 37 - PHP
+        "pla", // 38 - PLA
+        "plp", // 39 - PLP
+        "rol", // 40 - ROL
+        "ror", // 41 - ROR
+        "rti", // 42 - RTI
+        "rts", // 43 - RTS
+        "sbc", // 44 - SBC
+        "sec", // 45 - SEC
+        "sed", // 46 - SED
+        "sei", // 47 - SEI
+        "sta", // 48 - STA
+        "stx", // 49 - STX
+        "sty", // 50 - STY
+        "tax", // 51 - TAX
+        "tay", // 52 - TAY
+        "tsx", // 53 - TSX
+        "txa", // 54 - TXA
+        "txs", // 55 - TXS
+        "tya", // 56 - TYA
     };
     
     private static ReadOnlySpan<byte> MapOpCodeToCycles => new byte[256]

@@ -1,0 +1,12 @@
+﻿C000  BF 34 12   LAX $1234,Y
+C003  BF 03 FF   LAX $FF03,Y
+
+; BF 34 12 BF 03 FF
+
+Debug Info (Program: LAX_AbsoluteY)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1905
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1906

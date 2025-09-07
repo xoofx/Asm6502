@@ -1,0 +1,13 @@
+﻿C000  6C 34 12   JMP ($1234)
+
+C003  6C 04 FF   JMP ($FF04)
+
+; 6C 34 12 6C 04 FF
+
+Debug Info (Program: JMP_Indirect)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:755
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:756

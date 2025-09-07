@@ -17,7 +17,7 @@ public record Mos6502LabelZp : Mos6502ExpressionU8, IMos6502Label
     /// Creates an unbound label with the specified name.
     /// </summary>
     /// <remarks>
-    /// The label needs to be bound to an address with <see cref="Mos6502Assembler.Label(AsmMos6502.Mos6502Label,bool)"/> before it can be used in an instruction.
+    /// The label needs to be bound to an address with <see cref="Mos6502AssemblerBase.Label(AsmMos6502.Mos6502Label,bool)"/> before it can be used in an instruction.
     /// </remarks>
     /// <param name="name">The name of the label</param>
     public Mos6502LabelZp(string? name = null)

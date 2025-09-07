@@ -7,7 +7,7 @@ using static AsmMos6502.Mos6502Factory;
 namespace AsmMos6502.Tests;
 
 [TestClass]
-public class Mos6502AssemblerSpecialTests : VerifyAsmBase
+public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
 {
     [TestMethod]
     public void TestAppendBuffer()

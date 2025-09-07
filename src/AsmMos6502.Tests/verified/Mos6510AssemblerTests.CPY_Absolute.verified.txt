@@ -1,0 +1,12 @@
+﻿C000  CC 34 12   CPY $1234
+C003  CC 01 FF   CPY $FF01
+
+; CC 34 12 CC 01 FF
+
+Debug Info (Program: CPY_Absolute)
+- Program Start Address: C000
+- Program End Address: C006
+- Debug Line Count: 2
+
+C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:508
+C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:509

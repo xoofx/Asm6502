@@ -36,6 +36,8 @@ public class JsonAsm6502Instructions
 
 public class JsonAsm6502AddressingMode
 {
+    public int Id { get; set; }
+
     public string Kind { get; set; } = string.Empty;
 
     public int SizeBytes { get; set; }
@@ -53,6 +55,7 @@ public class JsonAsm6502AddressingMode
 public class JsonAsm6502Opcode
 {
     public string Name { get; set; } = string.Empty;
+    public string UniqueName { get; set; } = string.Empty;
     public string NameLong { get; set; } = string.Empty;
     public int Opcode { get; set; }
     public string? OpcodeUniqueName { get; set; } = string.Empty;
@@ -67,7 +70,8 @@ public class JsonAsm6502Opcode
     public List<string> StatusFlags { get; } = new();
     public bool Illegal { get; set; }
     public bool Unstable { get; set; }
-    
+    public bool W65c02 { get; set; }
+
     [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
     public List<string> OnlineDocumentation { get; } = new();
 }

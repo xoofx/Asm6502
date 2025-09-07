@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 using System.Runtime.CompilerServices;
 using static AsmMos6502.Mos6502Factory;
-
+#pragma warning disable CS0618 // We are still validating Unstable API in our tests even if it's marked as obsolete.
 namespace AsmMos6502.Tests;
 
 [TestClass]

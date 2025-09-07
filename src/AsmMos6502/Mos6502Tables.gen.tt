@@ -1,0 +1,36 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+    var procs = new string[] { "Mos6502", "Mos6510" };
+#>
+// Copyright (c) Alexandre Mutel. All rights reserved.
+// Licensed under the BSD-Clause 2 license.
+// See license.txt file in the project root for full license information.
+
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+namespace AsmMos6502;
+<# foreach(var proc in procs) { #>
+
+internal static partial class <#= proc #>Tables
+{
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Mos6502AddressingMode GetAddressingModeFromOpcode(byte c) => (Mos6502AddressingMode)Unsafe.Add(ref MemoryMarshal.GetReference(MapOpCodeToAddressingMode), c);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static <#= proc #>Mnemonic GetMnemonicFromOpcode(byte c) => (<#= proc #>Mnemonic)Unsafe.Add(ref MemoryMarshal.GetReference(MapOpCodeToMnemonic), c);
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int GetCycleCountFromOpcode(<#= proc #>OpCode opcode) => Unsafe.Add(ref MemoryMarshal.GetReference(MapOpCodeToCycles), (byte)opcode);
+    
+    public static string GetMnemonicText(<#= proc #>Mnemonic mnemonic, bool lowercase = false)
+        => lowercase
+            ? Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(MapMnemonicToTextLowercase), (byte)mnemonic)
+            : Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(MapMnemonicToTextUppercase), (byte)mnemonic);
+}
+<# } #>
