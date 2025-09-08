@@ -180,7 +180,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 2,
       "opcode_hex": "0x02",
       "addressing_mode": "Implied",
@@ -200,7 +200,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 3,
       "opcode_hex": "0x03",
       "addressing_mode": "IndirectX",
@@ -280,7 +280,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 7,
       "opcode_hex": "0x07",
       "addressing_mode": "ZeroPage",
@@ -360,7 +360,7 @@
     },
     {
       "name": "ANC",
-      "name_long": "",
+      "name_long": "AND then set carry",
       "opcode": 11,
       "opcode_hex": "0x0b",
       "addressing_mode": "Immediate",
@@ -439,7 +439,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 15,
       "opcode_hex": "0x0f",
       "addressing_mode": "Absolute",
@@ -497,7 +497,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 18,
       "opcode_hex": "0x12",
       "addressing_mode": "Implied",
@@ -517,7 +517,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 19,
       "opcode_hex": "0x13",
       "addressing_mode": "IndirectY",
@@ -597,7 +597,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 23,
       "opcode_hex": "0x17",
       "addressing_mode": "ZeroPageX",
@@ -675,7 +675,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 27,
       "opcode_hex": "0x1b",
       "addressing_mode": "AbsoluteY",
@@ -755,7 +755,7 @@
     },
     {
       "name": "SLO",
-      "name_long": "",
+      "name_long": "ASL then ORA",
       "opcode": 31,
       "opcode_hex": "0x1f",
       "addressing_mode": "AbsoluteX",
@@ -813,7 +813,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 34,
       "opcode_hex": "0x22",
       "addressing_mode": "Implied",
@@ -833,7 +833,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 35,
       "opcode_hex": "0x23",
       "addressing_mode": "IndirectX",
@@ -915,7 +915,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 39,
       "opcode_hex": "0x27",
       "addressing_mode": "ZeroPage",
@@ -1001,7 +1001,7 @@
     },
     {
       "name": "ANC",
-      "name_long": "",
+      "name_long": "AND then set carry",
       "opcode": 43,
       "opcode_hex": "0x2b",
       "addressing_mode": "Immediate",
@@ -1084,7 +1084,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 47,
       "opcode_hex": "0x2f",
       "addressing_mode": "Absolute",
@@ -1141,7 +1141,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 50,
       "opcode_hex": "0x32",
       "addressing_mode": "Implied",
@@ -1161,7 +1161,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 51,
       "opcode_hex": "0x33",
       "addressing_mode": "IndirectY",
@@ -1239,7 +1239,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 55,
       "opcode_hex": "0x37",
       "addressing_mode": "ZeroPageX",
@@ -1316,7 +1316,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 59,
       "opcode_hex": "0x3b",
       "addressing_mode": "AbsoluteY",
@@ -1394,7 +1394,7 @@
     },
     {
       "name": "RLA",
-      "name_long": "",
+      "name_long": "ROL then AND",
       "opcode": 63,
       "opcode_hex": "0x3f",
       "addressing_mode": "AbsoluteX",
@@ -1459,7 +1459,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 66,
       "opcode_hex": "0x42",
       "addressing_mode": "Implied",
@@ -1479,7 +1479,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 67,
       "opcode_hex": "0x43",
       "addressing_mode": "IndirectX",
@@ -1559,7 +1559,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 71,
       "opcode_hex": "0x47",
       "addressing_mode": "ZeroPage",
@@ -1639,7 +1639,7 @@
     },
     {
       "name": "ALR",
-      "name_long": "",
+      "name_long": "AND then LSR",
       "opcode": 75,
       "opcode_hex": "0x4b",
       "addressing_mode": "Immediate",
@@ -1719,7 +1719,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 79,
       "opcode_hex": "0x4f",
       "addressing_mode": "Absolute",
@@ -1777,7 +1777,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 82,
       "opcode_hex": "0x52",
       "addressing_mode": "Implied",
@@ -1797,7 +1797,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 83,
       "opcode_hex": "0x53",
       "addressing_mode": "IndirectY",
@@ -1877,7 +1877,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 87,
       "opcode_hex": "0x57",
       "addressing_mode": "ZeroPageX",
@@ -1955,7 +1955,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 91,
       "opcode_hex": "0x5b",
       "addressing_mode": "AbsoluteY",
@@ -2035,7 +2035,7 @@
     },
     {
       "name": "SRE",
-      "name_long": "",
+      "name_long": "LSR then EOR",
       "opcode": 95,
       "opcode_hex": "0x5f",
       "addressing_mode": "AbsoluteX",
@@ -2095,7 +2095,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 98,
       "opcode_hex": "0x62",
       "addressing_mode": "Implied",
@@ -2115,7 +2115,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 99,
       "opcode_hex": "0x63",
       "addressing_mode": "IndirectX",
@@ -2195,7 +2195,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 103,
       "opcode_hex": "0x67",
       "addressing_mode": "ZeroPage",
@@ -2278,7 +2278,7 @@
     },
     {
       "name": "ARR",
-      "name_long": "",
+      "name_long": "AND then ROR",
       "opcode": 107,
       "opcode_hex": "0x6b",
       "addressing_mode": "Immediate",
@@ -2358,7 +2358,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 111,
       "opcode_hex": "0x6f",
       "addressing_mode": "Absolute",
@@ -2417,7 +2417,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 114,
       "opcode_hex": "0x72",
       "addressing_mode": "Implied",
@@ -2437,7 +2437,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 115,
       "opcode_hex": "0x73",
       "addressing_mode": "IndirectY",
@@ -2517,7 +2517,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 119,
       "opcode_hex": "0x77",
       "addressing_mode": "ZeroPageX",
@@ -2596,7 +2596,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 123,
       "opcode_hex": "0x7b",
       "addressing_mode": "AbsoluteY",
@@ -2676,7 +2676,7 @@
     },
     {
       "name": "RRA",
-      "name_long": "",
+      "name_long": "ROR then ADC",
       "opcode": 127,
       "opcode_hex": "0x7f",
       "addressing_mode": "AbsoluteX",
@@ -2748,7 +2748,7 @@
     },
     {
       "name": "SAX",
-      "name_long": "",
+      "name_long": "Store accumulator AND X",
       "opcode": 131,
       "opcode_hex": "0x83",
       "addressing_mode": "IndirectX",
@@ -2822,7 +2822,7 @@
     },
     {
       "name": "SAX",
-      "name_long": "",
+      "name_long": "Store accumulator AND X",
       "opcode": 135,
       "opcode_hex": "0x87",
       "addressing_mode": "ZeroPage",
@@ -2899,7 +2899,7 @@
     },
     {
       "name": "ANE",
-      "name_long": "",
+      "name_long": "Undocumented: AND with X then AND operand",
       "opcode": 139,
       "opcode_hex": "0x8b",
       "addressing_mode": "Immediate",
@@ -2973,7 +2973,7 @@
     },
     {
       "name": "SAX",
-      "name_long": "",
+      "name_long": "Store accumulator AND X",
       "opcode": 143,
       "opcode_hex": "0x8f",
       "addressing_mode": "Absolute",
@@ -3029,7 +3029,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 146,
       "opcode_hex": "0x92",
       "addressing_mode": "Implied",
@@ -3049,7 +3049,7 @@
     },
     {
       "name": "SHA",
-      "name_long": "",
+      "name_long": "Store A AND X AND (high address + 1)",
       "opcode": 147,
       "opcode_hex": "0x93",
       "addressing_mode": "IndirectY",
@@ -3124,7 +3124,7 @@
     },
     {
       "name": "SAX",
-      "name_long": "",
+      "name_long": "Store accumulator AND X",
       "opcode": 151,
       "opcode_hex": "0x97",
       "addressing_mode": "ZeroPageY",
@@ -3198,7 +3198,7 @@
     },
     {
       "name": "TAS",
-      "name_long": "",
+      "name_long": "Transfer A AND X to SP, store A AND X AND (high address + 1)",
       "opcode": 155,
       "opcode_hex": "0x9b",
       "addressing_mode": "AbsoluteY",
@@ -3219,7 +3219,7 @@
     },
     {
       "name": "SHY",
-      "name_long": "",
+      "name_long": "Store Y AND (high address + 1)",
       "opcode": 156,
       "opcode_hex": "0x9c",
       "addressing_mode": "AbsoluteX",
@@ -3259,7 +3259,7 @@
     },
     {
       "name": "SHX",
-      "name_long": "",
+      "name_long": "Store A AND X AND (high address + 1)",
       "opcode": 158,
       "opcode_hex": "0x9e",
       "addressing_mode": "AbsoluteY",
@@ -3281,7 +3281,7 @@
     },
     {
       "name": "SHA",
-      "name_long": "",
+      "name_long": "Store A AND X AND (high address + 1)",
       "opcode": 159,
       "opcode_hex": "0x9f",
       "addressing_mode": "AbsoluteY",
@@ -3364,7 +3364,7 @@
     },
     {
       "name": "LAX",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 163,
       "opcode_hex": "0xa3",
       "addressing_mode": "IndirectX",
@@ -3445,7 +3445,7 @@
     },
     {
       "name": "LAX",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 167,
       "opcode_hex": "0xa7",
       "addressing_mode": "ZeroPage",
@@ -3520,7 +3520,7 @@
     },
     {
       "name": "LXA",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 171,
       "opcode_hex": "0xab",
       "addressing_mode": "Immediate",
@@ -3604,7 +3604,7 @@
     },
     {
       "name": "LAX",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 175,
       "opcode_hex": "0xaf",
       "addressing_mode": "Absolute",
@@ -3661,7 +3661,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 178,
       "opcode_hex": "0xb2",
       "addressing_mode": "Implied",
@@ -3681,7 +3681,7 @@
     },
     {
       "name": "LAX",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 179,
       "opcode_hex": "0xb3",
       "addressing_mode": "IndirectY",
@@ -3762,7 +3762,7 @@
     },
     {
       "name": "LAX",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 183,
       "opcode_hex": "0xb7",
       "addressing_mode": "ZeroPageY",
@@ -3839,7 +3839,7 @@
     },
     {
       "name": "LAS",
-      "name_long": "",
+      "name_long": "Load accumulator and transfer SP to X",
       "opcode": 187,
       "opcode_hex": "0xbb",
       "addressing_mode": "AbsoluteY",
@@ -3921,7 +3921,7 @@
     },
     {
       "name": "LAX",
-      "name_long": "",
+      "name_long": "LDA then LDX",
       "opcode": 191,
       "opcode_hex": "0xbf",
       "addressing_mode": "AbsoluteY",
@@ -4001,7 +4001,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 195,
       "opcode_hex": "0xc3",
       "addressing_mode": "IndirectX",
@@ -4085,7 +4085,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 199,
       "opcode_hex": "0xc7",
       "addressing_mode": "ZeroPage",
@@ -4168,7 +4168,7 @@
     },
     {
       "name": "SBX",
-      "name_long": "",
+      "name_long": "Compute (A AND X) then subtract with carry",
       "opcode": 203,
       "opcode_hex": "0xcb",
       "addressing_mode": "Immediate",
@@ -4253,7 +4253,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 207,
       "opcode_hex": "0xcf",
       "addressing_mode": "Absolute",
@@ -4312,7 +4312,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 210,
       "opcode_hex": "0xd2",
       "addressing_mode": "Implied",
@@ -4332,7 +4332,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 211,
       "opcode_hex": "0xd3",
       "addressing_mode": "IndirectY",
@@ -4412,7 +4412,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 215,
       "opcode_hex": "0xd7",
       "addressing_mode": "ZeroPageX",
@@ -4491,7 +4491,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 219,
       "opcode_hex": "0xdb",
       "addressing_mode": "AbsoluteY",
@@ -4571,7 +4571,7 @@
     },
     {
       "name": "DCP",
-      "name_long": "",
+      "name_long": "DEC then CMP",
       "opcode": 223,
       "opcode_hex": "0xdf",
       "addressing_mode": "AbsoluteX",
@@ -4653,7 +4653,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 227,
       "opcode_hex": "0xe3",
       "addressing_mode": "IndirectX",
@@ -4739,7 +4739,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 231,
       "opcode_hex": "0xe7",
       "addressing_mode": "ZeroPage",
@@ -4821,7 +4821,7 @@
     },
     {
       "name": "USBC",
-      "name_long": "",
+      "name_long": "SBC with NOP behavior",
       "opcode": 235,
       "opcode_hex": "0xeb",
       "addressing_mode": "Immediate",
@@ -4906,7 +4906,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 239,
       "opcode_hex": "0xef",
       "addressing_mode": "Absolute",
@@ -4967,7 +4967,7 @@
     },
     {
       "name": "JAM",
-      "name_long": "",
+      "name_long": "Jam the CPU (halt)",
       "opcode": 242,
       "opcode_hex": "0xf2",
       "addressing_mode": "Implied",
@@ -4987,7 +4987,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 243,
       "opcode_hex": "0xf3",
       "addressing_mode": "IndirectY",
@@ -5069,7 +5069,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 247,
       "opcode_hex": "0xf7",
       "addressing_mode": "ZeroPageX",
@@ -5150,7 +5150,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 251,
       "opcode_hex": "0xfb",
       "addressing_mode": "AbsoluteY",
@@ -5232,7 +5232,7 @@
     },
     {
       "name": "ISC",
-      "name_long": "",
+      "name_long": "INC then SBC",
       "opcode": 255,
       "opcode_hex": "0xff",
       "addressing_mode": "AbsoluteX",

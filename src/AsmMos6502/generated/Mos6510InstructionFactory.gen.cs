@@ -1077,28 +1077,28 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the ALR instruction (0x4b) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>AND then LSR. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ALR_Imm(byte immediate) => new (Mos6510OpCode.ALR_Immediate, immediate);
     
     /// <summary>
     /// Creates the ANC instruction (0x0b) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>AND then set carry. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ANC_Imm(byte immediate) => new (Mos6510OpCode.ANC_Immediate, immediate);
     
     /// <summary>
     /// Creates the ANC instruction (0x2b) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>AND then set carry. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ANC_2B_Imm(byte immediate) => new (Mos6510OpCode.ANC_2B_Immediate, immediate);
     
     /// <summary>
     /// Creates the ANE instruction (0x8b) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
+    /// <remarks>Undocumented: AND with X then AND operand. Cycles: 2, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public static Mos6510Instruction ANE_Imm(byte immediate) => new (Mos6510OpCode.ANE_Immediate, immediate);
@@ -1106,245 +1106,245 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the ARR instruction (0x6b) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>AND then ROR. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ARR_Imm(byte immediate) => new (Mos6510OpCode.ARR_Immediate, immediate);
     
     /// <summary>
     /// Creates the DCP instruction (0xcf) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(ushort address) => new (Mos6510OpCode.DCP_Absolute, address);
     
     /// <summary>
     /// Creates the DCP instruction (0xdf) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.DCP_AbsoluteX, address);
     
     /// <summary>
     /// Creates the DCP instruction (0xdb) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.DCP_AbsoluteY, address);
     
     /// <summary>
     /// Creates the DCP instruction (0xc3) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(Mos6502IndirectX indirect) => new (Mos6510OpCode.DCP_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the DCP instruction (0xd3) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.DCP_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the DCP instruction (0xc7) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(byte zeroPage) => new (Mos6510OpCode.DCP_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the DCP instruction (0xd7) instruction with addressing mode ZeroPageX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>DEC then CMP. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction DCP(byte zeroPage, Mos6502RegisterX x) => new (Mos6510OpCode.DCP_ZeroPageX, zeroPage);
     
     /// <summary>
     /// Creates the ISC instruction (0xef) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(ushort address) => new (Mos6510OpCode.ISC_Absolute, address);
     
     /// <summary>
     /// Creates the ISC instruction (0xff) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.ISC_AbsoluteX, address);
     
     /// <summary>
     /// Creates the ISC instruction (0xfb) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.ISC_AbsoluteY, address);
     
     /// <summary>
     /// Creates the ISC instruction (0xe3) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(Mos6502IndirectX indirect) => new (Mos6510OpCode.ISC_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the ISC instruction (0xf3) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.ISC_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the ISC instruction (0xe7) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(byte zeroPage) => new (Mos6510OpCode.ISC_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the ISC instruction (0xf7) instruction with addressing mode ZeroPageX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>INC then SBC. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction ISC(byte zeroPage, Mos6502RegisterX x) => new (Mos6510OpCode.ISC_ZeroPageX, zeroPage);
     
     /// <summary>
     /// Creates the JAM instruction (0x02) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM() => new (Mos6510OpCode.JAM_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x12) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_12() => new (Mos6510OpCode.JAM_12_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x22) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_22() => new (Mos6510OpCode.JAM_22_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x32) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_32() => new (Mos6510OpCode.JAM_32_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x42) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_42() => new (Mos6510OpCode.JAM_42_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x52) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_52() => new (Mos6510OpCode.JAM_52_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x62) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_62() => new (Mos6510OpCode.JAM_62_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x72) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_72() => new (Mos6510OpCode.JAM_72_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0x92) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_92() => new (Mos6510OpCode.JAM_92_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0xb2) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_B2() => new (Mos6510OpCode.JAM_B2_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0xd2) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_D2() => new (Mos6510OpCode.JAM_D2_Implied);
     
     /// <summary>
     /// Creates the JAM instruction (0xf2) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
+    /// <remarks>Jam the CPU (halt). Cycles: 2, Size: 1 byte. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction JAM_F2() => new (Mos6510OpCode.JAM_F2_Implied);
     
     /// <summary>
     /// Creates the LAS instruction (0xbb) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Load accumulator and transfer SP to X. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAS(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.LAS_AbsoluteY, address);
     
     /// <summary>
     /// Creates the LAX instruction (0xaf) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAX(ushort address) => new (Mos6510OpCode.LAX_Absolute, address);
     
     /// <summary>
     /// Creates the LAX instruction (0xbf) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAX(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.LAX_AbsoluteY, address);
     
     /// <summary>
     /// Creates the LAX instruction (0xa3) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAX(Mos6502IndirectX indirect) => new (Mos6510OpCode.LAX_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the LAX instruction (0xb3) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAX(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.LAX_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the LAX instruction (0xa7) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 3, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 3, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAX(byte zeroPage) => new (Mos6510OpCode.LAX_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the LAX instruction (0xb7) instruction with addressing mode ZeroPageY.
     /// </summary>
-    /// <remarks>. Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction LAX(byte zeroPage, Mos6502RegisterY y) => new (Mos6510OpCode.LAX_ZeroPageY, zeroPage);
     
     /// <summary>
     /// Creates the LXA instruction (0xab) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
+    /// <remarks>LDA then LDX. Cycles: 2, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public static Mos6510Instruction LXA_Imm(byte immediate) => new (Mos6510OpCode.LXA_Immediate, immediate);
@@ -1541,147 +1541,147 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the RLA instruction (0x2f) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(ushort address) => new (Mos6510OpCode.RLA_Absolute, address);
     
     /// <summary>
     /// Creates the RLA instruction (0x3f) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.RLA_AbsoluteX, address);
     
     /// <summary>
     /// Creates the RLA instruction (0x3b) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.RLA_AbsoluteY, address);
     
     /// <summary>
     /// Creates the RLA instruction (0x23) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(Mos6502IndirectX indirect) => new (Mos6510OpCode.RLA_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the RLA instruction (0x33) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.RLA_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the RLA instruction (0x27) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(byte zeroPage) => new (Mos6510OpCode.RLA_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the RLA instruction (0x37) instruction with addressing mode ZeroPageX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROL then AND. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RLA(byte zeroPage, Mos6502RegisterX x) => new (Mos6510OpCode.RLA_ZeroPageX, zeroPage);
     
     /// <summary>
     /// Creates the RRA instruction (0x6f) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(ushort address) => new (Mos6510OpCode.RRA_Absolute, address);
     
     /// <summary>
     /// Creates the RRA instruction (0x7f) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.RRA_AbsoluteX, address);
     
     /// <summary>
     /// Creates the RRA instruction (0x7b) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.RRA_AbsoluteY, address);
     
     /// <summary>
     /// Creates the RRA instruction (0x63) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(Mos6502IndirectX indirect) => new (Mos6510OpCode.RRA_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the RRA instruction (0x73) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.RRA_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the RRA instruction (0x67) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(byte zeroPage) => new (Mos6510OpCode.RRA_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the RRA instruction (0x77) instruction with addressing mode ZeroPageX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ROR then ADC. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction RRA(byte zeroPage, Mos6502RegisterX x) => new (Mos6510OpCode.RRA_ZeroPageX, zeroPage);
     
     /// <summary>
     /// Creates the SAX instruction (0x8f) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Store accumulator AND X. Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SAX(ushort address) => new (Mos6510OpCode.SAX_Absolute, address);
     
     /// <summary>
     /// Creates the SAX instruction (0x83) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Store accumulator AND X. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SAX(Mos6502IndirectX indirect) => new (Mos6510OpCode.SAX_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the SAX instruction (0x87) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 3, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Store accumulator AND X. Cycles: 3, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SAX(byte zeroPage) => new (Mos6510OpCode.SAX_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the SAX instruction (0x97) instruction with addressing mode ZeroPageY.
     /// </summary>
-    /// <remarks>. Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Store accumulator AND X. Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SAX(byte zeroPage, Mos6502RegisterY y) => new (Mos6510OpCode.SAX_ZeroPageY, zeroPage);
     
     /// <summary>
     /// Creates the SBX instruction (0xcb) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Compute (A AND X) then subtract with carry. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SBX_Imm(byte immediate) => new (Mos6510OpCode.SBX_Immediate, immediate);
     
     /// <summary>
     /// Creates the SHA instruction (0x9f) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>Store A AND X AND (high address + 1). Cycles: 5, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SHA(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.SHA_AbsoluteY, address);
     
     /// <summary>
     /// Creates the SHA instruction (0x93) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
+    /// <remarks>Store A AND X AND (high address + 1). Cycles: 6, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public static Mos6510Instruction SHA(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.SHA_IndirectY, indirect.Address);
@@ -1689,7 +1689,7 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the SHX instruction (0x9e) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
+    /// <remarks>Store A AND X AND (high address + 1). Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public static Mos6510Instruction SHX(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.SHX_AbsoluteY, address);
@@ -1697,7 +1697,7 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the SHY instruction (0x9c) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
+    /// <remarks>Store Y AND (high address + 1). Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public static Mos6510Instruction SHY(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.SHY_AbsoluteX, address);
@@ -1705,105 +1705,105 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the SLO instruction (0x0f) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(ushort address) => new (Mos6510OpCode.SLO_Absolute, address);
     
     /// <summary>
     /// Creates the SLO instruction (0x1f) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.SLO_AbsoluteX, address);
     
     /// <summary>
     /// Creates the SLO instruction (0x1b) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.SLO_AbsoluteY, address);
     
     /// <summary>
     /// Creates the SLO instruction (0x03) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(Mos6502IndirectX indirect) => new (Mos6510OpCode.SLO_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the SLO instruction (0x13) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.SLO_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the SLO instruction (0x07) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(byte zeroPage) => new (Mos6510OpCode.SLO_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the SLO instruction (0x17) instruction with addressing mode ZeroPageX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>ASL then ORA. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SLO(byte zeroPage, Mos6502RegisterX x) => new (Mos6510OpCode.SLO_ZeroPageX, zeroPage);
     
     /// <summary>
     /// Creates the SRE instruction (0x4f) instruction with addressing mode Absolute.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(ushort address) => new (Mos6510OpCode.SRE_Absolute, address);
     
     /// <summary>
     /// Creates the SRE instruction (0x5f) instruction with addressing mode AbsoluteX.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(ushort address, Mos6502RegisterX x) => new (Mos6510OpCode.SRE_AbsoluteX, address);
     
     /// <summary>
     /// Creates the SRE instruction (0x5b) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.SRE_AbsoluteY, address);
     
     /// <summary>
     /// Creates the SRE instruction (0x43) instruction with addressing mode IndirectX.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(Mos6502IndirectX indirect) => new (Mos6510OpCode.SRE_IndirectX, indirect.Address);
     
     /// <summary>
     /// Creates the SRE instruction (0x53) instruction with addressing mode IndirectY.
     /// </summary>
-    /// <remarks>. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(Mos6502IndirectY indirect, Mos6502RegisterY y) => new (Mos6510OpCode.SRE_IndirectY, indirect.Address);
     
     /// <summary>
     /// Creates the SRE instruction (0x47) instruction with addressing mode ZeroPage.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 5, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(byte zeroPage) => new (Mos6510OpCode.SRE_ZeroPage, zeroPage);
     
     /// <summary>
     /// Creates the SRE instruction (0x57) instruction with addressing mode ZeroPageX.
     /// </summary>
-    /// <remarks>. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>LSR then EOR. Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction SRE(byte zeroPage, Mos6502RegisterX x) => new (Mos6510OpCode.SRE_ZeroPageX, zeroPage);
     
     /// <summary>
     /// Creates the TAS instruction (0x9b) instruction with addressing mode AbsoluteY.
     /// </summary>
-    /// <remarks>. Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
+    /// <remarks>Transfer A AND X to SP, store A AND X AND (high address + 1). Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public static Mos6510Instruction TAS(ushort address, Mos6502RegisterY y) => new (Mos6510OpCode.TAS_AbsoluteY, address);
@@ -1811,7 +1811,7 @@ public static partial class Mos6510InstructionFactory
     /// <summary>
     /// Creates the USBC instruction (0xeb) instruction with addressing mode Immediate.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    /// <remarks>SBC with NOP behavior. Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6510Instruction USBC_Imm(byte immediate) => new (Mos6510OpCode.USBC_Immediate, immediate);
     
