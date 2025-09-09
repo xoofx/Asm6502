@@ -42,6 +42,7 @@ public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
         instruction.AsSpan.CopyTo(span);
         SizeInBytes = totalSizeInBytes;
         CurrentCycleCount += instruction.CycleCount;
+        CurrentOffset += (ushort)sizeInBytes;
 
         var debugMap = DebugMap;
         if (debugMap != null)
@@ -64,12 +65,13 @@ public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
     /// <returns>The current assembler instance.</returns>
     public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
-        var offset = SizeInBytes;
+        var currentAddress = CurrentAddress;
+        var bufferOffset = SizeInBytes;
         // ReSharper disable ExplicitCallerInfoArgument
         AddInstruction(instruction, debugFilePath, debugLineNumber);
         // ReSharper restore ExplicitCallerInfoArgument
 
-        Patches.Add(new((ushort)(offset + 1), instruction.AddressingMode, expression));
+        Patches.Add(new(currentAddress, (ushort)(bufferOffset + 1), instruction.AddressingMode, expression));
 
         return this;
     }
@@ -109,6 +111,7 @@ public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
         instruction.AsSpan.CopyTo(span);
         SizeInBytes = totalSizeInBytes;
         CurrentCycleCount += instruction.CycleCount;
+        CurrentOffset += (ushort)sizeInBytes;
 
         var debugMap = DebugMap;
         if (debugMap != null)
@@ -131,12 +134,13 @@ public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
     /// <returns>The current assembler instance.</returns>
     public Mos6510Assembler AddInstruction(Mos6510Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
-        var offset = SizeInBytes;
+        var currentAddress = CurrentAddress;
+        var bufferOffset = SizeInBytes;
         // ReSharper disable ExplicitCallerInfoArgument
         AddInstruction(instruction, debugFilePath, debugLineNumber);
         // ReSharper restore ExplicitCallerInfoArgument
 
-        Patches.Add(new((ushort)(offset + 1), instruction.AddressingMode, expression));
+        Patches.Add(new(currentAddress, (ushort)(bufferOffset + 1), instruction.AddressingMode, expression));
 
         return this;
     }

@@ -128,6 +128,14 @@ internal class GeneratorApp
 
         GenerateAssemblyTests("Mos6502", opcodes6502);
         GenerateAssemblyTests("Mos6510", opcodes6510);
+
+
+        Console.WriteLine("| Byte | Instruction | Aliases | Illegal |");
+        Console.WriteLine("|------|-------------|---------|---------|");
+        foreach (var opcode in opcodes6510)
+        {
+            Console.WriteLine($"| `{opcode.OpcodeHex}` | `{opcode.UniqueName}` | {string.Join(", ", opcode.AllNames.Select(x => $"`{x}`"))} | {opcode.Illegal.ToString().ToLowerInvariant()} |");
+        }
     }
 
     // 6510

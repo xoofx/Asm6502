@@ -19,10 +19,10 @@ Debug Info (Program: TestSimple)
 - Program End Address: C00E
 - Debug Line Count: 7
 
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:52
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:53
-C005 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:55
-C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:56
-C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:57
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:58
-C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:59
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:60
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:61
+C005 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:63
+C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:64
+C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:65
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:66
+C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:67

@@ -1,0 +1,22 @@
+﻿C000  A9 00      LDA #$00
+
+LL_02:
+C002  4C 12 C0   JMP LL_01
+
+C005  EA         NOP
+C006  EA         NOP
+C007  EA         NOP
+C008  EA         NOP
+C009  EA         NOP
+C00A  EA         NOP
+C00B  EA         NOP
+C00C  EA         NOP
+C00D  EA         NOP
+C00E  EA         NOP
+C00F  EA         NOP
+C010  A9 01      LDA #$01
+
+LL_01:
+C012  4C 02 C0   JMP LL_02
+
+; A9 00 4C 12 C0 EA EA EA EA EA EA EA EA EA EA EA A9 01 4C 02 C0

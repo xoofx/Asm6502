@@ -38,22 +38,22 @@ Debug Info (Program: TestComplex)
 - Program End Address: C026
 - Debug Line Count: 19
 
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:75
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:76
-C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:79
-C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:80
-C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:83
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:84
-C00C {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:85
-C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:86
-C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:89
-C012 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:90
-C013 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:91
-C015 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:95
-C018 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:99
-C01B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:107
-C01D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:110
-C020 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:111
-C021 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:112
-C023 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:113
-C025 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:114
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:83
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:84
+C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:87
+C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:88
+C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:91
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:92
+C00C {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:93
+C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:94
+C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:97
+C012 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:98
+C013 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:99
+C015 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:103
+C018 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:107
+C01B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:115
+C01D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:118
+C020 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:119
+C021 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:120
+C023 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:121
+C025 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:122

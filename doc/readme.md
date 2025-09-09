@@ -342,6 +342,53 @@ C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:57
 C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:58
 ```
 
+### Org directive
+
+The org directive allows to set the current assembly address to a specific value.
+
+```csharp
+using var asm = new Mos6502Assembler();
+asm.Begin(0xC000); // Resets the assembler state and sets the org to 0xC000
+asm.LDA_Imm(0);
+asm.Label("LABEL1", out var label1);
+asm.LabelForward("LABEL2", out var label2);
+asm.JMP(label2);
+
+// Fill with NOPs to reach address 0xC010
+asm.AppendBytes(0x10 - asm.SizeInBytes, (byte)Mos6502OpCode.NOP_Implied);
+        
+asm.Org(0xC010); // Usage of org directive to set the base address to 0xC010
+asm.LDA_Imm(1);
+asm.Label(label2);
+asm.JMP(label1);
+asm.End();
+```
+
+is will produce the following code:
+
+```
+C000  A9 00      LDA #$00
+
+LL_02:
+C002  4C 12 C0   JMP LL_01
+
+C005  EA         NOP
+C006  EA         NOP
+C007  EA         NOP
+C008  EA         NOP
+C009  EA         NOP
+C00A  EA         NOP
+C00B  EA         NOP
+C00C  EA         NOP
+C00D  EA         NOP
+C00E  EA         NOP
+C00F  EA         NOP
+C010  A9 01      LDA #$01
+
+LL_01:
+C012  4C 02 C0   JMP LL_02
+```
+
 ### 6510 Support
 
 The library also supports the 6510 CPU, which is a variant of the 6502 used in the Commodore 64. For simplicity, it contains all the 6502 instructions including the illegal opcodes. You can use the `Mos6510Assembler` and `Mos6510Disassembler` classes in the same way as the 6502 counterparts.

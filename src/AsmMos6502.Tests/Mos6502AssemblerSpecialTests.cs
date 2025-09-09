@@ -17,11 +17,18 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
         asm.AppendBuffer([0x01, 0x02, 0x03]);
         // Check the size in bytes
         Assert.AreEqual(3, asm.SizeInBytes);
+        Assert.AreEqual(3, asm.CurrentOffset);
         // Check the content of the buffer
         var buffer = asm.Buffer;
         Assert.AreEqual(0x01, buffer[0]);
         Assert.AreEqual(0x02, buffer[1]);
         Assert.AreEqual(0x03, buffer[2]);
+
+        asm.Org(0xE000);
+        // Append another buffer of 2 bytes at new origin
+        asm.AppendBuffer([0xAA, 0xBB]);
+        Assert.AreEqual(5, asm.SizeInBytes);
+        Assert.AreEqual(2, asm.CurrentOffset);
     }
 
     [TestMethod]
@@ -32,6 +39,7 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
         asm.AppendBytes(5, 0xFF);
         // Check the size in bytes
         Assert.AreEqual(5, asm.SizeInBytes);
+        Assert.AreEqual(5, asm.CurrentOffset);
         // Check the content of the buffer
         var buffer = asm.Buffer;
         for (int i = 0; i < 5; i++)
@@ -135,6 +143,51 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
             .LDA(_[0x10, X])          // Indirect,X
             .LDA(_[0x10], Y)          // Indirect,Y
             .End();
+        await VerifyAsm(asm);
+    }
+
+    [TestMethod]
+    public void TestOrg()
+    {
+        using var asm = new Mos6502Assembler();
+        asm.Org(0xE000);
+        Assert.AreEqual(0xE000, asm.CurrentAddress);
+        Assert.AreEqual(0, asm.CurrentOffset);
+        Assert.AreEqual(0, asm.SizeInBytes);
+        asm.LDA_Imm(0x10);
+        Assert.AreEqual(0xE002, asm.CurrentAddress);
+        Assert.AreEqual(2, asm.CurrentOffset);
+        Assert.AreEqual(2, asm.SizeInBytes);
+        asm.Org(0xC000);
+        Assert.AreEqual(0xC000, asm.CurrentAddress);
+        Assert.AreEqual(0, asm.CurrentOffset);
+        Assert.AreEqual(2, asm.SizeInBytes);
+        asm.LDA_Imm(0x20);
+        Assert.AreEqual(0xC002, asm.CurrentAddress);
+        Assert.AreEqual(2, asm.CurrentOffset);
+        Assert.AreEqual(4, asm.SizeInBytes);
+    }
+
+
+    [TestMethod]
+    public async Task TestOrgWithLabels()
+    {
+        using var asm = new Mos6502Assembler();
+        asm.Begin(0xC000);
+        asm.LDA_Imm(0);
+        asm.Label("LABEL1", out var label1);
+        asm.LabelForward("LABEL2", out var label2);
+        asm.JMP(label2);
+
+        // Fill with NOPs to reach address 0xC010
+        asm.AppendBytes(0x10 - asm.SizeInBytes, (byte)Mos6502OpCode.NOP_Implied);
+        
+        asm.Org(0xC010);
+        asm.LDA_Imm(1);
+        asm.Label(label2);
+        asm.JMP(label1);
+        asm.End();
+
         await VerifyAsm(asm);
     }
 }

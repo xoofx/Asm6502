@@ -27,15 +27,20 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     }
 
     /// <summary>
-    /// Gets or sets the base address for code generation.
+    /// Gets the base address for code generation. This address can be changed using the <see cref="Org(ushort)"/> method.
     /// </summary>
-    public ushort BaseAddress { get; set; }
+    public ushort BaseAddress { get; private set; }
 
     /// <summary>
     /// Gets the current address in the assembler.
     /// </summary>
-    public ushort CurrentAddress => SafeAddress(BaseAddress + SizeInBytes);
-
+    public ushort CurrentAddress => SafeAddress(BaseAddress + CurrentOffset);
+    
+    /// <summary>
+    /// Gets the current offset relative to the <see cref="BaseAddress"/>.
+    /// </summary>
+    public ushort CurrentOffset { get; private protected set; }
+    
     /// <summary>
     /// Gets the current size in bytes of generated assembly code.
     /// </summary>
@@ -60,7 +65,6 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// </remarks>
     public Span<byte> Buffer => _buffer.AsSpan(0, (int)SizeInBytes);
 
-
     /// <summary>
     /// Writes a buffer of bytes to the assembler's internal buffer.
     /// </summary>
@@ -74,7 +78,43 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
             var span = GetBuffer(input.Length);
             input.CopyTo(span);
             SizeInBytes = newSizeInBytes;
+            CurrentOffset += (ushort)input.Length;
         }
+
+        return this;
+    }
+
+    /// <summary>
+    /// Appends an 8-bit value to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="value">An 8-bit value to append.</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502AssemblerBase Append(byte value)
+    {
+        var sizeInBytes = SizeInBytes;
+        var newSizeInBytes = SafeAddress(sizeInBytes + 1);
+        var span = GetBuffer(1);
+        span[0] = value;
+        SizeInBytes = newSizeInBytes;
+        CurrentOffset += 1;
+
+        return this;
+    }
+
+    /// <summary>
+    /// Appends an 16-bit value to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="value">An 16-bit value to append.</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502AssemblerBase Append(ushort value)
+    {
+        var sizeInBytes = SizeInBytes;
+        var newSizeInBytes = SafeAddress(sizeInBytes + 2);
+        var span = GetBuffer(2);
+        span[0] = (byte)value;
+        span[1] = (byte)(value >> 8);
+        SizeInBytes = newSizeInBytes;
+        CurrentOffset += 2;
 
         return this;
     }
@@ -92,8 +132,10 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         var newSizeInBytes = SafeAddress(sizeInBytes + 1);
         var span = GetBuffer(1);
         span[0] = 0; // Initialize with zero
-        Patches.Add(new(sizeInBytes, Mos6502AddressingMode.Immediate, expression));
+        Patches.Add(new(CurrentAddress, sizeInBytes, Mos6502AddressingMode.Immediate, expression));
         SizeInBytes = newSizeInBytes;
+        CurrentOffset += 1;
+
         return this;
     }
 
@@ -111,8 +153,10 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         var span = GetBuffer(2);
         span[0] = 0; // Initialize with zero
         span[1] = 0;
-        Patches.Add(new(sizeInBytes, Mos6502AddressingMode.Absolute, expression));
+        Patches.Add(new(CurrentAddress, sizeInBytes, Mos6502AddressingMode.Absolute, expression));
         SizeInBytes = newSizeInBytes;
+        CurrentOffset += 2;
+
         return this;
     }
 
@@ -129,6 +173,8 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         var span = GetBuffer(length);
         span.Fill(c);
         SizeInBytes = newSizeInBytes;
+        CurrentOffset += (ushort)length;
+
         return this;
     }
 
@@ -137,14 +183,26 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// </summary>
     public Mos6502AssemblerBase Begin(ushort address = 0xc000)
     {
-        BaseAddress = address;
         ReleaseSharedBuffer();
         Patches.Clear();
         SizeInBytes = 0;
         CurrentCycleCount = 0;
+        Org(address);
+
+        return this;
+    }
+    
+    /// <summary>
+    /// Sets the origin address for the assembler, resets the <see cref="CurrentOffset"/>.
+    /// </summary>
+    public Mos6502AssemblerBase Org(ushort address)
+    {
+        BaseAddress = address;
+        CurrentOffset = 0;
 
         // Reset the base address to the default value
         DebugMap?.BeginProgram(BaseAddress);
+
         return this;
     }
 
@@ -187,10 +245,10 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
                     resolved = exprU16.Evaluate();
                     break;
                 default:
-                    throw new InvalidOperationException($"Unsupported expression type `{expression.GetType()}` for patch at offset 0x{patch.Offset:X4} with expression `{expression}`");
+                    throw new InvalidOperationException($"Unsupported expression type `{expression.GetType()}` for patch at offset 0x{patch.BufferOffset:X4} with expression `{expression}`");
             }
 
-            var patchRef = Buffer.Slice(patch.Offset);
+            var patchRef = Buffer.Slice(patch.BufferOffset);
 
             switch (patch.AddressingMode)
             {
@@ -210,14 +268,14 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
                     patchRef[1] = (byte)(resolved >> 8); // High byte
                     break;
                 case Mos6502AddressingMode.Relative:
-                    var deltaPc = resolved - (BaseAddress + patch.Offset + 1);
+                    var deltaPc = resolved - (patch.Address + 2);
                     if (deltaPc < sbyte.MinValue || deltaPc > sbyte.MaxValue)
-                        throw new InvalidOperationException($"Relative address for expression `{expression}` at instruction offset 0x`{patch.Offset - 1:X4}` is out of range: {deltaPc}. Must be [-128, 127] ");
+                        throw new InvalidOperationException($"Relative address for expression `{expression}` at buffer offset 0x`{patch.BufferOffset - 1:X4}` is out of range: {deltaPc}. Must be [-128, 127] ");
 
                     patchRef[0] = (byte)deltaPc;
                     break;
                 default:
-                    throw new InvalidOperationException($"Unsupported addressing mode {patch.AddressingMode} for patch at offset 0x{patch.Offset:X4} with expression `{expression}`");
+                    throw new InvalidOperationException($"Unsupported addressing mode {patch.AddressingMode} for patch at offset 0x{patch.BufferOffset:X4} with expression `{expression}`");
             }
         }
 
@@ -253,7 +311,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     public Mos6502AssemblerBase Label(Mos6502Label label, bool force = false)
     {
         if (!force && label.IsBound) throw new InvalidOperationException($"Label {label.Name} is already bound");
-        label.Address = SafeAddress(BaseAddress + SizeInBytes);
+        label.Address = CurrentAddress;
         label.IsBound = true;
         return this;
     }
@@ -342,10 +400,11 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// <summary>
     /// Represents a patch that needs to be applied to a memory location after labels have been bound.
     /// </summary>
-    /// <param name="Offset">The offset in the buffer where the patch should be applied.</param>
+    /// <param name="Address">The base address where the patch is applied.</param>
+    /// <param name="BufferOffset">The offset in the buffer where the patch should be applied.</param>
     /// <param name="AddressingMode">The kind of address for the patch (8 bit, 16 bit).</param>
     /// <param name="Expression">An expression (U8 or U16).</param>
-    private protected record struct Patch(ushort Offset, Mos6502AddressingMode AddressingMode, Mos6502Expression Expression);
+    private protected record struct Patch(ushort Address, ushort BufferOffset, Mos6502AddressingMode AddressingMode, Mos6502Expression Expression);
 }
 
 /// <summary>
@@ -384,7 +443,21 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// <returns>The current assembler instance.</returns>
     /// <exception cref="ArgumentNullException">if expression is null</exception>
     public new TAsm Append(Expressions.Mos6502ExpressionU16 expression) => (TAsm)base.Append(expression);
-    
+
+    /// <summary>
+    /// Appends an 8-bit value to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="value">An 8-bit value to append.</param>
+    /// <returns>The current assembler instance.</returns>
+    public new TAsm Append(byte value) => (TAsm)base.Append(value);
+
+    /// <summary>
+    /// Appends an 16-bit value to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="value">An 16-bit value to append.</param>
+    /// <returns>The current assembler instance.</returns>
+    public new TAsm Append(ushort value) => (TAsm)base.Append(value);
+
     /// <summary>
     /// Writes a number of bytes to the assembler's internal buffer, filling them with a specified byte value.
     /// </summary>
@@ -397,6 +470,11 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// Resets the assembler state.
     /// </summary>
     public new TAsm Begin(ushort address = 0xc000) => (TAsm)base.Begin(address);
+
+    /// <summary>
+    /// Sets the origin address for the assembler and resets the <see cref="Mos6502AssemblerBase.CurrentOffset"/>.
+    /// </summary>
+    public new TAsm Org(ushort address) => (TAsm)base.Org(address);
 
     /// <summary>
     /// Assembles the instructions and patches the labels.

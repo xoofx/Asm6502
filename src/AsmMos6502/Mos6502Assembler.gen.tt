@@ -52,6 +52,7 @@ public partial class <#= proc #>Assembler : Mos6502AssemblerBase<<#= proc #>Asse
         instruction.AsSpan.CopyTo(span);
         SizeInBytes = totalSizeInBytes;
         CurrentCycleCount += instruction.CycleCount;
+        CurrentOffset += (ushort)sizeInBytes;
 
         var debugMap = DebugMap;
         if (debugMap != null)
@@ -74,12 +75,13 @@ public partial class <#= proc #>Assembler : Mos6502AssemblerBase<<#= proc #>Asse
     /// <returns>The current assembler instance.</returns>
     public <#= proc #>Assembler AddInstruction(<#= proc #>Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
-        var offset = SizeInBytes;
+        var currentAddress = CurrentAddress;
+        var bufferOffset = SizeInBytes;
         // ReSharper disable ExplicitCallerInfoArgument
         AddInstruction(instruction, debugFilePath, debugLineNumber);
         // ReSharper restore ExplicitCallerInfoArgument
 
-        Patches.Add(new((ushort)(offset + 1), instruction.AddressingMode, expression));
+        Patches.Add(new(currentAddress, (ushort)(bufferOffset + 1), instruction.AddressingMode, expression));
 
         return this;
     }
