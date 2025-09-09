@@ -416,7 +416,7 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0x6d` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` address` | `asm.ADC(address);` | Add with carry |
 | `0x7d` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` address, X` | `asm.ADC(address, X);` | Add with carry |
 | `0x79` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` address, Y` | `asm.ADC(address, Y);` | Add with carry |
-| `0x69` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` #value` | `asm.ADC(value);` | Add with carry |
+| `0x69` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` #value` | `asm.ADC_Imm(value);` | Add with carry |
 | `0x61` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` (zp, X)` | `asm.ADC(_[zp, X]);` | Add with carry |
 | `0x71` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` (zp), Y` | `asm.ADC(_[zp], Y);` | Add with carry |
 | `0x65` | [`ADC`](https://www.masswerk.at/6502/6502_instruction_set.html#ADC) ` zp` | `asm.ADC(zp);` | Add with carry |
@@ -424,7 +424,7 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0x2d` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` address` | `asm.AND(address);` | Logical AND |
 | `0x3d` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` address, X` | `asm.AND(address, X);` | Logical AND |
 | `0x39` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` address, Y` | `asm.AND(address, Y);` | Logical AND |
-| `0x29` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` #value` | `asm.AND(value);` | Logical AND |
+| `0x29` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` #value` | `asm.AND_Imm(value);` | Logical AND |
 | `0x21` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` (zp, X)` | `asm.AND(_[zp, X]);` | Logical AND |
 | `0x31` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` (zp), Y` | `asm.AND(_[zp], Y);` | Logical AND |
 | `0x25` | [`AND`](https://www.masswerk.at/6502/6502_instruction_set.html#AND) ` zp` | `asm.AND(zp);` | Logical AND |
@@ -452,16 +452,16 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0xcd` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` address` | `asm.CMP(address);` | Compare |
 | `0xdd` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` address, X` | `asm.CMP(address, X);` | Compare |
 | `0xd9` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` address, Y` | `asm.CMP(address, Y);` | Compare |
-| `0xc9` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` #value` | `asm.CMP(value);` | Compare |
+| `0xc9` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` #value` | `asm.CMP_Imm(value);` | Compare |
 | `0xc1` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` (zp, X)` | `asm.CMP(_[zp, X]);` | Compare |
 | `0xd1` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` (zp), Y` | `asm.CMP(_[zp], Y);` | Compare |
 | `0xc5` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` zp` | `asm.CMP(zp);` | Compare |
 | `0xd5` | [`CMP`](https://www.masswerk.at/6502/6502_instruction_set.html#CMP) ` zp, X` | `asm.CMP(zp, X);` | Compare |
 | `0xec` | [`CPX`](https://www.masswerk.at/6502/6502_instruction_set.html#CPX) ` address` | `asm.CPX(address);` | Compare X register |
-| `0xe0` | [`CPX`](https://www.masswerk.at/6502/6502_instruction_set.html#CPX) ` #value` | `asm.CPX(value);` | Compare X register |
+| `0xe0` | [`CPX`](https://www.masswerk.at/6502/6502_instruction_set.html#CPX) ` #value` | `asm.CPX_Imm(value);` | Compare X register |
 | `0xe4` | [`CPX`](https://www.masswerk.at/6502/6502_instruction_set.html#CPX) ` zp` | `asm.CPX(zp);` | Compare X register |
 | `0xcc` | [`CPY`](https://www.masswerk.at/6502/6502_instruction_set.html#CPY) ` address` | `asm.CPY(address);` | Compare Y register |
-| `0xc0` | [`CPY`](https://www.masswerk.at/6502/6502_instruction_set.html#CPY) ` #value` | `asm.CPY(value);` | Compare Y register |
+| `0xc0` | [`CPY`](https://www.masswerk.at/6502/6502_instruction_set.html#CPY) ` #value` | `asm.CPY_Imm(value);` | Compare Y register |
 | `0xc4` | [`CPY`](https://www.masswerk.at/6502/6502_instruction_set.html#CPY) ` zp` | `asm.CPY(zp);` | Compare Y register |
 | `0xce` | [`DEC`](https://www.masswerk.at/6502/6502_instruction_set.html#DEC) ` address` | `asm.DEC(address);` | Decrement memory |
 | `0xde` | [`DEC`](https://www.masswerk.at/6502/6502_instruction_set.html#DEC) ` address, X` | `asm.DEC(address, X);` | Decrement memory |
@@ -472,7 +472,7 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0x4d` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` address` | `asm.EOR(address);` | Logical Exclusive OR (XOR) |
 | `0x5d` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` address, X` | `asm.EOR(address, X);` | Logical Exclusive OR (XOR) |
 | `0x59` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` address, Y` | `asm.EOR(address, Y);` | Logical Exclusive OR (XOR) |
-| `0x49` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` #value` | `asm.EOR(value);` | Logical Exclusive OR (XOR) |
+| `0x49` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` #value` | `asm.EOR_Imm(value);` | Logical Exclusive OR (XOR) |
 | `0x41` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` (zp, X)` | `asm.EOR(_[zp, X]);` | Logical Exclusive OR (XOR) |
 | `0x51` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` (zp), Y` | `asm.EOR(_[zp], Y);` | Logical Exclusive OR (XOR) |
 | `0x45` | [`EOR`](https://www.masswerk.at/6502/6502_instruction_set.html#EOR) ` zp` | `asm.EOR(zp);` | Logical Exclusive OR (XOR) |
@@ -489,19 +489,19 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0xad` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` address` | `asm.LDA(address);` | Load accumulator |
 | `0xbd` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` address, X` | `asm.LDA(address, X);` | Load accumulator |
 | `0xb9` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` address, Y` | `asm.LDA(address, Y);` | Load accumulator |
-| `0xa9` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` #value` | `asm.LDA(value);` | Load accumulator |
+| `0xa9` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` #value` | `asm.LDA_Imm(value);` | Load accumulator |
 | `0xa1` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` (zp, X)` | `asm.LDA(_[zp, X]);` | Load accumulator |
 | `0xb1` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` (zp), Y` | `asm.LDA(_[zp], Y);` | Load accumulator |
 | `0xa5` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` zp` | `asm.LDA(zp);` | Load accumulator |
 | `0xb5` | [`LDA`](https://www.masswerk.at/6502/6502_instruction_set.html#LDA) ` zp, X` | `asm.LDA(zp, X);` | Load accumulator |
 | `0xae` | [`LDX`](https://www.masswerk.at/6502/6502_instruction_set.html#LDX) ` address` | `asm.LDX(address);` | Load X register |
 | `0xbe` | [`LDX`](https://www.masswerk.at/6502/6502_instruction_set.html#LDX) ` address, Y` | `asm.LDX(address, Y);` | Load X register |
-| `0xa2` | [`LDX`](https://www.masswerk.at/6502/6502_instruction_set.html#LDX) ` #value` | `asm.LDX(value);` | Load X register |
+| `0xa2` | [`LDX`](https://www.masswerk.at/6502/6502_instruction_set.html#LDX) ` #value` | `asm.LDX_Imm(value);` | Load X register |
 | `0xa6` | [`LDX`](https://www.masswerk.at/6502/6502_instruction_set.html#LDX) ` zp` | `asm.LDX(zp);` | Load X register |
 | `0xb6` | [`LDX`](https://www.masswerk.at/6502/6502_instruction_set.html#LDX) ` zp, Y` | `asm.LDX(zp, Y);` | Load X register |
 | `0xac` | [`LDY`](https://www.masswerk.at/6502/6502_instruction_set.html#LDY) ` address` | `asm.LDY(address);` | Load Y register |
 | `0xbc` | [`LDY`](https://www.masswerk.at/6502/6502_instruction_set.html#LDY) ` address, X` | `asm.LDY(address, X);` | Load Y register |
-| `0xa0` | [`LDY`](https://www.masswerk.at/6502/6502_instruction_set.html#LDY) ` #value` | `asm.LDY(value);` | Load Y register |
+| `0xa0` | [`LDY`](https://www.masswerk.at/6502/6502_instruction_set.html#LDY) ` #value` | `asm.LDY_Imm(value);` | Load Y register |
 | `0xa4` | [`LDY`](https://www.masswerk.at/6502/6502_instruction_set.html#LDY) ` zp` | `asm.LDY(zp);` | Load Y register |
 | `0xb4` | [`LDY`](https://www.masswerk.at/6502/6502_instruction_set.html#LDY) ` zp, X` | `asm.LDY(zp, X);` | Load Y register |
 | `0x4e` | [`LSR`](https://www.masswerk.at/6502/6502_instruction_set.html#LSR) ` address` | `asm.LSR(address);` | Logical shift right |
@@ -513,7 +513,7 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0x0d` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` address` | `asm.ORA(address);` | Logical Inclusive OR |
 | `0x1d` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` address, X` | `asm.ORA(address, X);` | Logical Inclusive OR |
 | `0x19` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` address, Y` | `asm.ORA(address, Y);` | Logical Inclusive OR |
-| `0x09` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` #value` | `asm.ORA(value);` | Logical Inclusive OR |
+| `0x09` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` #value` | `asm.ORA_Imm(value);` | Logical Inclusive OR |
 | `0x01` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` (zp, X)` | `asm.ORA(_[zp, X]);` | Logical Inclusive OR |
 | `0x11` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` (zp), Y` | `asm.ORA(_[zp], Y);` | Logical Inclusive OR |
 | `0x05` | [`ORA`](https://www.masswerk.at/6502/6502_instruction_set.html#ORA) ` zp` | `asm.ORA(zp);` | Logical Inclusive OR |
@@ -537,7 +537,7 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0xed` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` address` | `asm.SBC(address);` | Subtract with carry |
 | `0xfd` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` address, X` | `asm.SBC(address, X);` | Subtract with carry |
 | `0xf9` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` address, Y` | `asm.SBC(address, Y);` | Subtract with carry |
-| `0xe9` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` #value` | `asm.SBC(value);` | Subtract with carry |
+| `0xe9` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` #value` | `asm.SBC_Imm(value);` | Subtract with carry |
 | `0xe1` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` (zp, X)` | `asm.SBC(_[zp, X]);` | Subtract with carry |
 | `0xf1` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` (zp), Y` | `asm.SBC(_[zp], Y);` | Subtract with carry |
 | `0xe5` | [`SBC`](https://www.masswerk.at/6502/6502_instruction_set.html#SBC) ` zp` | `asm.SBC(zp);` | Subtract with carry |
@@ -571,11 +571,11 @@ The following instructions are supported by the `Mos6510Assembler` class:
 
 | Byte | Instruction | C# Syntax    | Aliases | Description | Unstable |
 |------|-------------|--------------|---------|-------------|----------|
-| `0x4b` | [`ALR`](https://www.masswerk.at/6502/6502_instruction_set.html#ALR) ` #value` | `asm.ALR(value);` | `ALR`, `ASR` | AND then LSR |  |
-| `0x0b` | [`ANC`](https://www.masswerk.at/6502/6502_instruction_set.html#ANC) ` #value` | `asm.ANC(value);` | `ANC` | AND then set carry |  |
-| `0x2b` | [`ANC`](https://www.masswerk.at/6502/6502_instruction_set.html#ANC) ` #value` | `asm.ANC_2B(value);` | `ANC`, `ANC2` | AND then set carry |  |
-| `0x8b` | [`ANE`](https://www.masswerk.at/6502/6502_instruction_set.html#ANE) ` #value` | `asm.ANE(value);` | `ANE`, `XAA` | Undocumented: AND with X then AND operand | ❌ |
-| `0x6b` | [`ARR`](https://www.masswerk.at/6502/6502_instruction_set.html#ARR) ` #value` | `asm.ARR(value);` | `ARR` | AND then ROR |  |
+| `0x4b` | [`ALR`](https://www.masswerk.at/6502/6502_instruction_set.html#ALR) ` #value` | `asm.ALR_Imm(value);` | `ALR`, `ASR` | AND then LSR |  |
+| `0x0b` | [`ANC`](https://www.masswerk.at/6502/6502_instruction_set.html#ANC) ` #value` | `asm.ANC_Imm(value);` | `ANC` | AND then set carry |  |
+| `0x2b` | [`ANC`](https://www.masswerk.at/6502/6502_instruction_set.html#ANC) ` #value` | `asm.ANC_2B_Imm(value);` | `ANC`, `ANC2` | AND then set carry |  |
+| `0x8b` | [`ANE`](https://www.masswerk.at/6502/6502_instruction_set.html#ANE) ` #value` | `asm.ANE_Imm(value);` | `ANE`, `XAA` | Undocumented: AND with X then AND operand | ❌ |
+| `0x6b` | [`ARR`](https://www.masswerk.at/6502/6502_instruction_set.html#ARR) ` #value` | `asm.ARR_Imm(value);` | `ARR` | AND then ROR |  |
 | `0xcf` | [`DCP`](https://www.masswerk.at/6502/6502_instruction_set.html#DCP) ` address` | `asm.DCP(address);` | `DCP`, `DCM` | DEC then CMP |  |
 | `0xdf` | [`DCP`](https://www.masswerk.at/6502/6502_instruction_set.html#DCP) ` address, X` | `asm.DCP(address, X);` | `DCP`, `DCM` | DEC then CMP |  |
 | `0xdb` | [`DCP`](https://www.masswerk.at/6502/6502_instruction_set.html#DCP) ` address, Y` | `asm.DCP(address, Y);` | `DCP`, `DCM` | DEC then CMP |  |
@@ -609,7 +609,7 @@ The following instructions are supported by the `Mos6510Assembler` class:
 | `0xb3` | [`LAX`](https://www.masswerk.at/6502/6502_instruction_set.html#LAX) ` (zp), Y` | `asm.LAX(_[zp], Y);` | `LAX` | LDA then LDX |  |
 | `0xa7` | [`LAX`](https://www.masswerk.at/6502/6502_instruction_set.html#LAX) ` zp` | `asm.LAX(zp);` | `LAX` | LDA then LDX |  |
 | `0xb7` | [`LAX`](https://www.masswerk.at/6502/6502_instruction_set.html#LAX) ` zp, Y` | `asm.LAX(zp, Y);` | `LAX` | LDA then LDX |  |
-| `0xab` | [`LXA`](https://www.masswerk.at/6502/6502_instruction_set.html#LXA) ` #value` | `asm.LXA(value);` | `LXA`, `LAX`, `immediate` | LDA then LDX | ❌ |
+| `0xab` | [`LXA`](https://www.masswerk.at/6502/6502_instruction_set.html#LXA) ` #value` | `asm.LXA_Imm(value);` | `LXA`, `LAX`, `immediate` | LDA then LDX | ❌ |
 | `0x0c` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` address` | `asm.NOP(address);` | `NOP` | No operation |  |
 | `0x1c` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` address, X` | `asm.NOP(address, X);` | `NOP` | No operation |  |
 | `0x3c` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` address, X` | `asm.NOP_3C(address, X);` | `NOP` | No operation |  |
@@ -617,11 +617,11 @@ The following instructions are supported by the `Mos6510Assembler` class:
 | `0x7c` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` address, X` | `asm.NOP_7C(address, X);` | `NOP` | No operation |  |
 | `0xdc` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` address, X` | `asm.NOP_DC(address, X);` | `NOP` | No operation |  |
 | `0xfc` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` address, X` | `asm.NOP_FC(address, X);` | `NOP` | No operation |  |
-| `0x80` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP(value);` | `NOP` | No operation |  |
-| `0x82` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_82(value);` | `NOP` | No operation |  |
-| `0x89` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_89(value);` | `NOP` | No operation |  |
-| `0xc2` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_C2(value);` | `NOP` | No operation |  |
-| `0xe2` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_E2(value);` | `NOP` | No operation |  |
+| `0x80` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_Imm(value);` | `NOP` | No operation |  |
+| `0x82` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_82_Imm(value);` | `NOP` | No operation |  |
+| `0x89` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_89_Imm(value);` | `NOP` | No operation |  |
+| `0xc2` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_C2_Imm(value);` | `NOP` | No operation |  |
+| `0xe2` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) ` #value` | `asm.NOP_E2_Imm(value);` | `NOP` | No operation |  |
 | `0x1a` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) | `asm.NOP_1A();` | `NOP` | No operation |  |
 | `0x3a` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) | `asm.NOP_3A();` | `NOP` | No operation |  |
 | `0x5a` | [`NOP`](https://www.masswerk.at/6502/6502_instruction_set.html#NOP) | `asm.NOP_5A();` | `NOP` | No operation |  |
@@ -655,7 +655,7 @@ The following instructions are supported by the `Mos6510Assembler` class:
 | `0x83` | [`SAX`](https://www.masswerk.at/6502/6502_instruction_set.html#SAX) ` (zp, X)` | `asm.SAX(_[zp, X]);` | `SAX`, `AXS`, `AAX` | Store accumulator AND X |  |
 | `0x87` | [`SAX`](https://www.masswerk.at/6502/6502_instruction_set.html#SAX) ` zp` | `asm.SAX(zp);` | `SAX`, `AXS`, `AAX` | Store accumulator AND X |  |
 | `0x97` | [`SAX`](https://www.masswerk.at/6502/6502_instruction_set.html#SAX) ` zp, Y` | `asm.SAX(zp, Y);` | `SAX`, `AXS`, `AAX` | Store accumulator AND X |  |
-| `0xcb` | [`SBX`](https://www.masswerk.at/6502/6502_instruction_set.html#SBX) ` #value` | `asm.SBX(value);` | `SBX`, `AXS`, `SAX` | Compute (A AND X) then subtract with carry |  |
+| `0xcb` | [`SBX`](https://www.masswerk.at/6502/6502_instruction_set.html#SBX) ` #value` | `asm.SBX_Imm(value);` | `SBX`, `AXS`, `SAX` | Compute (A AND X) then subtract with carry |  |
 | `0x9f` | [`SHA`](https://www.masswerk.at/6502/6502_instruction_set.html#SHA) ` address, Y` | `asm.SHA(address, Y);` | `SHA`, `AHX`, `AXA` | Store A AND X AND (high address + 1) |  |
 | `0x93` | [`SHA`](https://www.masswerk.at/6502/6502_instruction_set.html#SHA) ` (zp), Y` | `asm.SHA(_[zp], Y);` | `SHA`, `AHX`, `AXA` | Store A AND X AND (high address + 1) | ❌ |
 | `0x9e` | [`SHX`](https://www.masswerk.at/6502/6502_instruction_set.html#SHX) ` address, Y` | `asm.SHX(address, Y);` | `SHX`, `A11`, `SXA`, `XAS` | Store A AND X AND (high address + 1) | ❌ |
@@ -675,4 +675,4 @@ The following instructions are supported by the `Mos6510Assembler` class:
 | `0x47` | [`SRE`](https://www.masswerk.at/6502/6502_instruction_set.html#SRE) ` zp` | `asm.SRE(zp);` | `SRE`, `LSE` | LSR then EOR |  |
 | `0x57` | [`SRE`](https://www.masswerk.at/6502/6502_instruction_set.html#SRE) ` zp, X` | `asm.SRE(zp, X);` | `SRE`, `LSE` | LSR then EOR |  |
 | `0x9b` | [`TAS`](https://www.masswerk.at/6502/6502_instruction_set.html#TAS) ` address, Y` | `asm.TAS(address, Y);` | `TAS`, `XAS`, `SHS` | Transfer A AND X to SP, store A AND X AND (high address + 1) | ❌ |
-| `0xeb` | [`USBC`](https://www.masswerk.at/6502/6502_instruction_set.html#USBC) ` #value` | `asm.USBC(value);` | `USBC`, `SBC` | SBC with NOP behavior |  |
+| `0xeb` | [`USBC`](https://www.masswerk.at/6502/6502_instruction_set.html#USBC) ` #value` | `asm.USBC_Imm(value);` | `USBC`, `SBC` | SBC with NOP behavior |  |

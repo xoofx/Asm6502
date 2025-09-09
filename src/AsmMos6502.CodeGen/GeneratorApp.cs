@@ -40,6 +40,10 @@ internal class GeneratorApp
         opcodes6502.ForEach(x =>
         {
             x.UniqueName = x.Name;
+            if (x.AddressingMode == "Immediate")
+            {
+                x.UniqueName = $"{x.Name}_Imm";
+            }
             x.OpcodeUniqueName = $"{x.Name}_{x.AddressingMode}";
         });
 
@@ -67,7 +71,18 @@ internal class GeneratorApp
             if (opcodeNameIsAlreadyUsed)
             {
                 illegal.UniqueName = $"{illegal.Name}_{illegal.Opcode:X2}";
-                illegal.OpcodeUniqueName = $"{illegal.UniqueName}_{illegal.AddressingMode}";
+                if (illegal.AddressingMode == "Immediate")
+                {
+                    illegal.UniqueName = $"{illegal.UniqueName}_Imm";
+                }
+                illegal.OpcodeUniqueName = $"{illegal.Name}_{illegal.Opcode:X2}_{illegal.AddressingMode}";
+            }
+            else
+            {
+                if (illegal.AddressingMode == "Immediate")
+                {
+                    illegal.UniqueName = $"{illegal.Name}_Imm";
+                }
             }
         }
         
@@ -488,7 +503,6 @@ internal class GeneratorApp
     
     private OpcodeSignature GetOpcodeSignature(JsonAsm6502Opcode opcode)
     {
-        var opName = opcode.UniqueName;
         var operandKind = OperandValueKind.None;
         List<Operand6502> argumentTypes;
         switch (opcode.AddressingMode)
@@ -507,7 +521,6 @@ internal class GeneratorApp
                 break;
             case "Immediate":
                 argumentTypes = ( [new("immediate", "byte")]);
-                opName = $"{opName}_Imm";
                 operandKind = OperandValueKind.Immediate;
                 break;
             case "ZeroPage":
@@ -551,7 +564,7 @@ internal class GeneratorApp
         }
 
         var operandCount = argumentTypes.Count;
-        return new(opcode, opName, operandCount, argumentTypes, operandKind);
+        return new(opcode, opcode.UniqueName, operandCount, argumentTypes, operandKind);
     }
 
     

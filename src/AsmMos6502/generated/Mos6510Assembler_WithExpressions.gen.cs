@@ -15,12 +15,6 @@ namespace AsmMos6502;
 partial class Mos6510Assembler
 {
     /// <summary>
-    /// Add with carry. ADC instruction (0x69) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler ADC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.ADC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
     /// Add with carry. ADC instruction (0x61) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
@@ -63,29 +57,29 @@ partial class Mos6510Assembler
     public Mos6510Assembler ADC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ADC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then LSR. ALR instruction (0x4b) with addressing mode Immediate.
+    /// Add with carry. ADC_Imm instruction (0x69) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler ADC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.ADC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// AND then LSR. ALR_Imm instruction (0x4b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler ALR_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ALR_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then set carry. ANC instruction (0x0b) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
-    public Mos6510Assembler ANC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.ANC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
-    /// AND then set carry. ANC_2B instruction (0x2b) with addressing mode Immediate.
+    /// AND then set carry. ANC_2B_Imm instruction (0x2b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler ANC_2B_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ANC_2B_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x29) with addressing mode Immediate.
+    /// AND then set carry. ANC_Imm instruction (0x0b) with addressing mode Immediate.
     /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler AND_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.AND_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler ANC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.ANC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical AND. AND instruction (0x21) with addressing mode IndirectX.
     /// </summary>
@@ -129,14 +123,20 @@ partial class Mos6510Assembler
     public Mos6510Assembler AND(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.AND((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Undocumented: AND with X then AND operand. ANE instruction (0x8b) with addressing mode Immediate.
+    /// Logical AND. AND_Imm instruction (0x29) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler AND_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.AND_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Undocumented: AND with X then AND operand. ANE_Imm instruction (0x8b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler ANE_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ANE_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then ROR. ARR instruction (0x6b) with addressing mode Immediate.
+    /// AND then ROR. ARR_Imm instruction (0x6b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler ARR_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -226,12 +226,6 @@ partial class Mos6510Assembler
     public Mos6510Assembler BVS(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BVS((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xc9) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler CMP_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.CMP_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
     /// Compare. CMP instruction (0xc1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
@@ -274,11 +268,11 @@ partial class Mos6510Assembler
     public Mos6510Assembler CMP(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.CMP((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare X register. CPX instruction (0xe0) with addressing mode Immediate.
+    /// Compare. CMP_Imm instruction (0xc9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler CPX_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.CPX_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    public Mos6510Assembler CMP_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.CMP_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare X register. CPX instruction (0xec) with addressing mode Absolute.
     /// </summary>
@@ -292,11 +286,11 @@ partial class Mos6510Assembler
     public Mos6510Assembler CPX(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.CPX((byte)0), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare Y register. CPY instruction (0xc0) with addressing mode Immediate.
+    /// Compare X register. CPX_Imm instruction (0xe0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler CPY_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.CPY_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    public Mos6510Assembler CPX_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.CPX_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Y register. CPY instruction (0xcc) with addressing mode Absolute.
     /// </summary>
@@ -309,6 +303,12 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 3, Size: 2 bytes.</remarks>
     public Mos6510Assembler CPY(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.CPY((byte)0), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Compare Y register. CPY_Imm instruction (0xc0) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler CPY_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.CPY_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// DEC then CMP. DCP instruction (0xc3) with addressing mode IndirectX.
     /// </summary>
@@ -376,12 +376,6 @@ partial class Mos6510Assembler
     public Mos6510Assembler DEC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DEC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x49) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler EOR_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.EOR_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x41) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
@@ -423,6 +417,12 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 2 bytes.</remarks>
     public Mos6510Assembler EOR(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.EOR((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical Exclusive OR (XOR). EOR_Imm instruction (0x49) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler EOR_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.EOR_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Increment memory. INC instruction (0xee) with addressing mode Absolute.
     /// </summary>
@@ -550,12 +550,6 @@ partial class Mos6510Assembler
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xa9) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler LDA_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.LDA_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
     /// Load accumulator. LDA instruction (0xa1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
@@ -598,11 +592,11 @@ partial class Mos6510Assembler
     public Mos6510Assembler LDA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LDA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX instruction (0xa2) with addressing mode Immediate.
+    /// Load accumulator. LDA_Imm instruction (0xa9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler LDX_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.LDX_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    public Mos6510Assembler LDA_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.LDA_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX instruction (0xae) with addressing mode Absolute.
     /// </summary>
@@ -628,11 +622,11 @@ partial class Mos6510Assembler
     public Mos6510Assembler LDX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LDX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY instruction (0xa0) with addressing mode Immediate.
+    /// Load X register. LDX_Imm instruction (0xa2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler LDY_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.LDY_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    public Mos6510Assembler LDX_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.LDX_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Y register. LDY instruction (0xac) with addressing mode Absolute.
     /// </summary>
@@ -658,6 +652,12 @@ partial class Mos6510Assembler
     public Mos6510Assembler LDY(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LDY((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Load Y register. LDY_Imm instruction (0xa0) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler LDY_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.LDY_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    /// <summary>
     /// Logical shift right. LSR instruction (0x4e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
@@ -682,18 +682,12 @@ partial class Mos6510Assembler
     public Mos6510Assembler LSR(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LSR((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// LDA then LDX. LXA instruction (0xab) with addressing mode Immediate.
+    /// LDA then LDX. LXA_Imm instruction (0xab) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal and unstable instruction.</remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler LXA_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LXA_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
-    /// No operation. NOP instruction (0x80) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
-    public Mos6510Assembler NOP_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.NOP_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// No operation. NOP instruction (0x0c) with addressing mode Absolute.
     /// </summary>
@@ -767,19 +761,19 @@ partial class Mos6510Assembler
     public Mos6510Assembler NOP_7C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_7C((ushort)0, x), address, debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_82 instruction (0x82) with addressing mode Immediate.
+    /// No operation. NOP_82_Imm instruction (0x82) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_82_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_82_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_89 instruction (0x89) with addressing mode Immediate.
+    /// No operation. NOP_89_Imm instruction (0x89) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_89_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_89_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_C2 instruction (0xc2) with addressing mode Immediate.
+    /// No operation. NOP_C2_Imm instruction (0xc2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_C2_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -797,7 +791,7 @@ partial class Mos6510Assembler
     public Mos6510Assembler NOP_DC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_DC((ushort)0, x), address, debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_E2 instruction (0xe2) with addressing mode Immediate.
+    /// No operation. NOP_E2_Imm instruction (0xe2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_E2_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -815,11 +809,11 @@ partial class Mos6510Assembler
     public Mos6510Assembler NOP_FC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_FC((ushort)0, x), address, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x09) with addressing mode Immediate.
+    /// No operation. NOP_Imm instruction (0x80) with addressing mode Immediate.
     /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler ORA_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.ORA_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.NOP_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Inclusive OR. ORA instruction (0x01) with addressing mode IndirectX.
     /// </summary>
@@ -862,6 +856,12 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 2 bytes.</remarks>
     public Mos6510Assembler ORA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ORA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical Inclusive OR. ORA_Imm instruction (0x09) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler ORA_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.ORA_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
     /// <summary>
     /// ROL then AND. RLA instruction (0x23) with addressing mode IndirectX.
     /// </summary>
@@ -1019,12 +1019,6 @@ partial class Mos6510Assembler
     public Mos6510Assembler SAX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SAX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xe9) with addressing mode Immediate.
-    /// </summary>
-    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
-    public Mos6510Assembler SBC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
-        => AddInstruction(Mos6510InstructionFactory.SBC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
-    /// <summary>
     /// Subtract with carry. SBC instruction (0xe1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
@@ -1067,7 +1061,13 @@ partial class Mos6510Assembler
     public Mos6510Assembler SBC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SBC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compute (A AND X) then subtract with carry. SBX instruction (0xcb) with addressing mode Immediate.
+    /// Subtract with carry. SBC_Imm instruction (0xe9) with addressing mode Immediate.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler SBC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+        => AddInstruction(Mos6510InstructionFactory.SBC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Compute (A AND X) then subtract with carry. SBX_Imm instruction (0xcb) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler SBX_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -1269,7 +1269,7 @@ partial class Mos6510Assembler
     public Mos6510Assembler TAS(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.TAS((ushort)0, y), address, debugFilePath, debugLineNumber);
     /// <summary>
-    /// SBC with NOP behavior. USBC instruction (0xeb) with addressing mode Immediate.
+    /// SBC with NOP behavior. USBC_Imm instruction (0xeb) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler USBC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
