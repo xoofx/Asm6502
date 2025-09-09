@@ -3180,7 +3180,7 @@
     },
     {
       "name": "TXS",
-      "name_long": "",
+      "name_long": "Transfer X to SP",
       "opcode": 154,
       "opcode_hex": "0x9a",
       "addressing_mode": "Implied",

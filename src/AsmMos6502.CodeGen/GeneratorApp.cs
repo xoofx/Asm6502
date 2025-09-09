@@ -21,6 +21,8 @@ internal class GeneratorApp
 
     public void Run()
     {
+        Console.OutputEncoding = Encoding.UTF8;
+
         if (!Directory.Exists(GeneratedFolderPath))
         {
             throw new DirectoryNotFoundException($"The directory '{GeneratedFolderPath}' does not exist. Please ensure the path is correct.");
@@ -130,12 +132,75 @@ internal class GeneratorApp
         GenerateAssemblyTests("Mos6510", opcodes6510);
 
 
-        Console.WriteLine("| Byte | Instruction | Aliases | Illegal |");
-        Console.WriteLine("|------|-------------|---------|---------|");
-        foreach (var opcode in opcodes6510)
+        Console.WriteLine("### 6502 Instructions");
+        Console.WriteLine();
+        Console.WriteLine("The following instructions are supported by the `Mos6502Assembler` and `Mos6510Assembler` classes:");
+        Console.WriteLine();
+        Console.WriteLine("| Byte | Instruction | C# Syntax    | Description |");
+        Console.WriteLine("|------|-------------|--------------|-------------|");
+        foreach (var opcode in opcodes6510.Where(x => !x.Illegal))
         {
-            Console.WriteLine($"| `{opcode.OpcodeHex}` | `{opcode.UniqueName}` | {string.Join(", ", opcode.AllNames.Select(x => $"`{x}`"))} | {opcode.Illegal.ToString().ToLowerInvariant()} |");
+            Console.WriteLine($"| `{opcode.OpcodeHex}` | {OpcodeWithLink(opcode)} | `asm.{opcode.UniqueName}{AddressingModeToSyntaxCSharp(opcode.AddressingMode)};` | {opcode.NameLong} |");
         }
+        Console.WriteLine();
+        Console.WriteLine("### 6510 Additional Illegal Instructions");
+        Console.WriteLine();
+        Console.WriteLine("The following instructions are supported by the `Mos6510Assembler` class:");
+        Console.WriteLine();
+        Console.WriteLine("| Byte | Instruction | C# Syntax    | Aliases | Description | Unstable |");
+        Console.WriteLine("|------|-------------|--------------|---------|-------------|----------|");
+        foreach (var opcode in opcodes6510.Where(x => x.Illegal))
+        {
+            Console.WriteLine($"| `{opcode.OpcodeHex}` | {OpcodeWithLink(opcode)} | `asm.{opcode.UniqueName}{AddressingModeToSyntaxCSharp(opcode.AddressingMode)};` | {string.Join(", ", opcode.AllNames.Select(x => $"`{x}`"))} | {opcode.NameLong} | {(opcode.Unstable?"❌" : "")} |");
+        }
+    }
+
+    private static string AddressingModeToSyntax(string mode)
+    {
+        return mode switch
+        {
+            "Implied" => "",
+            "Accumulator" => " A",
+            "Immediate" => " #value",
+            "ZeroPage" => " zp",
+            "ZeroPageX" => " zp, X",
+            "ZeroPageY" => " zp, Y",
+            "Absolute" => " address",
+            "AbsoluteX" => " address, X",
+            "AbsoluteY" => " address, Y",
+            "Indirect" => " (address)",
+            "IndirectX" => " (zp, X)",
+            "IndirectY" => " (zp), Y",
+            "Relative" => " label",
+            _ => throw new NotSupportedException($"Addressing mode '{mode}' is not supported."),
+        };
+    }
+
+    private static string OpcodeWithLink(JsonAsm6502Opcode opcode)
+    {
+        var operand = opcode.AddressingMode == "Implied" ? string.Empty : $" `{AddressingModeToSyntax(opcode.AddressingMode)}`";
+        return $"[`{opcode.Name}`]({opcode.OnlineDocumentation[^1]}){operand}";
+    }
+
+    private static string AddressingModeToSyntaxCSharp(string mode)
+    {
+        return mode switch
+        {
+            "Implied" => "()",
+            "Accumulator" => "(A)",
+            "Immediate" => "(value)",
+            "ZeroPage" => "(zp)",
+            "ZeroPageX" => "(zp, X)",
+            "ZeroPageY" => "(zp, Y)",
+            "Absolute" => "(address)",
+            "AbsoluteX" => "(address, X)",
+            "AbsoluteY" => "(address, Y)",
+            "Indirect" => "(_[address])",
+            "IndirectX" => "(_[zp, X])",
+            "IndirectY" => "(_[zp], Y)",
+            "Relative" => "(label)",
+            _ => throw new NotSupportedException($"Addressing mode '{mode}' is not supported."),
+        };
     }
 
     // 6510

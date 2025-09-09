@@ -1063,7 +1063,7 @@ public static partial class Mos6502InstructionFactory
     /// <summary>
     /// Creates the TXS instruction (0x9a) instruction with addressing mode Implied.
     /// </summary>
-    /// <remarks>. Cycles: 2, Size: 1 byte.</remarks>
+    /// <remarks>Transfer X to SP. Cycles: 2, Size: 1 byte.</remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Mos6502Instruction TXS() => new (Mos6502OpCode.TXS_Implied);
     

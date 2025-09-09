@@ -1539,7 +1539,7 @@ partial class Mos6510Assembler
     public Mos6510Assembler TXA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.TXA(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// . TXS instruction (0x9a) with addressing mode Implied.
+    /// Transfer X to SP. TXS instruction (0x9a) with addressing mode Implied.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 1 byte.</remarks>
     public Mos6510Assembler TXS([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)

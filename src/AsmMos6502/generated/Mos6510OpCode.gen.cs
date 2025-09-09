@@ -761,7 +761,7 @@ public enum Mos6510OpCode : byte
     /// <remarks>AddressingMode: Implied</remarks>
     TXA_Implied = 0x8a,
     /// <summary>
-    ///  - TXS
+    /// Transfer X to SP - TXS
     /// </summary>
     /// <remarks>AddressingMode: Implied</remarks>
     TXS_Implied = 0x9a,
