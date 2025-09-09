@@ -368,7 +368,7 @@ asm.JMP(label1);
 asm.End();
 ```
 
-is will produce the following code:
+This will produce the following code:
 
 ```
 C000  A9 00      LDA #$00
