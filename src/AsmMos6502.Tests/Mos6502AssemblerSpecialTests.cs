@@ -1,8 +1,8 @@
 // Copyright (c) Alexandre Mutel. All rights reserved.
 // Licensed under the BSD-Clause 2 license.
 // See license.txt file in the project root for full license information.
-
 using static AsmMos6502.Mos6502Factory;
+// ReSharper disable InconsistentNaming
 
 namespace AsmMos6502.Tests;
 
@@ -79,46 +79,46 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
 
         asm
             .Begin(0xc000)
-            .Label("START", out var startLabel)
+            .Label(out var start)
             .LDX_Imm(0x00)             // X = 0, index into buffer
             .LDY_Imm(0x10)             // Y = 16, number of bytes to process
 
-            .Label("LOOP", out var loopLabel)
+            .Label(out var loop)
             .LDA(0x0200, X) // Load byte at $0200 + X
             .CMP_Imm(0xFF)             // Check if byte is already 0xFF
 
-            .LabelForward("SKIP", out var skipLabel)
-            .BEQ(skipLabel)        // If so, skip incrementing
+            .LabelForward(out var skip)
+            .BEQ(skip)        // If so, skip incrementing
             .CLC()                 // Clear carry before addition
             .ADC_Imm(0x01)             // Add 1
             .STA(0x0200, X) // Store result back to memory
 
-            .Label(skipLabel)      // X = X + 1
+            .Label(skip)      // X = X + 1
             .INX()
             .DEY()                 // Y = Y - 1
-            .BNE(loopLabel)        // Loop until Y == 0
+            .BNE(loop)        // Loop until Y == 0
 
             // Call subroutine to flash border color
-            .LabelForward("FLASH_BORDER", out var flashBorderLabel)
-            .JSR(flashBorderLabel)
+            .LabelForward(out var flash_border)
+            .JSR(flash_border)
 
             // Infinite loop
-            .Label("END", out var endLabel)
-            .JMP(endLabel)
+            .Label(out var end)
+            .JMP(end)
 
             // ------------------------------
             // Subroutine: FLASH_BORDER
             // Cycles border color between 0–7
             // (Useful on C64, otherwise dummy)
             // -----------------------------
-            .Label(flashBorderLabel)
+            .Label(flash_border)
             .LDX_Imm(0x00)
 
-            .Label("FLASH_LOOP", out var flashLoopLabel)
+            .Label(out var flash_loop)
             .STX(0xD020) // C64 border color register
             .INX()
             .CPX_Imm(0x08)
-            .BNE(flashLoopLabel)
+            .BNE(flash_loop)
             .RTS()
 
             .End();                 // Mark the end of the assembly (to resolve labels)

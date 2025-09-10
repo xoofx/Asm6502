@@ -4,6 +4,7 @@
 
 using AsmMos6502.Expressions;
 using System.Buffers;
+using System.Runtime.CompilerServices;
 
 namespace AsmMos6502;
 
@@ -320,8 +321,15 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// Binds a new label to the current address.
     /// </summary>
     /// <param name="label">The label identifier (output).</param>
+    /// <param name="labelExpression">The label expression (for debugging purpose). This argument is automatically setup.</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502AssemblerBase Label(out Mos6502Label label) => Label(null, out label);
+    /// <remarks>
+    /// The label name is extracted from the C# expression passed as argument. For example: <c>assembler.LabelForward(out var myLabel);</c> will create a label with the name "myLabel".
+    /// </remarks>
+    public Mos6502AssemblerBase Label(out Mos6502Label label, [CallerArgumentExpression(nameof(label))] string? labelExpression = null)
+    {
+        return Label(Mos6502Label.ParseCSharpExpression(labelExpression), out label);
+    }
 
     /// <summary>
     /// Binds a new label with a specified name to the current address.
@@ -348,13 +356,17 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     }
 
     /// <summary>
-    /// Creates a new anonymous forward label that will need to be bound later via <see cref="Label(AsmMos6502.Mos6502Label,bool)"/>.
+    /// Creates a new forward label that will need to be bound later via <see cref="Label(AsmMos6502.Mos6502Label,bool)"/>.
     /// </summary>
     /// <param name="label">The label identifier (output).</param>
+    /// <param name="labelExpression">The label expression (for debugging purpose). This argument is automatically setup.</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502AssemblerBase LabelForward(out Mos6502Label label)
+    /// <remarks>
+    /// The label name is extracted from the C# expression passed as argument. For example: <c>assembler.LabelForward(out var myLabel);</c> will create a label with the name "myLabel".
+    /// </remarks>
+    public Mos6502AssemblerBase LabelForward(out Mos6502Label label, [CallerArgumentExpression(nameof(label))] string? labelExpression = null)
     {
-        label = new Mos6502Label(); // Create an anonymous label
+        label = new Mos6502Label(Mos6502Label.ParseCSharpExpression(labelExpression)); // Create an anonymous label
         return this;
     }
 
@@ -504,8 +516,12 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// Binds a new label to the current address.
     /// </summary>
     /// <param name="label">The label identifier (output).</param>
+    /// <param name="labelExpression">The label expression (for debugging purpose). This argument is automatically setup.</param>
     /// <returns>The current assembler instance.</returns>
-    public new TAsm Label(out Mos6502Label label) => Label(null, out label);
+    /// <remarks>
+    /// The label name is extracted from the C# expression passed as argument. For example: <c>assembler.LabelForward(out var myLabel);</c> will create a label with the name "myLabel".
+    /// </remarks>
+    public new TAsm Label(out Mos6502Label label, [CallerArgumentExpression(nameof(label))] string? labelExpression = null) => (TAsm)base.Label(out label, labelExpression);
 
     /// <summary>
     /// Binds a new label with a specified name to the current address.
@@ -527,6 +543,10 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// Creates a new anonymous forward label that will need to be bound later via <see cref="Label(AsmMos6502.Mos6502Label,bool)"/>.
     /// </summary>
     /// <param name="label">The label identifier (output).</param>
+    /// <param name="labelExpression">The label expression (for debugging purpose). This argument is automatically setup.</param>
     /// <returns>The current assembler instance.</returns>
-    public new TAsm LabelForward(out Mos6502Label label) => (TAsm)base.LabelForward(out label);
+    /// <remarks>
+    /// The label name is extracted from the C# expression passed as argument. For example: <c>assembler.LabelForward(out var myLabel);</c> will create a label with the name "myLabel".
+    /// </remarks>
+    public new TAsm LabelForward(out Mos6502Label label, [CallerArgumentExpression(nameof(label))] string? labelExpression = null) => (TAsm)base.LabelForward(out label, labelExpression);
 }

@@ -63,4 +63,45 @@ public record Mos6502Label : Mos6502ExpressionU16, IMos6502Label
 
     /// <inheritdoc />
     public override string ToString() => Name ?? (IsBound ? $"0x{Address:X4}" : $"0x????");
+
+    /// <summary>
+    /// This method tries to parse a simple C# expression to extract a label name.
+    /// </summary>
+    /// <param name="labelExpression">The label expression.</param>
+    /// <returns>The label name if successfully parsed; otherwise, null.</returns>
+    internal static string? ParseCSharpExpression(string? labelExpression)
+    {
+        // We support only the following C# expression
+        // var variableName
+        // variableName
+        // Mos6502Label variableName
+        //
+        // We don't support complex expressions like:
+        // array[0]
+        // obj.Field
+        // ...etc.
+
+        // The following is a simple parser that checks if the expression is a valid C# identifier
+        // it could be improved in the future to support more complex expressions if needed
+
+        if (string.IsNullOrEmpty(labelExpression)) return null;
+
+        var span = labelExpression.AsSpan();
+        var indexOfSpace = span.IndexOf(' ');
+        if (indexOfSpace >= 0)
+        {
+            span = span[(indexOfSpace + 1)..].Trim();
+        }
+        if (span.IsEmpty) return null;
+        // labelName must be a valid C# identifier
+
+        if (!char.IsLetter(span[0]) && span[0] != '_') return null;
+        for (var i = 1; i < span.Length; i++)
+        {
+            var c = span[i];
+            if (!char.IsLetterOrDigit(c) && c != '_') return null;
+        }
+
+        return span.ToString();
+    }
 }

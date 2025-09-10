@@ -108,13 +108,13 @@ using var asm = new Mos6502Assembler();
 
 asm
     .Begin(0xC000)         // Start assembling at address $C000
-    .Label("START", out var startLabel)
+    .Label(out var startLabel)
     .LDX_Imm(0x00)         // X = 0
     .LDY_Imm(0x10)         // Y = 16
-    .Label("LOOP", out var loopLabel)
+    .Label(out var loopLabel)
     .LDA(0x0200, X)        // LDA $0200,X
     .CMP(0xFF)             // CMP #$FF
-    .ForwardLabel("SKIP", out var skipLabel)
+    .ForwardLabel(out var skipLabel)
     .BEQ(skipLabel)        // BEQ SKIP
     .CLC()                 // CLC
     .ADC_Imm(0x01)         // ADC #$01
@@ -123,7 +123,7 @@ asm
     .INX()                 // INX
     .DEY()                 // DEY
     .BNE(loopLabel)        // BNE LOOP
-    .Label("END", out var endLabel)
+    .Label(out var endLabel)
     .JMP(endLabel)
     .End();
 
@@ -210,14 +210,25 @@ Labels can be created and bound to addresses. Branch instructions (e.g., BEQ, BN
 
 ```csharp
 asm
-    .Label("LOOP", out var loopLabel)
-    .BNE(loopLabel);
+    .Label(out var loop)
+    .BNE(loop);    
 ```
 
-You can also create forward labels that are resolved later:
+Note that the name of the label is inferred from the variable name if not explicitly provided. In the example above, the label will be named "loop". You can also provide a custom name:
+
 ```csharp
 asm
-    .ForwardLabel("SKIP", out var skipLabel)
+    .Label("CUSTOM_LABEL", out var customLabel)
+    .BNE(customLabel);
+```
+
+> ⚠️ The label name is only used when reporting errors when resolving label addresses.
+
+You can also create forward labels that are resolved later:
+
+```csharp
+asm
+    .ForwardLabel(out var skipLabel)
     .BEQ(skipLabel)    // Branch to SKIP if condition met
     .LDA_Imm(0xFF)     // Load accumulator with 0xFF
     .Label(skipLabel)  // Bind SKIP label later
@@ -244,8 +255,8 @@ It is possible to use expressions for memory addresses and immediate values, suc
   ```csharp
   asm
     .Begin()
-    .Label("start", out var startLabel)
-    .LabelForward("end", out var endLabel)
+    .Label(out var startLabel)
+    .LabelForward(out var endLabel)
     .LDA_Imm((endLabel - startLabel).LowByte()) // Store the size of this code
     .STA(0x1000)
     .RTS()
@@ -256,7 +267,7 @@ It is possible to use expressions for memory addresses and immediate values, suc
   ```csharp
   asm
     .Begin()
-    .LabelForward("end", out var endLabel)
+    .LabelForward(out var endLabel)
     .LDA(endLabel + 1) // Load A with the address of endLabel + 1
     .RTS()
     .Label(endLabel)
@@ -266,8 +277,8 @@ It is possible to use expressions for memory addresses and immediate values, suc
   ```csharp
   asm
     .Begin()
-    .Label("start", out var startLabel)
-    .LabelForward("end", out var endLabel)
+    .Label(out var startLabel)
+    .LabelForward(out var endLabel)
     .RTS()
     .Label(endLabel)
     .Append(startLabel) // The address of the label
@@ -354,8 +365,8 @@ The org directive allows to set the current assembly address to a specific value
 using var asm = new Mos6502Assembler();
 asm.Begin(0xC000); // Resets the assembler state and sets the org to 0xC000
 asm.LDA_Imm(0);
-asm.Label("LABEL1", out var label1);
-asm.LabelForward("LABEL2", out var label2);
+asm.Label(out var label1);
+asm.LabelForward(out var label2);
 asm.JMP(label2);
 
 // Fill with NOPs to reach address 0xC010
