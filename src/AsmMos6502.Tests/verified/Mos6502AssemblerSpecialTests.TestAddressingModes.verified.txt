@@ -17,13 +17,13 @@ Debug Info (Program: TestAddressingModes)
 - Program End Address: C018
 - Debug Line Count: 10
 
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:135
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:136
-C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:137
-C006 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:138
-C008 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:139
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:140
-C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:141
-C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:142
-C014 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:143
-C016 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:144
+C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:133
+C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:134
+C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:135
+C006 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:136
+C008 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:137
+C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:138
+C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:139
+C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:140
+C014 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:141
+C016 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:142

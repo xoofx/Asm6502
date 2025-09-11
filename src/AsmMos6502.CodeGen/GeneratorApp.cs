@@ -445,11 +445,21 @@ internal class GeneratorApp
     {
         public string? ArgumentPath { get; set; }
 
-        public bool IsArgumentOnly { get; set; }
+        public bool IsArgumentOnly { get; init; }
+
+        public bool IsParameterOnly { get; init; }
+
+        public bool IsOut { get; init; }
         
         public string ParameterDeclaration()
         {
             var builder = new StringBuilder();
+
+            if (IsOut)
+            {
+                builder.Append("out ");
+            }
+
             if (Attributes is not null)
             {
                 builder.Append(Attributes);
@@ -492,13 +502,23 @@ internal class GeneratorApp
 
     private record OpcodeSignature(JsonAsm6502Opcode Opcode, string Name, int OperandCount, List<Operand6502> Arguments, OperandValueKind OperandKind)
     {
+        public List<string> Summary { get; } = new();
+
+        public List<string> Remarks { get; } = new();
+
         public void AddDebugAttributes()
         {
             Arguments.Add(new Operand6502("debugFilePath", "string", "\"\"", "[CallerFilePath]"));
             Arguments.Add(new Operand6502("debugLineNumber", "int", "0", "[CallerLineNumber]"));
         }
 
-        public string Signature => $"{Name}({string.Join(", ", Arguments.Where(x => !x.IsArgumentOnly).Select(arg => arg.ParameterDeclaration()))})";
+        public string Signature
+        {
+            get
+            {
+                return $"{Name}({string.Join(", ", Arguments.Where(x => !x.IsArgumentOnly).Select(arg => arg.ParameterDeclaration()))})";
+            }
+        }
     }
     
     private OpcodeSignature GetOpcodeSignature(JsonAsm6502Opcode opcode)
@@ -633,11 +653,13 @@ internal class GeneratorApp
         // Generate all assembler instruction
         GenerateAssemblerFactoryGeneric(className, $"{className}Assembler",
             opcodes,
+            (
             opcodeSignature => true,
             opcodeSignature =>
             {
                 opcodeSignature.AddDebugAttributes();
             }
+            )
         );
     }
 
@@ -675,6 +697,7 @@ internal class GeneratorApp
     {
         GenerateAssemblerFactoryGeneric(className,$"{className}Assembler_WithExpressions",
             opcodes,
+            (
             opcodeSignature =>
                                 opcodeSignature.OperandKind == OperandValueKind.Relative ||
                                 opcodeSignature.OperandKind == OperandValueKind.Immediate ||
@@ -725,10 +748,35 @@ internal class GeneratorApp
 
                 opcodeSignature.Arguments.Add(new Operand6502(operand0.Name, operand0.Type) { IsArgumentOnly = true }); // Pass the label as an additional argument to the assembler AddInstruction
                 opcodeSignature.AddDebugAttributes();
-            });
+            }),
+            (
+            opcodeSignature =>
+                                opcodeSignature.OperandKind == OperandValueKind.Relative ||
+                                opcodeSignature.OperandKind == OperandValueKind.Address ||
+                               opcodeSignature.OperandKind == OperandValueKind.AddressX ||
+                               opcodeSignature.OperandKind == OperandValueKind.AddressY
+            ,
+            opcodeSignature =>
+            {
+                var originalOperand = opcodeSignature.Arguments[0];
+                var operand0 = new Operand6502(opcodeSignature.Arguments[0].Name, "Mos6502Label")
+                {
+                    IsOut = true
+                };
+                opcodeSignature.Arguments[0] = operand0;
+                operand0.ArgumentPath = $"({originalOperand.Type})0";
+
+                opcodeSignature.Summary.Add($"The output <paramref name=\"{operand0.Name}\"/> is declaring a forward label at the same time.");
+
+                opcodeSignature.Arguments.Add(new Operand6502(operand0.Name, operand0.Type) { IsArgumentOnly = true, IsOut = true }); // Pass the label as an additional argument to the assembler AddInstruction
+                opcodeSignature.AddDebugAttributes();
+                opcodeSignature.Arguments.Add(new Operand6502("addressExpression", "string?", "null", $"[CallerArgumentExpression(nameof({operand0.Name}))]") { IsParameterOnly  = true });
+            }
+        )
+            );
     }
 
-    private void GenerateAssemblerFactoryGeneric(string className, string fileName, List<JsonAsm6502Opcode> opcodes, Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)
+    private void GenerateAssemblerFactoryGeneric(string className, string fileName, List<JsonAsm6502Opcode> opcodes, params (Func<OpcodeSignature, bool> filter, Action<OpcodeSignature> modify)[] filterAndModifiers)
     {
 
         var filePath = Path.Combine(GeneratedFolderPath, $"{fileName}.gen.cs");
@@ -747,17 +795,27 @@ internal class GeneratorApp
         foreach (var opcode in opcodes)
         {
             var opcodeSignature = GetOpcodeSignature(opcode);
-            if (filter(opcodeSignature))
+
+            foreach (var filterAndModifier in filterAndModifiers)
             {
-                modify(opcodeSignature);
+                var filter = filterAndModifier.filter;
+                var modify = filterAndModifier.modify;
 
-                if (!mnemonicToSignatureToOpcodes.TryGetValue(opcode.UniqueName, out var opcodeWithAddress))
+                if (filter(opcodeSignature))
                 {
-                    opcodeWithAddress = new Dictionary<string, OpcodeSignature>();
-                    mnemonicToSignatureToOpcodes[opcode.UniqueName] = opcodeWithAddress;
-                }
+                    modify(opcodeSignature);
 
-                opcodeWithAddress[opcodeSignature.Signature] = opcodeSignature;
+                    if (!mnemonicToSignatureToOpcodes.TryGetValue(opcode.UniqueName, out var opcodeWithAddress))
+                    {
+                        opcodeWithAddress = new Dictionary<string, OpcodeSignature>();
+                        mnemonicToSignatureToOpcodes[opcode.UniqueName] = opcodeWithAddress;
+                    }
+
+                    opcodeWithAddress[opcodeSignature.Signature] = opcodeSignature;
+
+                    // Create new copy for new modification
+                    opcodeSignature = GetOpcodeSignature(opcode);
+                }
             }
         }
 
@@ -777,7 +835,14 @@ internal class GeneratorApp
                 {
                     special = opcode.Unstable ? " This is an illegal and unstable instruction." : " This is an illegal instruction.";
                 }
-                writer.WriteSummary($"{opcodeSignature.Opcode.NameLong}. {mnemonic} instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}.");
+
+                List<string> summaryList =
+                [
+                    $"{opcodeSignature.Opcode.NameLong}. {mnemonic} instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}."
+                    , .. opcodeSignature.Summary
+                ];
+
+                writer.WriteSummary(summaryList);
                 writer.WriteDoc([$"<remarks>Cycles: {opcodeSignature.Opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}.{special}</remarks>"]);
                 if (opcode.Unstable)
                 {
@@ -807,7 +872,16 @@ internal class GeneratorApp
                 for (int i = opcodeSignature.OperandCount; i < opcodeSignature.Arguments.Count; i++)
                 {
                     var arg = opcodeSignature.Arguments[i];
+                    if (arg.IsParameterOnly)
+                    {
+                        continue;
+                    }
                     writer.Write($", {arg.ArgumentPath ?? arg.Name}");
+
+                    if (arg.IsOut)
+                    {
+                        writer.Write(" = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression))");
+                    }
                 }
 
                 writer.WriteLine(");");

@@ -57,6 +57,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler ADC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ADC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Add with carry. ADC instruction (0x6d) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ADC(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ADC((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Add with carry. ADC instruction (0x7d) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ADC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ADC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Add with carry. ADC instruction (0x79) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ADC(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ADC((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Add with carry. ADC_Imm instruction (0x69) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -123,6 +144,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler AND(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.AND((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Logical AND. AND instruction (0x2d) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler AND(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.AND((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical AND. AND instruction (0x3d) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler AND(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.AND((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical AND. AND instruction (0x39) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler AND(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.AND((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Logical AND. AND_Imm instruction (0x29) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -166,11 +208,32 @@ partial class Mos6510Assembler
     public Mos6510Assembler ASL(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ASL((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Arithmetic shift left. ASL instruction (0x0e) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ASL(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ASL((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Arithmetic shift left. ASL instruction (0x1e) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ASL(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ASL((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Branch if carry clear. BCC instruction (0x90) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
     public Mos6510Assembler BCC(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BCC((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Branch if carry clear. BCC instruction (0x90) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BCC(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BCC((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if carry set. BCS instruction (0xb0) with addressing mode Relative.
     /// </summary>
@@ -178,11 +241,25 @@ partial class Mos6510Assembler
     public Mos6510Assembler BCS(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BCS((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Branch if carry set. BCS instruction (0xb0) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BCS(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BCS((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Branch if equal. BEQ instruction (0xf0) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
     public Mos6510Assembler BEQ(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BEQ((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Branch if equal. BEQ instruction (0xf0) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BEQ(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BEQ((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Bit test. BIT instruction (0x2c) with addressing mode Absolute.
     /// </summary>
@@ -196,11 +273,25 @@ partial class Mos6510Assembler
     public Mos6510Assembler BIT(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BIT((byte)0), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Bit test. BIT instruction (0x2c) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler BIT(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BIT((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Branch if minus. BMI instruction (0x30) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
     public Mos6510Assembler BMI(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BMI((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Branch if minus. BMI instruction (0x30) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BMI(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BMI((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if not equal. BNE instruction (0xd0) with addressing mode Relative.
     /// </summary>
@@ -208,11 +299,25 @@ partial class Mos6510Assembler
     public Mos6510Assembler BNE(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BNE((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Branch if not equal. BNE instruction (0xd0) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BNE(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BNE((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Branch if positive. BPL instruction (0x10) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
     public Mos6510Assembler BPL(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BPL((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Branch if positive. BPL instruction (0x10) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BPL(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BPL((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Branch if overflow clear. BVC instruction (0x50) with addressing mode Relative.
     /// </summary>
@@ -220,11 +325,25 @@ partial class Mos6510Assembler
     public Mos6510Assembler BVC(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BVC((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Branch if overflow clear. BVC instruction (0x50) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BVC(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BVC((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Branch if overflow set. BVS instruction (0x70) with addressing mode Relative.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
     public Mos6510Assembler BVS(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BVS((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Branch if overflow set. BVS instruction (0x70) with addressing mode Relative.
+    /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
+    public Mos6510Assembler BVS(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.BVS((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare. CMP instruction (0xc1) with addressing mode IndirectX.
     /// </summary>
@@ -268,6 +387,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler CMP(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.CMP((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Compare. CMP instruction (0xcd) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler CMP(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.CMP((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Compare. CMP instruction (0xdd) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler CMP(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.CMP((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Compare. CMP instruction (0xd9) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler CMP(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.CMP((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Compare. CMP_Imm instruction (0xc9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -286,6 +426,13 @@ partial class Mos6510Assembler
     public Mos6510Assembler CPX(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.CPX((byte)0), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Compare X register. CPX instruction (0xec) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler CPX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.CPX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Compare X register. CPX_Imm instruction (0xe0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -303,6 +450,13 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 3, Size: 2 bytes.</remarks>
     public Mos6510Assembler CPY(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.CPY((byte)0), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Compare Y register. CPY instruction (0xcc) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler CPY(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.CPY((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Y register. CPY_Imm instruction (0xc0) with addressing mode Immediate.
     /// </summary>
@@ -352,6 +506,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// DEC then CMP. DCP instruction (0xcf) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler DCP(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// DEC then CMP. DCP instruction (0xdf) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler DCP(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// DEC then CMP. DCP instruction (0xdb) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler DCP(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Decrement memory. DEC instruction (0xce) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
@@ -375,6 +550,20 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
     public Mos6510Assembler DEC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DEC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Decrement memory. DEC instruction (0xce) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler DEC(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.DEC((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Decrement memory. DEC instruction (0xde) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes.</remarks>
+    public Mos6510Assembler DEC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.DEC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Logical Exclusive OR (XOR). EOR instruction (0x41) with addressing mode IndirectX.
     /// </summary>
@@ -418,6 +607,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler EOR(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.EOR((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Logical Exclusive OR (XOR). EOR instruction (0x4d) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler EOR(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.EOR((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical Exclusive OR (XOR). EOR instruction (0x5d) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler EOR(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.EOR((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical Exclusive OR (XOR). EOR instruction (0x59) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler EOR(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.EOR((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Logical Exclusive OR (XOR). EOR_Imm instruction (0x49) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -447,6 +657,20 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
     public Mos6510Assembler INC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.INC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Increment memory. INC instruction (0xee) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler INC(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.INC((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Increment memory. INC instruction (0xfe) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes.</remarks>
+    public Mos6510Assembler INC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.INC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// INC then SBC. ISC instruction (0xe3) with addressing mode IndirectX.
     /// </summary>
@@ -490,6 +714,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// INC then SBC. ISC instruction (0xef) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler ISC(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// INC then SBC. ISC instruction (0xff) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler ISC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// INC then SBC. ISC instruction (0xfb) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler ISC(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Unconditional Jump. JMP instruction (0x6c) with addressing mode Indirect.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes.</remarks>
@@ -502,17 +747,38 @@ partial class Mos6510Assembler
     public Mos6510Assembler JMP(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.JMP((ushort)0), address, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Unconditional Jump. JMP instruction (0x4c) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 3, Size: 3 bytes.</remarks>
+    public Mos6510Assembler JMP(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.JMP((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Jump to subroutine. JSR instruction (0x20) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
     public Mos6510Assembler JSR(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.JSR((ushort)0), address, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Jump to subroutine. JSR instruction (0x20) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler JSR(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.JSR((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Load accumulator and transfer SP to X. LAS instruction (0xbb) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler LAS(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAS((ushort)0, y), address, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Load accumulator and transfer SP to X. LAS instruction (0xbb) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler LAS(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LAS((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// LDA then LDX. LAX instruction (0xa3) with addressing mode IndirectX.
     /// </summary>
@@ -549,6 +815,20 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// LDA then LDX. LAX instruction (0xaf) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler LAX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LAX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// LDA then LDX. LAX instruction (0xbf) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler LAX(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LAX((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load accumulator. LDA instruction (0xa1) with addressing mode IndirectX.
     /// </summary>
@@ -592,6 +872,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler LDA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LDA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Load accumulator. LDA instruction (0xad) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Load accumulator. LDA instruction (0xbd) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Load accumulator. LDA instruction (0xb9) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Load accumulator. LDA_Imm instruction (0xa9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -621,6 +922,20 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 2 bytes.</remarks>
     public Mos6510Assembler LDX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LDX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Load X register. LDX instruction (0xae) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Load X register. LDX instruction (0xbe) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDX(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDX((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load X register. LDX_Imm instruction (0xa2) with addressing mode Immediate.
     /// </summary>
@@ -652,6 +967,20 @@ partial class Mos6510Assembler
     public Mos6510Assembler LDY(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LDY((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Load Y register. LDY instruction (0xac) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDY(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDY((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Load Y register. LDY instruction (0xbc) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LDY(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LDY((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Load Y register. LDY_Imm instruction (0xa0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -681,6 +1010,20 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
     public Mos6510Assembler LSR(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LSR((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical shift right. LSR instruction (0x4e) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LSR(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LSR((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical shift right. LSR instruction (0x5e) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes.</remarks>
+    public Mos6510Assembler LSR(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.LSR((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// LDA then LDX. LXA_Imm instruction (0xab) with addressing mode Immediate.
     /// </summary>
@@ -713,6 +1056,20 @@ partial class Mos6510Assembler
     public Mos6510Assembler NOP(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// No operation. NOP instruction (0x0c) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// No operation. NOP instruction (0x1c) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// No operation. NOP_34 instruction (0x34) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
@@ -724,6 +1081,13 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_3C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_3C((ushort)0, x), address, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// No operation. NOP_3C instruction (0x3c) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP_3C(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP_3C((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// No operation. NOP_44 instruction (0x44) with addressing mode ZeroPage.
     /// </summary>
@@ -743,6 +1107,13 @@ partial class Mos6510Assembler
     public Mos6510Assembler NOP_5C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_5C((ushort)0, x), address, debugFilePath, debugLineNumber);
     /// <summary>
+    /// No operation. NOP_5C instruction (0x5c) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP_5C(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP_5C((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// No operation. NOP_64 instruction (0x64) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>Cycles: 3, Size: 2 bytes. This is an illegal instruction.</remarks>
@@ -760,6 +1131,13 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_7C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_7C((ushort)0, x), address, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// No operation. NOP_7C instruction (0x7c) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP_7C(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP_7C((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// No operation. NOP_82_Imm instruction (0x82) with addressing mode Immediate.
     /// </summary>
@@ -791,6 +1169,13 @@ partial class Mos6510Assembler
     public Mos6510Assembler NOP_DC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_DC((ushort)0, x), address, debugFilePath, debugLineNumber);
     /// <summary>
+    /// No operation. NOP_DC instruction (0xdc) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP_DC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP_DC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// No operation. NOP_E2_Imm instruction (0xe2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes. This is an illegal instruction.</remarks>
@@ -808,6 +1193,13 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler NOP_FC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_FC((ushort)0, x), address, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// No operation. NOP_FC instruction (0xfc) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler NOP_FC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.NOP_FC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// No operation. NOP_Imm instruction (0x80) with addressing mode Immediate.
     /// </summary>
@@ -857,6 +1249,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler ORA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ORA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Logical Inclusive OR. ORA instruction (0x0d) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ORA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ORA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical Inclusive OR. ORA instruction (0x1d) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ORA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ORA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Logical Inclusive OR. ORA instruction (0x19) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ORA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ORA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Logical Inclusive OR. ORA_Imm instruction (0x09) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -905,6 +1318,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// ROL then AND. RLA instruction (0x2f) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler RLA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// ROL then AND. RLA instruction (0x3f) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler RLA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// ROL then AND. RLA instruction (0x3b) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler RLA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Rotate left. ROL instruction (0x2e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
@@ -929,6 +1363,20 @@ partial class Mos6510Assembler
     public Mos6510Assembler ROL(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ROL((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Rotate left. ROL instruction (0x2e) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ROL(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ROL((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Rotate left. ROL instruction (0x3e) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ROL(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ROL((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Rotate right. ROR instruction (0x6e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
@@ -952,6 +1400,20 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 6, Size: 2 bytes.</remarks>
     public Mos6510Assembler ROR(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ROR((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Rotate right. ROR instruction (0x6e) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ROR(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ROR((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Rotate right. ROR instruction (0x7e) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes.</remarks>
+    public Mos6510Assembler ROR(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.ROR((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// ROR then ADC. RRA instruction (0x63) with addressing mode IndirectX.
     /// </summary>
@@ -995,6 +1457,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// ROR then ADC. RRA instruction (0x6f) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler RRA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// ROR then ADC. RRA instruction (0x7f) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler RRA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// ROR then ADC. RRA instruction (0x7b) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler RRA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Store accumulator AND X. SAX instruction (0x83) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
@@ -1018,6 +1501,13 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler SAX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SAX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Store accumulator AND X. SAX instruction (0x8f) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SAX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SAX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract with carry. SBC instruction (0xe1) with addressing mode IndirectX.
     /// </summary>
@@ -1061,6 +1551,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler SBC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SBC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Subtract with carry. SBC instruction (0xed) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler SBC(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SBC((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Subtract with carry. SBC instruction (0xfd) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler SBC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SBC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Subtract with carry. SBC instruction (0xf9) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler SBC(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SBC((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Subtract with carry. SBC_Imm instruction (0xe9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>Cycles: 2, Size: 2 bytes.</remarks>
@@ -1086,6 +1597,13 @@ partial class Mos6510Assembler
     public Mos6510Assembler SHA(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SHA((ushort)0, y), address, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Store A AND X AND (high address + 1). SHA instruction (0x9f) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SHA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SHA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Store A AND X AND (high address + 1). SHX instruction (0x9e) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
@@ -1093,12 +1611,28 @@ partial class Mos6510Assembler
     public Mos6510Assembler SHX(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SHX((ushort)0, y), address, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Store A AND X AND (high address + 1). SHX instruction (0x9e) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
+    [Obsolete("This instruction is unstable and may not behave as expected.", false)]
+    public Mos6510Assembler SHX(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SHX((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Store Y AND (high address + 1). SHY instruction (0x9c) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler SHY(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SHY((ushort)0, x), address, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Store Y AND (high address + 1). SHY instruction (0x9c) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
+    [Obsolete("This instruction is unstable and may not behave as expected.", false)]
+    public Mos6510Assembler SHY(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SHY((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// ASL then ORA. SLO instruction (0x03) with addressing mode IndirectX.
     /// </summary>
@@ -1142,6 +1676,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// ASL then ORA. SLO instruction (0x0f) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SLO(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// ASL then ORA. SLO instruction (0x1f) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SLO(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// ASL then ORA. SLO instruction (0x1b) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SLO(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// LSR then EOR. SRE instruction (0x43) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>Cycles: 8, Size: 2 bytes. This is an illegal instruction.</remarks>
@@ -1183,6 +1738,27 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 6, Size: 2 bytes. This is an illegal instruction.</remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// LSR then EOR. SRE instruction (0x4f) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 6, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SRE(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// LSR then EOR. SRE instruction (0x5f) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SRE(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// LSR then EOR. SRE instruction (0x5b) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 7, Size: 3 bytes. This is an illegal instruction.</remarks>
+    public Mos6510Assembler SRE(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store accumulator. STA instruction (0x81) with addressing mode IndirectX.
     /// </summary>
@@ -1226,6 +1802,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler STA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.STA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Store accumulator. STA instruction (0x8d) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler STA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.STA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Store accumulator. STA instruction (0x9d) with addressing mode AbsoluteX.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes.</remarks>
+    public Mos6510Assembler STA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.STA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Store accumulator. STA instruction (0x99) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes.</remarks>
+    public Mos6510Assembler STA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.STA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Store X register. STX instruction (0x8e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
@@ -1243,6 +1840,13 @@ partial class Mos6510Assembler
     /// <remarks>Cycles: 4, Size: 2 bytes.</remarks>
     public Mos6510Assembler STX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.STX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Store X register. STX instruction (0x8e) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler STX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.STX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Store Y register. STY instruction (0x8c) with addressing mode Absolute.
     /// </summary>
@@ -1262,12 +1866,27 @@ partial class Mos6510Assembler
     public Mos6510Assembler STY(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.STY((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
     /// <summary>
+    /// Store Y register. STY instruction (0x8c) with addressing mode Absolute.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 4, Size: 3 bytes.</remarks>
+    public Mos6510Assembler STY(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.STY((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
+    /// <summary>
     /// Transfer A AND X to SP, store A AND X AND (high address + 1). TAS instruction (0x9b) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler TAS(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.TAS((ushort)0, y), address, debugFilePath, debugLineNumber);
+    /// <summary>
+    /// Transfer A AND X to SP, store A AND X AND (high address + 1). TAS instruction (0x9b) with addressing mode AbsoluteY.
+    /// The output <paramref name="address"/> is declaring a forward label at the same time.
+    /// </summary>
+    /// <remarks>Cycles: 5, Size: 3 bytes. This is an illegal and unstable instruction.</remarks>
+    [Obsolete("This instruction is unstable and may not behave as expected.", false)]
+    public Mos6510Assembler TAS(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
+        => AddInstruction(Mos6510InstructionFactory.TAS((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
     /// SBC with NOP behavior. USBC_Imm instruction (0xeb) with addressing mode Immediate.
     /// </summary>

@@ -87,8 +87,7 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
             .LDA(0x0200, X) // Load byte at $0200 + X
             .CMP_Imm(0xFF)             // Check if byte is already 0xFF
 
-            .LabelForward(out var skip)
-            .BEQ(skip)        // If so, skip incrementing
+            .BEQ(out var skip)        // If so, skip incrementing (forward label)
             .CLC()                 // Clear carry before addition
             .ADC_Imm(0x01)             // Add 1
             .STA(0x0200, X) // Store result back to memory
@@ -99,8 +98,7 @@ public class Mos6502AssemblerSpecialTests : VerifyAsmMos6502Base
             .BNE(loop)        // Loop until Y == 0
 
             // Call subroutine to flash border color
-            .LabelForward(out var flash_border)
-            .JSR(flash_border)
+            .JSR(out var flash_border) // Declare a forward label
 
             // Infinite loop
             .Label(out var end)

@@ -181,6 +181,11 @@ internal class CodeWriter : IDisposable
         }
     }
 
+    public void WriteSummary(IEnumerable<string> summaryList)
+    {
+        WriteDoc(["<summary>", .. summaryList, "</summary>"]);
+    }
+
     public void WriteSummary(string summary, bool compact = false)
     {
         if (compact)

@@ -229,7 +229,18 @@ You can also create forward labels that are resolved later:
 ```csharp
 asm
     .ForwardLabel(out var skipLabel)
+    // ... some instructions ...
     .BEQ(skipLabel)    // Branch to SKIP if condition met
+    .LDA_Imm(0xFF)     // Load accumulator with 0xFF
+    .Label(skipLabel)  // Bind SKIP label later
+```
+
+Or directly within the branch instruction:
+
+
+```csharp
+asm
+    .BEQ(out var skipLabel)    // Branch to SKIP if condition met
     .LDA_Imm(0xFF)     // Load accumulator with 0xFF
     .Label(skipLabel)  // Bind SKIP label later
 ```
