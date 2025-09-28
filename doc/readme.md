@@ -1,6 +1,6 @@
-# AsmMos6502 User Guide
+# Asm6502 User Guide
 
-This document provides a small user guide for the AsmMos6502 library.
+This document provides a small user guide for the Asm6502 library.
 
 ---
 
@@ -36,8 +36,8 @@ This document provides a small user guide for the AsmMos6502 library.
 ### Assembling 6502 Code
 
 ```csharp
-using AsmMos6502;
-using static AsmMos6502.Mos6502Factory;
+using Asm6502;
+using static Asm6502.Mos6502Factory;
 
 // Create an assembler 
 using var asm = new Mos6502Assembler();
@@ -58,8 +58,8 @@ var buffer = asm.Buffer;
 
 With a more fluent syntax:
 ```csharp
-using AsmMos6502;
-using static AsmMos6502.Mos6502Factory;
+using Asm6502;
+using static Asm6502.Mos6502Factory;
 
 // Create an assembler with a base address (e.g., $C000)
 using var asm = new Mos6502Assembler(0xC000);
@@ -82,8 +82,8 @@ var buffer = asm.Buffer;
 ### Disassembling 6502 Code
 
 ```csharp
-using AsmMos6502;
-using static AsmMos6502.Mos6502Factory;
+using Asm6502;
+using static Asm6502.Mos6502Factory;
 
 var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions {
     PrintLabelBeforeFirstInstruction = false,
@@ -197,7 +197,7 @@ Notice that immediate values are suffixed with `_Imm`, and indirect addressing u
 In order to access the X and Y registers as well as the indirect addressing modes, the following syntax is used in C#:
 
 ```csharp
-using static AsmMos6502.Mos6502Factory;
+using static Asm6502.Mos6502Factory;
 ```
 
 ---

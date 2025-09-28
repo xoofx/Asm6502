@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/Documentation/">
+    <File Path="../doc/readme.md" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="../.editorconfig" />
+    <File Path="../.gitattributes" />
+    <File Path="../.github/workflows/ci.yml" />
+    <File Path="../.gitignore" />
+    <File Path="../license.txt" />
+    <File Path="../readme.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="dotnet-releaser.toml" />
+    <File Path="global.json" />
+  </Folder>
+  <Project Path="Asm6502.CodeGen/Asm6502.CodeGen.csproj" />
+  <Project Path="Asm6502.Tests/Asm6502.Tests.csproj" />
+  <Project Path="Asm6502/Asm6502.csproj" />
+</Solution>

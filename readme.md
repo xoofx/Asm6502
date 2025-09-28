@@ -1,8 +1,8 @@
-# AsmMos6502 [![ci](https://github.com/xoofx/AsmMos6502/actions/workflows/ci.yml/badge.svg)](https://github.com/xoofx/AsmMos6502/actions/workflows/ci.yml) [![NuGet](https://img.shields.io/nuget/v/AsmMos6502.svg)](https://www.nuget.org/packages/AsmMos6502/)
+# Asm6502 [![ci](https://github.com/xoofx/Asm6502/actions/workflows/ci.yml/badge.svg)](https://github.com/xoofx/Asm6502/actions/workflows/ci.yml) [![NuGet](https://img.shields.io/nuget/v/Asm6502.svg)](https://www.nuget.org/packages/Asm6502/)
 
-<img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/AsmMos6502/main/img/AsmMos6502.png">
+<img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/Asm6502/main/img/Asm6502.png">
 
-AsmMos6502 is a lightweight and efficient C# library to assemble and disassemble 6502/6510 assembly code. It provides a fluent API to create 6502/6510 assembly code (e.g. a CPU powering the Commodore 64), and can be used to generate binary files or disassemble existing binaries into assembly code.
+Asm6502 is a lightweight and efficient C# library to assemble and disassemble 6502/6510 assembly code. It provides a fluent API to create 6502/6510 assembly code (e.g. a CPU powering the Commodore 64), and can be used to generate binary files or disassemble existing binaries into assembly code.
 
 ## ✨ Features
 
@@ -59,7 +59,7 @@ FLASH_LOOP:
         RTS
 ```
 
-The following C# assembly would assemble this code using the `AsmMos6502` library:
+The following C# assembly would assemble this code using the `Asm6502` library:
 ```csharp
 using var asm = new Mos6502Assembler();
 
@@ -160,7 +160,7 @@ C023  D0 F8      BNE LL_05
 C025  60         RTS
 ```
 
-For more details on how to use AsmMos6502, please visit the [user guide](https://github.com/xoofx/AsmMos6502/blob/main/doc/readme.md).
+For more details on how to use Asm6502, please visit the [user guide](https://github.com/xoofx/Asm6502/blob/main/doc/readme.md).
 
 ## 🪪 License
 
