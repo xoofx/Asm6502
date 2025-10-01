@@ -148,14 +148,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "B"
+        "I:1"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#BRK",
         "http://www.6502.org/users/obelisk/6502/reference.html#BRK",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BRK"
-      ]
+      ],
+      "synopsis": "interrupt,\npush PC+2, push SR",
+      "summary": "Force Break",
+      "implementation_notes": "BRK initiates a software interrupt similar to a hardware\ninterrupt (IRQ). The return address pushed to the stack is\nPC+2, providing an extra byte of spacing for a break mark\n(identifying a reason for the break.)\nThe status register will be pushed to the stack with the break\nflag set to 1. However, when retrieved during RTI or by a PLP\ninstruction, the break flag will be ignored.\nThe interrupt disable flag is not set automatically."
     },
     {
       "name": "ORA",
@@ -168,15 +171,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -196,7 +201,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "SLO",
@@ -211,11 +217,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "NOP",
@@ -233,7 +244,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ORA",
@@ -246,15 +259,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "ASL",
@@ -267,16 +282,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ASL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ASL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ASL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- 0",
+      "summary": "Shift Left One Bit (Memory or Accumulator)"
     },
     {
       "name": "SLO",
@@ -291,11 +308,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "PHP",
@@ -313,7 +335,10 @@
         "https://www.nesdev.org/wiki/Instruction_reference#PHP",
         "http://www.6502.org/users/obelisk/6502/reference.html#PHP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#PHP"
-      ]
+      ],
+      "synopsis": "push SR",
+      "summary": "Push Processor Status on Stack",
+      "implementation_notes": "The status register will be pushed with the break\nflag and bit 5 set to 1."
     },
     {
       "name": "ORA",
@@ -326,15 +351,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "ASL",
@@ -347,16 +374,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ASL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ASL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ASL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- 0",
+      "summary": "Shift Left One Bit (Memory or Accumulator)"
     },
     {
       "name": "ANC",
@@ -370,11 +399,17 @@
       "all_names": [
         "ANC"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ANC"
-      ]
+      ],
+      "synopsis": "A AND oper, bit(7) ->  C",
+      "summary": "AND oper + set C as ASL"
     },
     {
       "name": "NOP",
@@ -392,7 +427,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ORA",
@@ -405,15 +442,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "ASL",
@@ -426,16 +465,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ASL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ASL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ASL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- 0",
+      "summary": "Shift Left One Bit (Memory or Accumulator)"
     },
     {
       "name": "SLO",
@@ -450,11 +491,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "BPL",
@@ -485,15 +531,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -513,7 +561,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "SLO",
@@ -528,11 +577,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "NOP",
@@ -550,7 +604,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ORA",
@@ -563,15 +619,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "ASL",
@@ -584,16 +642,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ASL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ASL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ASL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- 0",
+      "summary": "Shift Left One Bit (Memory or Accumulator)"
     },
     {
       "name": "SLO",
@@ -608,11 +668,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "CLC",
@@ -625,14 +690,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C"
+        "C:0"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CLC",
         "http://www.6502.org/users/obelisk/6502/reference.html#CLC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CLC"
-      ]
+      ],
+      "synopsis": "0 -> C",
+      "summary": "Clear Carry Flag"
     },
     {
       "name": "ORA",
@@ -645,15 +712,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "NOP",
@@ -671,7 +740,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "SLO",
@@ -686,11 +757,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "NOP",
@@ -708,7 +784,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ORA",
@@ -721,15 +799,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ORA",
         "http://www.6502.org/users/obelisk/6502/reference.html#ORA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "ASL",
@@ -742,16 +822,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ASL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ASL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ASL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- 0",
+      "summary": "Shift Left One Bit (Memory or Accumulator)"
     },
     {
       "name": "SLO",
@@ -766,11 +848,16 @@
         "SLO",
         "ASO"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SLO"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- 0, A OR M ->  A"
     },
     {
       "name": "JSR",
@@ -788,7 +875,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#JSR",
         "http://www.6502.org/users/obelisk/6502/reference.html#JSR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#JSR"
-      ]
+      ],
+      "synopsis": "push (PC+2),\noperand 1st byte -> PCL\noperand 2nd byte -> PCH",
+      "summary": "Jump to New Location Saving Return Address"
     },
     {
       "name": "AND",
@@ -801,15 +890,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -829,7 +920,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "RLA",
@@ -843,11 +935,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "BIT",
@@ -860,16 +958,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
+        "N:M7",
         "Z",
-        "V",
-        "N"
+        "V:M6"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#BIT",
         "http://www.6502.org/users/obelisk/6502/reference.html#BIT",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BIT"
-      ]
+      ],
+      "synopsis": "A AND M -> Z, M7 -> N, M6 -> V",
+      "summary": "Test Bits in Memory with Accumulator",
+      "implementation_notes": "bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);\nthe zero-flag is set according to the result of the operand AND\nthe accumulator (set, if the result is zero, unset otherwise).\nThis allows a quick check of a few bits at once without affecting\nany of the registers, other than the status register (SR)."
     },
     {
       "name": "AND",
@@ -882,15 +983,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "ROL",
@@ -903,15 +1006,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- C",
+      "summary": "Rotate One Bit Left (Memory or Accumulator)"
     },
     {
       "name": "RLA",
@@ -925,11 +1031,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "PLP",
@@ -942,20 +1054,22 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
+        "C",
         "I",
         "D",
-        "B",
-        "V",
-        "N"
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#PLP",
         "http://www.6502.org/users/obelisk/6502/reference.html#PLP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#PLP"
-      ]
+      ],
+      "synopsis": "pull SR",
+      "summary": "Pull Processor Status from Stack",
+      "implementation_notes": "The status register will be pulled with the break\nflag and bit 5 ignored."
     },
     {
       "name": "AND",
@@ -968,15 +1082,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "ROL",
@@ -989,15 +1105,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- C",
+      "summary": "Rotate One Bit Left (Memory or Accumulator)"
     },
     {
       "name": "ANC",
@@ -1012,11 +1131,17 @@
         "ANC",
         "ANC2"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ANC"
-      ]
+      ],
+      "synopsis": "A AND oper, bit(7) ->  C",
+      "summary": "AND oper + set C as ASL"
     },
     {
       "name": "BIT",
@@ -1029,16 +1154,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
+        "N:M7",
         "Z",
-        "V",
-        "N"
+        "V:M6"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#BIT",
         "http://www.6502.org/users/obelisk/6502/reference.html#BIT",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BIT"
-      ]
+      ],
+      "synopsis": "A AND M -> Z, M7 -> N, M6 -> V",
+      "summary": "Test Bits in Memory with Accumulator",
+      "implementation_notes": "bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);\nthe zero-flag is set according to the result of the operand AND\nthe accumulator (set, if the result is zero, unset otherwise).\nThis allows a quick check of a few bits at once without affecting\nany of the registers, other than the status register (SR)."
     },
     {
       "name": "AND",
@@ -1051,15 +1179,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "ROL",
@@ -1072,15 +1202,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- C",
+      "summary": "Rotate One Bit Left (Memory or Accumulator)"
     },
     {
       "name": "RLA",
@@ -1094,11 +1227,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "BMI",
@@ -1116,7 +1255,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BMI",
         "http://www.6502.org/users/obelisk/6502/reference.html#BMI",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BMI"
-      ]
+      ],
+      "synopsis": "branch on N = 1",
+      "summary": "Branch on Result Minus"
     },
     {
       "name": "AND",
@@ -1129,15 +1270,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -1157,7 +1300,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "RLA",
@@ -1171,11 +1315,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "NOP",
@@ -1193,7 +1343,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "AND",
@@ -1206,15 +1358,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "ROL",
@@ -1227,15 +1381,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- C",
+      "summary": "Rotate One Bit Left (Memory or Accumulator)"
     },
     {
       "name": "RLA",
@@ -1249,11 +1406,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "SEC",
@@ -1266,14 +1429,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C"
+        "C:1"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SEC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SEC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SEC"
-      ]
+      ],
+      "synopsis": "1 -> C",
+      "summary": "Set Carry Flag"
     },
     {
       "name": "AND",
@@ -1286,15 +1451,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "NOP",
@@ -1312,7 +1479,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "RLA",
@@ -1326,11 +1495,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "NOP",
@@ -1348,7 +1523,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "AND",
@@ -1361,15 +1538,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#AND",
         "http://www.6502.org/users/obelisk/6502/reference.html#AND",
         "https://www.masswerk.at/6502/6502_instruction_set.html#AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "ROL",
@@ -1382,15 +1561,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROL",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROL"
-      ]
+      ],
+      "synopsis": "C <- [76543210] <- C",
+      "summary": "Rotate One Bit Left (Memory or Accumulator)"
     },
     {
       "name": "RLA",
@@ -1404,11 +1586,17 @@
       "all_names": [
         "RLA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RLA"
-      ]
+      ],
+      "synopsis": "M = C <- [76543210] <- C, A AND M ->  A",
+      "summary": "ROL oper + AND oper"
     },
     {
       "name": "RTI",
@@ -1421,20 +1609,22 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
+        "C",
         "I",
         "D",
-        "B",
-        "V",
-        "N"
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#RTI",
         "http://www.6502.org/users/obelisk/6502/reference.html#RTI",
         "https://www.masswerk.at/6502/6502_instruction_set.html#RTI"
-      ]
+      ],
+      "synopsis": "pull SR, pull PC",
+      "summary": "Return from Interrupt",
+      "implementation_notes": "The status register is pulled with the break flag\nand bit 5 ignored. Then PC is pulled from the stack."
     },
     {
       "name": "EOR",
@@ -1447,15 +1637,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -1475,7 +1667,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "SRE",
@@ -1490,11 +1683,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "NOP",
@@ -1512,7 +1711,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "EOR",
@@ -1525,15 +1726,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "LSR",
@@ -1546,16 +1749,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N:0",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LSR",
         "http://www.6502.org/users/obelisk/6502/reference.html#LSR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LSR"
-      ]
+      ],
+      "synopsis": "0 -> [76543210] -> C",
+      "summary": "Shift One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "SRE",
@@ -1570,11 +1775,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "PHA",
@@ -1592,7 +1803,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#PHA",
         "http://www.6502.org/users/obelisk/6502/reference.html#PHA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#PHA"
-      ]
+      ],
+      "synopsis": "push A",
+      "summary": "Push Accumulator on Stack"
     },
     {
       "name": "EOR",
@@ -1605,15 +1818,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "LSR",
@@ -1626,16 +1841,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N:0",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LSR",
         "http://www.6502.org/users/obelisk/6502/reference.html#LSR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LSR"
-      ]
+      ],
+      "synopsis": "0 -> [76543210] -> C",
+      "summary": "Shift One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "ALR",
@@ -1650,11 +1867,17 @@
         "ALR",
         "ASR"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ALR"
-      ]
+      ],
+      "synopsis": "A AND oper, 0 ->  [76543210] ->  C",
+      "summary": "AND oper + LSR"
     },
     {
       "name": "JMP",
@@ -1672,7 +1895,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#JMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#JMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#JMP"
-      ]
+      ],
+      "synopsis": "operand 1st byte -> PCL\noperand 2nd byte -> PCH",
+      "summary": "Jump to New Location"
     },
     {
       "name": "EOR",
@@ -1685,15 +1910,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "LSR",
@@ -1706,16 +1933,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N:0",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LSR",
         "http://www.6502.org/users/obelisk/6502/reference.html#LSR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LSR"
-      ]
+      ],
+      "synopsis": "0 -> [76543210] -> C",
+      "summary": "Shift One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "SRE",
@@ -1730,11 +1959,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "BVC",
@@ -1752,7 +1987,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BVC",
         "http://www.6502.org/users/obelisk/6502/reference.html#BVC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BVC"
-      ]
+      ],
+      "synopsis": "branch on V = 0",
+      "summary": "Branch on Overflow Clear"
     },
     {
       "name": "EOR",
@@ -1765,15 +2002,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -1793,7 +2032,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "SRE",
@@ -1808,11 +2048,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "NOP",
@@ -1830,7 +2076,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "EOR",
@@ -1843,15 +2091,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "LSR",
@@ -1864,16 +2114,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N:0",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LSR",
         "http://www.6502.org/users/obelisk/6502/reference.html#LSR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LSR"
-      ]
+      ],
+      "synopsis": "0 -> [76543210] -> C",
+      "summary": "Shift One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "SRE",
@@ -1888,11 +2140,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "CLI",
@@ -1905,14 +2163,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "I"
+        "I:0"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CLI",
         "http://www.6502.org/users/obelisk/6502/reference.html#CLI",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CLI"
-      ]
+      ],
+      "synopsis": "0 -> I",
+      "summary": "Clear Interrupt Disable Bit"
     },
     {
       "name": "EOR",
@@ -1925,15 +2185,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "NOP",
@@ -1951,7 +2213,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "SRE",
@@ -1966,11 +2230,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "NOP",
@@ -1988,7 +2258,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "EOR",
@@ -2001,15 +2273,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#EOR",
         "http://www.6502.org/users/obelisk/6502/reference.html#EOR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "LSR",
@@ -2022,16 +2296,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N:0",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LSR",
         "http://www.6502.org/users/obelisk/6502/reference.html#LSR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LSR"
-      ]
+      ],
+      "synopsis": "0 -> [76543210] -> C",
+      "summary": "Shift One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "SRE",
@@ -2046,11 +2322,17 @@
         "SRE",
         "LSE"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SRE"
-      ]
+      ],
+      "synopsis": "M = 0 ->  [76543210] ->  C, A EOR M ->  A",
+      "summary": "LSR oper + EOR oper"
     },
     {
       "name": "RTS",
@@ -2068,7 +2350,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#RTS",
         "http://www.6502.org/users/obelisk/6502/reference.html#RTS",
         "https://www.masswerk.at/6502/6502_instruction_set.html#RTS"
-      ]
+      ],
+      "synopsis": "pull PC, PC+1 -> PC",
+      "summary": "Return from Subroutine"
     },
     {
       "name": "ADC",
@@ -2081,17 +2365,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "JAM",
@@ -2111,7 +2397,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "RRA",
@@ -2125,11 +2412,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "NOP",
@@ -2147,7 +2441,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ADC",
@@ -2160,17 +2456,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "ROR",
@@ -2183,15 +2481,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROR",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROR"
-      ]
+      ],
+      "synopsis": "C -> [76543210] -> C",
+      "summary": "Rotate One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "RRA",
@@ -2205,11 +2506,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "PLA",
@@ -2222,15 +2530,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#PLA",
         "http://www.6502.org/users/obelisk/6502/reference.html#PLA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#PLA"
-      ]
+      ],
+      "synopsis": "pull A",
+      "summary": "Pull Accumulator from Stack"
     },
     {
       "name": "ADC",
@@ -2243,17 +2553,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "ROR",
@@ -2266,15 +2578,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROR",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROR"
-      ]
+      ],
+      "synopsis": "C -> [76543210] -> C",
+      "summary": "Rotate One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "ARR",
@@ -2288,11 +2603,18 @@
       "all_names": [
         "ARR"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ARR"
-      ]
+      ],
+      "synopsis": "A AND oper, C ->  [76543210] ->  C",
+      "summary": "AND oper + ROR"
     },
     {
       "name": "JMP",
@@ -2310,7 +2632,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#JMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#JMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#JMP"
-      ]
+      ],
+      "synopsis": "operand 1st byte -> PCL\noperand 2nd byte -> PCH",
+      "summary": "Jump to New Location"
     },
     {
       "name": "ADC",
@@ -2323,17 +2647,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "ROR",
@@ -2346,15 +2672,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROR",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROR"
-      ]
+      ],
+      "synopsis": "C -> [76543210] -> C",
+      "summary": "Rotate One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "RRA",
@@ -2368,11 +2697,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "BVS",
@@ -2390,7 +2726,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BVS",
         "http://www.6502.org/users/obelisk/6502/reference.html#BVS",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BVS"
-      ]
+      ],
+      "synopsis": "branch on V = 1",
+      "summary": "Branch on Overflow Set"
     },
     {
       "name": "ADC",
@@ -2403,17 +2741,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "JAM",
@@ -2433,7 +2773,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "RRA",
@@ -2447,11 +2788,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "NOP",
@@ -2469,7 +2817,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ADC",
@@ -2482,17 +2832,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "ROR",
@@ -2505,15 +2857,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROR",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROR"
-      ]
+      ],
+      "synopsis": "C -> [76543210] -> C",
+      "summary": "Rotate One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "RRA",
@@ -2527,11 +2882,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "SEI",
@@ -2544,14 +2906,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "I"
+        "I:1"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SEI",
         "http://www.6502.org/users/obelisk/6502/reference.html#SEI",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SEI"
-      ]
+      ],
+      "synopsis": "1 -> I",
+      "summary": "Set Interrupt Disable Status"
     },
     {
       "name": "ADC",
@@ -2564,17 +2928,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "NOP",
@@ -2592,7 +2958,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "RRA",
@@ -2606,11 +2974,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "NOP",
@@ -2628,7 +3003,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ADC",
@@ -2641,17 +3018,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ADC",
         "http://www.6502.org/users/obelisk/6502/reference.html#ADC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "ROR",
@@ -2664,15 +3043,18 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#ROR",
         "http://www.6502.org/users/obelisk/6502/reference.html#ROR",
         "https://www.masswerk.at/6502/6502_instruction_set.html#ROR"
-      ]
+      ],
+      "synopsis": "C -> [76543210] -> C",
+      "summary": "Rotate One Bit Right (Memory or Accumulator)"
     },
     {
       "name": "RRA",
@@ -2686,11 +3068,18 @@
       "all_names": [
         "RRA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#RRA"
-      ]
+      ],
+      "synopsis": "M = C ->  [76543210] ->  C, A + M + C ->  A, C",
+      "summary": "ROR oper + ADC oper"
     },
     {
       "name": "NOP",
@@ -2708,7 +3097,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "STA",
@@ -2726,7 +3117,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "NOP",
@@ -2744,7 +3137,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "SAX",
@@ -2764,7 +3159,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SAX"
-      ]
+      ],
+      "synopsis": "A AND X ->  M",
+      "summary": "A and X are put on the bus at the same time (resulting effectively in an AND operation) and stored in M"
     },
     {
       "name": "STY",
@@ -2782,7 +3179,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STY",
         "http://www.6502.org/users/obelisk/6502/reference.html#STY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STY"
-      ]
+      ],
+      "synopsis": "Y -> M",
+      "summary": "Sore Index Y in Memory"
     },
     {
       "name": "STA",
@@ -2800,7 +3199,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "STX",
@@ -2818,7 +3219,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STX",
         "http://www.6502.org/users/obelisk/6502/reference.html#STX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STX"
-      ]
+      ],
+      "synopsis": "X -> M",
+      "summary": "Store Index X in Memory"
     },
     {
       "name": "SAX",
@@ -2838,7 +3241,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SAX"
-      ]
+      ],
+      "synopsis": "A AND X ->  M",
+      "summary": "A and X are put on the bus at the same time (resulting effectively in an AND operation) and stored in M"
     },
     {
       "name": "DEY",
@@ -2851,15 +3256,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#DEY",
         "http://www.6502.org/users/obelisk/6502/reference.html#DEY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#DEY"
-      ]
+      ],
+      "synopsis": "Y - 1 -> Y",
+      "summary": "Decrement Index Y by One"
     },
     {
       "name": "NOP",
@@ -2877,7 +3284,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "TXA",
@@ -2889,13 +3298,18 @@
       "dummy_reads": false,
       "dummy_writes": false,
       "all_names": [],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#TXA",
         "http://www.6502.org/users/obelisk/6502/reference.html#TXA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#TXA"
-      ]
+      ],
+      "synopsis": "X -> A",
+      "summary": "Transfer Index X to Accumulator"
     },
     {
       "name": "ANE",
@@ -2910,12 +3324,17 @@
         "ANE",
         "XAA"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ANE"
-      ]
+      ],
+      "synopsis": "(A OR CONST) AND X AND oper ->  A",
+      "summary": "* OR X + AND oper"
     },
     {
       "name": "STY",
@@ -2933,7 +3352,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STY",
         "http://www.6502.org/users/obelisk/6502/reference.html#STY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STY"
-      ]
+      ],
+      "synopsis": "Y -> M",
+      "summary": "Sore Index Y in Memory"
     },
     {
       "name": "STA",
@@ -2951,7 +3372,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "STX",
@@ -2969,7 +3392,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STX",
         "http://www.6502.org/users/obelisk/6502/reference.html#STX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STX"
-      ]
+      ],
+      "synopsis": "X -> M",
+      "summary": "Store Index X in Memory"
     },
     {
       "name": "SAX",
@@ -2989,7 +3414,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SAX"
-      ]
+      ],
+      "synopsis": "A AND X ->  M",
+      "summary": "A and X are put on the bus at the same time (resulting effectively in an AND operation) and stored in M"
     },
     {
       "name": "BCC",
@@ -3007,7 +3434,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BCC",
         "http://www.6502.org/users/obelisk/6502/reference.html#BCC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BCC"
-      ]
+      ],
+      "synopsis": "branch on C = 0",
+      "summary": "Branch on Carry Clear"
     },
     {
       "name": "STA",
@@ -3025,7 +3454,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "JAM",
@@ -3045,7 +3476,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "SHA",
@@ -3066,7 +3498,9 @@
       "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHA"
-      ]
+      ],
+      "synopsis": "A AND X AND (H+1) ->  M",
+      "summary": "Stores A AND X AND (high-byte of addr. + 1) at addr."
     },
     {
       "name": "STY",
@@ -3084,7 +3518,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STY",
         "http://www.6502.org/users/obelisk/6502/reference.html#STY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STY"
-      ]
+      ],
+      "synopsis": "Y -> M",
+      "summary": "Sore Index Y in Memory"
     },
     {
       "name": "STA",
@@ -3102,7 +3538,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "STX",
@@ -3120,7 +3558,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STX",
         "http://www.6502.org/users/obelisk/6502/reference.html#STX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STX"
-      ]
+      ],
+      "synopsis": "X -> M",
+      "summary": "Store Index X in Memory"
     },
     {
       "name": "SAX",
@@ -3140,7 +3580,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SAX"
-      ]
+      ],
+      "synopsis": "A AND X ->  M",
+      "summary": "A and X are put on the bus at the same time (resulting effectively in an AND operation) and stored in M"
     },
     {
       "name": "TYA",
@@ -3152,13 +3594,18 @@
       "dummy_reads": false,
       "dummy_writes": false,
       "all_names": [],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#TYA",
         "http://www.6502.org/users/obelisk/6502/reference.html#TYA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#TYA"
-      ]
+      ],
+      "synopsis": "Y -> A",
+      "summary": "Transfer Index Y to Accumulator"
     },
     {
       "name": "STA",
@@ -3176,7 +3623,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "TXS",
@@ -3194,7 +3643,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#TXS",
         "http://www.6502.org/users/obelisk/6502/reference.html#TXS",
         "https://www.masswerk.at/6502/6502_instruction_set.html#TXS"
-      ]
+      ],
+      "synopsis": "X -> SP",
+      "summary": "Transfer Index X to Stack Register"
     },
     {
       "name": "TAS",
@@ -3210,12 +3661,17 @@
         "XAS",
         "SHS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#TAS"
-      ]
+      ],
+      "synopsis": "[76543210] <- 0",
+      "summary": "As ASL, but does not update the carry."
     },
     {
       "name": "SHY",
@@ -3237,7 +3693,9 @@
       "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHY"
-      ]
+      ],
+      "synopsis": "Y AND (H+1) ->  M",
+      "summary": "Stores Y AND (high-byte of addr. + 1) at addr."
     },
     {
       "name": "STA",
@@ -3255,7 +3713,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#STA",
         "http://www.6502.org/users/obelisk/6502/reference.html#STA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     },
     {
       "name": "SHX",
@@ -3277,7 +3737,9 @@
       "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHX"
-      ]
+      ],
+      "synopsis": "X AND (H+1) ->  M",
+      "summary": "Stores X AND (high-byte of addr. + 1) at addr."
     },
     {
       "name": "SHA",
@@ -3297,7 +3759,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SHA"
-      ]
+      ],
+      "synopsis": "A AND X AND (H+1) ->  M",
+      "summary": "Stores A AND X AND (high-byte of addr. + 1) at addr."
     },
     {
       "name": "LDY",
@@ -3310,15 +3774,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDY",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDY"
-      ]
+      ],
+      "synopsis": "M -> Y",
+      "summary": "Load Index Y with Memory"
     },
     {
       "name": "LDA",
@@ -3331,15 +3797,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "LDX",
@@ -3352,15 +3820,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDX",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDX"
-      ]
+      ],
+      "synopsis": "M -> X",
+      "summary": "Load Index X with Memory"
     },
     {
       "name": "LAX",
@@ -3374,11 +3844,16 @@
       "all_names": [
         "LAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAX"
-      ]
+      ],
+      "synopsis": "M ->  A ->  X",
+      "summary": "LDA oper + LDX oper"
     },
     {
       "name": "LDY",
@@ -3391,15 +3866,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDY",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDY"
-      ]
+      ],
+      "synopsis": "M -> Y",
+      "summary": "Load Index Y with Memory"
     },
     {
       "name": "LDA",
@@ -3412,15 +3889,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "LDX",
@@ -3433,15 +3912,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDX",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDX"
-      ]
+      ],
+      "synopsis": "M -> X",
+      "summary": "Load Index X with Memory"
     },
     {
       "name": "LAX",
@@ -3455,11 +3936,16 @@
       "all_names": [
         "LAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAX"
-      ]
+      ],
+      "synopsis": "M ->  A ->  X",
+      "summary": "LDA oper + LDX oper"
     },
     {
       "name": "TAY",
@@ -3471,13 +3957,18 @@
       "dummy_reads": false,
       "dummy_writes": false,
       "all_names": [],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#TAY",
         "http://www.6502.org/users/obelisk/6502/reference.html#TAY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#TAY"
-      ]
+      ],
+      "synopsis": "A -> Y",
+      "summary": "Transfer Accumulator to Index Y"
     },
     {
       "name": "LDA",
@@ -3490,15 +3981,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "TAX",
@@ -3510,13 +4003,18 @@
       "dummy_reads": false,
       "dummy_writes": false,
       "all_names": [],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#TAX",
         "http://www.6502.org/users/obelisk/6502/reference.html#TAX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#TAX"
-      ]
+      ],
+      "synopsis": "A -> X",
+      "summary": "Transfer Accumulator to Index X"
     },
     {
       "name": "LXA",
@@ -3532,12 +4030,17 @@
         "LAX",
         "immediate"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "unstable": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LXA"
-      ]
+      ],
+      "synopsis": "(A OR CONST) AND oper ->  A ->  X",
+      "summary": "Store * AND oper in A and X"
     },
     {
       "name": "LDY",
@@ -3550,15 +4053,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDY",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDY"
-      ]
+      ],
+      "synopsis": "M -> Y",
+      "summary": "Load Index Y with Memory"
     },
     {
       "name": "LDA",
@@ -3571,15 +4076,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "LDX",
@@ -3592,15 +4099,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDX",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDX"
-      ]
+      ],
+      "synopsis": "M -> X",
+      "summary": "Load Index X with Memory"
     },
     {
       "name": "LAX",
@@ -3614,11 +4123,16 @@
       "all_names": [
         "LAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAX"
-      ]
+      ],
+      "synopsis": "M ->  A ->  X",
+      "summary": "LDA oper + LDX oper"
     },
     {
       "name": "BCS",
@@ -3636,7 +4150,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BCS",
         "http://www.6502.org/users/obelisk/6502/reference.html#BCS",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BCS"
-      ]
+      ],
+      "synopsis": "branch on C = 1",
+      "summary": "Branch on Carry Set"
     },
     {
       "name": "LDA",
@@ -3649,15 +4165,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "JAM",
@@ -3677,7 +4195,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "LAX",
@@ -3691,11 +4210,16 @@
       "all_names": [
         "LAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAX"
-      ]
+      ],
+      "synopsis": "M ->  A ->  X",
+      "summary": "LDA oper + LDX oper"
     },
     {
       "name": "LDY",
@@ -3708,15 +4232,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDY",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDY"
-      ]
+      ],
+      "synopsis": "M -> Y",
+      "summary": "Load Index Y with Memory"
     },
     {
       "name": "LDA",
@@ -3729,15 +4255,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "LDX",
@@ -3750,15 +4278,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDX",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDX"
-      ]
+      ],
+      "synopsis": "M -> X",
+      "summary": "Load Index X with Memory"
     },
     {
       "name": "LAX",
@@ -3772,11 +4302,16 @@
       "all_names": [
         "LAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAX"
-      ]
+      ],
+      "synopsis": "M ->  A ->  X",
+      "summary": "LDA oper + LDX oper"
     },
     {
       "name": "CLV",
@@ -3789,14 +4324,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "V"
+        "V:0"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CLV",
         "http://www.6502.org/users/obelisk/6502/reference.html#CLV",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CLV"
-      ]
+      ],
+      "synopsis": "0 -> V",
+      "summary": "Clear Overflow Flag"
     },
     {
       "name": "LDA",
@@ -3809,15 +4346,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "TSX",
@@ -3829,13 +4368,18 @@
       "dummy_reads": false,
       "dummy_writes": false,
       "all_names": [],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#TSX",
         "http://www.6502.org/users/obelisk/6502/reference.html#TSX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#TSX"
-      ]
+      ],
+      "synopsis": "SP -> X",
+      "summary": "Transfer Stack Pointer to Index X"
     },
     {
       "name": "LAS",
@@ -3850,11 +4394,16 @@
         "LAS",
         "LAR"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAS"
-      ]
+      ],
+      "synopsis": "M AND SP ->  A, X, SP",
+      "summary": "LDA/TSX oper"
     },
     {
       "name": "LDY",
@@ -3867,15 +4416,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDY",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDY"
-      ]
+      ],
+      "synopsis": "M -> Y",
+      "summary": "Load Index Y with Memory"
     },
     {
       "name": "LDA",
@@ -3888,15 +4439,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDA",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDA",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "LDX",
@@ -3909,15 +4462,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#LDX",
         "http://www.6502.org/users/obelisk/6502/reference.html#LDX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#LDX"
-      ]
+      ],
+      "synopsis": "M -> X",
+      "summary": "Load Index X with Memory"
     },
     {
       "name": "LAX",
@@ -3931,11 +4486,16 @@
       "all_names": [
         "LAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#LAX"
-      ]
+      ],
+      "synopsis": "M ->  A ->  X",
+      "summary": "LDA oper + LDX oper"
     },
     {
       "name": "CPY",
@@ -3948,16 +4508,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CPY",
         "http://www.6502.org/users/obelisk/6502/reference.html#CPY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CPY"
-      ]
+      ],
+      "synopsis": "Y - M",
+      "summary": "Compare Memory and Index Y"
     },
     {
       "name": "CMP",
@@ -3970,16 +4532,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "NOP",
@@ -3997,7 +4561,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "DCP",
@@ -4012,11 +4578,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "CPY",
@@ -4029,16 +4601,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CPY",
         "http://www.6502.org/users/obelisk/6502/reference.html#CPY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CPY"
-      ]
+      ],
+      "synopsis": "Y - M",
+      "summary": "Compare Memory and Index Y"
     },
     {
       "name": "CMP",
@@ -4051,16 +4625,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "DEC",
@@ -4073,15 +4649,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#DEC",
         "http://www.6502.org/users/obelisk/6502/reference.html#DEC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#DEC"
-      ]
+      ],
+      "synopsis": "M - 1 -> M",
+      "summary": "Decrement Memory by One"
     },
     {
       "name": "DCP",
@@ -4096,11 +4674,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "INY",
@@ -4113,15 +4697,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#INY",
         "http://www.6502.org/users/obelisk/6502/reference.html#INY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#INY"
-      ]
+      ],
+      "synopsis": "Y + 1 -> Y",
+      "summary": "Increment Index Y by One"
     },
     {
       "name": "CMP",
@@ -4134,16 +4720,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "DEX",
@@ -4156,15 +4744,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#DEX",
         "http://www.6502.org/users/obelisk/6502/reference.html#DEX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#DEX"
-      ]
+      ],
+      "synopsis": "X - 1 -> X",
+      "summary": "Decrement Index X by One"
     },
     {
       "name": "SBX",
@@ -4180,11 +4770,17 @@
         "AXS",
         "SAX"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBX"
-      ]
+      ],
+      "synopsis": "(A AND X) - oper ->  X",
+      "summary": "CMP and DEX at once, sets flags like CMP"
     },
     {
       "name": "CPY",
@@ -4197,16 +4793,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CPY",
         "http://www.6502.org/users/obelisk/6502/reference.html#CPY",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CPY"
-      ]
+      ],
+      "synopsis": "Y - M",
+      "summary": "Compare Memory and Index Y"
     },
     {
       "name": "CMP",
@@ -4219,16 +4817,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "DEC",
@@ -4241,15 +4841,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#DEC",
         "http://www.6502.org/users/obelisk/6502/reference.html#DEC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#DEC"
-      ]
+      ],
+      "synopsis": "M - 1 -> M",
+      "summary": "Decrement Memory by One"
     },
     {
       "name": "DCP",
@@ -4264,11 +4866,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "BNE",
@@ -4286,7 +4894,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BNE",
         "http://www.6502.org/users/obelisk/6502/reference.html#BNE",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BNE"
-      ]
+      ],
+      "synopsis": "branch on Z = 0",
+      "summary": "Branch on Result not Zero"
     },
     {
       "name": "CMP",
@@ -4299,16 +4909,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "JAM",
@@ -4328,7 +4940,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "DCP",
@@ -4343,11 +4956,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "NOP",
@@ -4365,7 +4984,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "CMP",
@@ -4378,16 +4999,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "DEC",
@@ -4400,15 +5023,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#DEC",
         "http://www.6502.org/users/obelisk/6502/reference.html#DEC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#DEC"
-      ]
+      ],
+      "synopsis": "M - 1 -> M",
+      "summary": "Decrement Memory by One"
     },
     {
       "name": "DCP",
@@ -4423,11 +5048,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "CLD",
@@ -4440,14 +5071,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "D"
+        "D:0"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CLD",
         "http://www.6502.org/users/obelisk/6502/reference.html#CLD",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CLD"
-      ]
+      ],
+      "synopsis": "0 -> D",
+      "summary": "Clear Decimal Mode"
     },
     {
       "name": "CMP",
@@ -4460,16 +5093,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "NOP",
@@ -4487,7 +5122,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "DCP",
@@ -4502,11 +5139,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "NOP",
@@ -4524,7 +5167,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "CMP",
@@ -4537,16 +5182,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CMP",
         "http://www.6502.org/users/obelisk/6502/reference.html#CMP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "DEC",
@@ -4559,15 +5206,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#DEC",
         "http://www.6502.org/users/obelisk/6502/reference.html#DEC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#DEC"
-      ]
+      ],
+      "synopsis": "M - 1 -> M",
+      "summary": "Decrement Memory by One"
     },
     {
       "name": "DCP",
@@ -4582,11 +5231,17 @@
         "DCP",
         "DCM"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#DCP"
-      ]
+      ],
+      "synopsis": "M - 1 ->  M, A - M",
+      "summary": "DEC oper + CMP oper"
     },
     {
       "name": "CPX",
@@ -4599,16 +5254,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CPX",
         "http://www.6502.org/users/obelisk/6502/reference.html#CPX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CPX"
-      ]
+      ],
+      "synopsis": "X - M",
+      "summary": "Compare Memory and Index X"
     },
     {
       "name": "SBC",
@@ -4621,17 +5278,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "NOP",
@@ -4649,7 +5308,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ISC",
@@ -4665,11 +5326,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "CPX",
@@ -4682,16 +5350,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CPX",
         "http://www.6502.org/users/obelisk/6502/reference.html#CPX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CPX"
-      ]
+      ],
+      "synopsis": "X - M",
+      "summary": "Compare Memory and Index X"
     },
     {
       "name": "SBC",
@@ -4704,17 +5374,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "INC",
@@ -4727,15 +5399,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#INC",
         "http://www.6502.org/users/obelisk/6502/reference.html#INC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#INC"
-      ]
+      ],
+      "synopsis": "M + 1 -> M",
+      "summary": "Increment Memory by One"
     },
     {
       "name": "ISC",
@@ -4751,11 +5425,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "INX",
@@ -4768,15 +5449,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#INX",
         "http://www.6502.org/users/obelisk/6502/reference.html#INX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#INX"
-      ]
+      ],
+      "synopsis": "X + 1 -> X",
+      "summary": "Increment Index X by One"
     },
     {
       "name": "SBC",
@@ -4789,17 +5472,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "NOP",
@@ -4817,7 +5502,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#NOP",
         "http://www.6502.org/users/obelisk/6502/reference.html#NOP",
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "USBC",
@@ -4832,11 +5519,18 @@
         "USBC",
         "SBC"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#USBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ ->  A",
+      "summary": "SBC oper + NOP"
     },
     {
       "name": "CPX",
@@ -4849,16 +5543,18 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "N"
+        "C"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#CPX",
         "http://www.6502.org/users/obelisk/6502/reference.html#CPX",
         "https://www.masswerk.at/6502/6502_instruction_set.html#CPX"
-      ]
+      ],
+      "synopsis": "X - M",
+      "summary": "Compare Memory and Index X"
     },
     {
       "name": "SBC",
@@ -4871,17 +5567,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "INC",
@@ -4894,15 +5592,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#INC",
         "http://www.6502.org/users/obelisk/6502/reference.html#INC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#INC"
-      ]
+      ],
+      "synopsis": "M + 1 -> M",
+      "summary": "Increment Memory by One"
     },
     {
       "name": "ISC",
@@ -4918,11 +5618,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "BEQ",
@@ -4940,7 +5647,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BEQ",
         "http://www.6502.org/users/obelisk/6502/reference.html#BEQ",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BEQ"
-      ]
+      ],
+      "synopsis": "branch on Z = 1",
+      "summary": "Branch on Result Zero"
     },
     {
       "name": "SBC",
@@ -4953,17 +5662,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "JAM",
@@ -4983,7 +5694,8 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#JAM"
-      ]
+      ],
+      "summary": "These instructions freeze the CPU."
     },
     {
       "name": "ISC",
@@ -4999,11 +5711,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "NOP",
@@ -5021,7 +5740,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "SBC",
@@ -5034,17 +5755,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "INC",
@@ -5057,15 +5780,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#INC",
         "http://www.6502.org/users/obelisk/6502/reference.html#INC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#INC"
-      ]
+      ],
+      "synopsis": "M + 1 -> M",
+      "summary": "Increment Memory by One"
     },
     {
       "name": "ISC",
@@ -5081,11 +5806,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "SED",
@@ -5098,14 +5830,16 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "D"
+        "D:1"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SED",
         "http://www.6502.org/users/obelisk/6502/reference.html#SED",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SED"
-      ]
+      ],
+      "synopsis": "1 -> D",
+      "summary": "Set Decimal Flag"
     },
     {
       "name": "SBC",
@@ -5118,17 +5852,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "NOP",
@@ -5146,7 +5882,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "ISC",
@@ -5162,11 +5900,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "NOP",
@@ -5184,7 +5929,9 @@
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#NOP"
-      ]
+      ],
+      "synopsis": "---",
+      "summary": "No Operation"
     },
     {
       "name": "SBC",
@@ -5197,17 +5944,19 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "C",
+        "N",
         "Z",
-        "V",
-        "N"
+        "C",
+        "V"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#SBC",
         "http://www.6502.org/users/obelisk/6502/reference.html#SBC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "INC",
@@ -5220,15 +5969,17 @@
       "dummy_writes": true,
       "all_names": [],
       "status_flags": [
-        "Z",
-        "N"
+        "N",
+        "Z"
       ],
       "illegal": false,
       "online_documentation": [
         "https://www.nesdev.org/wiki/Instruction_reference#INC",
         "http://www.6502.org/users/obelisk/6502/reference.html#INC",
         "https://www.masswerk.at/6502/6502_instruction_set.html#INC"
-      ]
+      ],
+      "synopsis": "M + 1 -> M",
+      "summary": "Increment Memory by One"
     },
     {
       "name": "ISC",
@@ -5244,11 +5995,18 @@
         "ISB",
         "INS"
       ],
-      "status_flags": [],
+      "status_flags": [
+        "N",
+        "Z",
+        "C",
+        "V"
+      ],
       "illegal": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#ISC"
-      ]
+      ],
+      "synopsis": "M + 1 ->  M, A - M - C̅ ->  A",
+      "summary": "INC oper + SBC oper"
     },
     {
       "name": "ADC",
@@ -5263,12 +6021,15 @@
       "status_flags": [
         "N",
         "Z",
-        "C"
+        "C",
+        "V"
       ],
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_ADC"
-      ]
+      ],
+      "synopsis": "A + M + C -> A, C",
+      "summary": "Add Memory to Accumulator with Carry"
     },
     {
       "name": "AND",
@@ -5287,7 +6048,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_AND"
-      ]
+      ],
+      "synopsis": "A AND M -> A",
+      "summary": "AND Memory with Accumulator"
     },
     {
       "name": "BIT",
@@ -5300,14 +6063,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "N7",
-        "V6",
-        "Z"
+        "N:M7",
+        "Z",
+        "V:M6"
       ],
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
-      ]
+      ],
+      "synopsis": "A AND M -> Z, M7 -> N, M6 -> V",
+      "summary": "Test Bits in Memory with Accumulator",
+      "implementation_notes": "bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);\nthe zero-flag is set according to the result of the operand AND\nthe accumulator (set, if the result is zero, unset otherwise).\nThis allows a quick check of a few bits at once without affecting\nany of the registers, other than the status register (SR)."
     },
     {
       "name": "BIT",
@@ -5320,14 +6086,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "N7",
-        "V6",
-        "Z"
+        "N:M7",
+        "Z",
+        "V:M6"
       ],
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
-      ]
+      ],
+      "synopsis": "A AND M -> Z, M7 -> N, M6 -> V",
+      "summary": "Test Bits in Memory with Accumulator",
+      "implementation_notes": "bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);\nthe zero-flag is set according to the result of the operand AND\nthe accumulator (set, if the result is zero, unset otherwise).\nThis allows a quick check of a few bits at once without affecting\nany of the registers, other than the status register (SR)."
     },
     {
       "name": "BIT",
@@ -5340,14 +6109,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "N7",
-        "V6",
-        "Z"
+        "N:M7",
+        "Z",
+        "V:M6"
       ],
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
-      ]
+      ],
+      "synopsis": "A AND M -> Z, M7 -> N, M6 -> V",
+      "summary": "Test Bits in Memory with Accumulator",
+      "implementation_notes": "bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);\nthe zero-flag is set according to the result of the operand AND\nthe accumulator (set, if the result is zero, unset otherwise).\nThis allows a quick check of a few bits at once without affecting\nany of the registers, other than the status register (SR)."
     },
     {
       "name": "BIT",
@@ -5360,14 +6132,17 @@
       "dummy_writes": false,
       "all_names": [],
       "status_flags": [
-        "N7",
-        "V6",
-        "Z"
+        "N:M7",
+        "Z",
+        "V:M6"
       ],
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_BIT"
-      ]
+      ],
+      "synopsis": "A AND M -> Z, M7 -> N, M6 -> V",
+      "summary": "Test Bits in Memory with Accumulator",
+      "implementation_notes": "bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);\nthe zero-flag is set according to the result of the operand AND\nthe accumulator (set, if the result is zero, unset otherwise).\nThis allows a quick check of a few bits at once without affecting\nany of the registers, other than the status register (SR)."
     },
     {
       "name": "CMP",
@@ -5387,7 +6162,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_CMP"
-      ]
+      ],
+      "synopsis": "A - M",
+      "summary": "Compare Memory with Accumulator"
     },
     {
       "name": "DEC",
@@ -5406,7 +6183,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_DEC"
-      ]
+      ],
+      "synopsis": "M - 1 -> M",
+      "summary": "Decrement Memory by One"
     },
     {
       "name": "EOR",
@@ -5425,7 +6204,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_EOR"
-      ]
+      ],
+      "synopsis": "A EOR M -> A",
+      "summary": "Exclusive-OR Memory with Accumulator"
     },
     {
       "name": "INC",
@@ -5444,7 +6225,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_INC"
-      ]
+      ],
+      "synopsis": "M + 1 -> M",
+      "summary": "Increment Memory by One"
     },
     {
       "name": "JMP",
@@ -5460,7 +6243,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_JMP"
-      ]
+      ],
+      "synopsis": "operand 1st byte -> PCL\noperand 2nd byte -> PCH",
+      "summary": "Jump to New Location"
     },
     {
       "name": "LDA",
@@ -5479,7 +6264,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_LDA"
-      ]
+      ],
+      "synopsis": "M -> A",
+      "summary": "Load Accumulator with Memory"
     },
     {
       "name": "ORA",
@@ -5498,7 +6285,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_ORA"
-      ]
+      ],
+      "synopsis": "A OR M -> A",
+      "summary": "OR Memory with Accumulator"
     },
     {
       "name": "SBC",
@@ -5512,12 +6301,16 @@
       "all_names": [],
       "status_flags": [
         "N",
-        "Z"
+        "Z",
+        "C",
+        "V"
       ],
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_SBC"
-      ]
+      ],
+      "synopsis": "A - M - C̅ -> A",
+      "summary": "Subtract Memory from Accumulator with Borrow"
     },
     {
       "name": "STA",
@@ -5533,7 +6326,9 @@
       "w65c02": true,
       "online_documentation": [
         "https://www.masswerk.at/6502/6502_instruction_set.html#WDC_STA"
-      ]
+      ],
+      "synopsis": "A -> M",
+      "summary": "Store Accumulator in Memory"
     }
   ]
 }

@@ -15,72 +15,94 @@ namespace Asm6502;
 partial class Mos6510Assembler
 {
     /// <summary>
-    /// Add with carry. ADC_Imm instruction (0x69) with addressing mode Immediate.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC_Imm</see> instruction (0x69) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x69
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6510Assembler ADC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ADC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then LSR. ALR_Imm instruction (0x4b) with addressing mode Immediate.
+    /// AND oper + LSR. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ALR">ALR_Imm</see> instruction (0x4b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND oper, 0 ->  [76543210] ->  C
     /// <code>
+    /// OpCode: 0x4b
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler ALR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ALR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then set carry. ANC_2B_Imm instruction (0x2b) with addressing mode Immediate.
+    /// AND oper + set C as ASL. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ANC">ANC_2B_Imm</see> instruction (0x2b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND oper, bit(7) ->  C
     /// <code>
+    /// OpCode: 0x2b
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler ANC_2B_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ANC_2B_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then set carry. ANC_Imm instruction (0x0b) with addressing mode Immediate.
+    /// AND oper + set C as ASL. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ANC">ANC_Imm</see> instruction (0x0b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND oper, bit(7) ->  C
     /// <code>
+    /// OpCode: 0x0b
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler ANC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ANC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND_Imm instruction (0x29) with addressing mode Immediate.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND_Imm</see> instruction (0x29) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x29
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6510Assembler AND_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.AND_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Undocumented: AND with X then AND operand. ANE_Imm instruction (0x8b) with addressing mode Immediate.
+    /// * OR X + AND oper. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ANE">ANE_Imm</see> instruction (0x8b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// (A OR CONST) AND X AND oper ->  A
     /// <code>
+    /// OpCode: 0x8b
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     ///  This is an illegal and unstable instruction.
     /// </remarks>
@@ -88,108 +110,137 @@ partial class Mos6510Assembler
     public Mos6510Assembler ANE_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ANE_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// AND then ROR. ARR_Imm instruction (0x6b) with addressing mode Immediate.
+    /// AND oper + ROR. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ARR">ARR_Imm</see> instruction (0x6b) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND oper, C ->  [76543210] ->  C
     /// <code>
+    /// OpCode: 0x6b
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler ARR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ARR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP_Imm instruction (0xc9) with addressing mode Immediate.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP_Imm</see> instruction (0xc9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xc9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6510Assembler CMP_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.CMP_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare X register. CPX_Imm instruction (0xe0) with addressing mode Immediate.
+    /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX_Imm</see> instruction (0xe0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// X - M
     /// <code>
+    /// OpCode: 0xe0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6510Assembler CPX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.CPX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare Y register. CPY_Imm instruction (0xc0) with addressing mode Immediate.
+    /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY_Imm</see> instruction (0xc0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// Y - M
     /// <code>
+    /// OpCode: 0xc0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6510Assembler CPY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.CPY_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR_Imm instruction (0x49) with addressing mode Immediate.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR_Imm</see> instruction (0x49) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x49
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6510Assembler EOR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.EOR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA_Imm instruction (0xa9) with addressing mode Immediate.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA_Imm</see> instruction (0xa9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xa9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6510Assembler LDA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.LDA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX_Imm instruction (0xa2) with addressing mode Immediate.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX_Imm</see> instruction (0xa2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xa2
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6510Assembler LDX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.LDX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY_Imm instruction (0xa0) with addressing mode Immediate.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY_Imm</see> instruction (0xa0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xa0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6510Assembler LDY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.LDY_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// LDA then LDX. LXA_Imm instruction (0xab) with addressing mode Immediate.
+    /// Store * AND oper in A and X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LXA">LXA_Imm</see> instruction (0xab) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// (A OR CONST) AND oper ->  A ->  X
     /// <code>
+    /// OpCode: 0xab
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     ///  This is an illegal and unstable instruction.
     /// </remarks>
@@ -197,108 +248,142 @@ partial class Mos6510Assembler
     public Mos6510Assembler LXA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.LXA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_82_Imm instruction (0x82) with addressing mode Immediate.
+    /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_82_Imm</see> instruction (0x82) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// ---
     /// <code>
+    /// OpCode: 0x82
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler NOP_82_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_82_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_89_Imm instruction (0x89) with addressing mode Immediate.
+    /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_89_Imm</see> instruction (0x89) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// ---
     /// <code>
+    /// OpCode: 0x89
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler NOP_89_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_89_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_C2_Imm instruction (0xc2) with addressing mode Immediate.
+    /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_C2_Imm</see> instruction (0xc2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// ---
     /// <code>
+    /// OpCode: 0xc2
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler NOP_C2_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_C2_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_E2_Imm instruction (0xe2) with addressing mode Immediate.
+    /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_E2_Imm</see> instruction (0xe2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// ---
     /// <code>
+    /// OpCode: 0xe2
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler NOP_E2_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_E2_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP_Imm instruction (0x80) with addressing mode Immediate.
+    /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_Imm</see> instruction (0x80) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// ---
     /// <code>
+    /// OpCode: 0x80
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler NOP_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA_Imm instruction (0x09) with addressing mode Immediate.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA_Imm</see> instruction (0x09) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x09
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6510Assembler ORA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ORA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC_Imm instruction (0xe9) with addressing mode Immediate.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC_Imm</see> instruction (0xe9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xe9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6510Assembler SBC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.SBC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compute (A AND X) then subtract with carry. SBX_Imm instruction (0xcb) with addressing mode Immediate.
+    /// CMP and DEX at once, sets flags like CMP. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBX">SBX_Imm</see> instruction (0xcb) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// (A AND X) - oper ->  X
     /// <code>
+    /// OpCode: 0xcb
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>
     public Mos6510Assembler SBX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.SBX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// SBC with NOP behavior. USBC_Imm instruction (0xeb) with addressing mode Immediate.
+    /// SBC oper + NOP. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#USBC">USBC_Imm</see> instruction (0xeb) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ ->  A
     /// <code>
+    /// OpCode: 0xeb
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     ///  This is an illegal instruction.
     /// </remarks>

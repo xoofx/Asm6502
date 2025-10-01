@@ -73,4 +73,6 @@ public class JsonAsm6502Opcode
 
     [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
     public List<string> OnlineDocumentation { get; } = new();
+    public string Synopsis { get; set; } = string.Empty;
+    public string Summary { get; set; } = string.Empty;
 }

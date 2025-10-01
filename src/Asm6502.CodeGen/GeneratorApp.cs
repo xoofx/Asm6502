@@ -3,13 +3,7 @@
 // See license.txt file in the project root for full license information.
 
 using System.Diagnostics;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.JavaScript;
 using System.Text;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace Asm6502.CodeGen;
 
@@ -891,23 +885,56 @@ internal class GeneratorApp
 
                 List<string> summaryList =
                 [
-                    $"{opcodeSignature.Opcode.NameLong}. {mnemonic} instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}."
+                    $"{opcodeSignature.Opcode.Summary}. <see href=\"{opcode.OnlineDocumentation.FirstOrDefault(x => x.Contains("masswerk", StringComparison.Ordinal))}\">{mnemonic}</see> instruction ({opcodeSignature.Opcode.OpcodeHex}) with addressing mode {opcodeSignature.Opcode.AddressingMode}."
                     , .. opcodeSignature.Summary
                 ];
 
                 writer.WriteSummary(summaryList);
 
                 // Write remarks
+                
                 var lines = new List<string>
                 {
                     "<remarks>",
+                    opcode.Synopsis.Replace("&", "&amp;").Replace("<", "&lt;"),
                     "<code>",
+                    $"OpCode: {opcode.OpcodeHex}",
                     $"Cycles: {opcodeSignature.Opcode.Cycles}",
                     $"  Size: {mode.SizeBytes}"
                 };
-                if (opcode.StatusFlags.Count > 0)
+
                 {
-                    lines.Add($" Flags: {string.Join(", ", opcode.StatusFlags)}");
+                    lines.Add($" Flags: N V - B D I Z C");
+                    string flagLine = "        ";
+                    bool isFirst = true;
+                    foreach (var flag in "NV-BDIZC")
+                    {
+                        if (!isFirst) { flagLine += " "; }
+                        isFirst = false;
+                        var found = opcode.StatusFlags.FirstOrDefault(x => x.StartsWith(flag));
+                        if (found is not null)
+                        {
+                            if (found.Length > 1)
+                            {
+                                found = found.Substring(2);
+                            }
+                            else
+                            {
+                                found = "+";
+                            }
+
+                            flagLine += found;
+                            if (found.Length > 1)
+                            {
+                                isFirst = true; // Remove space after multi-char flags
+                            }
+                        }
+                        else
+                        {
+                            flagLine += "-";
+                        }
+                    }
+                    lines.Add(flagLine);
                 }
                 lines.Add("</code>");
                 if (!string.IsNullOrEmpty(special))

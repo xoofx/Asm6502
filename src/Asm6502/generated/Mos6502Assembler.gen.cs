@@ -15,1779 +15,2271 @@ namespace Asm6502;
 partial class Mos6502Assembler
 {
     /// <summary>
-    /// Add with carry. ADC instruction (0x65) with addressing mode ZeroPage.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x65) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x65
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC instruction (0x75) with addressing mode ZeroPageX.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x75) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x75
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC instruction (0x61) with addressing mode IndirectX.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x61) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x61
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC instruction (0x71) with addressing mode IndirectY.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x71) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x71
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC instruction (0x6d) with addressing mode Absolute.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x6d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x6d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC instruction (0x7d) with addressing mode AbsoluteX.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x7d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x7d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC instruction (0x79) with addressing mode AbsoluteY.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC</see> instruction (0x79) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x79
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Add with carry. ADC_Imm instruction (0x69) with addressing mode Immediate.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC_Imm</see> instruction (0x69) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x69
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ADC_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x25) with addressing mode ZeroPage.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x25) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x25
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x35) with addressing mode ZeroPageX.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x35) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x35
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x21) with addressing mode IndirectX.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x21) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x21
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x31) with addressing mode IndirectY.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x31) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x31
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x2d) with addressing mode Absolute.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x2d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x2d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x3d) with addressing mode AbsoluteX.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x3d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x3d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND instruction (0x39) with addressing mode AbsoluteY.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND</see> instruction (0x39) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x39
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND_Imm instruction (0x29) with addressing mode Immediate.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND_Imm</see> instruction (0x29) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x29
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.AND_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction (0x06) with addressing mode ZeroPage.
+    /// Shift Left One Bit (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ASL">ASL</see> instruction (0x06) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- 0
     /// <code>
+    /// OpCode: 0x06
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ASL(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction (0x16) with addressing mode ZeroPageX.
+    /// Shift Left One Bit (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ASL">ASL</see> instruction (0x16) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- 0
     /// <code>
+    /// OpCode: 0x16
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ASL(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction (0x0a) with addressing mode Accumulator.
+    /// Shift Left One Bit (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ASL">ASL</see> instruction (0x0a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- 0
     /// <code>
+    /// OpCode: 0x0a
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ASL(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction (0x0e) with addressing mode Absolute.
+    /// Shift Left One Bit (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ASL">ASL</see> instruction (0x0e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- 0
     /// <code>
+    /// OpCode: 0x0e
     /// Cycles: 6
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ASL(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Arithmetic shift left. ASL instruction (0x1e) with addressing mode AbsoluteX.
+    /// Shift Left One Bit (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ASL">ASL</see> instruction (0x1e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- 0
     /// <code>
+    /// OpCode: 0x1e
     /// Cycles: 7
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ASL(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ASL(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if carry clear. BCC instruction (0x90) with addressing mode Relative.
+    /// Branch on Carry Clear. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BCC">BCC</see> instruction (0x90) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on C = 0
     /// <code>
+    /// OpCode: 0x90
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BCC(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BCC(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if carry set. BCS instruction (0xb0) with addressing mode Relative.
+    /// Branch on Carry Set. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BCS">BCS</see> instruction (0xb0) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on C = 1
     /// <code>
+    /// OpCode: 0xb0
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BCS(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BCS(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if equal. BEQ instruction (0xf0) with addressing mode Relative.
+    /// Branch on Result Zero. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BEQ">BEQ</see> instruction (0xf0) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on Z = 1
     /// <code>
+    /// OpCode: 0xf0
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BEQ(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BEQ(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Bit test. BIT instruction (0x24) with addressing mode ZeroPage.
+    /// Test Bits in Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BIT">BIT</see> instruction (0x24) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A AND M -> Z, M7 -> N, M6 -> V
     /// <code>
+    /// OpCode: 0x24
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         M7M6- - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BIT(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BIT(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Bit test. BIT instruction (0x2c) with addressing mode Absolute.
+    /// Test Bits in Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BIT">BIT</see> instruction (0x2c) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A AND M -> Z, M7 -> N, M6 -> V
     /// <code>
+    /// OpCode: 0x2c
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         M7M6- - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BIT(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BIT(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if minus. BMI instruction (0x30) with addressing mode Relative.
+    /// Branch on Result Minus. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BMI">BMI</see> instruction (0x30) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on N = 1
     /// <code>
+    /// OpCode: 0x30
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BMI(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BMI(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if not equal. BNE instruction (0xd0) with addressing mode Relative.
+    /// Branch on Result not Zero. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BNE">BNE</see> instruction (0xd0) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on Z = 0
     /// <code>
+    /// OpCode: 0xd0
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BNE(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BNE(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if positive. BPL instruction (0x10) with addressing mode Relative.
+    /// . <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// 
     /// <code>
+    /// OpCode: 0x10
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BPL(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BPL(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Break / Software Interrupt. BRK instruction (0x00) with addressing mode Implied.
+    /// Force Break. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BRK">BRK</see> instruction (0x00) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// interrupt,
+    /// push PC+2, push SR
     /// <code>
+    /// OpCode: 0x00
     /// Cycles: 7
     ///   Size: 1
-    ///  Flags: B
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - 1 - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BRK([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BRK(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if overflow clear. BVC instruction (0x50) with addressing mode Relative.
+    /// Branch on Overflow Clear. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BVC">BVC</see> instruction (0x50) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on V = 0
     /// <code>
+    /// OpCode: 0x50
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BVC(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BVC(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Branch if overflow set. BVS instruction (0x70) with addressing mode Relative.
+    /// Branch on Overflow Set. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BVS">BVS</see> instruction (0x70) with addressing mode Relative.
     /// </summary>
     /// <remarks>
+    /// branch on V = 1
     /// <code>
+    /// OpCode: 0x70
     /// Cycles: 2
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler BVS(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BVS(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Clear carry. CLC instruction (0x18) with addressing mode Implied.
+    /// Clear Carry Flag. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CLC">CLC</see> instruction (0x18) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 0 -> C
     /// <code>
+    /// OpCode: 0x18
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: C
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - 0
     /// </code>
     /// </remarks>
     public Mos6502Assembler CLC([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLC(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Clear decimal mode. CLD instruction (0xd8) with addressing mode Implied.
+    /// Clear Decimal Mode. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CLD">CLD</see> instruction (0xd8) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 0 -> D
     /// <code>
+    /// OpCode: 0xd8
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: D
+    ///  Flags: N V - B D I Z C
+    ///         - - - - 0 - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler CLD([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLD(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Clear interrupt disable. CLI instruction (0x58) with addressing mode Implied.
+    /// Clear Interrupt Disable Bit. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CLI">CLI</see> instruction (0x58) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 0 -> I
     /// <code>
+    /// OpCode: 0x58
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: I
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - 0 - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler CLI([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLI(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Clear overflow flag. CLV instruction (0xb8) with addressing mode Implied.
+    /// Clear Overflow Flag. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CLV">CLV</see> instruction (0xb8) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 0 -> V
     /// <code>
+    /// OpCode: 0xb8
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: V
+    ///  Flags: N V - B D I Z C
+    ///         - 0 - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler CLV([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CLV(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xc5) with addressing mode ZeroPage.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xc5) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xc5
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xd5) with addressing mode ZeroPageX.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xd5) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xd5
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xc1) with addressing mode IndirectX.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xc1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xc1
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xd1) with addressing mode IndirectY.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xd1) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xd1
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xcd) with addressing mode Absolute.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xcd) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xcd
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xdd) with addressing mode AbsoluteX.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xdd) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xdd
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP instruction (0xd9) with addressing mode AbsoluteY.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP</see> instruction (0xd9) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xd9
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP_Imm instruction (0xc9) with addressing mode Immediate.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP_Imm</see> instruction (0xc9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xc9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CMP_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare X register. CPX instruction (0xe4) with addressing mode ZeroPage.
+    /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX</see> instruction (0xe4) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// X - M
     /// <code>
+    /// OpCode: 0xe4
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPX(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPX(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare X register. CPX instruction (0xec) with addressing mode Absolute.
+    /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX</see> instruction (0xec) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// X - M
     /// <code>
+    /// OpCode: 0xec
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPX(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPX(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare X register. CPX_Imm instruction (0xe0) with addressing mode Immediate.
+    /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX_Imm</see> instruction (0xe0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// X - M
     /// <code>
+    /// OpCode: 0xe0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPX_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPX_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare Y register. CPY instruction (0xc4) with addressing mode ZeroPage.
+    /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY</see> instruction (0xc4) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// Y - M
     /// <code>
+    /// OpCode: 0xc4
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPY(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPY(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare Y register. CPY instruction (0xcc) with addressing mode Absolute.
+    /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY</see> instruction (0xcc) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// Y - M
     /// <code>
+    /// OpCode: 0xcc
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPY(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPY(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare Y register. CPY_Imm instruction (0xc0) with addressing mode Immediate.
+    /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY_Imm</see> instruction (0xc0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// Y - M
     /// <code>
+    /// OpCode: 0xc0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPY_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.CPY_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Decrement memory. DEC instruction (0xc6) with addressing mode ZeroPage.
+    /// Decrement Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#DEC">DEC</see> instruction (0xc6) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// M - 1 -> M
     /// <code>
+    /// OpCode: 0xc6
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler DEC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Decrement memory. DEC instruction (0xd6) with addressing mode ZeroPageX.
+    /// Decrement Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#DEC">DEC</see> instruction (0xd6) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// M - 1 -> M
     /// <code>
+    /// OpCode: 0xd6
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler DEC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Decrement memory. DEC instruction (0xce) with addressing mode Absolute.
+    /// Decrement Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#DEC">DEC</see> instruction (0xce) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// M - 1 -> M
     /// <code>
+    /// OpCode: 0xce
     /// Cycles: 6
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler DEC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Decrement memory. DEC instruction (0xde) with addressing mode AbsoluteX.
+    /// Decrement Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#DEC">DEC</see> instruction (0xde) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// M - 1 -> M
     /// <code>
+    /// OpCode: 0xde
     /// Cycles: 7
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler DEC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Decrement X register. DEX instruction (0xca) with addressing mode Implied.
+    /// Decrement Index X by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#DEX">DEX</see> instruction (0xca) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// X - 1 -> X
     /// <code>
+    /// OpCode: 0xca
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler DEX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEX(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Decrement Y register. DEY instruction (0x88) with addressing mode Implied.
+    /// Decrement Index Y by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#DEY">DEY</see> instruction (0x88) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// Y - 1 -> Y
     /// <code>
+    /// OpCode: 0x88
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler DEY([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.DEY(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x45) with addressing mode ZeroPage.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x45) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x45
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x55) with addressing mode ZeroPageX.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x55) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x55
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x41) with addressing mode IndirectX.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x41) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x41
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x51) with addressing mode IndirectY.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x51) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x51
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x4d) with addressing mode Absolute.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x4d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x4d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x5d) with addressing mode AbsoluteX.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x5d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x5d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR instruction (0x59) with addressing mode AbsoluteY.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR</see> instruction (0x59) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x59
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR_Imm instruction (0x49) with addressing mode Immediate.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR_Imm</see> instruction (0x49) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x49
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.EOR_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Increment memory. INC instruction (0xe6) with addressing mode ZeroPage.
+    /// Increment Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#INC">INC</see> instruction (0xe6) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// M + 1 -> M
     /// <code>
+    /// OpCode: 0xe6
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler INC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Increment memory. INC instruction (0xf6) with addressing mode ZeroPageX.
+    /// Increment Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#INC">INC</see> instruction (0xf6) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// M + 1 -> M
     /// <code>
+    /// OpCode: 0xf6
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler INC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Increment memory. INC instruction (0xee) with addressing mode Absolute.
+    /// Increment Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#INC">INC</see> instruction (0xee) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// M + 1 -> M
     /// <code>
+    /// OpCode: 0xee
     /// Cycles: 6
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler INC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Increment memory. INC instruction (0xfe) with addressing mode AbsoluteX.
+    /// Increment Memory by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#INC">INC</see> instruction (0xfe) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// M + 1 -> M
     /// <code>
+    /// OpCode: 0xfe
     /// Cycles: 7
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler INC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Increment X register. INX instruction (0xe8) with addressing mode Implied.
+    /// Increment Index X by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#INX">INX</see> instruction (0xe8) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// X + 1 -> X
     /// <code>
+    /// OpCode: 0xe8
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler INX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INX(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Increment Y register. INY instruction (0xc8) with addressing mode Implied.
+    /// Increment Index Y by One. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#INY">INY</see> instruction (0xc8) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// Y + 1 -> Y
     /// <code>
+    /// OpCode: 0xc8
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler INY([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.INY(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Unconditional Jump. JMP instruction (0x6c) with addressing mode Indirect.
+    /// Jump to New Location. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#JMP">JMP</see> instruction (0x6c) with addressing mode Indirect.
     /// </summary>
     /// <remarks>
+    /// operand 1st byte -> PCL
+    /// operand 2nd byte -> PCH
     /// <code>
+    /// OpCode: 0x6c
     /// Cycles: 5
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler JMP(Mos6502Indirect indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.JMP(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Unconditional Jump. JMP instruction (0x4c) with addressing mode Absolute.
+    /// Jump to New Location. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#JMP">JMP</see> instruction (0x4c) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// operand 1st byte -> PCL
+    /// operand 2nd byte -> PCH
     /// <code>
+    /// OpCode: 0x4c
     /// Cycles: 3
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler JMP(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.JMP(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Jump to subroutine. JSR instruction (0x20) with addressing mode Absolute.
+    /// Jump to New Location Saving Return Address. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#JSR">JSR</see> instruction (0x20) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// push (PC+2),
+    /// operand 1st byte -> PCL
+    /// operand 2nd byte -> PCH
     /// <code>
+    /// OpCode: 0x20
     /// Cycles: 6
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler JSR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.JSR(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xa5) with addressing mode ZeroPage.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xa5) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xa5
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xb5) with addressing mode ZeroPageX.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xb5) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xb5
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xa1) with addressing mode IndirectX.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xa1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xa1
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xb1) with addressing mode IndirectY.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xb1) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xb1
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xad) with addressing mode Absolute.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xad) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xad
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xbd) with addressing mode AbsoluteX.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xbd) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xbd
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA instruction (0xb9) with addressing mode AbsoluteY.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA</see> instruction (0xb9) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xb9
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA_Imm instruction (0xa9) with addressing mode Immediate.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA_Imm</see> instruction (0xa9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xa9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDA_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX instruction (0xa6) with addressing mode ZeroPage.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX</see> instruction (0xa6) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xa6
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDX(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX instruction (0xb6) with addressing mode ZeroPageY.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX</see> instruction (0xb6) with addressing mode ZeroPageY.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xb6
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDX(byte zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(zeroPage, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX instruction (0xae) with addressing mode Absolute.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX</see> instruction (0xae) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xae
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDX(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX instruction (0xbe) with addressing mode AbsoluteY.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX</see> instruction (0xbe) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xbe
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDX(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX_Imm instruction (0xa2) with addressing mode Immediate.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX_Imm</see> instruction (0xa2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xa2
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDX_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDX_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY instruction (0xa4) with addressing mode ZeroPage.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY</see> instruction (0xa4) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xa4
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDY(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY instruction (0xb4) with addressing mode ZeroPageX.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY</see> instruction (0xb4) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xb4
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDY(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY instruction (0xac) with addressing mode Absolute.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY</see> instruction (0xac) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xac
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDY(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY instruction (0xbc) with addressing mode AbsoluteX.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY</see> instruction (0xbc) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xbc
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDY(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY_Imm instruction (0xa0) with addressing mode Immediate.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY_Imm</see> instruction (0xa0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xa0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDY_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LDY_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical shift right. LSR instruction (0x46) with addressing mode ZeroPage.
+    /// Shift One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LSR">LSR</see> instruction (0x46) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// 0 -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x46
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         0 - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler LSR(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical shift right. LSR instruction (0x56) with addressing mode ZeroPageX.
+    /// Shift One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LSR">LSR</see> instruction (0x56) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// 0 -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x56
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         0 - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler LSR(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical shift right. LSR instruction (0x4a) with addressing mode Accumulator.
+    /// Shift One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LSR">LSR</see> instruction (0x4a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>
+    /// 0 -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x4a
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         0 - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler LSR(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical shift right. LSR instruction (0x4e) with addressing mode Absolute.
+    /// Shift One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LSR">LSR</see> instruction (0x4e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// 0 -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x4e
     /// Cycles: 6
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         0 - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler LSR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical shift right. LSR instruction (0x5e) with addressing mode AbsoluteX.
+    /// Shift One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LSR">LSR</see> instruction (0x5e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// 0 -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x5e
     /// Cycles: 7
     ///   Size: 3
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         0 - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler LSR(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.LSR(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// No operation. NOP instruction (0xea) with addressing mode Implied.
+    /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP</see> instruction (0xea) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// ---
     /// <code>
+    /// OpCode: 0xea
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler NOP([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.NOP(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x05) with addressing mode ZeroPage.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x05) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x05
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x15) with addressing mode ZeroPageX.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x15) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x15
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x01) with addressing mode IndirectX.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x01) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x01
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x11) with addressing mode IndirectY.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x11) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x11
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x0d) with addressing mode Absolute.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x0d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x0d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x1d) with addressing mode AbsoluteX.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x1d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x1d
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA instruction (0x19) with addressing mode AbsoluteY.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA</see> instruction (0x19) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x19
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA_Imm instruction (0x09) with addressing mode Immediate.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA_Imm</see> instruction (0x09) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x09
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ORA_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Push accumulator. PHA instruction (0x48) with addressing mode Implied.
+    /// Push Accumulator on Stack. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#PHA">PHA</see> instruction (0x48) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// push A
     /// <code>
+    /// OpCode: 0x48
     /// Cycles: 3
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler PHA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PHA(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Push processor status. PHP instruction (0x08) with addressing mode Implied.
+    /// Push Processor Status on Stack. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#PHP">PHP</see> instruction (0x08) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// push SR
     /// <code>
+    /// OpCode: 0x08
     /// Cycles: 3
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler PHP([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PHP(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Pull accumulator. PLA instruction (0x68) with addressing mode Implied.
+    /// Pull Accumulator from Stack. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#PLA">PLA</see> instruction (0x68) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// pull A
     /// <code>
+    /// OpCode: 0x68
     /// Cycles: 4
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler PLA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PLA(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Pull processor status. PLP instruction (0x28) with addressing mode Implied.
+    /// Pull Processor Status from Stack. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#PLP">PLP</see> instruction (0x28) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// pull SR
     /// <code>
+    /// OpCode: 0x28
     /// Cycles: 4
     ///   Size: 1
-    ///  Flags: C, Z, I, D, B, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - + + + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler PLP([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.PLP(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate left. ROL instruction (0x26) with addressing mode ZeroPage.
+    /// Rotate One Bit Left (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROL">ROL</see> instruction (0x26) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- C
     /// <code>
+    /// OpCode: 0x26
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROL(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate left. ROL instruction (0x36) with addressing mode ZeroPageX.
+    /// Rotate One Bit Left (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROL">ROL</see> instruction (0x36) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- C
     /// <code>
+    /// OpCode: 0x36
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROL(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate left. ROL instruction (0x2a) with addressing mode Accumulator.
+    /// Rotate One Bit Left (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROL">ROL</see> instruction (0x2a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- C
     /// <code>
+    /// OpCode: 0x2a
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROL(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate left. ROL instruction (0x2e) with addressing mode Absolute.
+    /// Rotate One Bit Left (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROL">ROL</see> instruction (0x2e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- C
     /// <code>
+    /// OpCode: 0x2e
     /// Cycles: 6
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROL(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate left. ROL instruction (0x3e) with addressing mode AbsoluteX.
+    /// Rotate One Bit Left (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROL">ROL</see> instruction (0x3e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// C &lt;- [76543210] &lt;- C
     /// <code>
+    /// OpCode: 0x3e
     /// Cycles: 7
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROL(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROL(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate right. ROR instruction (0x66) with addressing mode ZeroPage.
+    /// Rotate One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROR">ROR</see> instruction (0x66) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// C -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x66
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROR(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate right. ROR instruction (0x76) with addressing mode ZeroPageX.
+    /// Rotate One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROR">ROR</see> instruction (0x76) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// C -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x76
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROR(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate right. ROR instruction (0x6a) with addressing mode Accumulator.
+    /// Rotate One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROR">ROR</see> instruction (0x6a) with addressing mode Accumulator.
     /// </summary>
     /// <remarks>
+    /// C -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x6a
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROR(Mos6502RegisterA accumulator = Mos6502RegisterA.A, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate right. ROR instruction (0x6e) with addressing mode Absolute.
+    /// Rotate One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROR">ROR</see> instruction (0x6e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// C -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x6e
     /// Cycles: 6
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROR(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Rotate right. ROR instruction (0x7e) with addressing mode AbsoluteX.
+    /// Rotate One Bit Right (Memory or Accumulator). <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ROR">ROR</see> instruction (0x7e) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// C -> [76543210] -> C
     /// <code>
+    /// OpCode: 0x7e
     /// Cycles: 7
     ///   Size: 3
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ROR(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.ROR(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Return from interrupt. RTI instruction (0x40) with addressing mode Implied.
+    /// Return from Interrupt. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#RTI">RTI</see> instruction (0x40) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// pull SR, pull PC
     /// <code>
+    /// OpCode: 0x40
     /// Cycles: 6
     ///   Size: 1
-    ///  Flags: C, Z, I, D, B, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - + + + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler RTI([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.RTI(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Return from subroutine. RTS instruction (0x60) with addressing mode Implied.
+    /// Return from Subroutine. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#RTS">RTS</see> instruction (0x60) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// pull PC, PC+1 -> PC
     /// <code>
+    /// OpCode: 0x60
     /// Cycles: 6
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler RTS([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.RTS(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xe5) with addressing mode ZeroPage.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xe5) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xe5
     /// Cycles: 3
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xf5) with addressing mode ZeroPageX.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xf5) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xf5
     /// Cycles: 4
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xe1) with addressing mode IndirectX.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xe1) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xe1
     /// Cycles: 6
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xf1) with addressing mode IndirectY.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xf1) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xf1
     /// Cycles: 5
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xed) with addressing mode Absolute.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xed) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xed
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xfd) with addressing mode AbsoluteX.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xfd) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xfd
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC instruction (0xf9) with addressing mode AbsoluteY.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC</see> instruction (0xf9) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xf9
     /// Cycles: 4
     ///   Size: 3
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC_Imm instruction (0xe9) with addressing mode Immediate.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC_Imm</see> instruction (0xe9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xe9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC_Imm(byte immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SBC_Imm(immediate), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Set carry. SEC instruction (0x38) with addressing mode Implied.
+    /// Set Carry Flag. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SEC">SEC</see> instruction (0x38) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 1 -> C
     /// <code>
+    /// OpCode: 0x38
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: C
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - 1
     /// </code>
     /// </remarks>
     public Mos6502Assembler SEC([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SEC(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Set decimal flag. SED instruction (0xf8) with addressing mode Implied.
+    /// Set Decimal Flag. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SED">SED</see> instruction (0xf8) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 1 -> D
     /// <code>
+    /// OpCode: 0xf8
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: D
+    ///  Flags: N V - B D I Z C
+    ///         - - - - 1 - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler SED([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SED(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Set interrupt disable. SEI instruction (0x78) with addressing mode Implied.
+    /// Set Interrupt Disable Status. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SEI">SEI</see> instruction (0x78) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// 1 -> I
     /// <code>
+    /// OpCode: 0x78
     /// Cycles: 2
     ///   Size: 1
-    ///  Flags: I
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - 1 - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler SEI([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.SEI(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x85) with addressing mode ZeroPage.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x85) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x85
     /// Cycles: 3
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x95) with addressing mode ZeroPageX.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x95) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x95
     /// Cycles: 4
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x81) with addressing mode IndirectX.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x81) with addressing mode IndirectX.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x81
     /// Cycles: 6
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(Mos6502IndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(indirect), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x91) with addressing mode IndirectY.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x91) with addressing mode IndirectY.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x91
     /// Cycles: 6
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(Mos6502IndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(indirect, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x8d) with addressing mode Absolute.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x8d) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x8d
     /// Cycles: 4
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x9d) with addressing mode AbsoluteX.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x9d) with addressing mode AbsoluteX.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x9d
     /// Cycles: 5
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(ushort address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(address, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store accumulator. STA instruction (0x99) with addressing mode AbsoluteY.
+    /// Store Accumulator in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STA">STA</see> instruction (0x99) with addressing mode AbsoluteY.
     /// </summary>
     /// <remarks>
+    /// A -> M
     /// <code>
+    /// OpCode: 0x99
     /// Cycles: 5
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STA(ushort address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STA(address, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store X register. STX instruction (0x86) with addressing mode ZeroPage.
+    /// Store Index X in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STX">STX</see> instruction (0x86) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// X -> M
     /// <code>
+    /// OpCode: 0x86
     /// Cycles: 3
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STX(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STX(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store X register. STX instruction (0x96) with addressing mode ZeroPageY.
+    /// Store Index X in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STX">STX</see> instruction (0x96) with addressing mode ZeroPageY.
     /// </summary>
     /// <remarks>
+    /// X -> M
     /// <code>
+    /// OpCode: 0x96
     /// Cycles: 4
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STX(byte zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STX(zeroPage, y), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store X register. STX instruction (0x8e) with addressing mode Absolute.
+    /// Store Index X in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STX">STX</see> instruction (0x8e) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// X -> M
     /// <code>
+    /// OpCode: 0x8e
     /// Cycles: 4
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STX(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STX(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store Y register. STY instruction (0x84) with addressing mode ZeroPage.
+    /// Sore Index Y in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STY">STY</see> instruction (0x84) with addressing mode ZeroPage.
     /// </summary>
     /// <remarks>
+    /// Y -> M
     /// <code>
+    /// OpCode: 0x84
     /// Cycles: 3
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STY(byte zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STY(zeroPage), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store Y register. STY instruction (0x94) with addressing mode ZeroPageX.
+    /// Sore Index Y in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STY">STY</see> instruction (0x94) with addressing mode ZeroPageX.
     /// </summary>
     /// <remarks>
+    /// Y -> M
     /// <code>
+    /// OpCode: 0x94
     /// Cycles: 4
     ///   Size: 2
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STY(byte zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STY(zeroPage, x), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Store Y register. STY instruction (0x8c) with addressing mode Absolute.
+    /// Sore Index Y in Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#STY">STY</see> instruction (0x8c) with addressing mode Absolute.
     /// </summary>
     /// <remarks>
+    /// Y -> M
     /// <code>
+    /// OpCode: 0x8c
     /// Cycles: 4
     ///   Size: 3
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler STY(ushort address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.STY(address), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Transfer acc to X. TAX instruction (0xaa) with addressing mode Implied.
+    /// Transfer Accumulator to Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#TAX">TAX</see> instruction (0xaa) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// A -> X
     /// <code>
+    /// OpCode: 0xaa
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler TAX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TAX(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Transfer acc to Y. TAY instruction (0xa8) with addressing mode Implied.
+    /// Transfer Accumulator to Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#TAY">TAY</see> instruction (0xa8) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// A -> Y
     /// <code>
+    /// OpCode: 0xa8
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler TAY([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TAY(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Transfer stack pointer to X. TSX instruction (0xba) with addressing mode Implied.
+    /// Transfer Stack Pointer to Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#TSX">TSX</see> instruction (0xba) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// SP -> X
     /// <code>
+    /// OpCode: 0xba
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler TSX([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TSX(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Transfer X to acc. TXA instruction (0x8a) with addressing mode Implied.
+    /// Transfer Index X to Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#TXA">TXA</see> instruction (0x8a) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// X -> A
     /// <code>
+    /// OpCode: 0x8a
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler TXA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TXA(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Transfer X to SP. TXS instruction (0x9a) with addressing mode Implied.
+    /// Transfer Index X to Stack Register. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#TXS">TXS</see> instruction (0x9a) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// X -> SP
     /// <code>
+    /// OpCode: 0x9a
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         - - - - - - - -
     /// </code>
     /// </remarks>
     public Mos6502Assembler TXS([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.TXS(), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Transfer Y to acc. TYA instruction (0x98) with addressing mode Implied.
+    /// Transfer Index Y to Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#TYA">TYA</see> instruction (0x98) with addressing mode Implied.
     /// </summary>
     /// <remarks>
+    /// Y -> A
     /// <code>
+    /// OpCode: 0x98
     /// Cycles: 2
     ///   Size: 1
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler TYA([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)

@@ -15,133 +15,166 @@ namespace Asm6502;
 partial class Mos6502Assembler
 {
     /// <summary>
-    /// Add with carry. ADC_Imm instruction (0x69) with addressing mode Immediate.
+    /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC_Imm</see> instruction (0x69) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A + M + C -> A, C
     /// <code>
+    /// OpCode: 0x69
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler ADC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.ADC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical AND. AND_Imm instruction (0x29) with addressing mode Immediate.
+    /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND_Imm</see> instruction (0x29) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A AND M -> A
     /// <code>
+    /// OpCode: 0x29
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler AND_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.AND_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare. CMP_Imm instruction (0xc9) with addressing mode Immediate.
+    /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP_Imm</see> instruction (0xc9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M
     /// <code>
+    /// OpCode: 0xc9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CMP_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.CMP_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare X register. CPX_Imm instruction (0xe0) with addressing mode Immediate.
+    /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX_Imm</see> instruction (0xe0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// X - M
     /// <code>
+    /// OpCode: 0xe0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.CPX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Compare Y register. CPY_Imm instruction (0xc0) with addressing mode Immediate.
+    /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY_Imm</see> instruction (0xc0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// Y - M
     /// <code>
+    /// OpCode: 0xc0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler CPY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.CPY_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Exclusive OR (XOR). EOR_Imm instruction (0x49) with addressing mode Immediate.
+    /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR_Imm</see> instruction (0x49) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A EOR M -> A
     /// <code>
+    /// OpCode: 0x49
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler EOR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.EOR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load accumulator. LDA_Imm instruction (0xa9) with addressing mode Immediate.
+    /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA_Imm</see> instruction (0xa9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> A
     /// <code>
+    /// OpCode: 0xa9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.LDA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load X register. LDX_Imm instruction (0xa2) with addressing mode Immediate.
+    /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX_Imm</see> instruction (0xa2) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> X
     /// <code>
+    /// OpCode: 0xa2
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.LDX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Load Y register. LDY_Imm instruction (0xa0) with addressing mode Immediate.
+    /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY_Imm</see> instruction (0xa0) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// M -> Y
     /// <code>
+    /// OpCode: 0xa0
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler LDY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.LDY_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Logical Inclusive OR. ORA_Imm instruction (0x09) with addressing mode Immediate.
+    /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA_Imm</see> instruction (0x09) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A OR M -> A
     /// <code>
+    /// OpCode: 0x09
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: Z, N
+    ///  Flags: N V - B D I Z C
+    ///         + - - - - - + -
     /// </code>
     /// </remarks>
     public Mos6502Assembler ORA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.ORA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// Subtract with carry. SBC_Imm instruction (0xe9) with addressing mode Immediate.
+    /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC_Imm</see> instruction (0xe9) with addressing mode Immediate.
     /// </summary>
     /// <remarks>
+    /// A - M - C̅ -> A
     /// <code>
+    /// OpCode: 0xe9
     /// Cycles: 2
     ///   Size: 2
-    ///  Flags: C, Z, V, N
+    ///  Flags: N V - B D I Z C
+    ///         + + - - - - + +
     /// </code>
     /// </remarks>
     public Mos6502Assembler SBC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
