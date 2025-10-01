@@ -14,7 +14,7 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
     {
         using var asm = new Mos6502Assembler();
         // Append a buffer of 3 bytes
-        asm.AppendBuffer([0x01, 0x02, 0x03]);
+        asm.Append([0x01, 0x02, 0x03]);
         // Check the size in bytes
         Assert.AreEqual(3, asm.SizeInBytes);
         Assert.AreEqual(3, asm.CurrentOffset);
@@ -26,7 +26,7 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
 
         asm.Org(0xE000);
         // Append another buffer of 2 bytes at new origin
-        asm.AppendBuffer([0xAA, 0xBB]);
+        asm.Append([0xAA, 0xBB]);
         Assert.AreEqual(5, asm.SizeInBytes);
         Assert.AreEqual(2, asm.CurrentOffset);
     }

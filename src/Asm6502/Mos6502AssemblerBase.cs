@@ -71,7 +71,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// </summary>
     /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502AssemblerBase AppendBuffer(ReadOnlySpan<byte> input)
+    public Mos6502AssemblerBase Append(ReadOnlySpan<byte> input)
     {
         var newSizeInBytes = SafeAddress(SizeInBytes + input.Length);
         if (input.Length > 0)
@@ -84,6 +84,14 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
 
         return this;
     }
+
+    /// <summary>
+    /// Writes a buffer of bytes to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
+    /// <returns>The current assembler instance.</returns>
+    [Obsolete("This method is deprecated. Please use Append instead.")]
+    public Mos6502AssemblerBase AppendBuffer(ReadOnlySpan<byte> input) => Append(input);
 
     /// <summary>
     /// Appends an 8-bit value to the assembler's internal buffer.
@@ -432,13 +440,21 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     protected Mos6502AssemblerBase(ushort baseAddress = 0xC000) : base(baseAddress)
     {
     }
-    
+
     /// <summary>
     /// Writes a buffer of bytes to the assembler's internal buffer.
     /// </summary>
     /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
     /// <returns>The current assembler instance.</returns>
-    public new TAsm AppendBuffer(ReadOnlySpan<byte> input) => (TAsm)base.AppendBuffer(input);
+    public new TAsm Append(ReadOnlySpan<byte> input) => (TAsm)base.Append(input);
+
+    /// <summary>
+    /// Writes a buffer of bytes to the assembler's internal buffer.
+    /// </summary>
+    /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
+    /// <returns>The current assembler instance.</returns>
+    [Obsolete("This method is deprecated. Please use Append instead.")]
+    public new TAsm AppendBuffer(ReadOnlySpan<byte> input) => (TAsm)base.Append(input);
 
     /// <summary>
     /// Appends an 8-bit expression to the assembler's internal buffer.
