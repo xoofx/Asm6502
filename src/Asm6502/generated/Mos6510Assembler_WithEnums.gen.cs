@@ -17,9 +17,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC_Imm</see> instruction (0x69) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A + M + C -> A, C
     /// <code>
+    /// Syntax: ADC_Imm #$BB
     /// OpCode: 0x69
     /// Cycles: 2
     ///   Size: 2
@@ -32,9 +34,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// AND oper + LSR. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ALR">ALR_Imm</see> instruction (0x4b) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A AND oper, 0 ->  [76543210] ->  C
     /// <code>
+    /// Syntax: ALR_Imm #$BB
     /// OpCode: 0x4b
     /// Cycles: 2
     ///   Size: 2
@@ -48,9 +52,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// AND oper + set C as ASL. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ANC">ANC_2B_Imm</see> instruction (0x2b) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A AND oper, bit(7) ->  C
     /// <code>
+    /// Syntax: ANC_2B_Imm #$BB
     /// OpCode: 0x2b
     /// Cycles: 2
     ///   Size: 2
@@ -64,9 +70,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// AND oper + set C as ASL. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ANC">ANC_Imm</see> instruction (0x0b) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A AND oper, bit(7) ->  C
     /// <code>
+    /// Syntax: ANC_Imm #$BB
     /// OpCode: 0x0b
     /// Cycles: 2
     ///   Size: 2
@@ -80,9 +88,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND_Imm</see> instruction (0x29) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A AND M -> A
     /// <code>
+    /// Syntax: AND_Imm #$BB
     /// OpCode: 0x29
     /// Cycles: 2
     ///   Size: 2
@@ -95,9 +105,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// * OR X + AND oper. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ANE">ANE_Imm</see> instruction (0x8b) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// (A OR CONST) AND X AND oper ->  A
     /// <code>
+    /// Syntax: ANE_Imm #$BB
     /// OpCode: 0x8b
     /// Cycles: 2
     ///   Size: 2
@@ -112,9 +124,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// AND oper + ROR. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ARR">ARR_Imm</see> instruction (0x6b) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A AND oper, C ->  [76543210] ->  C
     /// <code>
+    /// Syntax: ARR_Imm #$BB
     /// OpCode: 0x6b
     /// Cycles: 2
     ///   Size: 2
@@ -128,9 +142,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP_Imm</see> instruction (0xc9) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A - M
     /// <code>
+    /// Syntax: CMP_Imm #$BB
     /// OpCode: 0xc9
     /// Cycles: 2
     ///   Size: 2
@@ -143,9 +159,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX_Imm</see> instruction (0xe0) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// X - M
     /// <code>
+    /// Syntax: CPX_Imm #$BB
     /// OpCode: 0xe0
     /// Cycles: 2
     ///   Size: 2
@@ -158,9 +176,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY_Imm</see> instruction (0xc0) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// Y - M
     /// <code>
+    /// Syntax: CPY_Imm #$BB
     /// OpCode: 0xc0
     /// Cycles: 2
     ///   Size: 2
@@ -173,9 +193,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR_Imm</see> instruction (0x49) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A EOR M -> A
     /// <code>
+    /// Syntax: EOR_Imm #$BB
     /// OpCode: 0x49
     /// Cycles: 2
     ///   Size: 2
@@ -188,9 +210,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA_Imm</see> instruction (0xa9) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// M -> A
     /// <code>
+    /// Syntax: LDA_Imm #$BB
     /// OpCode: 0xa9
     /// Cycles: 2
     ///   Size: 2
@@ -203,9 +227,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX_Imm</see> instruction (0xa2) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// M -> X
     /// <code>
+    /// Syntax: LDX_Imm #$BB
     /// OpCode: 0xa2
     /// Cycles: 2
     ///   Size: 2
@@ -218,9 +244,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY_Imm</see> instruction (0xa0) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// M -> Y
     /// <code>
+    /// Syntax: LDY_Imm #$BB
     /// OpCode: 0xa0
     /// Cycles: 2
     ///   Size: 2
@@ -233,9 +261,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Store * AND oper in A and X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LXA">LXA_Imm</see> instruction (0xab) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// (A OR CONST) AND oper ->  A ->  X
     /// <code>
+    /// Syntax: LXA_Imm #$BB
     /// OpCode: 0xab
     /// Cycles: 2
     ///   Size: 2
@@ -250,9 +280,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_82_Imm</see> instruction (0x82) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// ---
     /// <code>
+    /// Syntax: NOP_82_Imm #$BB
     /// OpCode: 0x82
     /// Cycles: 2
     ///   Size: 2
@@ -266,9 +298,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_89_Imm</see> instruction (0x89) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// ---
     /// <code>
+    /// Syntax: NOP_89_Imm #$BB
     /// OpCode: 0x89
     /// Cycles: 2
     ///   Size: 2
@@ -282,9 +316,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_C2_Imm</see> instruction (0xc2) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// ---
     /// <code>
+    /// Syntax: NOP_C2_Imm #$BB
     /// OpCode: 0xc2
     /// Cycles: 2
     ///   Size: 2
@@ -298,9 +334,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_E2_Imm</see> instruction (0xe2) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// ---
     /// <code>
+    /// Syntax: NOP_E2_Imm #$BB
     /// OpCode: 0xe2
     /// Cycles: 2
     ///   Size: 2
@@ -314,9 +352,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// No Operation. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#NOP">NOP_Imm</see> instruction (0x80) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// ---
     /// <code>
+    /// Syntax: NOP_Imm #$BB
     /// OpCode: 0x80
     /// Cycles: 2
     ///   Size: 2
@@ -330,9 +370,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA_Imm</see> instruction (0x09) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A OR M -> A
     /// <code>
+    /// Syntax: ORA_Imm #$BB
     /// OpCode: 0x09
     /// Cycles: 2
     ///   Size: 2
@@ -345,9 +387,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC_Imm</see> instruction (0xe9) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A - M - C̅ -> A
     /// <code>
+    /// Syntax: SBC_Imm #$BB
     /// OpCode: 0xe9
     /// Cycles: 2
     ///   Size: 2
@@ -360,9 +404,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// CMP and DEX at once, sets flags like CMP. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBX">SBX_Imm</see> instruction (0xcb) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// (A AND X) - oper ->  X
     /// <code>
+    /// Syntax: SBX_Imm #$BB
     /// OpCode: 0xcb
     /// Cycles: 2
     ///   Size: 2
@@ -376,9 +422,11 @@ partial class Mos6510Assembler
     /// <summary>
     /// SBC oper + NOP. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#USBC">USBC_Imm</see> instruction (0xeb) with addressing mode Immediate.
     /// </summary>
+    /// <param name="immediate"></param>
     /// <remarks>
     /// A - M - C̅ ->  A
     /// <code>
+    /// Syntax: USBC_Imm #$BB
     /// OpCode: 0xeb
     /// Cycles: 2
     ///   Size: 2

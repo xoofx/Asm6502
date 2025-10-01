@@ -12,8 +12,12 @@ Asm6502 is a lightweight and efficient C# library to assemble and disassemble 65
 - **Easily disassemble** instructions and operand.
 - **High performance** / **zero allocation** library for disassembling / assembling instructions.
 - Compatible with `net8.0+` and NativeAOT.
+- Integrated assembler API documentation via API XML comments.
+  ![Integrated API documentation](img/asm6502_xml_api_example.png)
 
 ## 📖 User Guide
+
+For more details on how to use Asm6502, please visit the [user guide](https://github.com/xoofx/Asm6502/blob/main/doc/readme.md).
 
 Suppose that we want to write a simple program in C# to assemble and disassemble the equivalent of the following 6502 assembly code:
 
@@ -159,8 +163,6 @@ C023  D0 F8      BNE LL_05
 
 C025  60         RTS
 ```
-
-For more details on how to use Asm6502, please visit the [user guide](https://github.com/xoofx/Asm6502/blob/main/doc/readme.md).
 
 ## 🪪 License
 

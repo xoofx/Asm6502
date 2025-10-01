@@ -447,6 +447,8 @@ internal class GeneratorApp
 
         public bool IsParameterOnly { get; init; }
 
+        public string? Comment { get; set; }
+
         public bool IsOut { get; init; }
         
         public string ParameterDeclaration()
@@ -554,51 +556,51 @@ internal class GeneratorApp
                 operandKind = OperandValueKind.Implied;
                 break;
             case "Relative":
-                argumentTypes = [new("relativeAddress", "sbyte")];
+                argumentTypes = [new("relativeAddress", "sbyte") { Comment = "Relative Address."}];
                 operandKind = OperandValueKind.Relative;
                 break;
             case "Accumulator":
-                argumentTypes = [new("accumulator", Mos6502RegisterA, "Mos6502RegisterA.A")];
+                argumentTypes = [new("accumulator", Mos6502RegisterA, "Mos6502RegisterA.A") { Comment = "Accumulator Register."}];
                 operandKind = OperandValueKind.Accumulator;
                 break;
             case "Immediate":
-                argumentTypes = ( [new("immediate", "byte")]);
+                argumentTypes = ( [new("immediate", "byte") { Comment = "Immediate value."}]);
                 operandKind = OperandValueKind.Immediate;
                 break;
             case "ZeroPage":
-                argumentTypes = ( [new("zeroPage", "byte")]);
+                argumentTypes = ( [new("zeroPage", "byte") { Comment = "Zero Page address." }]);
                 operandKind = OperandValueKind.Zp;
                 break;
             case "ZeroPageX":
-                argumentTypes = ( [new("zeroPage", "byte"), new("x", Mos6502RegisterX)]);
+                argumentTypes = ( [new("zeroPage", "byte") { Comment = "Zero Page address." } , new("x", Mos6502RegisterX) { Comment = "Register X for Zero Page X-Indexed." }]);
                 operandKind = OperandValueKind.ZpX;
                 break;
             case "ZeroPageY":
-                argumentTypes = ( [new("zeroPage", "byte"), new("y", Mos6502RegisterY)]);
+                argumentTypes = ( [new("zeroPage", "byte") { Comment = "Zero Page address." }, new("y", Mos6502RegisterY) { Comment = "Register Y for Zero Page Y-Indexed." }]);
                 operandKind = OperandValueKind.ZpY;
                 break;
             case "Absolute":
-                argumentTypes = ( [new("address", "ushort")]);
+                argumentTypes = ( [new("address", "ushort") {Comment = "Absolute address." }]);
                 operandKind = OperandValueKind.Address;
                 break;
             case "AbsoluteX":
-                argumentTypes = ( [new("address", "ushort"), new("x", Mos6502RegisterX)]);
+                argumentTypes = ( [new("address", "ushort") { Comment = "Absolute address." }, new("x", Mos6502RegisterX) { Comment = "Register X for Address X-Indexed." }]);
                 operandKind = OperandValueKind.AddressX;
                 break;
             case "AbsoluteY":
-                argumentTypes = ( [new("address", "ushort"), new("y", Mos6502RegisterY)]);
+                argumentTypes = ( [new("address", "ushort") { Comment = "Absolute address." }, new("y", Mos6502RegisterY) { Comment = "Register Y for Address Y-Indexed." }]);
                 operandKind = OperandValueKind.AddressY;
                 break;
             case "Indirect":
-                argumentTypes = ( [new("indirect", "Mos6502Indirect")]);
+                argumentTypes = ( [new("indirect", "Mos6502Indirect") { Comment = "Indirect Absolute address." }]);
                 operandKind = OperandValueKind.Indirect;
                 break;
             case "IndirectX":
-                argumentTypes = ( [new("indirect", "Mos6502IndirectX")]);
+                argumentTypes = ( [new("indirect", "Mos6502IndirectX") { Comment = "Indirect Zero Page address." }]);
                 operandKind = OperandValueKind.IndirectX;
                 break;
             case "IndirectY":
-                argumentTypes = ( [new("indirect", "Mos6502IndirectY"), new("y", Mos6502RegisterY)]);
+                argumentTypes = ( [new("indirect", "Mos6502IndirectY") { Comment = "Indirect Zero Page address." }, new("y", Mos6502RegisterY) { Comment = "Register Y for Indirect Zero-Page Y-Indexed." }]);
                 operandKind = OperandValueKind.IndirectY;
                 break;
             default:
@@ -892,16 +894,71 @@ internal class GeneratorApp
                 writer.WriteSummary(summaryList);
 
                 // Write remarks
-                
-                var lines = new List<string>
+                var lines = new List<string>();
+
+                // Add arguments
+                for (int i = 0; i < opcodeSignature.OperandCount; i++)
                 {
+                    var arg = opcodeSignature.Arguments[i];
+                    lines.Add($"<param name=\"{arg.Name}\">{arg.Comment}</param>");
+                }
+
+                StringBuilder syntax = new StringBuilder();
+                syntax.Append(mnemonic);
+                switch (opcode.AddressingMode)
+                {
+                    case "Implied":
+                        break;
+                    case "Relative":
+                        syntax.Append(" $BB");
+                        break;
+                    case "Accumulator":
+                        syntax.Append(" A");
+                        break;
+                    case "Immediate":
+                        syntax.Append(" #$BB");
+                        break;
+                    case "ZeroPage":
+                        syntax.Append(" $LL");
+                        break;
+                    case "ZeroPageX":
+                        syntax.Append(" $LL,X");
+                        break;
+                    case "ZeroPageY":
+                        syntax.Append(" $LL,X");
+                        break;
+                    case "Absolute":
+                        syntax.Append(" $LLHH");
+                        break;
+                    case "AbsoluteX":
+                        syntax.Append(" $LLHH,X");
+                        break;
+                    case "AbsoluteY":
+                        syntax.Append(" $LLHH,Y");
+                        break;
+                    case "Indirect":
+                        syntax.Append(" ($LLHH)");
+                        break;
+                    case "IndirectX":
+                        syntax.Append(" ($LL,X)");
+                        break;
+                    case "IndirectY":
+                        syntax.Append(" ($LL),Y");
+                        break;
+                    default:
+                        throw new NotSupportedException($"Addressing mode '{opcode.AddressingMode}' is not supported for opcode '{opcode.Name}'");
+                }
+
+                lines.AddRange([
+                
                     "<remarks>",
-                    opcode.Synopsis.Replace("&", "&amp;").Replace("<", "&lt;"),
+                    $"{opcode.Synopsis.Replace("&", "&amp;").Replace("<", "&lt;")}",
                     "<code>",
+                    $"Syntax: {syntax}",
                     $"OpCode: {opcode.OpcodeHex}",
                     $"Cycles: {opcodeSignature.Opcode.Cycles}",
                     $"  Size: {mode.SizeBytes}"
-                };
+                ]);
 
                 {
                     lines.Add($" Flags: N V - B D I Z C");
