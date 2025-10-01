@@ -190,6 +190,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// <summary>
     /// Resets the assembler state.
     /// </summary>
+    /// <returns>The current assembler instance.</returns>
     public Mos6502AssemblerBase Begin(ushort address = 0xc000)
     {
         ReleaseSharedBuffer();
@@ -198,6 +199,27 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         CurrentCycleCount = 0;
         Org(address);
 
+        return this;
+    }
+
+    /// <summary>
+    /// Resets the current cycle count to zero.
+    /// </summary>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502AssemblerBase ResetCycle()
+    {
+        CurrentCycleCount = 0;
+        return this;
+    }
+
+    /// <summary>
+    /// Gets the current cycle count and outputs it to the provided variable.
+    /// </summary>
+    /// <param name="cycleCount">The output of the current cycle count.</param>
+    /// <returns>The current assembler instance.</returns>
+    public Mos6502AssemblerBase Cycle(out int cycleCount)
+    {
+        cycleCount = CurrentCycleCount;
         return this;
     }
     
@@ -498,6 +520,19 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// Resets the assembler state.
     /// </summary>
     public new TAsm Begin(ushort address = 0xc000) => (TAsm)base.Begin(address);
+
+    /// <summary>
+    /// Resets the current cycle count to zero.
+    /// </summary>
+    /// <returns>The current assembler instance.</returns>
+    public new TAsm ResetCycle() => (TAsm)base.ResetCycle();
+
+    /// <summary>
+    /// Gets the current cycle count and outputs it to the provided variable.
+    /// </summary>
+    /// <param name="cycleCount">The output of the current cycle count.</param>
+    /// <returns>The current assembler instance.</returns>
+    public new TAsm Cycle(out int cycleCount) => (TAsm)base.Cycle(out cycleCount);
 
     /// <summary>
     /// Sets the origin address for the assembler and resets the <see cref="Mos6502AssemblerBase.CurrentOffset"/>.
