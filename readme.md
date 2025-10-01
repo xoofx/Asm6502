@@ -166,6 +166,10 @@ For more details on how to use Asm6502, please visit the [user guide](https://gi
 
 This software is released under the [BSD-2-Clause license](https://opensource.org/licenses/BSD-2-Clause). 
 
+## 🌟 Credits
+
+Thanks to Norbert Landsteiner for providing the [6502 Instruction Set](https://www.masswerk.at/6502/6502_instruction_set.html).
+
 ## 🤗 Author
 
 Alexandre Mutel aka [xoofx](https://xoofx.github.io).
