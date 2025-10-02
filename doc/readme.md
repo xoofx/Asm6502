@@ -107,23 +107,26 @@ The `Mos6502Assembler` class provides a fluent API for generating 6502 machine c
 using var asm = new Mos6502Assembler();
 
 asm
-    .Begin(0xC000)         // Start assembling at address $C000
-    .Label(out var startLabel)
+    .Org(0xC000);          // Start assembling at address $C000
+asm.Label(out var start)
     .LDX_Imm(0x00)         // X = 0
-    .LDY_Imm(0x10)         // Y = 16
-    .Label(out var loopLabel)
+    .LDY_Imm(0x10);        // Y = 16
+
+asm.Label(out var loop)
     .LDA(0x0200, X)        // LDA $0200,X
     .CMP(0xFF)             // CMP #$FF
-    .ForwardLabel(out var skipLabel)
-    .BEQ(skipLabel)        // BEQ SKIP
+    .BEQ(out var skip)     // BEQ skip (forward label)
+
     .CLC()                 // CLC
     .ADC_Imm(0x01)         // ADC #$01
-    .STA(0x0200, X)        // STA $0200,X
-    .Label(skipLabel)
+    .STA(0x0200, X);       // STA $0200,X
+
+asm.Label(skip)
     .INX()                 // INX
     .DEY()                 // DEY
-    .BNE(loopLabel)        // BNE LOOP
-    .Label(out var endLabel)
+    .BNE(loop);            // BNE loop
+
+asm.Label(out var endLabel)
     .JMP(endLabel)
     .End();
 
@@ -227,12 +230,12 @@ asm
 You can also create forward labels that are resolved later:
 
 ```csharp
-asm
-    .ForwardLabel(out var skipLabel)
+asm.LabelForward(out var skipLabel)
     // ... some instructions ...
     .BEQ(skipLabel)    // Branch to SKIP if condition met
-    .LDA_Imm(0xFF)     // Load accumulator with 0xFF
-    .Label(skipLabel)  // Bind SKIP label later
+    .LDA_Imm(0xFF);    // Load accumulator with 0xFF
+
+asm.Label(skipLabel);  // Bind SKIP label later
 ```
 
 Or directly within the branch instruction:
@@ -240,9 +243,9 @@ Or directly within the branch instruction:
 
 ```csharp
 asm
-    .BEQ(out var skipLabel)    // Branch to SKIP if condition met
-    .LDA_Imm(0xFF)     // Load accumulator with 0xFF
-    .Label(skipLabel)  // Bind SKIP label later
+    .BEQ(out var skipLabel) // Branch to SKIP if condition met
+    .LDA_Imm(0xFF);         // Load accumulator with 0xFF
+asm.Label(skipLabel)        // Bind SKIP label later
 ```
 
 ### Expressions

@@ -13,106 +13,110 @@ Asm6502 is a lightweight and efficient C# library to assemble and disassemble 65
 - **High performance** / **zero allocation** library for disassembling / assembling instructions.
 - Compatible with `net8.0+` and NativeAOT.
 - Integrated assembler API documentation via API XML comments.
-  ![Integrated API documentation](img/asm6502_xml_api_example.png)
+  ![Integrated API documentation](https://raw.githubusercontent.com/xoofx/Asm6502/main/img/asm6502_xml_api_example.png)
 
 ## 📖 User Guide
 
 For more details on how to use Asm6502, please visit the [user guide](https://github.com/xoofx/Asm6502/blob/main/doc/readme.md).
 
-Suppose that we want to write a simple program in C# to assemble and disassemble the equivalent of the following 6502 assembly code:
+Suppose the following 6502 assembly code:
 
 ```
-        .org $c000             ; Start address (for example, on C64 this is an available memory area)
-
-        ; Initialization
-START:  LDX #$00               ; X = 0, index into buffer
-        LDY #$10               ; Y = 16, number of bytes to process
-
-LOOP:   LDA $0200,X            ; Load byte at $0200 + X
-        CMP #$FF               ; Check if byte is already 0xFF
-        BEQ SKIP               ; If so, skip incrementing
-
-        CLC                    ; Clear carry before addition
-        ADC #$01               ; Add 1
-        STA $0200,X            ; Store result back to memory
-
-SKIP:   INX                    ; X = X + 1
-        DEY                    ; Y = Y - 1
-        BNE LOOP               ; Loop until Y == 0
-
-        ; Call subroutine to flash border color
-        JSR FLASH_BORDER
-
-        ; Infinite loop
-END:    JMP END
+       .org $c000     ; Start address
+       
+       ; Initialization
+start: LDX #$00       ; X = 0, index into buffer
+       LDY #$10       ; Y = 16, number of bytes to process
+       
+loop:  LDA $0200,X    ; Load byte at $0200 + X
+       CMP #$FF       ; Check if byte is already 0xFF
+       BEQ skip       ; If so, skip incrementing
+       
+       CLC            ; Clear carry before addition
+       ADC #$01       ; Add 1
+       STA $0200,X    ; Store result back to memory
+       
+skip:  INX            ; X = X + 1
+       DEY            ; Y = Y - 1
+       BNE loop       ; Loop until Y == 0
+       
+       ; Call subroutine to flash border color
+       JSR flash_border
+       
+       ; Infinite loop
+end:   JMP end
 
 ; ------------------------------
-; Subroutine: FLASH_BORDER
+; Subroutine: flash_border
 ; Cycles border color between 0–7
 ; (Useful on C64, otherwise dummy)
 ; ------------------------------
-FLASH_BORDER:
+flash_border:
         LDX #$00
 
-FLASH_LOOP:
-        STX $D020              ; C64 border color register
+flash_loop:
+        STX $D020     ; C64 border color register
         INX
         CPX #$08
-        BNE FLASH_LOOP
+        BNE flash_loop
 
         RTS
 ```
 
-The following C# assembly would assemble this code using the `Asm6502` library:
+
+And the equivalent in C# using `Asm6502` library:
+
 ```csharp
 using var asm = new Mos6502Assembler();
+asm.Org(0xc000);
 
-asm
-    .Begin(0xc000)
-    .Label(out var start)
-    .LDX_Imm(0x00)             // X = 0, index into buffer
-    .LDY_Imm(0x10)             // Y = 16, number of bytes to process
+// Initialization
+asm.Label(out var start)
+    .LDX_Imm(0x00)     // X = 0, index into buffer
+    .LDY_Imm(0x10);    // Y = 16, number of bytes to process
 
-    .Label(out var loop)
-    .LDA(0x0200, X) // Load byte at $0200 + X
-    .CMP_Imm(0xFF)             // Check if byte is already 0xFF
+asm.Label(out var loop)
+    .LDA(0x0200, X)    // Load byte at $0200 + X
+    .CMP_Imm(0xFF)     // Check if byte is already 0xFF
+    .BEQ(out var skip) // If so, skip incrementing (forward label)
 
-    .BEQ(out var skip)        // If so, skip incrementing (forward label)
-    .CLC()                 // Clear carry before addition
-    .ADC_Imm(0x01)             // Add 1
-    .STA(0x0200, X) // Store result back to memory
+    .CLC()             // Clear carry before addition
+    .ADC_Imm(0x01)     // Add 1
+    .STA(0x0200, X);   // Store result back to memory
 
-    .Label(skip)      // X = X + 1
+asm.Label(skip)        // X = X + 1
     .INX()
-    .DEY()                 // Y = Y - 1
-    .BNE(loop)        // Loop until Y == 0
+    .DEY()             // Y = Y - 1
+    .BNE(loop)         // Loop until Y == 0
 
     // Call subroutine to flash border color
-    .JSR(out var flash_border) // Declare a forward label
+    .JSR(out var flash_border); // Declare a forward label
 
-    // Infinite loop
-    .Label(out var end)
-    .JMP(end)
+// Infinite loop
+asm.Label(out var end)
+    .JMP(end);
 
-    // ------------------------------
-    // Subroutine: FLASH_BORDER
-    // Cycles border color between 0–7
-    // (Useful on C64, otherwise dummy)
-    // -----------------------------
-    .Label(flash_border)
-    .LDX_Imm(0x00)
+// ------------------------------
+// Subroutine: FLASH_BORDER
+// Cycles border color between 0–7
+// (Useful on C64, otherwise dummy)
+// -----------------------------
+asm.Label(flash_border)
+    .LDX_Imm(0x00);
 
-    .Label(out var flash_loop)
-    .STX(0xD020) // C64 border color register
+asm.Label(out var flash_loop)
+    .STX(0xD020)       // C64 border color register
     .INX()
     .CPX_Imm(0x08)
     .BNE(flash_loop)
     .RTS()
 
-    .End();                 // Mark the end of the assembly (to resolve labels)
+    .End();            // Resolve labels
 
-var buffer = asm.Buffer; // Get the assembled buffer
+// Get the assembled buffer
+var buffer = asm.Buffer;
 ```
+
 
 Disassembling the same code can be done using the `Mos6502Disassembler` class:
 ```csharp
