@@ -518,7 +518,9 @@
         "https://www.nesdev.org/wiki/Instruction_reference#BPL",
         "http://www.6502.org/users/obelisk/6502/reference.html#BPL",
         "https://www.masswerk.at/6502/6502_instruction_set.html#BPL"
-      ]
+      ],
+      "summary": "Branch on Result Plus",
+      "synopsis": "branch on N = 0"
     },
     {
       "name": "ORA",

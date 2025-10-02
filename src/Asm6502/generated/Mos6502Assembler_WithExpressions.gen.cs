@@ -741,11 +741,11 @@ partial class Mos6502Assembler
     public Mos6502Assembler BNE(out Mos6502Label relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(relativeAddress))] string? addressExpression = null)
         => AddInstruction(Mos6502InstructionFactory.BNE((sbyte)0), relativeAddress = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
     /// <summary>
-    /// . <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
+    /// Branch on Result Plus. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
     /// </summary>
     /// <param name="relativeAddress"></param>
     /// <remarks>
-    /// 
+    /// branch on N = 0
     /// <code>
     /// Syntax: BPL $BB
     /// OpCode: 0x10
@@ -758,12 +758,12 @@ partial class Mos6502Assembler
     public Mos6502Assembler BPL(Expressions.Mos6502ExpressionU16 relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6502InstructionFactory.BPL((sbyte)0), relativeAddress, debugFilePath, debugLineNumber);
     /// <summary>
-    /// . <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
+    /// Branch on Result Plus. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
     /// The output <paramref name="relativeAddress"/> is declaring a forward label at the same time.
     /// </summary>
     /// <param name="relativeAddress"></param>
     /// <remarks>
-    /// 
+    /// branch on N = 0
     /// <code>
     /// Syntax: BPL $BB
     /// OpCode: 0x10

@@ -592,11 +592,11 @@ partial class Mos6510Assembler
     public Mos6510Assembler BNE(sbyte relativeAddress, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.BNE(relativeAddress), debugFilePath, debugLineNumber);
     /// <summary>
-    /// . <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
+    /// Branch on Result Plus. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#BPL">BPL</see> instruction (0x10) with addressing mode Relative.
     /// </summary>
     /// <param name="relativeAddress">Relative Address.</param>
     /// <remarks>
-    /// 
+    /// branch on N = 0
     /// <code>
     /// Syntax: BPL $BB
     /// OpCode: 0x10
