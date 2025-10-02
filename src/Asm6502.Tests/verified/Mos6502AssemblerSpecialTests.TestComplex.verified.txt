@@ -42,7 +42,7 @@ C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:83
 C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:84
 C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:87
 C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:88
-C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:90
+C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:89
 C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:91
 C00C {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:92
 C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:93

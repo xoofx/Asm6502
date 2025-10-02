@@ -76,50 +76,50 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
     {
         // Start address (for example, on C64 this is an available memory area)
         using var asm = CreateAsm();
+        asm.Org(0xc000);
 
-        asm
-            .Begin(0xc000)
-            .Label(out var start)
-            .LDX_Imm(0x00)             // X = 0, index into buffer
-            .LDY_Imm(0x10)             // Y = 16, number of bytes to process
+        // Initialization
+        asm.Label(out var start)
+            .LDX_Imm(0x00)     // X = 0, index into buffer
+            .LDY_Imm(0x10);    // Y = 16, number of bytes to process
 
-            .Label(out var loop)
-            .LDA(0x0200, X) // Load byte at $0200 + X
-            .CMP_Imm(0xFF)             // Check if byte is already 0xFF
+        asm.Label(out var loop)
+            .LDA(0x0200, X)    // Load byte at $0200 + X
+            .CMP_Imm(0xFF)     // Check if byte is already 0xFF
+            .BEQ(out var skip) // If so, skip incrementing (forward label)
 
-            .BEQ(out var skip)        // If so, skip incrementing (forward label)
-            .CLC()                 // Clear carry before addition
-            .ADC_Imm(0x01)             // Add 1
-            .STA(0x0200, X) // Store result back to memory
+            .CLC()             // Clear carry before addition
+            .ADC_Imm(0x01)     // Add 1
+            .STA(0x0200, X);   // Store result back to memory
 
-            .Label(skip)      // X = X + 1
+        asm.Label(skip)        // X = X + 1
             .INX()
-            .DEY()                 // Y = Y - 1
-            .BNE(loop)        // Loop until Y == 0
+            .DEY()             // Y = Y - 1
+            .BNE(loop)         // Loop until Y == 0
 
             // Call subroutine to flash border color
-            .JSR(out var flash_border) // Declare a forward label
+            .JSR(out var flash_border); // Declare a forward label
 
-            // Infinite loop
-            .Label(out var end)
-            .JMP(end)
+        // Infinite loop
+        asm.Label(out var end)
+            .JMP(end);
 
-            // ------------------------------
-            // Subroutine: FLASH_BORDER
-            // Cycles border color between 0–7
-            // (Useful on C64, otherwise dummy)
-            // -----------------------------
-            .Label(flash_border)
-            .LDX_Imm(0x00)
+        // ------------------------------
+        // Subroutine: FLASH_BORDER
+        // Cycles border color between 0–7
+        // (Useful on C64, otherwise dummy)
+        // -----------------------------
+        asm.Label(flash_border)
+            .LDX_Imm(0x00);
 
-            .Label(out var flash_loop)
-            .STX(0xD020) // C64 border color register
+        asm.Label(out var flash_loop)
+            .STX(0xD020)       // C64 border color register
             .INX()
             .CPX_Imm(0x08)
             .BNE(flash_loop)
             .RTS()
 
-            .End();                 // Mark the end of the assembly (to resolve labels)
+            .End();            // Resolve labels
 
         await VerifyAsm(asm);
     }
