@@ -5,14 +5,14 @@
 namespace Asm6502.Tests;
 
 [TestClass]
-public class Mos6502LabelTests
+public class Mos6502MiscTests
 {
 
     [TestMethod]
     public void TestParseLabelExpression()
     {
         // Test that we capture the name of the variable via expression caller argument info
-        var asm = new Mos6502Assembler();
+        using var asm = new Mos6502Assembler();
 
         asm.Label(out var myLabel);
         Assert.AreEqual(nameof(myLabel), myLabel.Name);
@@ -28,5 +28,24 @@ public class Mos6502LabelTests
         Mos6502Label[] labels = new Mos6502Label[2];
         asm.Label(out labels[0]);
         Assert.AreEqual(null, labels[0].Name);
+    }
+
+    [TestMethod]
+    public void TestAppend()
+    {
+        using var asm = new Mos6502Assembler();
+
+        asm.Append(new byte[7]);
+        Assert.AreEqual(7, asm.SizeInBytes);
+
+        asm.Append(new byte[1024]);
+        Assert.AreEqual(1024 + 7, asm.SizeInBytes);
+
+        asm.Begin();
+        Assert.AreEqual(0, asm.SizeInBytes);
+        asm.AppendBytes(7);
+        Assert.AreEqual(7, asm.SizeInBytes);
+        asm.AppendBytes(1024);
+        Assert.AreEqual(1024 + 7, asm.SizeInBytes);
     }
 }

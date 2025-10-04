@@ -408,19 +408,19 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         ReleaseSharedBuffer();
     }
 
-    private protected Span<byte> GetBuffer(int minimumSize)
+    private protected Span<byte> GetBuffer(int requestedSize)
     {
-        if (SizeInBytes + minimumSize > _buffer.Length)
+        if (SizeInBytes + requestedSize > _buffer.Length)
         {
             // Resize the buffer to accommodate the new instruction
-            var newSize = Math.Max(_buffer.Length * 2, Math.Max(minimumSize, 16));
+            var newSize = Math.Max(_buffer.Length * 2, Math.Max(SizeInBytes + requestedSize, 16));
             var newBuffer = ArrayPool<byte>.Shared.Rent(newSize);
             _buffer.CopyTo(newBuffer.AsSpan());
             ReleaseSharedBuffer();
             _buffer = newBuffer;
         }
 
-        return _buffer.AsSpan((int)SizeInBytes, _buffer.Length - (int)SizeInBytes);
+        return _buffer.AsSpan((int)SizeInBytes, requestedSize);
     }
 
     private void ReleaseSharedBuffer()
