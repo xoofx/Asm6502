@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // ------------------------------------------------------------------------------
 // ReSharper disable All
-// ------------------------------------------------------------------------------
+#pragma warning disable CS1573
 using System.Runtime.CompilerServices;
 
 namespace Asm6502;

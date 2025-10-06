@@ -1196,7 +1196,7 @@ internal class GeneratorApp
         writer.WriteLine("//     the code is regenerated.");
         writer.WriteLine("// ------------------------------------------------------------------------------");
         writer.WriteLine("// ReSharper disable All");
-        writer.WriteLine("// ------------------------------------------------------------------------------");
+        writer.WriteLine("#pragma warning disable CS1573");
         return writer;
     }
 

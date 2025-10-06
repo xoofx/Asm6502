@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // ------------------------------------------------------------------------------
 // ReSharper disable All
-// ------------------------------------------------------------------------------
+#pragma warning disable CS1573
 using System.Runtime.CompilerServices;
 using static Asm6502.Mos6502Factory;
 #pragma warning disable CS0618 // We are still validating Unstable API in our tests even if it's marked as obsolete.
