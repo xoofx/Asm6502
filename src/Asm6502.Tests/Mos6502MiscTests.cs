@@ -48,4 +48,24 @@ public class Mos6502MiscTests
         asm.AppendBytes(1024);
         Assert.AreEqual(1024 + 7, asm.SizeInBytes);
     }
+
+    [TestMethod]
+    public void TestAlign()
+    {
+        using var asm = new Mos6502Assembler();
+        asm.Align(16);
+        Assert.AreEqual(0, asm.SizeInBytes);
+        asm.Append(new byte[7]);
+        Assert.AreEqual(7, asm.SizeInBytes);
+        asm.Align(16);
+        Assert.AreEqual(16, asm.SizeInBytes);
+        asm.Align(256);
+        Assert.AreEqual(256, asm.SizeInBytes);
+        asm.Align(256);
+        Assert.AreEqual(256, asm.SizeInBytes);
+        asm.Append(new byte[10]);
+        Assert.AreEqual(266, asm.SizeInBytes);
+        asm.Align(512);
+        Assert.AreEqual(512, asm.SizeInBytes);
+    }
 }

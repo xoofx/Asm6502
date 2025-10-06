@@ -4,6 +4,7 @@
 
 using Asm6502.Expressions;
 using System.Buffers;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Asm6502;
@@ -184,6 +185,32 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         SizeInBytes = newSizeInBytes;
         CurrentOffset += (ushort)length;
 
+        return this;
+    }
+
+    /// <summary>
+    /// Aligns the current output position to the specified byte boundary, optionally filling any added padding with a
+    /// specified byte value.
+    /// </summary>
+    /// <remarks>This method appends padding bytes as needed to advance the output position to the next
+    /// multiple of the specified alignment relative to the <see cref="CurrentOffset"/>.
+    /// If the <see cref="CurrentOffset"/> is already aligned, no padding is added.</remarks>
+    /// <param name="alignment">The byte alignment boundary to align to. Must be greater than zero.</param>
+    /// <param name="fill">The byte value to use for padding. The default is 0.</param>
+    /// <returns>The current assembler instance, to allow for method chaining.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown if alignment is zero or not power of 2.</exception>
+    public Mos6502AssemblerBase Align(ushort alignment, byte fill = 0)
+    {
+        if (alignment == 0 || !BitOperations.IsPow2(alignment)) 
+            throw new ArgumentOutOfRangeException(nameof(alignment), "Alignment must be > 0 and a power of 2.");
+
+        var currentOffset = CurrentOffset;
+        var alignedSize = (currentOffset + (alignment - 1)) & ~(alignment - 1);
+        var padding = alignedSize - currentOffset;
+        if (padding > 0)
+        {
+            AppendBytes((int)padding, fill);
+        }
         return this;
     }
 
@@ -515,6 +542,19 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// <param name="c">The byte value to fill the buffer with. Default is 0.</param>
     /// <returns>The current assembler instance.</returns>
     public new TAsm AppendBytes(int length, byte c = 0) => (TAsm)base.AppendBytes(length, c);
+
+    /// <summary>
+    /// Aligns the current output position to the specified byte boundary, optionally filling any added padding with a
+    /// specified byte value.
+    /// </summary>
+    /// <remarks>This method appends padding bytes as needed to advance the output position to the next
+    /// multiple of the specified alignment relative to the <see cref="Mos6502AssemblerBase.CurrentOffset"/>.
+    /// If the <see cref="Mos6502AssemblerBase.CurrentOffset"/> is already aligned, no padding is added.</remarks>
+    /// <param name="alignment">The byte alignment boundary to align to. Must be greater than zero.</param>
+    /// <param name="fill">The byte value to use for padding. The default is 0.</param>
+    /// <returns>The current assembler instance, to allow for method chaining.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown if alignment is zero.</exception>
+    public new TAsm Align(ushort alignment, byte fill = 0) => (TAsm)base.Align(alignment, fill);
 
     /// <summary>
     /// Resets the assembler state.
