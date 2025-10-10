@@ -227,6 +227,8 @@ This software is released under the [BSD-2-Clause license](https://opensource.or
 
 Thanks to Norbert Landsteiner for providing the [6502 Instruction Set](https://www.masswerk.at/6502/6502_instruction_set.html).
 
+Thanks to Jacob Paul for providing a C++ version cycle accurate version of the [6502 CPU](https://github.com/ericssonpaul/O2). See [Mos6502Cpu.cs](https://github.com/xoofx/Asm6502/blob/main/src/Asm6502/Mos6502Cpu.cs#L5-L35) for more details about the improvements made in Asm6502.
+
 ## 🤗 Author
 
 Alexandre Mutel aka [xoofx](https://xoofx.github.io).
