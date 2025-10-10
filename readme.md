@@ -22,7 +22,7 @@ Asm6502 is a lightweight C# library for the 6502/6510 that combines a fluent, st
 
 For more details on how to use Asm6502, please visit the [user guide](https://github.com/xoofx/Asm6502/blob/main/doc/readme.md).
 
-## 🧠 CPU Emulator (6502/6510)
+## 🧠 6502 CPU Emulator
 
 Asm6502 includes a cycle-accurate CPU emulator with two variants:
 
@@ -69,6 +69,8 @@ Notes:
 - `cpu.Nmi()`, `cpu.Irq()`, and `cpu.Reset()` helpers are provided; `RaiseNmi/Irq/Reset` schedule the interrupt on the next cycle.
 - `InstructionCycles` reports cycles for the last completed instruction; `TimestampCounter` is a monotonic cycle counter.
 - The implementation targets accurate cycle timing and passes known 6502 timing test suites.
+
+## 🧪 6502 Assembler/Disassembler Example
 
 Suppose the following 6502 assembly code:
 
@@ -118,7 +120,7 @@ flash_loop:
 And the equivalent in C# using `Asm6502` library:
 
 ```csharp
-using var asm = new Mos6502Assembler();
+using var asm = new Mos6510Assembler();
 asm.Org(0xc000);
 
 // Initialization
@@ -171,7 +173,7 @@ var buffer = asm.Buffer;
 
 Disassembling the same code can be done using the `Mos6502Disassembler` class:
 ```csharp
-var dis = new Mos6502Disassembler(new Mos6502DisassemblerOptions()
+var dis = new Mos6510Disassembler(new Mos6502DisassemblerOptions()
 {
     PrintLabelBeforeFirstInstruction = false,
     PrintAddress = true,
