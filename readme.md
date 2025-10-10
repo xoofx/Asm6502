@@ -2,7 +2,7 @@
 
 <img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/Asm6502/main/img/Asm6502.png">
 
-Asm6502 is a lightweight C# library for the 6502/6510 that combines a fluent, strongly typed assembler/disassembler with a cycle-accurate CPU emulator (pluggable 64 KiB memory bus). Use it to generate binaries, disassemble existing code, and run or step programs with precise timing.
+Asm6502 is a lightweight C# library for the 6502/6510 that combines a fluent, strongly typed **assembler**/**disassembler** with a cycle-accurate **CPU emulator** (pluggable 64 KiB memory bus). Use it to generate binaries, disassemble existing code, and run or step programs with precise timing.
 
 ## ✨ Features
 
