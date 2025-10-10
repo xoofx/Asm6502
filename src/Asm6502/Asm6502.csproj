@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>Asm6502 is a lightweight and efficient C# library to assemble and disassemble 6502/6510 assembly code.</Description>
+    <Description>Asm6502 is a lightweight C# library for the 6502/6510 that combines a fluent, strongly typed assembler/disassembler with a cycle-accurate CPU emulator.</Description>
     <Copyright>Alexandre Mutel</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Alexandre Mutel</Authors>
-    <PackageTags>assembler;disassembler;6502;6510;c64</PackageTags>
+    <PackageTags>assembler;disassembler;emulator;6502;6510;c64</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageIcon>Asm6502.png</PackageIcon>
     <PackageProjectUrl>https://github.com/xoofx/Asm6502</PackageProjectUrl>

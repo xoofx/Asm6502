@@ -23,6 +23,7 @@ This document provides a small user guide for the Asm6502 library.
   - [Customizing Disassembly Output](#customizing-disassembly-output)
   - [Assembler Debug Line Information](#assembler-debug-line-information)
   - [Org directive](#org-directive)
+  - [CPU Emulator (6502/6510)](#cpu-emulator-65026510)
   - [6510 Support](#6510-support)
 - [Tips and Best Practices](#tips-and-best-practices)
 - [Supported instructions](#supported-instructions)
@@ -418,9 +419,66 @@ LL_01:
 C012  4C 02 C0   JMP LL_02
 ```
 
+### CPU Emulator (6502/6510)
+
+Asm6502 provides a cycle-accurate CPU core with two variants:
+
+- `Mos6502Cpu` implements the documented 6502 instruction set
+- `Mos6510Cpu` extends it with all undocumented/illegal opcodes (recommended)
+
+Both cores use a pluggable 64 KiB memory bus defined by `IMos6502CpuMemoryBus`.
+
+Quick start:
+
+```csharp
+using Asm6502;
+
+// Minimal 64 KiB RAM bus
+public sealed class RamBus : IMos6502CpuMemoryBus
+{
+  private readonly byte[] _ram;
+  public RamBus(byte[] ram) => _ram = ram;
+  public byte Read(ushort address) => _ram[address];
+  public void Write(ushort address, byte value) => _ram[address] = value;
+}
+
+// Create memory and a tiny program at $C000: LDA #$01; ADC #$01;
+var mem = new byte[65536];
+mem[0xC000] = 0xA9;
+mem[0xC001] = 0x01; // LDA #$01
+mem[0xC002] = 0x69;
+mem[0xC003] = 0x01; // ADC #$01
+
+// Set Reset vector to $C000
+mem[0xFFFC] = 0x00;
+mem[0xFFFD] = 0xC0;
+
+var cpu = new Mos6510Cpu(new RamBus(mem));
+cpu.Reset(); // fetch reset vector and begin executing
+cpu.Steps(2); // Run 2 instructions (LDA and ADC)
+var a = cpu.A; // 2
+// cpu.PC is at 0xC004 (next instruction)
+```
+
+Useful members:
+- `Step()` / `Steps(n)`: step by instruction; `Cycle()` / `Cycles(n)`: step by bus cycle
+- `InstructionCycles`: cycles consumed by the last completed instruction
+- `TimestampCounter`: monotonically increasing bus-cycle counter
+- `Nmi()`, `Irq()`, `Reset()` convenience helpers; `RaiseNmi/Irq/Reset()` to request on next cycle
+
+Memory-bus expectations:
+- Read-Modify-Write instructions perform read + two writes (read, write-back, write-modified)
+- Stack activity occurs in page $0100–$01FF; vectors are read from $FFFA/$FFFC/$FFFE
+- Unattached bus reads default to NOP (0xEA) internally
+
 ### 6510 Support
 
-The library also supports the 6510 CPU, which is a variant of the 6502 used in the Commodore 64. For simplicity, it contains all the 6502 instructions including the illegal opcodes. You can use the `Mos6510Assembler` and `Mos6510Disassembler` classes in the same way as the 6502 counterparts.
+The library also supports the 6510 CPU, a 6502 variant used in the Commodore 64. In addition to the assembler and disassembler, you can emulate and run code with the CPU core:
+
+- `Mos6510Assembler` / `Mos6510Disassembler`: assembly and disassembly with undocumented/illegal opcodes
+- `Mos6510Cpu`: cycle-accurate execution with full opcode coverage
+
+Use `Mos6510Cpu` when you need to execute code and measure exact cycle counts; if you only need documented opcodes, `Mos6502Cpu` is available as well.
 
 ## Tips and Best Practices
 
@@ -701,3 +759,4 @@ The following instructions are supported by the `Mos6510Assembler` class:
 | `0x57` | [`SRE`](https://www.masswerk.at/6502/6502_instruction_set.html#SRE) ` zp, X` | `asm.SRE(zp, X);` | `SRE`, `LSE` | LSR then EOR |  |
 | `0x9b` | [`TAS`](https://www.masswerk.at/6502/6502_instruction_set.html#TAS) ` address, Y` | `asm.TAS(address, Y);` | `TAS`, `XAS`, `SHS` | Transfer A AND X to SP, store A AND X AND (high address + 1) | ❌ |
 | `0xeb` | [`USBC`](https://www.masswerk.at/6502/6502_instruction_set.html#USBC) ` #value` | `asm.USBC_Imm(value);` | `USBC`, `SBC` | SBC with NOP behavior |  |
+

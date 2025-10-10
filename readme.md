@@ -2,22 +2,73 @@
 
 <img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/Asm6502/main/img/Asm6502.png">
 
-Asm6502 is a lightweight and efficient C# library to assemble and disassemble 6502/6510 assembly code. It provides a fluent API to create 6502/6510 assembly code (e.g. a CPU powering the Commodore 64), and can be used to generate binary files or disassemble existing binaries into assembly code.
+Asm6502 is a lightweight C# library for the 6502/6510 that combines a fluent, strongly typed assembler/disassembler with a cycle-accurate CPU emulator (pluggable 64 KiB memory bus). Use it to generate binaries, disassemble existing code, and run or step programs with precise timing.
 
 ## ✨ Features
 
-- **Full support** for all core 6502 instructions and 6510 instructions (6502 + illegal opcodes)
+- Assembler/disassembler with **full support** for all core 6502 instructions and 6510 instructions (6502 + undocumented/illegal opcodes)
+- New: **cycle-accurate 6502/6510 CPU emulator** (use `Mos6510Cpu` for full opcode coverage; `Mos6502Cpu` for documented opcodes)
+  - Accurate cycle timing and passes known 6502 timing from [Thomas Harte's 2,560,000 tests for the 6502](https://github.com/SingleStepTests/65x02/tree/main/6502)
+  - **Pluggable 64 KiB memory bus** via `IMos6502CpuMemoryBus`
 - Unique **strongly typed** and fluent assembler API
 - Support producing **debug information** (C# file and line numbers) for each instruction
 - **Easily disassemble** instructions and operand.
 - **High performance** / **zero allocation** library for disassembling / assembling instructions.
 - Compatible with `net8.0+` and NativeAOT.
 - Integrated assembler API documentation via API XML comments.
-  ![Integrated API documentation](https://raw.githubusercontent.com/xoofx/Asm6502/main/img/asm6502_xml_api_example.png)
+    ![Integrated API documentation](https://raw.githubusercontent.com/xoofx/Asm6502/main/img/asm6502_xml_api_example.png)
 
 ## 📖 User Guide
 
 For more details on how to use Asm6502, please visit the [user guide](https://github.com/xoofx/Asm6502/blob/main/doc/readme.md).
+
+## 🧠 CPU Emulator (6502/6510)
+
+Asm6502 includes a cycle-accurate CPU emulator with two variants:
+
+- `Mos6502Cpu`: documented 6502 instruction set
+- `Mos6510Cpu`: full instruction set including all undocumented/illegal opcodes (recommended)
+
+Both reuse the same decode tables as the assembler/disassembler and expose a simple, pluggable 64 KiB memory bus.
+
+Quick start:
+
+```csharp
+using Asm6502;
+
+// Minimal 64 KiB RAM bus
+public sealed class RamBus : IMos6502CpuMemoryBus
+{
+    private readonly byte[] _ram;
+    public RamBus(byte[] ram) => _ram = ram;
+    public byte Read(ushort address) => _ram[address];
+    public void Write(ushort address, byte value) => _ram[address] = value;
+}
+
+// Create memory and a tiny program at $C000: LDA #$01; ADC #$01;
+var mem = new byte[65536];
+mem[0xC000] = 0xA9;
+mem[0xC001] = 0x01; // LDA #$01
+mem[0xC002] = 0x69;
+mem[0xC003] = 0x01; // ADC #$01
+
+// Set Reset vector to $C000
+mem[0xFFFC] = 0x00;
+mem[0xFFFD] = 0xC0;
+
+var cpu = new Mos6510Cpu(new RamBus(mem));
+cpu.Reset(); // fetch reset vector and begin executing
+cpu.Steps(2); // Run 2 instructions (LDA and ADC)
+var a = cpu.A; // 2
+// cpu.PC is at 0xC004 (next instruction)
+```
+
+Notes:
+- RMW instructions perform read + two writes; your bus should tolerate that pattern.
+- Use `cpu.Step()`/`cpu.Steps(n)` for instruction stepping, `cpu.Cycle()`/`cpu.Cycles(n)` for cycle stepping.
+- `cpu.Nmi()`, `cpu.Irq()`, and `cpu.Reset()` helpers are provided; `RaiseNmi/Irq/Reset` schedule the interrupt on the next cycle.
+- `InstructionCycles` reports cycles for the last completed instruction; `TimestampCounter` is a monotonic cycle counter.
+- The implementation targets accurate cycle timing and passes known 6502 timing test suites.
 
 Suppose the following 6502 assembly code:
 
