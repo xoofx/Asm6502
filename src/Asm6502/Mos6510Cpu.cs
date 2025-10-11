@@ -34,6 +34,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// ReSharper disable InconsistentNaming
 #pragma warning disable CS1591
 
 namespace Asm6502;
@@ -152,14 +153,14 @@ public class Mos6510Cpu : Mos6502Cpu
         switch (_cycleCount)
         {
             case 0:
-                Read(PC);
+                Read(PC, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
             case 3:
-                Read(0xFFFE);
+                Read(0xFFFE, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             default:
-                Read(0xFFFF);
+                Read(0xFFFF, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
         }
 
@@ -173,7 +174,7 @@ public class Mos6510Cpu : Mos6502Cpu
         {
             case 0:
                 _av = (ushort)((_wv1 << 8) | _wv0);
-                _wv0 = Read(_av);
+                _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
                 if (_addressingMode == Mos6502AddressingMode.Absolute ||
                     _addressingMode == Mos6502AddressingMode.ZeroPage ||
                     _addressingMode == Mos6502AddressingMode.ZeroPageX ||
@@ -183,17 +184,17 @@ public class Mos6510Cpu : Mos6502Cpu
                     _cycleCount++;
                 break;
             case 1:
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
-                Write(_av, _wv0); // We need to write the original value first (according to the tests)
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteDummyWrite); // We need to write the original value first (according to the tests)
                 SetFlag(Mos6502CpuFlags.C, ((_wv0 >> 7) & 1) != 0);
                 _wv0 = (byte)(_wv0 << 1);
                 A = (byte)(_wv0 | A);
                 UpdateNZFlag(A);
                 break;
             default:
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 _runState = Mos6502CpuRunState.Fetch;
                 break;
         }
@@ -211,7 +212,7 @@ public class Mos6510Cpu : Mos6502Cpu
         {
             case 0:
                 _av = (ushort)((_wv1 << 8) | _wv0);
-                _wv0 = Read(_av);
+                _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
                 if (_addressingMode == Mos6502AddressingMode.Absolute ||
                     _addressingMode == Mos6502AddressingMode.ZeroPage ||
                     _addressingMode == Mos6502AddressingMode.ZeroPageX ||
@@ -221,10 +222,10 @@ public class Mos6510Cpu : Mos6502Cpu
                     _cycleCount++;
                 break;
             case 1:
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
-                Write(_av, _wv0); // We need to write the original value first (according to the tests)
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteDummyWrite); // We need to write the original value first (according to the tests)
                 bool tmp = GetFlag(Mos6502CpuFlags.C);
                 SetFlag(Mos6502CpuFlags.C, ((_wv0 >> 7) & 1) != 0);
                 _wv0 = (byte)(_wv0 << 1);
@@ -233,7 +234,7 @@ public class Mos6510Cpu : Mos6502Cpu
                 UpdateNZFlag(A);
                 break;
             case 3:
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 _runState = Mos6502CpuRunState.Fetch;
                 break;
         }
@@ -245,7 +246,7 @@ public class Mos6510Cpu : Mos6502Cpu
         {
             case 0:
                 _av = (ushort)((_wv1 << 8) | _wv0);
-                _wv0 = Read(_av);
+                _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
                 if (_addressingMode == Mos6502AddressingMode.Absolute ||
                     _addressingMode == Mos6502AddressingMode.ZeroPage ||
                     _addressingMode == Mos6502AddressingMode.ZeroPageX ||
@@ -255,17 +256,17 @@ public class Mos6510Cpu : Mos6502Cpu
                     _cycleCount++;
                 break;
             case 1:
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
-                Write(_av, _wv0); // We need to write the original value first (according to the tests)
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteDummyWrite); // We need to write the original value first (according to the tests)
                 SetFlag(Mos6502CpuFlags.C, (_wv0 & 1) != 0);
                 _wv0 = (byte)(_wv0 >> 1);
                 A = (byte)(_wv0 ^ A);
                 UpdateNZFlag(A);
                 break;
             default:
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 _runState = Mos6502CpuRunState.Fetch;
                 break;
         }
@@ -288,7 +289,7 @@ public class Mos6510Cpu : Mos6502Cpu
         {
             case 0:
                 _av = (ushort)((_wv1 << 8) | _wv0);
-                _wv0 = Read(_av);
+                _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
                 if (_addressingMode == Mos6502AddressingMode.Absolute ||
                     _addressingMode == Mos6502AddressingMode.ZeroPage ||
                     _addressingMode == Mos6502AddressingMode.ZeroPageX ||
@@ -298,10 +299,10 @@ public class Mos6510Cpu : Mos6502Cpu
                     _cycleCount++;
                 break;
             case 1:
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
-                Write(_av, _wv0); // We need to write the original value first (according to the tests)
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteDummyWrite); // We need to write the original value first (according to the tests)
                 bool tmp = GetFlag(Mos6502CpuFlags.C);
                 SetFlag(Mos6502CpuFlags.C, (_wv0 & 1) != 0);
                 _wv0 = (byte)(_wv0 >> 1);
@@ -309,7 +310,7 @@ public class Mos6510Cpu : Mos6502Cpu
                 break;
             case 3:
             {
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 ADC(_wv0);
                 _runState = Mos6502CpuRunState.Fetch;
                 break;
@@ -319,7 +320,7 @@ public class Mos6510Cpu : Mos6502Cpu
 
     private void ARR()
     {
-        byte p = Read((ushort)((_wv1 << 8) | _wv0));
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         A &= p;
 
         if (GetFlag(Mos6502CpuFlags.D))
@@ -370,18 +371,18 @@ public class Mos6510Cpu : Mos6502Cpu
             {
                 _wv0 = (byte)(Y & _wv1);
                 _av = (ushort)((_av & 0xFF) | (_wv0 << 8));
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 _runState = Mos6502CpuRunState.Fetch;
             }
             else
             {
                 _wv0 = (byte)(Y & (_wv1 + 1));
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
             }
         }
         else
         {
-            Write(_av, _wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
             _runState = Mos6502CpuRunState.Fetch;
         }
     }
@@ -396,18 +397,18 @@ public class Mos6510Cpu : Mos6502Cpu
             {
                 _wv0 = (byte)(X & _wv1);
                 _av = (ushort)((_av & 0xFF) | (_wv0 << 8));
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 _runState = Mos6502CpuRunState.Fetch;
             }
             else
             {
                 _wv0 = (byte)(X & (_wv1 + 1));
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
             }
         }
         else
         {
-            Write(_av, _wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
             _runState = Mos6502CpuRunState.Fetch;
         }
     }
@@ -420,7 +421,7 @@ public class Mos6510Cpu : Mos6502Cpu
 
     private void SBX()
     {
-        var p = Read(_av);
+        var p = Read(_av, _pendingExecuteReadKind);
         X = (byte)(A & X);
         p = (byte)(X - p);
         UpdateNZFlag(p);
@@ -431,7 +432,7 @@ public class Mos6510Cpu : Mos6502Cpu
 
     private void ANE()
     {
-        byte p = Read((ushort)((_wv1 << 8) | _wv0));
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         A = (byte)((A | 0xee) & X & p);
         UpdateNZFlag(A);
         _runState = Mos6502CpuRunState.Fetch;
@@ -445,18 +446,18 @@ public class Mos6510Cpu : Mos6502Cpu
             if (_pageCrossed)
             {
                 _wv0 = (byte)(A & X & _wv1); // this one is not documented but matching tests
-                Write((ushort)((_av & 0xFF) | (_wv0 << 8)), _wv0);
+                Write((ushort)((_av & 0xFF) | (_wv0 << 8)), _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 _runState = Mos6502CpuRunState.Fetch;
             }
             else
             {
                 _wv0 = (byte)(A & X & (_wv1 + 1));
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
             }
         }
         else
         {
-            Write(_av, _wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
             _runState = Mos6502CpuRunState.Fetch;
         }
     }
@@ -474,7 +475,7 @@ public class Mos6510Cpu : Mos6502Cpu
             }
             else
             {
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
             }
         }
         else
@@ -492,15 +493,14 @@ public class Mos6510Cpu : Mos6502Cpu
                 _av = (ushort)((_av & 0xFF) | (d << 8));
             }
 
-            Write(_av, d);
-            //UpdateNZFlag(A);
+            Write(_av, d, Mos6502MemoryBusAccessKind.ExecuteWrite);
             _runState = Mos6502CpuRunState.Fetch;
         }
     }
 
     private void LAX()
     {
-        byte p = Read((ushort)((_wv1 << 8) | _wv0));
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), Mos6502MemoryBusAccessKind.ExecuteRead);
         A = p;
         X = p;
         UpdateNZFlag(p);
@@ -510,7 +510,7 @@ public class Mos6510Cpu : Mos6502Cpu
     private void LXA()
     {
         // (A OR CONST) AND oper -> A -> X
-        byte p = Read((ushort)((_wv1 << 8) | _wv0));
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         A = (byte)((A | 0xee) & p); // 0xee unstable bits
         X = A;
         UpdateNZFlag(A);
@@ -519,7 +519,7 @@ public class Mos6510Cpu : Mos6502Cpu
 
     private void LAS()
     {
-        byte p = Read((ushort)((_wv1 << 8) | _wv0));
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), Mos6502MemoryBusAccessKind.ExecuteRead);
         A = (byte)(p & S);
         X = A;
         S = A;
@@ -533,7 +533,7 @@ public class Mos6510Cpu : Mos6502Cpu
         {
             case 0:
                 _av = (ushort)((_wv1 << 8) | _wv0);
-                _wv0 = Read(_av);
+                _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
                 if (_addressingMode == Mos6502AddressingMode.Absolute ||
                     _addressingMode == Mos6502AddressingMode.ZeroPage ||
                     _addressingMode == Mos6502AddressingMode.ZeroPageX ||
@@ -543,15 +543,15 @@ public class Mos6510Cpu : Mos6502Cpu
                     _cycleCount++;
                 break;
             case 1:
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
-                Write(_av, _wv0); // dummy write for the bus cycle
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteDummyWrite); // dummy write for the bus cycle
                 _wv0--;
                 UpdateNZFlag(_wv0);
                 break;
             case 3:
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
 
                 var result = (byte)(A - _wv0);
                 UpdateNZFlag(result);
@@ -567,7 +567,7 @@ public class Mos6510Cpu : Mos6502Cpu
         {
             case 0:
                 _av = (ushort)((_wv1 << 8) | _wv0);
-                _wv0 = Read(_av);
+                _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
                 if (_addressingMode == Mos6502AddressingMode.Absolute ||
                     _addressingMode == Mos6502AddressingMode.ZeroPage ||
                     _addressingMode == Mos6502AddressingMode.ZeroPageX ||
@@ -577,15 +577,15 @@ public class Mos6510Cpu : Mos6502Cpu
                     _cycleCount++;
                 break;
             case 1:
-                Read(_av);
+                Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
                 break;
             case 2:
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteDummyWrite);
                 _wv0++;
                 break;
             case 3:
             {
-                Write(_av, _wv0);
+                Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
                 SBC(_wv0);
                 _runState = Mos6502CpuRunState.Fetch;
                 break;

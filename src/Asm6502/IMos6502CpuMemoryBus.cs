@@ -30,6 +30,19 @@ namespace Asm6502;
 public interface IMos6502CpuMemoryBus
 {
     /// <summary>
+    /// Records a memory access event of the specified kind for tracing or debugging purposes.
+    /// </summary>
+    /// <param name="kind">The type of memory bus access to trace. Specifies whether the access is a read, write, or another supported
+    /// operation.</param>
+    /// <remarks>
+    /// This method is called by <see cref="Mos6502Cpu"/> before calling <see cref="Read(ushort)"/> or <see cref="Write(ushort, byte)"/>.
+    /// </remarks>
+    void Trace(Mos6502MemoryBusAccessKind kind)
+    {
+        // Default implementation does nothing.
+    }
+
+    /// <summary>
     /// Reads a byte from the specified 16-bit address presented by <see cref="Mos6502Cpu"/>.
     /// </summary>
     /// <param name="address">The absolute address in the 0x0000–0xFFFF range.</param>
