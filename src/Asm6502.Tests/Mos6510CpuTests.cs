@@ -18,10 +18,25 @@ namespace Asm6502.Tests;
 /// repository to validate CPU correctness at the instruction and cycle level. To run the tests, ensure the 65x02
 /// repository is cloned at the appropriate directory level as described in the test class. The tests check CPU state,
 /// memory actions, and cycle counts for each instruction, providing comprehensive coverage of the MOS 6510 CPU's
-/// expected behavior.</remarks>
+/// expected behavior.
+///
+/// Checkout at the same level https://github.com/SingleStepTests/65x02 of this repository, for example:
+/// <code>
+/// C:\code\65x02
+/// C:\code\Asm6502
+/// </code>
+///
+/// This class is also extracting a representative subset of tests (<see cref="TestSubsetCountPerOpCode"/> per opcode) to a separate JSON file cpu_6502_tests_subset.json
+/// to allow testing during CI and in case the full Thomas Harte tests haven't been cloned.
+/// </remarks>
 [TestClass]
 public class Mos6510CpuTests
 {
+    private const string TestSubsetName = "cpu_6502_tests_subset";
+    private const int TestSubsetCountPerOpCode = 40; // The number of tests to select per opcode for the subset from Thomas Harte tests.
+    private static List<TestCase6502> SelectedSubsetTestCases = new();
+    private static bool HasErrors = false;
+
     /// <summary>
     /// Tests https://github.com/SingleStepTests/65x02
     /// Checkout at the same level of this repository, for example:
@@ -35,6 +50,7 @@ public class Mos6510CpuTests
     public Mos6510CpuTests()
     {
     }
+    
 
     public TestContext TestContext { get; set; } = null!;
 
@@ -90,13 +106,14 @@ public class Mos6510CpuTests
         options.Converters.Add(new JsonMemoryActionConverter());
 
         var testCases = JsonSerializer.Deserialize<List<TestCase6502>>(File.ReadAllText(file), options)!;
-
-
+        
         var bus = new MemoryBusTracker();
         var cpu = new Mos6510Cpu(bus);
         cpu.Steps(8);
         bus.Reset();
 
+        Dictionary<TestCaseClusterKey, List<TestCase6502>> clusteredTests = new();
+        
         int failed = 0;
         foreach (var test in testCases)
         {
@@ -105,7 +122,7 @@ public class Mos6510CpuTests
                 cpu.Reset();
             }
             
-            var exception = TestSingle(test, cpu, bus);
+            var exception = TestSingle(file, test, cpu, bus, clusteredTests);
             if (exception != null)
             {
                 Console.WriteLine($"Test `{test.Name}` in file `{file}` failed: {exception}");
@@ -114,11 +131,17 @@ public class Mos6510CpuTests
         }
         if (failed > 0)
         {
+            HasErrors = true;
             Assert.Fail($"{failed}/{testCases.Count} tests failed in file `{file}`");
         }
+
+        var fileName = Path.GetFileNameWithoutExtension(file);
+        if (fileName == TestSubsetName) return; // Do not cluster the selected subset file
+
+        UpdateSelectedTestsFromSampling(clusteredTests);
     }
 
-    private AssertFailedException? TestSingle(TestCase6502 testCase, Mos6502Cpu cpu, MemoryBusTracker bus)
+    private AssertFailedException? TestSingle(string file, TestCase6502 testCase, Mos6502Cpu cpu, MemoryBusTracker bus, Dictionary<TestCaseClusterKey, List<TestCase6502>> clusteredTests)
     {
         try
         {
@@ -209,6 +232,51 @@ public class Mos6510CpuTests
 
             // We verify that the number of cycles emitted is matching the CPU.InstructionCycles
             Assert.AreEqual((uint)testCase.Cycles.Count, cpu.InstructionCycles, $"Number of cycles not matching CPU.InstructionCycles for test `{testCase.Name}`");
+
+            // Extract cluster key from tests
+            // The way it is working is that we group tests with the:
+            // - same number of cycles / read/write sequence
+            // - If the instruction is BCD and if the decimal mode is on
+            // - If there is a carry in
+            // - If there is a carry out
+            // - If there is an overflow out
+            //
+            // Then later, we will randomly select TestSubsetCountPerOpCode from each cluster
+            var fileName = Path.GetFileNameWithoutExtension(file);
+            if (fileName.Length == 2) // opcode
+            {
+                HashCode hash = new();
+                hash.Add(testCase.Cycles.Count);
+                foreach (var memoryAction in testCase.Cycles)
+                {
+                    hash.Add(memoryAction.Kind);
+                }
+                var cycleHash = hash.ToHashCode();
+
+                var opcode = (Mos6510OpCode)byte.Parse(fileName, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                var mnemonic = opcode.ToMnemonic();
+                bool isBCDInstructionWithBCDModeOn = false;
+                var initialSR = (Mos6502CpuFlags)initial.P;
+                switch (mnemonic)
+                {
+                    case Mos6510Mnemonic.ADC:
+                    case Mos6510Mnemonic.SBC:
+                    case Mos6510Mnemonic.ARR:
+                        isBCDInstructionWithBCDModeOn = ((initialSR & Mos6502CpuFlags.D) != 0);
+                        break;
+                }
+                var carryIn = (initialSR & Mos6502CpuFlags.C) != 0;
+                var overflowOut = (cpu.SR & Mos6502CpuFlags.V) != 0;
+                var carryOut = (cpu.SR & Mos6502CpuFlags.C) != 0;
+                var key = new TestCaseClusterKey(cycleHash, isBCDInstructionWithBCDModeOn, carryIn, overflowOut, carryOut);
+
+                if (!clusteredTests.TryGetValue(key, out var tests))
+                {
+                    tests = new();
+                    clusteredTests.Add(key, tests);
+                }
+                tests.Add(testCase);
+            }
         }
         catch (AssertFailedException ex)
         {
@@ -217,7 +285,79 @@ public class Mos6510CpuTests
 
         return null;
     }
+    
 
+    [ClassCleanup()]
+    public static void SerializeBackExtractedTestsSubset()
+    {
+        if (SelectedSubsetTestCases.Count == 0 || HasErrors) return;
+        var outputFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
+        if (string.IsNullOrEmpty(outputFolder)) throw new InvalidOperationException($"test output folder cannot be null");
+
+        // Keep it stable/sorted
+        var selectedSubsetTestCases = SelectedSubsetTestCases.OrderBy(x => x.Name).ToList();
+
+        JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            WriteIndented = false,
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+        options.Converters.Add(new JsonMemoryActionConverter());
+        var outputFile = Path.Combine(outputFolder, $"{TestSubsetName}.json");
+
+        // Serialize each line as indented but on each line
+        {
+            using var writer = new StreamWriter(outputFile, false, Encoding.UTF8);
+            writer.WriteLine("[");
+            for (var i = 0; i < selectedSubsetTestCases.Count; i++)
+            {
+                var testCase = selectedSubsetTestCases[i];
+                var line = JsonSerializer.Serialize(testCase, options).Trim();
+                writer.Write(line);
+                if (i < selectedSubsetTestCases.Count - 1)
+                {
+                    writer.WriteLine(",");
+                }
+                else
+                {
+                    writer.WriteLine();
+                }
+            }
+
+            writer.WriteLine("]");
+        }
+        Console.WriteLine($"Wrote {selectedSubsetTestCases.Count} selected tests to {outputFile}");
+    }
+
+
+
+    private void UpdateSelectedTestsFromSampling(Dictionary<TestCaseClusterKey, List<TestCase6502>> clusteredTests)
+    {
+        var checkCount = clusteredTests.Values.Sum(x => x.Count);
+        if (checkCount < TestSubsetCountPerOpCode) Assert.Inconclusive($"Invalid number of clustered tests {checkCount} < {TestSubsetCountPerOpCode}");
+
+        var rnd = new Random(1234);
+        var selectedTests = new List<TestCase6502>();
+        while (selectedTests.Count < TestSubsetCountPerOpCode)
+        {
+            foreach (var kv in clusteredTests)
+            {
+                var tests = kv.Value;
+                var selectedTest = tests[rnd.Next(tests.Count)];
+                if (!selectedTests.Contains(selectedTest))
+                {
+                    selectedTests.Add(selectedTest);
+                }
+                if (selectedTests.Count >= TestSubsetCountPerOpCode) break;
+            }
+        }
+
+        SelectedSubsetTestCases.AddRange(selectedTests);
+    }
+    
+    private record struct TestCaseClusterKey(int CycleHash, bool IsBCDInstructionWithBCDModeOn, bool CarryIn, bool OverflowOut, bool CarryOut);
+    
 
     public class MemoryBusTracker : IMos6502CpuMemoryBus
     {
@@ -264,7 +404,11 @@ public class Mos6510CpuTests
 
         public override void Write(Utf8JsonWriter writer, MemoryAction value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            writer.WriteStartArray();
+            writer.WriteNumberValue(value.Address);
+            writer.WriteNumberValue(value.Value);
+            writer.WriteStringValue(value.Kind == MemoryActionKind.Read ? "read" : "write");
+            writer.WriteEndArray();
         }
     }
 
@@ -272,7 +416,10 @@ public class Mos6510CpuTests
     {
         public IEnumerable<object[]> GetData(MethodInfo methodInfo)
         {
-            for(int i = 0; i < 256; i++)
+            // Always add first the selected subset
+            yield return [Path.Combine(AppContext.BaseDirectory, $"{TestSubsetName}.json")];
+
+            for (int i = 0; i < 256; i++)
             {
                 var file = Path.Combine(Tests6502Folder, $"{i:X2}.json");
                 yield return [file];
@@ -284,10 +431,17 @@ public class Mos6510CpuTests
             if (data != null)
             {
                 var file = (string)data[0]!;
-                var hex = Path.GetFileNameWithoutExtension(file);
-                var b = byte.Parse(hex, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
-                var opcode = (Mos6510OpCode)b;
-                return $"Test_{b:X2}_{opcode}";
+                var fileNameWithoutExt = Path.GetFileNameWithoutExtension(file);
+                if (fileNameWithoutExt == TestSubsetName)
+                {
+                    return $"Primary_{fileNameWithoutExt}";
+                }
+                else
+                {
+                    var b = byte.Parse(fileNameWithoutExt, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                    var opcode = (Mos6510OpCode)b;
+                    return $"Test_{b:X2}_{opcode}";
+                }
             }
 
             return null;

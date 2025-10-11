@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="cpu_6502_tests_subset.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="cpu_6502_tests_subset.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MSTest" />
     <PackageReference Include="Verify.DiffPlex" />
     <PackageReference Include="Verify.MSTest" />
