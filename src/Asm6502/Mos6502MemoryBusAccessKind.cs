@@ -19,6 +19,10 @@ namespace Asm6502;
 public enum Mos6502MemoryBusAccessKind
 {
     /// <summary>
+    /// An undefined or uninitialized state. This value should not occur during normal operation.
+    /// </summary>
+    Undefined,
+    /// <summary>
     /// The opcode byte being fetched from PC.
     /// </summary>
     OpCode,
