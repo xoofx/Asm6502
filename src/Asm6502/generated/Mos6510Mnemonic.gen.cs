@@ -11,7 +11,7 @@
 namespace Asm6502;
 
 /// <summary>
-/// 6510 mnemonics (6502 + illegals).
+/// 6510 mnemonics (6502 + undocumented).
 /// </summary>
 public enum Mos6510Mnemonic : byte
 {
@@ -244,87 +244,87 @@ public enum Mos6510Mnemonic : byte
     /// </summary>
     TYA = 56,
     /// <summary>
-    /// ALR. This mnemonic is part of the illegal instructions.
+    /// ALR. This mnemonic is part of the undocumented instructions.
     /// </summary>
     ALR = 57,
     /// <summary>
-    /// ANC. This mnemonic is part of the illegal instructions.
+    /// ANC. This mnemonic is part of the undocumented instructions.
     /// </summary>
     ANC = 58,
     /// <summary>
-    /// ANE. This mnemonic is part of the illegal (and unstable) instructions.
+    /// ANE. This mnemonic is part of the undocumented (and unstable) instructions.
     /// </summary>
     ANE = 59,
     /// <summary>
-    /// ARR. This mnemonic is part of the illegal instructions.
+    /// ARR. This mnemonic is part of the undocumented instructions.
     /// </summary>
     ARR = 60,
     /// <summary>
-    /// DCP. This mnemonic is part of the illegal instructions.
+    /// DCP. This mnemonic is part of the undocumented instructions.
     /// </summary>
     DCP = 61,
     /// <summary>
-    /// ISC. This mnemonic is part of the illegal instructions.
+    /// ISC. This mnemonic is part of the undocumented instructions.
     /// </summary>
     ISC = 62,
     /// <summary>
-    /// JAM. This mnemonic is part of the illegal instructions.
+    /// JAM. This mnemonic is part of the undocumented instructions.
     /// </summary>
     JAM = 63,
     /// <summary>
-    /// LAS. This mnemonic is part of the illegal instructions.
+    /// LAS. This mnemonic is part of the undocumented instructions.
     /// </summary>
     LAS = 64,
     /// <summary>
-    /// LAX. This mnemonic is part of the illegal instructions.
+    /// LAX. This mnemonic is part of the undocumented instructions.
     /// </summary>
     LAX = 65,
     /// <summary>
-    /// LXA. This mnemonic is part of the illegal (and unstable) instructions.
+    /// LXA. This mnemonic is part of the undocumented (and unstable) instructions.
     /// </summary>
     LXA = 66,
     /// <summary>
-    /// RLA. This mnemonic is part of the illegal instructions.
+    /// RLA. This mnemonic is part of the undocumented instructions.
     /// </summary>
     RLA = 67,
     /// <summary>
-    /// RRA. This mnemonic is part of the illegal instructions.
+    /// RRA. This mnemonic is part of the undocumented instructions.
     /// </summary>
     RRA = 68,
     /// <summary>
-    /// SAX. This mnemonic is part of the illegal instructions.
+    /// SAX. This mnemonic is part of the undocumented instructions.
     /// </summary>
     SAX = 69,
     /// <summary>
-    /// SBX. This mnemonic is part of the illegal instructions.
+    /// SBX. This mnemonic is part of the undocumented instructions.
     /// </summary>
     SBX = 70,
     /// <summary>
-    /// SHA. This mnemonic is part of the illegal instructions.
+    /// SHA. This mnemonic is part of the undocumented instructions.
     /// </summary>
     SHA = 71,
     /// <summary>
-    /// SHX. This mnemonic is part of the illegal (and unstable) instructions.
+    /// SHX. This mnemonic is part of the undocumented (and unstable) instructions.
     /// </summary>
     SHX = 72,
     /// <summary>
-    /// SHY. This mnemonic is part of the illegal (and unstable) instructions.
+    /// SHY. This mnemonic is part of the undocumented (and unstable) instructions.
     /// </summary>
     SHY = 73,
     /// <summary>
-    /// SLO. This mnemonic is part of the illegal instructions.
+    /// SLO. This mnemonic is part of the undocumented instructions.
     /// </summary>
     SLO = 74,
     /// <summary>
-    /// SRE. This mnemonic is part of the illegal instructions.
+    /// SRE. This mnemonic is part of the undocumented instructions.
     /// </summary>
     SRE = 75,
     /// <summary>
-    /// TAS. This mnemonic is part of the illegal (and unstable) instructions.
+    /// TAS. This mnemonic is part of the undocumented (and unstable) instructions.
     /// </summary>
     TAS = 76,
     /// <summary>
-    /// USBC. This mnemonic is part of the illegal instructions.
+    /// USBC. This mnemonic is part of the undocumented instructions.
     /// </summary>
     USBC = 77,
 }

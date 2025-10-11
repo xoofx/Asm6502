@@ -224,7 +224,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ALR_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ALR_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -242,7 +242,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ANC_2B_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ANC_2B_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -260,7 +260,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ANC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ANC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -474,7 +474,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler ANE_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -493,7 +493,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ARR_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ARR_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -1284,7 +1284,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -1303,7 +1303,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -1321,7 +1321,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0), address, debugFilePath, debugLineNumber);
@@ -1340,7 +1340,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -1359,7 +1359,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -1377,7 +1377,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -1396,7 +1396,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.DCP((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -1415,7 +1415,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -1435,7 +1435,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -1455,7 +1455,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler DCP(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.DCP((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -1883,7 +1883,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -1902,7 +1902,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -1920,7 +1920,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0), address, debugFilePath, debugLineNumber);
@@ -1939,7 +1939,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -1958,7 +1958,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -1976,7 +1976,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -1995,7 +1995,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.ISC((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -2014,7 +2014,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -2034,7 +2034,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -2054,7 +2054,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ISC(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.ISC((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -2167,7 +2167,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAS(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAS((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -2187,7 +2187,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAS(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.LAS((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -2205,7 +2205,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -2224,7 +2224,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -2242,7 +2242,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((ushort)0), address, debugFilePath, debugLineNumber);
@@ -2261,7 +2261,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -2279,7 +2279,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -2298,7 +2298,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.LAX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
@@ -2317,7 +2317,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.LAX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -2337,7 +2337,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler LAX(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.LAX((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -2906,7 +2906,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler LXA_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -2925,7 +2925,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP((ushort)0), address, debugFilePath, debugLineNumber);
@@ -2944,7 +2944,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -2962,7 +2962,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -2981,7 +2981,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3000,7 +3000,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3020,7 +3020,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3039,7 +3039,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_34(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_34((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3058,7 +3058,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_3C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_3C((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -3078,7 +3078,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_3C(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP_3C((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3096,7 +3096,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_44(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_44((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -3115,7 +3115,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_54(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_54((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3134,7 +3134,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_5C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_5C((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -3154,7 +3154,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_5C(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP_5C((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3172,7 +3172,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_64(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_64((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -3191,7 +3191,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_74(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_74((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3210,7 +3210,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_7C(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_7C((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -3230,7 +3230,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_7C(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP_7C((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3248,7 +3248,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_82_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_82_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -3266,7 +3266,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_89_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_89_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -3284,7 +3284,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_C2_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_C2_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -3303,7 +3303,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_D4(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_D4((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3322,7 +3322,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_DC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_DC((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -3342,7 +3342,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_DC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP_DC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3360,7 +3360,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_E2_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_E2_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -3379,7 +3379,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_F4(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_F4((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3398,7 +3398,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_FC(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_FC((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -3418,7 +3418,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_FC(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.NOP_FC((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3436,7 +3436,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.NOP_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -3650,7 +3650,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -3669,7 +3669,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -3687,7 +3687,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0), address, debugFilePath, debugLineNumber);
@@ -3706,7 +3706,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -3725,7 +3725,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -3743,7 +3743,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -3762,7 +3762,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RLA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -3781,7 +3781,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3801,7 +3801,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -3821,7 +3821,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RLA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.RLA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4053,7 +4053,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -4072,7 +4072,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -4090,7 +4090,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0), address, debugFilePath, debugLineNumber);
@@ -4109,7 +4109,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -4128,7 +4128,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -4146,7 +4146,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -4165,7 +4165,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.RRA((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -4184,7 +4184,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4204,7 +4204,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4224,7 +4224,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler RRA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.RRA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4242,7 +4242,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SAX(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SAX((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -4260,7 +4260,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SAX(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SAX((ushort)0), address, debugFilePath, debugLineNumber);
@@ -4278,7 +4278,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SAX(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SAX((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -4297,7 +4297,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SAX(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SAX((byte)0, y), zeroPage, debugFilePath, debugLineNumber);
@@ -4316,7 +4316,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SAX(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SAX((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4530,7 +4530,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SBX_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SBX_Imm((byte)0), immediate, debugFilePath, debugLineNumber);
@@ -4549,7 +4549,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler SHA(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -4569,7 +4569,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SHA(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SHA((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -4589,7 +4589,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SHA(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SHA((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4608,7 +4608,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler SHX(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -4629,7 +4629,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler SHX(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
@@ -4649,7 +4649,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler SHY(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -4670,7 +4670,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler SHY(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
@@ -4689,7 +4689,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -4708,7 +4708,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -4726,7 +4726,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0), address, debugFilePath, debugLineNumber);
@@ -4745,7 +4745,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -4764,7 +4764,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -4782,7 +4782,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -4801,7 +4801,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SLO((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -4820,7 +4820,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4840,7 +4840,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4860,7 +4860,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SLO(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SLO((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -4878,7 +4878,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionIndirectX indirect, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((Mos6502IndirectX)0), indirect, debugFilePath, debugLineNumber);
@@ -4897,7 +4897,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionIndirectY indirect, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((Mos6502IndirectY)0, y), indirect, debugFilePath, debugLineNumber);
@@ -4915,7 +4915,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionU16 address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0), address, debugFilePath, debugLineNumber);
@@ -4934,7 +4934,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0, x), address, debugFilePath, debugLineNumber);
@@ -4953,7 +4953,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0, y), address, debugFilePath, debugLineNumber);
@@ -4971,7 +4971,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionU8 zeroPage, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((byte)0), zeroPage, debugFilePath, debugLineNumber);
@@ -4990,7 +4990,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(Expressions.Mos6502ExpressionU8 zeroPage, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.SRE((byte)0, x), zeroPage, debugFilePath, debugLineNumber);
@@ -5009,7 +5009,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(out Mos6502Label address, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -5029,7 +5029,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(out Mos6502Label address, Mos6502RegisterX x, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0, x), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -5049,7 +5049,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SRE(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
         => AddInstruction(Mos6510InstructionFactory.SRE((ushort)0, y), address = new Mos6502Label(Mos6502Label.ParseCSharpExpression(addressExpression)), debugFilePath, debugLineNumber);
@@ -5387,7 +5387,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler TAS(Expressions.Mos6502ExpressionU16 address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
@@ -5408,7 +5408,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler TAS(out Mos6502Label address, Mos6502RegisterY y, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0, [CallerArgumentExpression(nameof(address))] string? addressExpression = null)
@@ -5427,7 +5427,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler USBC_Imm(Expressions.Mos6502ExpressionU8 immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
         => AddInstruction(Mos6510InstructionFactory.USBC_Imm((byte)0), immediate, debugFilePath, debugLineNumber);

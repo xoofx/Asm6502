@@ -11,7 +11,7 @@
 namespace Asm6502;
 
 /// <summary>
-/// 6510 opcodes (6502 + illegal opcodes).
+/// 6510 opcodes (6502 + undocumented opcodes).
 /// </summary>
 public enum Mos6510OpCode : byte
 {
@@ -773,526 +773,526 @@ public enum Mos6510OpCode : byte
     /// <summary>
     /// AND then LSR - ALR
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     ALR_Immediate = 0x4b,
     /// <summary>
     /// AND then set carry - ANC
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     ANC_Immediate = 0x0b,
     /// <summary>
     /// AND then set carry - ANC
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     ANC_2B_Immediate = 0x2b,
     /// <summary>
     /// Undocumented: AND with X then AND operand - ANE
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal (unstable) opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented (unstable) opcode.</remarks>
     ANE_Immediate = 0x8b,
     /// <summary>
     /// AND then ROR - ARR
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     ARR_Immediate = 0x6b,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     DCP_Absolute = 0xcf,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     DCP_AbsoluteX = 0xdf,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     DCP_AbsoluteY = 0xdb,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     DCP_IndirectX = 0xc3,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     DCP_IndirectY = 0xd3,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     DCP_ZeroPage = 0xc7,
     /// <summary>
     /// DEC then CMP - DCP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     DCP_ZeroPageX = 0xd7,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     ISC_Absolute = 0xef,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     ISC_AbsoluteX = 0xff,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     ISC_AbsoluteY = 0xfb,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     ISC_IndirectX = 0xe3,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     ISC_IndirectY = 0xf3,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     ISC_ZeroPage = 0xe7,
     /// <summary>
     /// INC then SBC - ISC
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     ISC_ZeroPageX = 0xf7,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_Implied = 0x02,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_12_Implied = 0x12,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_22_Implied = 0x22,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_32_Implied = 0x32,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_42_Implied = 0x42,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_52_Implied = 0x52,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_62_Implied = 0x62,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_72_Implied = 0x72,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_92_Implied = 0x92,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_B2_Implied = 0xb2,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_D2_Implied = 0xd2,
     /// <summary>
     /// Jam the CPU (halt) - JAM
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     JAM_F2_Implied = 0xf2,
     /// <summary>
     /// Load accumulator and transfer SP to X - LAS
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     LAS_AbsoluteY = 0xbb,
     /// <summary>
     /// LDA then LDX - LAX
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     LAX_Absolute = 0xaf,
     /// <summary>
     /// LDA then LDX - LAX
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     LAX_AbsoluteY = 0xbf,
     /// <summary>
     /// LDA then LDX - LAX
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     LAX_IndirectX = 0xa3,
     /// <summary>
     /// LDA then LDX - LAX
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     LAX_IndirectY = 0xb3,
     /// <summary>
     /// LDA then LDX - LAX
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     LAX_ZeroPage = 0xa7,
     /// <summary>
     /// LDA then LDX - LAX
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageY. This is an undocumented opcode.</remarks>
     LAX_ZeroPageY = 0xb7,
     /// <summary>
     /// LDA then LDX - LXA
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal (unstable) opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented (unstable) opcode.</remarks>
     LXA_Immediate = 0xab,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     NOP_Absolute = 0x0c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     NOP_AbsoluteX = 0x1c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     NOP_3C_AbsoluteX = 0x3c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     NOP_5C_AbsoluteX = 0x5c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     NOP_7C_AbsoluteX = 0x7c,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     NOP_DC_AbsoluteX = 0xdc,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     NOP_FC_AbsoluteX = 0xfc,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     NOP_Immediate = 0x80,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     NOP_82_Immediate = 0x82,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     NOP_89_Immediate = 0x89,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     NOP_C2_Immediate = 0xc2,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     NOP_E2_Immediate = 0xe2,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     NOP_1A_Implied = 0x1a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     NOP_3A_Implied = 0x3a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     NOP_5A_Implied = 0x5a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     NOP_7A_Implied = 0x7a,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     NOP_DA_Implied = 0xda,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: Implied. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Implied. This is an undocumented opcode.</remarks>
     NOP_FA_Implied = 0xfa,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     NOP_ZeroPage = 0x04,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     NOP_44_ZeroPage = 0x44,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     NOP_64_ZeroPage = 0x64,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     NOP_ZeroPageX = 0x14,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     NOP_34_ZeroPageX = 0x34,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     NOP_54_ZeroPageX = 0x54,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     NOP_74_ZeroPageX = 0x74,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     NOP_D4_ZeroPageX = 0xd4,
     /// <summary>
     /// No operation - NOP
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     NOP_F4_ZeroPageX = 0xf4,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     RLA_Absolute = 0x2f,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     RLA_AbsoluteX = 0x3f,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     RLA_AbsoluteY = 0x3b,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     RLA_IndirectX = 0x23,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     RLA_IndirectY = 0x33,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     RLA_ZeroPage = 0x27,
     /// <summary>
     /// ROL then AND - RLA
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     RLA_ZeroPageX = 0x37,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     RRA_Absolute = 0x6f,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     RRA_AbsoluteX = 0x7f,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     RRA_AbsoluteY = 0x7b,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     RRA_IndirectX = 0x63,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     RRA_IndirectY = 0x73,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     RRA_ZeroPage = 0x67,
     /// <summary>
     /// ROR then ADC - RRA
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     RRA_ZeroPageX = 0x77,
     /// <summary>
     /// Store accumulator AND X - SAX
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     SAX_Absolute = 0x8f,
     /// <summary>
     /// Store accumulator AND X - SAX
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     SAX_IndirectX = 0x83,
     /// <summary>
     /// Store accumulator AND X - SAX
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     SAX_ZeroPage = 0x87,
     /// <summary>
     /// Store accumulator AND X - SAX
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageY. This is an undocumented opcode.</remarks>
     SAX_ZeroPageY = 0x97,
     /// <summary>
     /// Compute (A AND X) then subtract with carry - SBX
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     SBX_Immediate = 0xcb,
     /// <summary>
     /// Store A AND X AND (high address + 1) - SHA
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     SHA_AbsoluteY = 0x9f,
     /// <summary>
     /// Store A AND X AND (high address + 1) - SHA
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal (unstable) opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented (unstable) opcode.</remarks>
     SHA_IndirectY = 0x93,
     /// <summary>
     /// Store A AND X AND (high address + 1) - SHX
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal (unstable) opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented (unstable) opcode.</remarks>
     SHX_AbsoluteY = 0x9e,
     /// <summary>
     /// Store Y AND (high address + 1) - SHY
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal (unstable) opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented (unstable) opcode.</remarks>
     SHY_AbsoluteX = 0x9c,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     SLO_Absolute = 0x0f,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     SLO_AbsoluteX = 0x1f,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     SLO_AbsoluteY = 0x1b,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     SLO_IndirectX = 0x03,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     SLO_IndirectY = 0x13,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     SLO_ZeroPage = 0x07,
     /// <summary>
     /// ASL then ORA - SLO
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     SLO_ZeroPageX = 0x17,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: Absolute. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Absolute. This is an undocumented opcode.</remarks>
     SRE_Absolute = 0x4f,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteX. This is an undocumented opcode.</remarks>
     SRE_AbsoluteX = 0x5f,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented opcode.</remarks>
     SRE_AbsoluteY = 0x5b,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: IndirectX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectX. This is an undocumented opcode.</remarks>
     SRE_IndirectX = 0x43,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: IndirectY. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: IndirectY. This is an undocumented opcode.</remarks>
     SRE_IndirectY = 0x53,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPage. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPage. This is an undocumented opcode.</remarks>
     SRE_ZeroPage = 0x47,
     /// <summary>
     /// LSR then EOR - SRE
     /// </summary>
-    /// <remarks>AddressingMode: ZeroPageX. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: ZeroPageX. This is an undocumented opcode.</remarks>
     SRE_ZeroPageX = 0x57,
     /// <summary>
     /// Transfer A AND X to SP, store A AND X AND (high address + 1) - TAS
     /// </summary>
-    /// <remarks>AddressingMode: AbsoluteY. This is an illegal (unstable) opcode.</remarks>
+    /// <remarks>AddressingMode: AbsoluteY. This is an undocumented (unstable) opcode.</remarks>
     TAS_AbsoluteY = 0x9b,
     /// <summary>
     /// SBC with NOP behavior - USBC
     /// </summary>
-    /// <remarks>AddressingMode: Immediate. This is an illegal opcode.</remarks>
+    /// <remarks>AddressingMode: Immediate. This is an undocumented opcode.</remarks>
     USBC_Immediate = 0xeb,
 }

@@ -8,7 +8,7 @@
 // - Integrate it better with Asm6502 and C#
 // - Rely on Asm6502 builtin decoding logic
 // - Fix issues with regular opcode (BCD mode)
-// - Add support for all illegal opcodes in Mos6510Cpu
+// - Add support for all undocumented opcodes in Mos6510Cpu
 // - Fix accurate cycles for all instructions to pass Thomas Harte test suite for the 6502
 //   https://github.com/SingleStepTests/65x02
 //
@@ -49,7 +49,7 @@ namespace Asm6502;
 /// <remarks>
 /// This class provides a base class for decoding MOS 6502 CPU variants.
 ///
-/// For a full support of the original 6502 with illegal opcodes, consider using <see cref="Mos6510Cpu"/>.
+/// For a full support of the original 6502 with undocumented opcodes, consider using <see cref="Mos6510Cpu"/>.
 /// </remarks>
 public class Mos6502Cpu
 {
@@ -208,7 +208,7 @@ public class Mos6502Cpu
     public bool IsHalted => _halted;
 
     /// <summary>
-    /// Gets a value indicating whether the CPU is jammed by an illegal opcode (halted until reset).
+    /// Gets a value indicating whether the CPU is jammed by an undocumented opcode (JAM/KIL/HLT).
     /// </summary>
     public bool IsJammed => _jammed;
 

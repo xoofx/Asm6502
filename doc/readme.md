@@ -28,7 +28,7 @@ This document provides a small user guide for the Asm6502 library.
 - [Tips and Best Practices](#tips-and-best-practices)
 - [Supported instructions](#supported-instructions)
   - [6502 Instructions](#6502-instructions)
-  - [6510 Additional Illegal Instructions](#6510-additional-illegal-instructions)
+  - [6510 Additional Undocumented Instructions](#6510-additional-undocumented-instructions)
 
 ---
 
@@ -424,7 +424,7 @@ C012  4C 02 C0   JMP LL_02
 Asm6502 provides a cycle-accurate CPU core with two variants:
 
 - `Mos6502Cpu` implements the documented 6502 instruction set
-- `Mos6510Cpu` extends it with all undocumented/illegal opcodes (recommended)
+- `Mos6510Cpu` extends it with all undocumented opcodes (recommended)
 
 Both cores use a pluggable 64 KiB memory bus defined by `IMos6502CpuMemoryBus`.
 
@@ -475,7 +475,7 @@ Memory-bus expectations:
 
 The library also supports the 6510 CPU, a 6502 variant used in the Commodore 64. In addition to the assembler and disassembler, you can emulate and run code with the CPU core:
 
-- `Mos6510Assembler` / `Mos6510Disassembler`: assembly and disassembly with undocumented/illegal opcodes
+- `Mos6510Assembler` / `Mos6510Disassembler`: assembly and disassembly with undocumented opcodes
 - `Mos6510Cpu`: cycle-accurate execution with full opcode coverage
 
 Use `Mos6510Cpu` when you need to execute code and measure exact cycle counts; if you only need documented opcodes, `Mos6502Cpu` is available as well.
@@ -648,7 +648,7 @@ The following instructions are supported by the `Mos6502Assembler` and `Mos6510A
 | `0x9a` | [`TXS`](https://www.masswerk.at/6502/6502_instruction_set.html#TXS) | `asm.TXS();` | Transfer X to SP |
 | `0x98` | [`TYA`](https://www.masswerk.at/6502/6502_instruction_set.html#TYA) | `asm.TYA();` | Transfer Y to acc |
 
-### 6510 Additional Illegal Instructions
+### 6510 Additional Undocumented Instructions
 
 The following instructions are supported by the `Mos6510Assembler` class:
 

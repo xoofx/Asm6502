@@ -6,7 +6,7 @@ Asm6502 is a lightweight C# library for the 6502/6510 that combines a fluent, st
 
 ## ✨ Features
 
-- Assembler/disassembler with **full support** for all core 6502 instructions and 6510 instructions (6502 + undocumented/illegal opcodes)
+- Assembler/disassembler with **full support** for all core 6502 instructions and 6510 instructions (6502 + undocumented opcodes)
 - New: **cycle-accurate 6502/6510 CPU emulator** (use `Mos6510Cpu` for full opcode coverage; `Mos6502Cpu` for documented opcodes)
   - Accurate cycle timing and passes known 6502 timing from [Thomas Harte's 2,560,000 tests for the 6502](https://github.com/SingleStepTests/65x02/tree/main/6502)
   - **Pluggable 64 KiB memory bus** via `IMos6502CpuMemoryBus`
@@ -27,7 +27,7 @@ For more details on how to use Asm6502, please visit the [user guide](https://gi
 Asm6502 includes a cycle-accurate CPU emulator with two variants:
 
 - `Mos6502Cpu`: documented 6502 instruction set
-- `Mos6510Cpu`: full instruction set including all undocumented/illegal opcodes (recommended)
+- `Mos6510Cpu`: full instruction set including all undocumented opcodes (recommended)
 
 Both reuse the same decode tables as the assembler/disassembler and expose a simple, pluggable 64 KiB memory bus.
 

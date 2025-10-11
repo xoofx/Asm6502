@@ -8,7 +8,7 @@
 // - Integrate it better with Asm6502 and C#
 // - Rely on Asm6502 builtin decoding logic
 // - Fix issues with regular opcode (BCD mode)
-// - Add support for all illegal opcodes in Mos6510Cpu
+// - Add support for all undocumented opcodes in Mos6510Cpu
 // - Fix accurate cycles for all instructions to pass Thomas Harte test suite for the 6502
 //   https://github.com/SingleStepTests/65x02
 //
@@ -39,7 +39,7 @@
 namespace Asm6502;
 
 /// <summary>
-/// Represents a MOS 6510 CPU, providing full emulation of all documented and undocumented (illegal) instructions
+/// Represents a MOS 6510 CPU, providing full emulation of all documented and undocumented instructions
 /// supported by the 6510 processor. Inherits core functionality from the MOS 6502 CPU implementation and extends it to
 /// support the additional opcodes and behaviors specific to the 6510.
 /// </summary>
@@ -67,7 +67,7 @@ public class Mos6510Cpu : Mos6502Cpu
 
     private protected override void DecodeOpCode(Mos6502OpCode opcode6502, out Mos6502AddressingMode addressingMode, out Mos6502Mnemonic mnemonic)
     {
-        // Mos6510 covers all Mos6502 opcodes including illegal ones
+        // Mos6510 covers all Mos6502 opcodes including undocumented ones
         var opcode = (Mos6510OpCode)opcode6502;
         addressingMode = opcode.ToAddressingMode();
         mnemonic = (Mos6502Mnemonic)opcode.ToMnemonic();

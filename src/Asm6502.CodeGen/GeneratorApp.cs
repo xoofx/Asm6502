@@ -121,10 +121,10 @@ internal class GeneratorApp
         var mnemonics6510 = mnemonics6502.Concat(illegalMnemonics).ToList();
 
         GenerateOpCodes(opcodes6502, "Mos6502OpCode", "6502 opcodes.");
-        GenerateOpCodes(opcodes6510, "Mos6510OpCode", "6510 opcodes (6502 + illegal opcodes).");
+        GenerateOpCodes(opcodes6510, "Mos6510OpCode", "6510 opcodes (6502 + undocumented opcodes).");
 
         GenerateMnemonics(mnemonics6502, "Mos6502Mnemonic", "6502 mnemonics.");
-        GenerateMnemonics(mnemonics6510, "Mos6510Mnemonic", "6510 mnemonics (6502 + illegals).");
+        GenerateMnemonics(mnemonics6510, "Mos6510Mnemonic", "6510 mnemonics (6502 + undocumented).");
         
         GenerateTables("Mos6502", opcodes6502, modes, modeMapping, mnemonics6502);
         GenerateTables("Mos6510", opcodes6510, modes, modeMapping, mnemonics6510);
@@ -156,7 +156,7 @@ internal class GeneratorApp
             Console.WriteLine($"| `{opcode.OpcodeHex}` | {OpcodeWithLink(opcode)} | `asm.{opcode.UniqueName}{AddressingModeToSyntaxCSharp(opcode.AddressingMode)};` | {opcode.NameLong} |");
         }
         Console.WriteLine();
-        Console.WriteLine("### 6510 Additional Illegal Instructions");
+        Console.WriteLine("### 6510 Additional Undocumented Instructions");
         Console.WriteLine();
         Console.WriteLine("The following instructions are supported by the `Mos6510Assembler` class:");
         Console.WriteLine();
@@ -261,7 +261,7 @@ internal class GeneratorApp
             if (opcode.Illegal)
             {
                 var unstable = opcode.Unstable ? " (unstable)" : string.Empty;
-                writer.WriteDoc([$"<remarks>AddressingMode: {opcode.AddressingMode}. This is an illegal{unstable} opcode.</remarks>"]);
+                writer.WriteDoc([$"<remarks>AddressingMode: {opcode.AddressingMode}. This is an undocumented{unstable} opcode.</remarks>"]);
             }
             else
             {
@@ -422,7 +422,7 @@ internal class GeneratorApp
             if (mnemonic.Illegal)
             {
                 var unstable = mnemonic.Unstable ? " (and unstable)" : string.Empty;
-                writer.WriteSummary($"{mnemonic.Name}. This mnemonic is part of the illegal{unstable} instructions.");
+                writer.WriteSummary($"{mnemonic.Name}. This mnemonic is part of the undocumented{unstable} instructions.");
             }
             else
             {
@@ -635,7 +635,7 @@ internal class GeneratorApp
             string special = string.Empty;
             if (opcode.Illegal)
             {
-                special = opcode.Unstable ? " This is an illegal and unstable instruction." : " This is an illegal instruction.";
+                special = opcode.Unstable ? " This is an undocumented and unstable instruction." : " This is an undocumented instruction.";
             }
             writer.WriteDoc([$"<remarks>{opcode.NameLong}. Cycles: {opcode.Cycles}, Size: {BytesText(mode.SizeBytes)}.{special}</remarks>"]);
             writer.WriteLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
@@ -882,7 +882,7 @@ internal class GeneratorApp
                 string special = string.Empty;
                 if (opcode.Illegal)
                 {
-                    special = opcode.Unstable ? " This is an illegal and unstable instruction." : " This is an illegal instruction.";
+                    special = opcode.Unstable ? " This is an undocumented and unstable instruction." : " This is an undocumented instruction.";
                 }
 
                 List<string> summaryList =

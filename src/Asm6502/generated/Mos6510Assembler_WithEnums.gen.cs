@@ -45,7 +45,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ALR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ALR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -63,7 +63,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ANC_2B_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ANC_2B_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -81,7 +81,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ANC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ANC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -116,7 +116,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler ANE_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
@@ -135,7 +135,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler ARR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.ARR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -272,7 +272,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + -
     /// </code>
-    ///  This is an illegal and unstable instruction.
+    ///  This is an undocumented and unstable instruction.
     /// </remarks>
     [Obsolete("This instruction is unstable and may not behave as expected.", false)]
     public Mos6510Assembler LXA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
@@ -291,7 +291,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_82_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_82_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -309,7 +309,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_89_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_89_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -327,7 +327,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_C2_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_C2_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -345,7 +345,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_E2_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_E2_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -363,7 +363,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         - - - - - - - -
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler NOP_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.NOP_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -415,7 +415,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + - - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler SBX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.SBX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
@@ -433,7 +433,7 @@ partial class Mos6510Assembler
     ///  Flags: N V - B D I Z C
     ///         + + - - - - + +
     /// </code>
-    ///  This is an illegal instruction.
+    ///  This is an undocumented instruction.
     /// </remarks>
     public Mos6510Assembler USBC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6510InstructionFactory.USBC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
