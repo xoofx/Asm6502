@@ -12,11 +12,10 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 {
     private readonly byte[] _ram = new byte[65536];
     private readonly ProgramSource?[] _ramProgramSources = new ProgramSource?[65536];
-    private readonly bool[] _readMap = new bool[65536];
-    private readonly bool[] _writeMap = new bool[65536];
+    private readonly ReadWriteFlags[] _accessMap = new ReadWriteFlags[65536];
     private readonly ushort _programAddress;
     private readonly byte[] _programBytes;
-    private readonly ProgramByteInfo[] _programByteInfos;
+    private readonly ProgramByteState[] _programByteInfos;
     private readonly Mos6502Cpu _cpu;
     private readonly Stack<ProgramSource> _sourcePool = new();
     private bool _enableTrackSource;
@@ -34,12 +33,11 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     {
         _programAddress = (ushort)programAddress;
         _programBytes = programBytes;
-        _programByteInfos = new ProgramByteInfo[programBytes.Length];
+        _programByteInfos = new ProgramByteState[programBytes.Length];
         EnableZpReloc = true;
         for (ushort i = 0; i < programBytes.Length; i++)
         {
-            ref var pgByte = ref _programByteInfos[i];
-            pgByte = new ProgramByteInfo();
+            _programByteInfos[i] = new ProgramByteState();
         }
 
         RelocationStart = programAddress;
@@ -63,12 +61,19 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
     public TextWriter? Log { get; set; }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ref byte GetRam(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ram), addr);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ref ProgramSource? GetRamProgramSource(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ramProgramSources), addr);
+
+    private ref ReadWriteFlags GetAccessMap(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_accessMap), addr);
+    
     public void Reset()
     {
         var ram = _ram.AsSpan();
         ram.Clear();
-        _readMap.AsSpan().Clear();
-        _writeMap.AsSpan().Clear();
+        _accessMap.AsSpan().Clear();
 
         for (var i = 0; i < _ramProgramSources.Length; i++)
         {
@@ -83,13 +88,33 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         {
             var addr = (ushort)(_programAddress + i);
             _ramProgramSources[addr] = CreateSourceAtProgramByteOffset(i, null);
-            _programByteInfos[i].Flags = ProgramByteFlags.None;
+            _programByteInfos[i].Flags = RamByteFlags.None;
         }
 
         _enableTrackSource = false;
         _cpu.Reset();
     }
 
+    public RamByteFlags GetRamByteFlagsAt(ushort address)
+    {
+        var rwFlags = GetAccessMap(address);
+        var offset = address - _programAddress;
+        var flags = (uint)offset < (uint)_programByteInfos.Length ? Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_programByteInfos), offset).Flags : RamByteFlags.None;
+        if ((rwFlags & ReadWriteFlags.Read) != 0) flags |= RamByteFlags.Read;
+        if ((rwFlags & ReadWriteFlags.Write) != 0) flags |= RamByteFlags.Write;
+        return flags;
+    }
+
+    public ReadOnlySpan<byte> Ram => _ram;
+
+    public void SetRamRegion(ushort targetAddress, ReadOnlySpan<byte> buffer)
+    {
+        if (buffer.Length == 0) return;
+        if (targetAddress + buffer.Length > 0x10000)
+            throw new ArgumentOutOfRangeException(nameof(targetAddress), "Target address and length exceed 64KB");
+        buffer.CopyTo(_ram.AsSpan(targetAddress, buffer.Length));
+    }
+    
     public void RunSubroutineAt(ushort address, int maxCycles)
     {
         // Check RelocationStart/End correctness
@@ -109,8 +134,8 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
         _cpu.PC = address;
         _cpu.S = 0xFD; // Simulate that we came from a JSR (with a return address on the stack)
-        _ram[0x1FE] = default; // Clear the return address on the stack
-        _ram[0x1FF] = default;
+        GetRam(0x1FE) = 0; // Clear the return address on the stack
+        GetRam(0x1FF) = 0;
 
         _enableTrackSource = true; // Enable tracking during execution
 
@@ -124,12 +149,18 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 throw new InvalidOperationException($"CPU was halted or jammed at 0x{_cpu.PCAtOpcode:X4}");
             }
 
-            if (_cpu.RunState == Mos6502CpuRunState.Fetch && _cpu.CurrentOpCode == Mos6502OpCode.RTS_Implied)
+            if (Cpu.RunState == Mos6502CpuRunState.Fetch)
             {
-                break;
+                // Only run the post process after the full instruction has been executed
+                PostProcessInstructionForRegisters();
+
+                if (_cpu.CurrentOpCode == Mos6502OpCode.RTS_Implied && Cpu.S == 0xFF)
+                {
+                    // RTS with empty stack, we are done
+                    break;
+                }
             }
 
-            ProcessPostInstruction();
 
             if (maxCycles > 0 && cycleCount++ >= maxCycles)
             {
@@ -142,7 +173,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         _enableTrackSource = false;
     }
 
-    public void Solve()
+    public void Analyze()
     {
         FinalizeConstraints();
 
@@ -182,14 +213,14 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 int i = addr - org;
                 ref var pb = ref _programByteInfos[i];
 
-                if ((pb.Flags & ProgramByteFlags.Reloc) != 0)
+                if ((pb.Flags & RamByteFlags.Reloc) != 0)
                 {
-                    if ((pb.Flags & ProgramByteFlags.UsedInMsb) != 0)
+                    if ((pb.Flags & RamByteFlags.UsedInMsb) != 0)
                     {
                         writer.Write("R");
                         nReloc++;
                     }
-                    else if ((pb.Flags & ProgramByteFlags.UsedInZp) != 0)
+                    else if ((pb.Flags & RamByteFlags.UsedInZp) != 0)
                     {
                         writer.Write("Z");
                         nZp++;
@@ -199,12 +230,12 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                         writer.Write("e"); // internal error
                     }
                 }
-                else if ((pb.Flags & ProgramByteFlags.NoReloc) != 0)
+                else if ((pb.Flags & RamByteFlags.NoReloc) != 0)
                 {
                     writer.Write("=");
                     nDont++;
                 }
-                else if (!(_readMap[addr] || _writeMap[addr]))
+                else if (_accessMap[addr] == ReadWriteFlags.None)
                 {
                     writer.Write(".");
                     nUnused++;
@@ -227,12 +258,12 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         writer.Write("Old zero-page addresses:  ");
 
         for(int i = 2; i < 256; i++ ){
-            if (_writeMap[i]) writer.Write($" {i:x2}");
+            if ((_accessMap[i] & ReadWriteFlags.Write) != 0) writer.Write($" {i:x2}");
         }
         writer.WriteLine();
     }
 
-    private void ProcessPostInstruction()
+    private void PostProcessInstructionForRegisters()
     {
         var mnemonic = ((Mos6510OpCode)_cpu.CurrentOpCode).ToMnemonic();
         switch (mnemonic)
@@ -247,7 +278,6 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             case Mos6510Mnemonic.ARR:
                 _srcA = null;
                 break;
-
             case Mos6510Mnemonic.TAX:
                 _srcX = _srcA;
                 break;
@@ -263,7 +293,6 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             case Mos6510Mnemonic.TXS:
                 NoReloc(_srcX);
                 break;
-
             case Mos6510Mnemonic.SBX:
                 _srcX = null; // TODO: check if this is correct
                 break;
@@ -278,18 +307,13 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 break;
         }
     }
-
-
-    private void HandleMemoryAccess(ushort address, byte value, ref ProgramSource? source, bool isRead)
+    
+    private void HandleMemoryAccess(ushort address, byte value)
     {
         // Don't track dummy accesses
-        if (IsDummy(_kind)) return;
+        if (IsDummyBusAccess(_kind)) return;
 
-        if (isRead)
-            _readMap[address] = true;
-        else
-            _writeMap[address] = true;
-
+        ref var source = ref GetRamProgramSource(address);
         var mnemonic = ((Mos6510OpCode)_cpu.CurrentOpCode).ToMnemonic();
 
         switch (_kind)
@@ -356,8 +380,8 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             case Mos6502MemoryBusAccessKind.OperandJsrAbsoluteHigh:
             {
                 _eaSrcMsb = source;
-                var ea = (ushort)((value << 8) | _ram[address - 1]);
-                CheckRelocRange(ea, _ramProgramSources[address - 1], null, source);
+                var ea = (ushort)((value << 8) | GetRam((ushort)(address - 1)));
+                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), null, source);
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandBranchOffset:
@@ -367,29 +391,29 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
             case Mos6502MemoryBusAccessKind.OperandIndirectHigh:
             {
-                var indirectAddr = (ushort)((value << 8) | _ram[address - 1]);
-                CheckRelocRange(indirectAddr, _ramProgramSources[address - 1], null, source);
+                var indirectAddr = (ushort)((value << 8) | GetRam((ushort)(address - 1)));
+                CheckRelocRange(indirectAddr, GetRamProgramSource((ushort)(address - 1)), null, source);
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandIndirectResolveHigh:
             {
                 _eaSrcMsb = source;
-                var ea = (ushort)((value << 8) | _ram[address - 1]);
-                CheckRelocRange(ea, _ramProgramSources[address - 1], null, source);
+                var ea = (ushort)((value << 8) | GetRam((ushort)(address - 1)));
+                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), null, source);
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandAbsoluteXHigh:
             {
                 _eaSrcMsb = source;
-                var ea = (ushort)(((value << 8) | _ram[address - 1]) + _cpu.X);
-                CheckRelocRange(ea, _ramProgramSources[address - 1], _srcX, source);
+                var ea = (ushort)(((value << 8) | GetRam((ushort)(address - 1))) + _cpu.X);
+                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), _srcX, source);
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandAbsoluteYHigh:
             {
                 _eaSrcMsb = source;
-                var ea = (ushort)(((value << 8) | _ram[address - 1]) + _cpu.Y);
-                CheckRelocRange(ea, _ramProgramSources[address - 1], _srcY, source);
+                var ea = (ushort)(((value << 8) | GetRam((ushort)(address - 1))) + _cpu.Y);
+                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), _srcY, source);
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandZeroPage:
@@ -424,8 +448,8 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             case Mos6502MemoryBusAccessKind.OperandIndirectXResolveHigh:
             {
                 _eaSrcMsb = source;
-                var ea = (ushort)((value << 8) | _ram[address - 1]);
-                CheckRelocRange(ea, _ramProgramSources[address - 1], null, source);
+                var ea = (ushort)((value << 8) | GetRam((ushort)(address - 1)));
+                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), null, source);
             }
                 break;
 
@@ -435,9 +459,9 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 UsedForZpAddr(tmp, source, _srcY);
                 UsedForZpAddr((byte)(tmp + 1), source, _srcY);
 
-                _eaSrcMsb = _ramProgramSources[tmp + 1];
-                var ea = (ushort)(((_ram[tmp + 1] << 8) | _ram[tmp]) + _cpu.Y);
-                CheckRelocRange(ea, _ramProgramSources[tmp], _srcY, _eaSrcMsb);
+                _eaSrcMsb = GetRamProgramSource((ushort)(tmp + 1));
+                var ea = (ushort)(((GetRam((ushort)(tmp + 1)) << 8) | GetRam(tmp)) + _cpu.Y);
+                CheckRelocRange(ea, GetRamProgramSource(tmp), _srcY, _eaSrcMsb);
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandIndirectYResolveHigh:
@@ -445,7 +469,6 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 break;
 
             case Mos6502MemoryBusAccessKind.ExecuteWrite:
-
                 switch (mnemonic)
                 {
                     case Mos6510Mnemonic.STA:
@@ -462,9 +485,6 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                         source = _eaSrcMsb;
                         break;
                 }
-
-
-
                 break;
             case Mos6502MemoryBusAccessKind.VectorInterruptLow:
                 break;
@@ -492,7 +512,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 source = null;
                 break;
             case Mos6502MemoryBusAccessKind.PushJsrTargetHigh:
-                source = _ramProgramSources[_cpu.PC + 1];
+                source = GetRamProgramSource((ushort)(_cpu.PC + 1));
                 break;
             case Mos6502MemoryBusAccessKind.PopRtiLow:
                 // TODO
@@ -505,30 +525,11 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 _eaSrcMsb = source;
                 break;
             case Mos6502MemoryBusAccessKind.PopRtsHigh:
-                // TODO: add abck
+                // TODO: 
                 //CheckRelocRange((ushort)((value << 8) | _cpu.PC), _eaSrcMsb, null, source);
                 break;
         }
 
-    }
-
-    private void NoRelocAt(ushort offset)
-    {
-        _programByteInfos[offset].Flags |= ProgramByteFlags.NoReloc;
-    }
-
-    private void RelocAt(ushort offset)
-    {
-        _programByteInfos[offset].Flags |= ProgramByteFlags.Reloc;
-    }
-
-    private void NoReloc(ProgramSource? src)
-    {
-        while (src != null)
-        {
-            NoRelocAt(src.ProgramOffset);
-            src = src.Next;
-        }
     }
 
     private void RelocAlike(byte v1, ProgramSource? sv1, byte v2, ProgramSource? sv2)
@@ -583,11 +584,11 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         for (var s = src; s is not null; s = s.Next)
         {
             ref var programByte = ref _programByteInfos[s.ProgramOffset];
-            if ((programByte.Flags & ProgramByteFlags.NoReloc) != 0)
+            if ((programByte.Flags & RamByteFlags.NoReloc) != 0)
             {
                 dontCount++;
             }
-            else if ((programByte.Flags & ProgramByteFlags.Reloc) != 0)
+            else if ((programByte.Flags & RamByteFlags.Reloc) != 0)
             {
                 doCount++;
                 lastDoOffset = s.ProgramOffset;
@@ -610,7 +611,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             
             for (var s = src; s is not null; s = s.Next)
             {
-                if ((_programByteInfos[s.ProgramOffset].Flags & ProgramByteFlags.NoReloc) == 0)
+                if ((_programByteInfos[s.ProgramOffset].Flags & RamByteFlags.NoReloc) == 0)
                 {
                     constraint.ProgramOffsets1.Add(s.ProgramOffset);
                 }
@@ -661,7 +662,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
                     for (var s = src; s is not null; s = s.Next)
                     {
-                        if ((_programByteInfos[s.ProgramOffset].Flags & (ProgramByteFlags.Reloc | ProgramByteFlags.NoReloc)) == 0)
+                        if ((_programByteInfos[s.ProgramOffset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) == 0)
                         {
                             constraint.ProgramOffsets1.Add(s.ProgramOffset);
                         }
@@ -708,7 +709,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
         for (var s = msb; s != null; s = s.Next)
         {
-            _programByteInfos[s.ProgramOffset].Flags |= ProgramByteFlags.UsedInMsb;
+            _programByteInfos[s.ProgramOffset].Flags |= RamByteFlags.UsedInMsb;
         }
 
         if (addr >= RelocationStart && addr <= RelocationEnd)
@@ -749,7 +750,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     private ProgramSource? CreateSourceAtProgramByteOffset(ushort offset, ProgramSource? next)
     {
         // Don't track an offset that is marked as NoReloc
-        if ((_programByteInfos[offset].Flags & ProgramByteFlags.NoReloc) != 0)
+        if ((_programByteInfos[offset].Flags & RamByteFlags.NoReloc) != 0)
         {
             return next;
         }
@@ -808,7 +809,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             for (int i = 0; i < _zpConstraints.Length; i++)
             {
                 var constraints = _zpConstraints[i];
-                if (_writeMap[i])
+                if ((_accessMap[i] & ReadWriteFlags.Write) != 0)
                 {
                     Debug.Assert(constraints is not null);
                     foreach (var constraint in constraints!)
@@ -857,12 +858,12 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                 var offset = constraint.ProgramOffsets1[i];
                 ref var pb = ref _programByteInfos[offset];
 
-                if ((pb.Flags & ProgramByteFlags.Reloc) != 0)
+                if ((pb.Flags & RamByteFlags.Reloc) != 0)
                 {
                     relocCount++;
                     lastRelocIndex = i;
                 }
-                else if ((pb.Flags & ProgramByteFlags.NoReloc) != 0)
+                else if ((pb.Flags & RamByteFlags.NoReloc) != 0)
                 {
                     noRelocCount++;
                 }
@@ -911,7 +912,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
             foreach (var offset in constraint.ProgramOffsets1)
             {
-                if ((_programByteInfos[offset].Flags & ProgramByteFlags.Reloc) != 0)
+                if ((_programByteInfos[offset].Flags & RamByteFlags.Reloc) != 0)
                 {
                     n1Do++;
                 }
@@ -919,7 +920,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
             foreach (var offset in constraint.ProgramOffsets2)
             {
-                if ((_programByteInfos[offset].Flags & ProgramByteFlags.Reloc) != 0)
+                if ((_programByteInfos[offset].Flags & RamByteFlags.Reloc) != 0)
                 {
                     n2Do++;
                 }
@@ -939,12 +940,12 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             ref var pb = ref _programByteInfos[i];
 
             // If a byte contributes to both a zero-page address and an msb, it cannot be relocatable
-            if ((pb.Flags & ProgramByteFlags.UsedInZp) != 0 && (pb.Flags & ProgramByteFlags.UsedInMsb) != 0)
+            if ((pb.Flags & RamByteFlags.UsedInZp) != 0 && (pb.Flags & RamByteFlags.UsedInMsb) != 0)
             {
-                pb.Flags |= ProgramByteFlags.NoReloc;
+                pb.Flags |= RamByteFlags.NoReloc;
             }
 
-            if ((pb.Flags & ProgramByteFlags.Reloc) != 0 && (pb.Flags & ProgramByteFlags.NoReloc) != 0)
+            if ((pb.Flags & RamByteFlags.Reloc) != 0 && (pb.Flags & RamByteFlags.NoReloc) != 0)
             {
                 Log?.WriteLine($"Inconsistency detected! Byte at 0x{_programAddress + i:X4} can't be both relocated and not relocated at the same time.");
                 return true;
@@ -985,13 +986,13 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             {
                 foreach (var offset in constraint.GetAllOffsets())
                 {
-                    if ((_programByteInfos[offset].Flags & (ProgramByteFlags.Reloc | ProgramByteFlags.NoReloc)) != 0)
+                    if ((_programByteInfos[offset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) != 0)
                     {
                         continue;
                     }
 
                     // Backtrack: save state
-                    var backtrack = new ProgramByteFlags[_programByteInfos.Length];
+                    var backtrack = new RamByteFlags[_programByteInfos.Length];
                     for (ushort i = 0; i < _programByteInfos.Length; i++)
                     {
                         backtrack[i] = _programByteInfos[i].Flags;
@@ -1036,13 +1037,13 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     {
         ref var pb = ref _programByteInfos[offset];
 
-        if ((pb.Flags & ProgramByteFlags.Reloc) != 0)
+        if ((pb.Flags & RamByteFlags.Reloc) != 0)
         {
             return true; // Inconsistency
         }
-        else if ((pb.Flags & ProgramByteFlags.NoReloc) == 0)
+        else if ((pb.Flags & RamByteFlags.NoReloc) == 0)
         {
-            pb.Flags |= ProgramByteFlags.NoReloc;
+            pb.Flags |= RamByteFlags.NoReloc;
 
             foreach (var constraint in pb.Constraints)
             {
@@ -1057,13 +1058,13 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     {
         ref var pb = ref _programByteInfos[offset];
 
-        if ((pb.Flags & ProgramByteFlags.NoReloc) != 0)
+        if ((pb.Flags & RamByteFlags.NoReloc) != 0)
         {
             return true; // Inconsistency
         }
-        else if ((pb.Flags & ProgramByteFlags.Reloc) == 0)
+        else if ((pb.Flags & RamByteFlags.Reloc) == 0)
         {
-            pb.Flags |= ProgramByteFlags.Reloc;
+            pb.Flags |= RamByteFlags.Reloc;
 
             foreach (var constraint in pb.Constraints)
             {
@@ -1074,29 +1075,43 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         return false;
     }
     
+    private void NoRelocAt(ushort offset) => _programByteInfos[offset].Flags |= RamByteFlags.NoReloc;
 
+    private void RelocAt(ushort offset) => _programByteInfos[offset].Flags |= RamByteFlags.Reloc;
+
+    private void NoReloc(ProgramSource? src)
+    {
+        while (src != null)
+        {
+            NoRelocAt(src.ProgramOffset);
+            src = src.Next;
+        }
+    }
+    
     void IMos6502CpuMemoryBus.Trace(Mos6502MemoryBusAccessKind kind) => _kind = kind;
 
     byte IMos6502CpuMemoryBus.Read(ushort address)
     {
-        var value = _ram[address];
+        var value = GetRam(address);
         if (_enableTrackSource)
         {
-            HandleMemoryAccess(address, value, ref _ramProgramSources[address], true);
+            GetAccessMap(address) |= ReadWriteFlags.Read;
+            HandleMemoryAccess(address, value);
         }
         return value;
     }
 
     void IMos6502CpuMemoryBus.Write(ushort address, byte value)
     {
-        _ram[address] = value;
+        GetRam(address) = value;
         if (_enableTrackSource)
         {
-            HandleMemoryAccess(address, value, ref _ramProgramSources[address], false);
+            GetAccessMap(address) |= ReadWriteFlags.Write;
+            HandleMemoryAccess(address, value);
         }
     }
 
-    private static bool IsDummy(Mos6502MemoryBusAccessKind kind) =>
+    private static bool IsDummyBusAccess(Mos6502MemoryBusAccessKind kind) =>
         kind switch
         {
             Mos6502MemoryBusAccessKind.OperandDummyRead or Mos6502MemoryBusAccessKind.ExecuteDummyRead or Mos6502MemoryBusAccessKind.ExecuteDummyWrite => true,
@@ -1110,9 +1125,9 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         public ushort ProgramOffset;
     }
 
-    private struct ProgramByteInfo()
+    private struct ProgramByteState()
     {
-        public ProgramByteFlags Flags;
+        public RamByteFlags Flags;
 
         public readonly ConstraintList Constraints = new();
 
@@ -1120,7 +1135,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
         public void SetUsedInZp(byte zpAddr)
         {
-            Flags |= ProgramByteFlags.UsedInZp;
+            Flags |= RamByteFlags.UsedInZp;
             ZpAddr.SetUsed(zpAddr);
         }
     }
@@ -1142,15 +1157,13 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     }
 
     [Flags]
-    private enum ProgramByteFlags
+    private enum ReadWriteFlags : byte
     {
         None = 0,
-        NoReloc = 1 << 0,
-        Reloc = 1 << 1,
-        UsedInZp = 1 << 2,
-        UsedInMsb = 1 << 3,
+        Read = 1 << 0,
+        Write = 1 << 1,
     }
-
+    
     private class ConstraintList : List<Constraint>;
 
     private class Constraint : IEquatable<Constraint>
@@ -1252,3 +1265,22 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         Alike,
     }
 }
+
+[Flags]
+public enum RamByteFlags
+{
+    None = 0,
+    NoReloc = 1 << 0,
+    Reloc = 1 << 1,
+    UsedInZp = 1 << 2,
+    UsedInMsb = 1 << 3,
+    Read = 1 << 4,
+    Write = 1 << 5,
+}
+
+//public struct ProgramByteInfo
+//{
+//    public ProgramByteFlags
+
+
+//}
