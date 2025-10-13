@@ -15,19 +15,20 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     private readonly ReadWriteFlags[] _accessMap = new ReadWriteFlags[65536];
     private readonly ushort _programAddress;
     private readonly byte[] _programBytes;
-    private readonly ProgramByteState[] _programByteInfos;
     private readonly Mos6502Cpu _cpu;
+    private readonly ProgramByteState[] _programByteInfos;
     private readonly Stack<ProgramSource> _sourcePool = new();
     private bool _enableTrackSource;
     private readonly ConstraintList?[] _zpConstraints = new ConstraintList?[0x100];
     private readonly Dictionary<int, ConstraintList> _constraintsHashTable = new();
 
+    // Track of the program source for the current effective address and all registers
     private ProgramSource? _eaSrcMsb;
     private ProgramSource? _srcX;
     private ProgramSource? _srcY;
     private ProgramSource? _srcA;
 
-    private Mos6502MemoryBusAccessKind _kind;
+    private Mos6502MemoryBusAccessKind _kind; // Property to track the current access kind from the CPU
 
     public CodeRelocator(ushort programAddress, byte[] programBytes)
     {
@@ -49,6 +50,8 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
     public Mos6502Cpu Cpu => _cpu;
 
+    public ReadOnlySpan<byte> Ram => _ram;
+
     public ushort RelocationStart { get; set; }
 
     public ushort RelocationEnd { get; set; }
@@ -61,14 +64,6 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
     public TextWriter? Log { get; set; }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private ref byte GetRam(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ram), addr);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private ref ProgramSource? GetRamProgramSource(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ramProgramSources), addr);
-
-    private ref ReadWriteFlags GetAccessMap(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_accessMap), addr);
-    
     public void Reset()
     {
         var ram = _ram.AsSpan();
@@ -105,8 +100,6 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         return flags;
     }
 
-    public ReadOnlySpan<byte> Ram => _ram;
-
     public void SetRamRegion(ushort targetAddress, ReadOnlySpan<byte> buffer)
     {
         if (buffer.Length == 0) return;
@@ -115,7 +108,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         buffer.CopyTo(_ram.AsSpan(targetAddress, buffer.Length));
     }
     
-    public void RunSubroutineAt(ushort address, int maxCycles)
+    public void RunSubroutineAt(ushort address, int maxCycles, bool enableAnalysis = true)
     {
         // Check RelocationStart/End correctness
         if (RelocationStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than 0x200");
@@ -137,7 +130,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         GetRam(0x1FE) = 0; // Clear the return address on the stack
         GetRam(0x1FF) = 0;
 
-        _enableTrackSource = true; // Enable tracking during execution
+        _enableTrackSource = enableAnalysis; // Enable tracking during execution
 
         int cycleCount = 0;
         while (true)
@@ -1087,7 +1080,16 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             src = src.Next;
         }
     }
-    
+
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ref byte GetRam(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ram), addr);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private ref ProgramSource? GetRamProgramSource(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ramProgramSources), addr);
+
+    private ref ReadWriteFlags GetAccessMap(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_accessMap), addr);
+
     void IMos6502CpuMemoryBus.Trace(Mos6502MemoryBusAccessKind kind) => _kind = kind;
 
     byte IMos6502CpuMemoryBus.Read(ushort address)
