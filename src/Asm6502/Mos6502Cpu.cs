@@ -130,6 +130,11 @@ public class Mos6502Cpu
     public ushort PC { get; set; }
 
     /// <summary>
+    /// Gets the value of the program counter at the current opcode.
+    /// </summary>
+    public ushort PCAtOpcode => _PCAtOpcode;
+
+    /// <summary>
     /// Accumulator register (A).
     /// </summary>
     public byte A;
