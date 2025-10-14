@@ -4,6 +4,15 @@
 
 namespace Asm6502.Relocator;
 
+/// <summary>
+/// Analyzes and relocates MOS 6502/6510 machine code by emulating it, tracking memory accesses, identifying zero-page usage,
+/// and determining safe relocation addresses while maintaining code functionality.
+/// </summary>
+/// <remarks>
+/// This class emulates a MOS 6502/6510 CPU to trace program execution and analyze memory access patterns.
+/// It identifies which memory locations and zero-page addresses are used by the code, allowing for safe
+/// relocation of the program to different memory addresses.
+/// </remarks>
 public partial class CodeRelocator : IMos6502CpuMemoryBus
 {
     private readonly byte[] _ram = new byte[65536];
@@ -29,15 +38,27 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     private bool _hasBeenAnalyzed;
     private CodeRelocationTarget _lastRelocationTarget;
 
-    public CodeRelocator(ushort programAddress, byte[] programBytes, ushort? relocationStart = null, ushort? relocationEnd = null)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CodeRelocator"/> class with the specified program data and optional relocation boundaries.
+    /// </summary>
+    /// <param name="programAddress">The original address in memory where the program is loaded.</param>
+    /// <param name="programBytes">The byte array containing the machine code to be analyzed and relocated.</param>
+    /// <param name="relocationAnalysisStart">The starting address for the relocation analysis range. If null, defaults to <paramref name="programAddress"/>.</param>
+    /// <param name="relocationAnalysisEnd">The ending address for the relocation analysis  range. If null, defaults to the end of the program.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when <paramref name="relocationAnalysisStart"/> is less than 0x200, or when <paramref name="relocationAnalysisStart"/> is greater than or equal to <paramref name="relocationAnalysisEnd"/>.
+    /// </exception>
+    public CodeRelocator(ushort programAddress, byte[] programBytes, ushort? relocationAnalysisStart = null, ushort? relocationAnalysisEnd = null)
     {
-        RelocationStart = relocationStart ?? programAddress;
-        RelocationEnd = relocationEnd ?? (ushort)(programAddress + programBytes.Length - 1);
+        ArgumentNullException.ThrowIfNull(programBytes);
+
+        RelocationAnalysisStart = relocationAnalysisStart ?? programAddress;
+        RelocationAnalysisEnd = relocationAnalysisEnd ?? (ushort)(programAddress + programBytes.Length - 1);
 
         // Check RelocationStart/End correctness
-        if (RelocationStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than 0x200");
-        if (RelocationStart >= RelocationEnd)
-            throw new InvalidOperationException($"RelocationStart (0x{RelocationStart:X4}) must be less than RelocationEnd (0x{RelocationEnd:X4})");
+        if (RelocationAnalysisStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than $0200");
+        if (RelocationAnalysisStart >= RelocationAnalysisEnd)
+            throw new InvalidOperationException($"RelocationStart (${RelocationAnalysisStart:x4}) must be less than RelocationEnd (${RelocationAnalysisEnd:x4})");
 
         _programAddress = (ushort)programAddress;
         _programBytes = programBytes;
@@ -54,20 +75,58 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
         Reset();
     }
 
+    /// <summary>
+    /// Gets the MOS 6502/6510 CPU instance used for emulating and analyzing the program code.
+    /// </summary>
     public Mos6502Cpu Cpu => _cpu;
 
+    /// <summary>
+    /// Gets a read-only view of the 64KB RAM emulated by this relocator.
+    /// </summary>
+    /// <remarks>
+    /// In order to modify the ram, use the <see cref="Reset"/> method to restore the original program bytes,
+    /// Then you can use <see cref="ClearRamRegion"/> and <see cref="SetRamRegion"/> to modify the RAM.
+    /// </remarks>
     public ReadOnlySpan<byte> Ram => _ram;
+    
+    /// <summary>
+    /// Gets the address of the program in memory.
+    /// </summary>
+    public ushort ProgramAddress => _programAddress;
 
-    public ushort RelocationStart { get; }
+    /// <summary>
+    /// Gets a read-only view of the original program bytes.
+    /// </summary>
+    public ReadOnlySpan<byte> ProgramBytes => _programBytes;
 
-    public ushort RelocationEnd { get; }
+    /// <summary>
+    /// Gets the starting address of the relocation analysis range. By default, it is the <see cref="ProgramAddress"/>
+    /// </summary>
+    public ushort RelocationAnalysisStart { get; }
 
+    /// <summary>
+    /// Gets the ending address of the relocation analysis range. By default, it is <see cref="ProgramAddress"/> + <see cref="ProgramBytes"/> length - 1.
+    /// </summary>
+    public ushort RelocationAnalysisEnd { get; }
+
+    /// <summary>
+    /// Gets the list of RAM address ranges that are safe to use during relocation, identified through program analysis.
+    /// </summary>
     public List<RamRangeAccess> SafeRamRanges { get; } = new();
 
+    /// <summary>
+    /// Gets a value indicating whether zero-page relocation is enabled for this relocator. Default is true.
+    /// </summary>
     public bool EnableZpReloc { get; init; }
 
+    /// <summary>
+    /// Gets the diagnostic bag containing warnings and errors generated during code analysis and relocation.
+    /// </summary>
     public CodeRelocationDiagnosticBag Diagnostics { get; } = new();
 
+    /// <summary>
+    /// Resets the relocator to its initial state, clearing all analysis data, diagnostics, and restoring the original program in memory.
+    /// </summary>
     public void Reset()
     {
         Diagnostics.Clear();

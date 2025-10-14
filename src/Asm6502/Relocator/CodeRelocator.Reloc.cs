@@ -2,6 +2,34 @@
 // Licensed under the BSD-Clause 2 license.
 // See license.txt file in the project root for full license information.
 
+// The code in this file is based on code from the original project sidreloc 1.0 by Linus Akesson,
+// which is licensed under the MIT license (see below).
+// The original code has been largely adapted and integrated into Asm6502.
+// https://www.linusakesson.net/software/sidreloc/index.php
+
+/* Copyright (c) 2012 Linus Akesson
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -11,6 +39,22 @@ namespace Asm6502.Relocator;
 
 partial class CodeRelocator
 {
+    /// <summary>
+    /// Relocates the program code to the specified target address and applies any required zero-page relocations.
+    /// </summary>
+    /// <remarks>This method performs relocation only once per instance; subsequent calls reuse the analysis
+    /// unless the relocation target changes. The returned byte array represents the program code as it would appear at
+    /// the specified relocation address, with all applicable relocations applied. If zero-page relocation is enabled,
+    /// the method uses the provided zero-page range to resolve zero-page references.</remarks>
+    /// <param name="relocationTarget">The relocation target specifying the destination address and zero-page range for the relocated code. The address
+    /// must be greater than or equal to 0x200, and the low byte must match the relocation analysis start address. If
+    /// zero-page relocation is enabled, a non-empty zero-page range must be provided.</param>
+    /// <returns>A byte array containing the relocated program code. Returns null if relocation is not possible.</returns>
+    /// <exception cref="ArgumentException">Thrown if the relocation target address is less than 0x200, if the low byte of the address does not match the
+    /// relocation analysis start address, if the address plus program length exceeds 64KB, or if zero-page relocation
+    /// is enabled but no zero-page range is specified.</exception>
+    /// <exception cref="CodeRelocationException">Thrown if a trivial inconsistency is detected during relocation analysis or if no valid relocation solution can
+    /// be found.</exception>
     public byte[]? Relocate(CodeRelocationTarget relocationTarget)
     {
         _lastRelocationTarget = default;
@@ -26,14 +70,14 @@ partial class CodeRelocator
         }
 
         // In practice, it should always be 0x00 (but we allow other values, as long as they are the same)
-        if ((byte)relocationTarget.Address != (byte)RelocationStart)
+        if ((byte)relocationTarget.Address != (byte)RelocationAnalysisStart)
         {
-            throw new ArgumentException($"Relocation target address low byte must be equal to RelocationStart low byte (0x{RelocationStart:x4}). Actual: 0x{relocationTarget.Address:x4}", nameof(relocationTarget));
+            throw new ArgumentException($"Relocation target address low byte must be equal to RelocationStart low byte (${RelocationAnalysisStart:x4}). Actual: ${relocationTarget.Address:x4}", nameof(relocationTarget));
         }
 
         if (relocationTarget.Address + _programBytes.Length > 0x10000)
         {
-            throw new ArgumentException($"Relocation target address + program length must be within 64KB. Actual: 0x{relocationTarget.Address + _programBytes.Length:x4}", nameof(relocationTarget));
+            throw new ArgumentException($"Relocation target address + program length must be within 64KB. Actual: ${relocationTarget.Address + _programBytes.Length:x4}", nameof(relocationTarget));
         }
 
         _lastRelocationTarget = relocationTarget;
@@ -93,8 +137,14 @@ partial class CodeRelocator
 
         return newProgramBytes;
     }
-
- 
+    
+    /// <summary>
+    /// Prints a formatted relocation map of the program to the specified text writer.
+    /// </summary>
+    /// <remarks>The output includes a visual map of program memory, counts of different relocation types, and
+    /// lists of old and new zero-page addresses. This method does not modify program state.</remarks>
+    /// <param name="writer">The <see cref="TextWriter"/> to which the relocation map will be written. Cannot be null.</param>
+    /// <exception cref="InvalidOperationException">Thrown if relocation analysis has not been performed. Call <c>Relocate()</c> before invoking this method.</exception>
     public void PrintRelocationMap(TextWriter writer)
     {
         if (!_hasBeenAnalyzed)
@@ -108,7 +158,7 @@ partial class CodeRelocator
         ushort org = _programAddress;
         ushort targetOrg = _lastRelocationTarget.Address;
 
-        bool isFirst = true;
+        // Align down and up to 64 bytes to display a full range
         for (int addr = org & 0xFFC0, taddr = targetOrg & 0xFFC0; addr <= ((org + _programByteInfos.Length - 1) | 0x003F); addr++, taddr++)
         {
             if ((addr & 0x3F) == 0)
@@ -292,7 +342,7 @@ partial class CodeRelocator
 
                 if (dest > lastZp)
                 {
-                    throw new InvalidOperationException($"Can't fit all zero-page addresses into specified range (0x{firstZp:X2}-0x{lastZp:X2}).");
+                    throw new InvalidOperationException($"Can't fit all zero-page addresses into specified range (${firstZp:x2}-${lastZp:x2}).");
                 }
             }
         }
@@ -380,19 +430,19 @@ partial class CodeRelocator
         {
             if (first == last)
             {
-                Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds, $"Warning: Write out of bounds at address 0x{first:x4}");
+                Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds, $"Warning: Write out of bounds at address ${first:x4}");
             }
             else
             {
-                Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds, $"Warning: Write out of bounds at address 0x{first:x4}-0x{last:x4}");
+                Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds, $"Warning: Write out of bounds at address ${first:x4}-${last:x4}");
             }
         }
     }
 
     private void RelocAlike(byte v1, ProgramSource? sv1, byte v2, ProgramSource? sv2)
     {
-        if (v1 >= (RelocationStart >> 8) && v1 <= (RelocationEnd >> 8) &&
-            v2 >= (RelocationStart >> 8) && v2 <= (RelocationEnd >> 8))
+        if (v1 >= (RelocationAnalysisStart >> 8) && v1 <= (RelocationAnalysisEnd >> 8) &&
+            v2 >= (RelocationAnalysisStart >> 8) && v2 <= (RelocationAnalysisEnd >> 8))
         {
             var constraint = new Constraint
             {
@@ -426,7 +476,7 @@ partial class CodeRelocator
                 // once. It cannot be relocated.
                 if (s.ProgramOffset == s2.ProgramOffset)
                 {
-                    Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_ByteMultipleContributeCannotBeRelocated, $"Byte at 0x{_programAddress + s.ProgramOffset:X4} contributes more than once to a sum and won't be relocated.");
+                    Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_ByteMultipleContributeCannotBeRelocated, $"Byte at ${_programAddress + s.ProgramOffset:x4} contributes more than once to a sum and won't be relocated.");
                     NoRelocAt(s.ProgramOffset);
                 }
             }
@@ -504,7 +554,7 @@ partial class CodeRelocator
                     sb.Append("Inconsistency: Want to relocate one of {");
                     for (var s = src; s is not null; s = s.Next)
                     {
-                        sb.Append($"0x{_programAddress + s.ProgramOffset:x4}{(s.Next != null ? ", " : "")}");
+                        sb.Append($"${_programAddress + s.ProgramOffset:x4}{(s.Next != null ? ", " : "")}");
                     }
 
                     sb.Append("} but this would contradict other equations.");
@@ -560,6 +610,11 @@ partial class CodeRelocator
             }
         }
 
+        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
+        {
+            LogConstraints(constraint);
+        }
+
         constraints.Add(constraint);
     }
 
@@ -572,7 +627,7 @@ partial class CodeRelocator
             _programByteInfos[s.ProgramOffset].Flags |= RamByteFlags.UsedInMsb;
         }
 
-        if (addr >= RelocationStart && addr <= RelocationEnd)
+        if (addr >= RelocationAnalysisStart && addr <= RelocationAnalysisEnd)
         {
             NoReloc(lsb1);
             if (lsb2 is not null) NoReloc(lsb2);
@@ -807,7 +862,7 @@ partial class CodeRelocator
 
             if ((pb.Flags & RamByteFlags.Reloc) != 0 && (pb.Flags & RamByteFlags.NoReloc) != 0)
             {
-                Diagnostics.Error(CodeRelocationDiagnosticId.ERR_RelocationInconsistency, $"Inconsistency detected! Byte at 0x{_programAddress + i:X4} can't be both relocated and not relocated at the same time.");
+                Diagnostics.Error(CodeRelocationDiagnosticId.ERR_RelocationInconsistency, $"Inconsistency detected! Byte at ${_programAddress + i:x4} can't be both relocated and not relocated at the same time.");
                 return true;
             }
         }
@@ -860,7 +915,7 @@ partial class CodeRelocator
 
                     if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
                     {
-                        Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldNotBeRelocated, $"Guessing that 0x{_programAddress + offset:x4} should not be relocated.");
+                        Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldNotBeRelocated, $"Guessing that ${_programAddress + offset:x4} should not be relocated.");
                     }
 
                     if (EnforceNoReloc(offset) || RecursiveSolver())
@@ -878,7 +933,7 @@ partial class CodeRelocator
 
                         if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
                         {
-                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldBeRelocated, $"Assuming that 0x{_programAddress + offset:X4} should be relocated.");
+                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldBeRelocated, $"Assuming that ${_programAddress + offset:X4} should be relocated.");
                         }
 
                         return EnforceReloc(offset) || RecursiveSolver();
@@ -934,7 +989,41 @@ partial class CodeRelocator
 
         return false;
     }
-    
+
+    private void LogConstraints(Constraint constraint)
+    {
+        var sb = new StringBuilder();
+        sb.Append("Adding constraint: ");
+        if (constraint.Kind == ConstraintKind.ExactlyOne)
+        {
+            sb.Append("Exactly one reloc: {");
+            for (int i = 0; i < constraint.ProgramOffsets1.Count; i++)
+            {
+                sb.Append($"{(i > 0 ? ", " : "")}${_programAddress + constraint.ProgramOffsets1[i]:x4}");
+            }
+            sb.Append("}");
+        }
+        else if (constraint.Kind == ConstraintKind.Alike)
+        {
+            sb.Append("Reloc alike: {");
+            for (int i = 0; i < constraint.ProgramOffsets1.Count; i++)
+            {
+                sb.Append($"{(i > 0 ? ", " : "")}${_programAddress + constraint.ProgramOffsets1[i]:x4}");
+            }
+            sb.Append("}, {");
+            for (int i = 0; i < constraint.ProgramOffsets2.Count; i++)
+            {
+                sb.Append($"{(i > 0 ? ", " : "")}${_programAddress + constraint.ProgramOffsets2[i]:x4}");
+            }
+            sb.Append("}");
+        }
+        else
+        {
+            sb.Append("Unknown constraint!");
+        }
+        Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverConstraint, sb.ToString());
+    }
+
     private void NoRelocAt(ushort offset) => _programByteInfos[offset].Flags |= RamByteFlags.NoReloc;
 
     private void RelocAt(ushort offset) => _programByteInfos[offset].Flags |= RamByteFlags.Reloc;

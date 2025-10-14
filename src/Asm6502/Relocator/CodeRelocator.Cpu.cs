@@ -9,6 +9,11 @@ namespace Asm6502.Relocator;
 
 partial class CodeRelocator
 {
+    /// <summary>
+    /// Gets the combined flags indicating how a byte at the specified RAM address has been accessed and used.
+    /// </summary>
+    /// <param name="address">The RAM address to query.</param>
+    /// <returns>A <see cref="RamByteFlags"/> value combining access flags (Read/Write) and relocation flags.</returns>
     public RamByteFlags GetRamByteFlagsAt(ushort address)
     {
         var rwFlags = GetAccessMap(address);
@@ -18,6 +23,12 @@ partial class CodeRelocator
         return flags;
     }
     
+    /// <summary>
+    /// Clears a region of RAM by setting all bytes to zero.
+    /// </summary>
+    /// <param name="targetAddress">The starting address of the region to clear.</param>
+    /// <param name="length">The number of bytes to clear.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the target address and length exceed 64KB address space.</exception>
     public void ClearRamRegion(ushort targetAddress, ushort length)
     {
         if (length == 0) return;
@@ -26,6 +37,12 @@ partial class CodeRelocator
         _ram.AsSpan(targetAddress, length).Clear();
     }
 
+    /// <summary>
+    /// Copies data from a buffer into a region of RAM.
+    /// </summary>
+    /// <param name="targetAddress">The starting address where data will be written.</param>
+    /// <param name="buffer">The data to copy into RAM.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the target address and buffer length exceed 64KB address space.</exception>
     public void SetRamRegion(ushort targetAddress, ReadOnlySpan<byte> buffer)
     {
         if (buffer.Length == 0) return;
@@ -34,6 +51,13 @@ partial class CodeRelocator
         buffer.CopyTo(_ram.AsSpan(targetAddress, buffer.Length));
     }
     
+    /// <summary>
+    /// Executes a subroutine at the specified address, simulating a JSR call and running until RTS returns.
+    /// </summary>
+    /// <param name="address">The address of the subroutine to execute.</param>
+    /// <param name="maxCycles">The maximum number of cycles to execute, or 0 for unlimited.</param>
+    /// <param name="enableAnalysis">Whether to enable source tracking and relocation analysis during execution.</param>
+    /// <exception cref="InvalidOperationException">Thrown when the CPU halts or jams during execution.</exception>
     public void RunSubroutineAt(ushort address, int maxCycles, bool enableAnalysis = true)
     {
         _hasBeenAnalyzed = false; // Reset analysis state
@@ -56,7 +80,7 @@ partial class CodeRelocator
 
             if (_cpu.IsHalted || _cpu.IsJammed)
             {
-                throw new InvalidOperationException($"CPU was halted or jammed at 0x{_cpu.PCAtOpcode:X4}");
+                throw new InvalidOperationException($"CPU was halted or jammed at ${_cpu.PCAtOpcode:X4}");
             }
 
             if (Cpu.RunState == Mos6502CpuRunState.Fetch)
@@ -82,6 +106,31 @@ partial class CodeRelocator
 
         _enableTrackSource = false;
     }
+
+    // Implementation of IMos6502CpuMemoryBus
+    void IMos6502CpuMemoryBus.Trace(Mos6502MemoryBusAccessKind kind) => _kind = kind;
+
+    byte IMos6502CpuMemoryBus.Read(ushort address)
+    {
+        var value = GetRam(address);
+        if (_enableTrackSource)
+        {
+            GetAccessMap(address) |= RamReadWriteFlags.Read;
+            HandleMemoryAccess(address, value);
+        }
+        return value;
+    }
+
+    void IMos6502CpuMemoryBus.Write(ushort address, byte value)
+    {
+        GetRam(address) = value;
+        if (_enableTrackSource)
+        {
+            GetAccessMap(address) |= RamReadWriteFlags.Write;
+            HandleMemoryAccess(address, value);
+        }
+    }
+
 
     private void PostProcessInstructionForRegisters()
     {
@@ -352,34 +401,10 @@ partial class CodeRelocator
 
     }
 
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ref byte GetRam(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ram), addr);
 
     private ref RamReadWriteFlags GetAccessMap(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_accessMap), addr);
-
-    void IMos6502CpuMemoryBus.Trace(Mos6502MemoryBusAccessKind kind) => _kind = kind;
-
-    byte IMos6502CpuMemoryBus.Read(ushort address)
-    {
-        var value = GetRam(address);
-        if (_enableTrackSource)
-        {
-            GetAccessMap(address) |= RamReadWriteFlags.Read;
-            HandleMemoryAccess(address, value);
-        }
-        return value;
-    }
-
-    void IMos6502CpuMemoryBus.Write(ushort address, byte value)
-    {
-        GetRam(address) = value;
-        if (_enableTrackSource)
-        {
-            GetAccessMap(address) |= RamReadWriteFlags.Write;
-            HandleMemoryAccess(address, value);
-        }
-    }
 
     private static bool IsDummyBusAccess(Mos6502MemoryBusAccessKind kind) =>
         kind switch

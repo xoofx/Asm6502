@@ -24,11 +24,11 @@ public record CodeRelocationDiagnostic(CodeRelocationDiagnosticKind Kind, CodeRe
     {
         if (StackTrace is not null)
         {
-            return $"{Kind} CR{(uint)Id:0000}: {Message}\n{StackTrace}";
+            return $"{Kind,8} CR{(uint)Id:0000}: {Message}\n{StackTrace}";
         }
         else
         {
-            return $"{Kind} CR{(uint)Id:0000}: {Message}";
+            return $"{Kind,8} CR{(uint)Id:0000}: {Message}";
         }
     }
 }
