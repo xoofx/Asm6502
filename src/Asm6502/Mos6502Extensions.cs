@@ -119,6 +119,13 @@ public static class Mos6502Extensions
     public static Mos6502ExpressionLowByte LowByte(this Mos6502ExpressionU16 expression) => new(expression);
 
     /// <summary>
+    /// Converts an 8-bit MOS 6502 expression to an absolute 16-bit expression.
+    /// </summary>
+    /// <param name="expression">The 8-bit MOS 6502 expression to convert.</param>
+    /// <returns>A new expression representing the absolute 16-bit equivalent of the specified 8-bit expression.</returns>
+    public static Mos6502ExpressionU8ToU16 ToAbsolute(this Mos6502ExpressionU8 expression) => new(expression);
+
+    /// <summary>
     /// Gets the high byte of the specified 16-bit expression.
     /// </summary>
     /// <param name="expression">The 16-bit expression.</param>

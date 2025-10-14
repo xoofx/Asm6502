@@ -1,0 +1,52 @@
+﻿Program map:
+c000, 2000:  ==R==?===?===R==?=?R...                                         
+MSB relocations       (R): 3
+Zero-page relocations (Z): 0
+Static bytes          (=): 13
+Status undetermined   (?): 4
+Unused bytes          (.): 3
+Old zero-page addresses:  
+New zero-page addresses:  
+
+Diagnostics: (none)
+
+Original:
+LL_01:
+C000  AD 13 C0   LDA LL_01
+C003  AA         TAX
+C004  A9 00      LDA #$00
+C006  8A         TXA
+C007  A8         TAY
+C008  A9 00      LDA #$00
+C00A  98         TYA
+C00B  8D 10 C0   STA $C010
+C00E  AD 12 00   LDA $0012
+C011  60         RTS
+
+C012  EA         NOP
+
+LL_01:
+C013  C0 EA      CPY #$EA
+C015  EA         NOP
+C016  EA         NOP
+
+Relocated:
+LL_01:
+2000  AD 13 20   LDA LL_01
+2003  AA         TAX
+2004  A9 00      LDA #$00
+2006  8A         TXA
+2007  A8         TAY
+2008  A9 00      LDA #$00
+200A  98         TYA
+200B  8D 10 20   STA $2010
+200E  AD 12 00   LDA $0012
+2011  60         RTS
+
+2012  EA         NOP
+
+LL_01:
+2013  20 EA EA   JSR $EAEA
+
+2016  EA         NOP
+

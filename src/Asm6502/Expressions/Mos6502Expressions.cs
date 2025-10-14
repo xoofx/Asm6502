@@ -219,6 +219,20 @@ public record Mos6502ExpressionAddConstU16(Mos6502ExpressionU16 Left, short Righ
 }
 
 /// <summary>
+/// Represents a 16-bit MOS 6502 expression that is derived from an 8-bit expression by zero-extending its value.
+/// </summary>
+/// <param name="Left">The 8-bit expression whose value is used as the lower byte of the resulting 16-bit expression.</param>
+public record Mos6502ExpressionU8ToU16(Mos6502ExpressionU8 Left) : Mos6502ExpressionU16
+{
+    /// <inheritdoc />
+    public override ushort Evaluate() => Left.Evaluate();
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
+}
+
+
+/// <summary>
 /// Represents a 16-bit expression that evaluates to an indirect address in the MOS 6502 architecture.
 /// </summary>
 /// <param name="Expression">The 16-bit expression that resolves to an indirect address.</param>

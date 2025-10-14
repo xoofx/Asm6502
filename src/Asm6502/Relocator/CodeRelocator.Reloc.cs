@@ -620,7 +620,7 @@ partial class CodeRelocator
 
     private void CheckRelocRange(ushort addr, ProgramSource? lsb1, ProgramSource? lsb2, ProgramSource? msb)
     {
-        Debug.Assert(msb is not null);
+        if (msb is null) return;
 
         for (var s = msb; s != null; s = s.Next)
         {

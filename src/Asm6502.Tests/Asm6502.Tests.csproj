@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="generated\" />
-    <Folder Include="verified\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,57 @@
+﻿Program map:
+c000, 2000:  ==R==R==R==R==R=Z==R=Z===Z==R???                                
+MSB relocations       (R): 7
+Zero-page relocations (Z): 3
+Static bytes          (=): 19
+Status undetermined   (?): 3
+Unused bytes          (.): 0
+Old zero-page addresses:   02 03
+New zero-page addresses:   80 81
+
+Diagnostics:
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c010}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c015}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c017, $c019}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c017, $c019}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c010}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c017, $c019}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c015}
+
+Original:
+LL_01:
+C000  AD 1B C0   LDA LL_01
+C003  8D 1D C0   STA $C01D
+C006  AD 1C C0   LDA $C01C
+C009  8D 1E C0   STA $C01E
+C00C  AD 1D C0   LDA $C01D
+C00F  85 02      STA $02
+C011  AD 1E C0   LDA $C01E
+C014  85 03      STA $03
+C016  A0 00      LDY #$00
+C018  B1 02      LDA ($02),Y
+C01A  60         RTS
+
+LL_01:
+C01B  1F C0 00   SLO $00C0,X
+C01E  00         BRK
+C01F  EA         NOP
+
+Relocated:
+LL_01:
+2000  AD 1B 20   LDA LL_01
+2003  8D 1D 20   STA $201D
+2006  AD 1C 20   LDA $201C
+2009  8D 1E 20   STA $201E
+200C  AD 1D 20   LDA $201D
+200F  85 80      STA $80
+2011  AD 1E 20   LDA $201E
+2014  85 81      STA $81
+2016  A0 00      LDY #$00
+2018  B1 80      LDA ($80),Y
+201A  60         RTS
+
+LL_01:
+201B  1F 20 00   SLO $0020,X
+201E  00         BRK
+201F  EA         NOP
+
