@@ -2,7 +2,9 @@
 // Licensed under the BSD-Clause 2 license.
 // See license.txt file in the project root for full license information.
 
+using System;
 using System.Diagnostics;
+using System.Formats.Tar;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -12,7 +14,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 {
     private readonly byte[] _ram = new byte[65536];
     private readonly ProgramSource?[] _ramProgramSources = new ProgramSource?[65536];
-    private readonly ReadWriteFlags[] _accessMap = new ReadWriteFlags[65536];
+    private readonly RamReadWriteFlags[] _accessMap = new RamReadWriteFlags[65536];
     private readonly ushort _programAddress;
     private readonly byte[] _programBytes;
     private readonly Mos6502Cpu _cpu;
@@ -29,9 +31,20 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     private ProgramSource? _srcA;
 
     private Mos6502MemoryBusAccessKind _kind; // Property to track the current access kind from the CPU
+    private readonly ZeroPageReloc[] _zpRelocations;
+    private bool _hasBeenAnalyzed;
+    private CodeRelocationTarget _lastRelocationTarget;
 
-    public CodeRelocator(ushort programAddress, byte[] programBytes)
+    public CodeRelocator(ushort programAddress, byte[] programBytes, ushort? relocationStart = null, ushort? relocationEnd = null)
     {
+        RelocationStart = relocationStart ?? programAddress;
+        RelocationEnd = relocationEnd ?? (ushort)(programAddress + programBytes.Length - 1);
+
+        // Check RelocationStart/End correctness
+        if (RelocationStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than 0x200");
+        if (RelocationStart >= RelocationEnd)
+            throw new InvalidOperationException($"RelocationStart (0x{RelocationStart:X4}) must be less than RelocationEnd (0x{RelocationEnd:X4})");
+
         _programAddress = (ushort)programAddress;
         _programBytes = programBytes;
         _programByteInfos = new ProgramByteState[programBytes.Length];
@@ -41,8 +54,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             _programByteInfos[i] = new ProgramByteState();
         }
 
-        RelocationStart = programAddress;
-        RelocationEnd = (ushort)(programAddress + programBytes.Length - 1);
+        _zpRelocations = new ZeroPageReloc[256];
 
         _cpu = new Mos6510Cpu(this);
         Reset();
@@ -52,13 +64,13 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
     public ReadOnlySpan<byte> Ram => _ram;
 
-    public ushort RelocationStart { get; set; }
+    public ushort RelocationStart { get; }
 
-    public ushort RelocationEnd { get; set; }
+    public ushort RelocationEnd { get; }
 
-    public ushort TargetRelocationStart { get; set; }
+    public List<RamRangeAccess> SafeRamRanges { get; } = new();
 
-    public bool EnableZpReloc { get; set; }
+    public bool EnableZpReloc { get; init; }
 
     public int VerboseLevel { get; set; }
 
@@ -95,8 +107,8 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         var rwFlags = GetAccessMap(address);
         var offset = address - _programAddress;
         var flags = (uint)offset < (uint)_programByteInfos.Length ? Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_programByteInfos), offset).Flags : RamByteFlags.None;
-        if ((rwFlags & ReadWriteFlags.Read) != 0) flags |= RamByteFlags.Read;
-        if ((rwFlags & ReadWriteFlags.Write) != 0) flags |= RamByteFlags.Write;
+        if ((rwFlags & RamReadWriteFlags.Read) != 0) flags |= RamByteFlags.Read;
+        if ((rwFlags & RamReadWriteFlags.Write) != 0) flags |= RamByteFlags.Write;
         return flags;
     }
 
@@ -110,16 +122,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     
     public void RunSubroutineAt(ushort address, int maxCycles, bool enableAnalysis = true)
     {
-        // Check RelocationStart/End correctness
-        if (RelocationStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than 0x200");
-
-        int relocationEnd = RelocationStart + _programByteInfos.Length;
-        if (relocationEnd >= 0x10000)
-            throw new InvalidOperationException($"RelocationEnd (0x{relocationEnd:X}) must be less than 0x10000 (64KB)");
-
-        if (RelocationStart >= RelocationEnd)
-            throw new InvalidOperationException($"RelocationStart (0x{RelocationStart:X4}) must be less than RelocationEnd (0x{RelocationEnd:X4})");
-        
+        _hasBeenAnalyzed = false; // Reset analysis state
         _srcA = null;
         _srcX = null;
         _srcY = null;
@@ -166,28 +169,102 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         _enableTrackSource = false;
     }
 
-    public void Analyze()
+    public byte[]? Relocate(CodeRelocationTarget relocationTarget)
     {
-        FinalizeConstraints();
+        _lastRelocationTarget = default;
 
-        if (CheckTrivialInconsistency())
+        if (EnableZpReloc && relocationTarget.ZpRange.IsEmpty)
         {
-            throw new InvalidOperationException("Trivial inconsistency detected");
+            throw new InvalidOperationException("Zero-page relocation is enabled but no zero-page range was specified");
         }
 
-        if (RecursiveSolver())
+        if (relocationTarget.Address < 0x200)
         {
-            throw new InvalidOperationException("No solution found");
+            throw new InvalidOperationException("Relocation target address must be >= 0x200");
         }
+
+        // In practice, it should always be 0x00 (but we allow other values, as long as they are the same)
+        if ((byte)relocationTarget.Address != (byte)RelocationStart)
+        {
+            throw new InvalidOperationException($"Relocation target address low byte must be equal to RelocationStart low byte (0x{RelocationStart:x4}). Actual: 0x{relocationTarget.Address:x4}");
+        }
+
+        if (relocationTarget.Address + _programBytes.Length > 0x10000)
+        {
+            throw new InvalidOperationException($"Relocation target address + program length must be within 64KB. Actual: 0x{relocationTarget.Address + _programBytes.Length:x4}");
+        }
+
+        _lastRelocationTarget = relocationTarget;
+
+        if (!_hasBeenAnalyzed)
+        {
+            ReportBadMemoryAccess(); // TODO: check result
+
+            FinalizeConstraints();
+            _hasBeenAnalyzed = true;
+
+            if (CheckTrivialInconsistency())
+            {
+                throw new InvalidOperationException("Trivial inconsistency detected");
+            }
+
+            if (RecursiveSolver())
+            {
+                throw new InvalidOperationException("No solution found");
+            }
+        }
+
+        ComputeZeroPageRelocations(relocationTarget.ZpRange);
+
+        var newProgramBytes = new byte[_programBytes.Length];
+        _programBytes.AsSpan().CopyTo(newProgramBytes);
+
+        // Apply relocations
+        var msb = (byte)(relocationTarget.Address >> 8);
+        for (int i = 0; i < newProgramBytes.Length; i++)
+        {
+            ref var b = ref newProgramBytes[i];
+            ref var pb = ref _programByteInfos[i];
+            if ((pb.Flags & RamByteFlags.Reloc) == 0)
+            {
+                continue;
+            }
+
+            if((pb.Flags & RamByteFlags.UsedInMsb) != 0)
+            {
+                b = msb;
+            }
+            else if (EnableZpReloc && (pb.Flags & RamByteFlags.UsedInZp) != 0)
+            {
+                int j;
+                for(j = 2; j< 256; j++) {
+                    if(pb.ZpAddr.IsUsed((byte)j)) {
+                        break;
+                    }
+                }
+                if (j < 256)
+                {
+                    b = _zpRelocations[j].Reloc;
+                }
+            }
+        }
+
+        return newProgramBytes;
     }
 
+ 
     public void PrintRelocationMap(TextWriter writer)
     {
+        if (!_hasBeenAnalyzed)
+        {
+            throw new InvalidOperationException("Relocation has not been analyzed yet. Call Relocate() first.");
+        }
+
         int nReloc = 0, nZp = 0, nDont = 0, nUnused = 0, nUnknown = 0;
 
         writer.Write("Program map:");
         ushort org = _programAddress;
-        ushort targetOrg = TargetRelocationStart;
+        ushort targetOrg = _lastRelocationTarget.Address;
 
         bool isFirst = true;
         for (int addr = org & 0xFFC0, taddr = targetOrg & 0xFFC0; addr <= ((org + _programByteInfos.Length - 1) | 0x003F); addr++, taddr++)
@@ -228,7 +305,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
                     writer.Write("=");
                     nDont++;
                 }
-                else if (_accessMap[addr] == ReadWriteFlags.None)
+                else if (_accessMap[addr] == RamReadWriteFlags.None)
                 {
                     writer.Write(".");
                     nUnused++;
@@ -249,11 +326,229 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         writer.WriteLine($"Unused bytes          (.): {nUnused}");
 
         writer.Write("Old zero-page addresses:  ");
-
         for(int i = 2; i < 256; i++ ){
-            if ((_accessMap[i] & ReadWriteFlags.Write) != 0) writer.Write($" {i:x2}");
+            if ((_accessMap[i] & RamReadWriteFlags.Write) != 0) writer.Write($" {i:x2}");
         }
         writer.WriteLine();
+
+        writer.Write("New zero-page addresses:  ");
+        for (int i = 2; i < 256; i++)
+        {
+            if ((_accessMap[i] & RamReadWriteFlags.Write) != 0) writer.Write($" {_zpRelocations[i].Reloc:x2}");
+        }
+        writer.WriteLine();
+    }
+
+    private void ComputeZeroPageRelocations(RamZpRange zpRange)
+    {
+        var zp = _zpRelocations;
+        if (!EnableZpReloc)
+        {
+            for (int i = 0; i < 256; i++)
+            {
+                zp[i].Link = (byte)i;
+                zp[i].Reloc = (byte)i;
+                zp[i].IsFree = false;
+            }
+            return;
+        }
+        
+        Debug.Assert(!zpRange.IsEmpty);
+
+        var firstZp = zpRange.Start;
+        var lastZp = zpRange.GetEnd();
+
+        // Initialize zero-page relocation array
+        for (int i = 0; i < 256; i++)
+        {
+            zp[i].Link = (byte)i;
+            zp[i].IsFree = (i >= firstZp && i <= lastZp);
+        }
+
+        // Find program bytes that contribute to multiple zero-page addresses and link them
+        for (int i = 0; i < _programByteInfos.Length; i++)
+        {
+            ref var pb = ref _programByteInfos[i];
+            if ((pb.Flags & (RamByteFlags.Reloc | RamByteFlags.UsedInZp)) != (RamByteFlags.Reloc | RamByteFlags.UsedInZp))
+            {
+                continue;
+            }
+
+            int first = -1;
+            for (int j = 0; j < 256; j++)
+            {
+                if (!pb.ZpAddr.IsUsed((byte)j))
+                {
+                    continue;
+                }
+
+                if (first != -1)
+                {
+                    // One relocated program byte contributes to several zero-page addresses. Link them.
+                    if (zp[j].Link > zp[first].Link)
+                    {
+                        zp[j].Link = zp[first].Link;
+                    }
+                    else
+                    {
+                        zp[first].Link = zp[j].Link;
+                    }
+                }
+                else
+                {
+                    first = j;
+                }
+            }
+        }
+
+        // Flatten links (path compression)
+        for (int i = 0; i < 256; i++)
+        {
+            if (zp[i].Link != zp[zp[i].Link].Link)
+            {
+                zp[i].Link = zp[zp[i].Link].Link;
+            }
+        }
+
+        // Perform zero-page relocation if enabled
+        for (int chunk = 2; chunk < 0x100; chunk++)
+        {
+            if ((GetAccessMap((ushort)chunk) & RamReadWriteFlags.Write) != 0 && zp[chunk].Link == chunk)
+            {
+                // We have a chunk to place somewhere
+                int dest;
+                for (dest = firstZp; dest <= lastZp; dest++)
+                {
+                    // Try to put it at dest
+                    bool fits = true;
+                    for (int i = chunk; i < 0x100; i++)
+                    {
+                        if (zp[i].Link == chunk)
+                        {
+                            if (!zp[(byte)(dest + i - chunk)].IsFree)
+                            {
+                                fits = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (fits)
+                    {
+                        // It fits!
+                        for (int i = chunk; i < 0x100; i++)
+                        {
+                            if (zp[i].Link == chunk)
+                            {
+                                zp[i].Reloc = (byte)(dest + i - chunk);
+                                zp[(byte)(dest + i - chunk)].IsFree = false;
+                            }
+                        }
+                        break;
+                    }
+                }
+
+                if (dest > lastZp)
+                {
+                    throw new InvalidOperationException($"Can't fit all zero-page addresses into specified range (0x{firstZp:X2}-0x{lastZp:X2}).");
+                }
+            }
+        }
+    }
+
+    private bool ReportBadMemoryAccess()
+    {
+        bool outOfBounds = false;
+        ushort oobStart = 0;
+        ushort oobEnd = 0;
+
+        var ramRanges = SafeRamRanges.ToArray().AsSpan();
+        ramRanges.Sort();
+
+
+        for (int i = 0; i < 65536; i++)
+        {
+            var addr = (ushort)i;
+            if (addr >= _programAddress && addr < _programAddress + _programBytes.Length)
+            {
+                // Inside program
+            }
+            else if (addr >= 0xd400 && addr <= 0xd41f) // SID registers: TODO make it configurable
+            {
+                // Ignore
+            }
+            else if (addr >= 2 && addr < 0x100) // ZeroPage
+            {
+                // A zp address was read from without writing to it
+                if (GetAccessMap(addr) == RamReadWriteFlags.Read)
+                {
+                    // TODO: Log read only from zero-page without writing
+                    for (int j = 0; j < _programBytes.Length; j++)
+                    {
+                        ref var pb = ref _programByteInfos[j];
+                        if ((pb.Flags & RamByteFlags.UsedInZp) != 0 && pb.ZpAddr.IsUsed((byte)addr))
+                        {
+                            pb.ZpAddr.ClearUsed((byte)addr);
+                            if (pb.ZpAddr.IsNotUsed())
+                            {
+                                pb.Flags &= ~(RamByteFlags.Reloc | RamByteFlags.UsedInZp);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (addr >= 0x200) // Ignore stack (TODO: should we ignore also vectors?)
+            {
+                bool isAllowed = false;
+                var ramRwFlags = GetAccessMap(addr);
+                foreach (var ramRange in ramRanges)
+                {
+                    if (ramRange.Contains(addr))
+                    {
+                        isAllowed = (ramRange.Flags & ramRwFlags) != 0;
+                        break;
+                    }
+                }
+
+                if (!isAllowed && (ramRwFlags & RamReadWriteFlags.Write) != 0)
+                {
+                    outOfBounds = true;
+                    if (oobStart == 0)
+                    {
+                        oobStart = addr;
+                    }
+                    else if (oobEnd != addr - 1)
+                    {
+                        ReportMemoryAccessOutOfBounds(oobStart, oobEnd);
+                        oobStart = 0;
+                    }
+                    oobEnd = addr;
+                }
+            }
+        }
+
+        if (oobStart != 0)
+        {
+            ReportMemoryAccessOutOfBounds(oobStart, oobEnd);
+        }
+
+        return outOfBounds;
+
+        void ReportMemoryAccessOutOfBounds(ushort first, ushort last)
+        {
+            bool quiet = false;
+            if (!quiet)
+            {
+                if (first == last)
+                {
+                    Log?.WriteLine($"Warning: Write out of bounds at address 0x{first:x4}");
+                }
+                else
+                {
+                    Log?.WriteLine($"Warning: Write out of bounds at address 0x{first:x4}-0x{last:x4}");
+                }
+            }
+        }
     }
 
     private void PostProcessInstructionForRegisters()
@@ -802,7 +1097,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
             for (int i = 0; i < _zpConstraints.Length; i++)
             {
                 var constraints = _zpConstraints[i];
-                if ((_accessMap[i] & ReadWriteFlags.Write) != 0)
+                if ((_accessMap[i] & RamReadWriteFlags.Write) != 0)
                 {
                     Debug.Assert(constraints is not null);
                     foreach (var constraint in constraints!)
@@ -1088,7 +1383,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private ref ProgramSource? GetRamProgramSource(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_ramProgramSources), addr);
 
-    private ref ReadWriteFlags GetAccessMap(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_accessMap), addr);
+    private ref RamReadWriteFlags GetAccessMap(ushort addr) => ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_accessMap), addr);
 
     void IMos6502CpuMemoryBus.Trace(Mos6502MemoryBusAccessKind kind) => _kind = kind;
 
@@ -1097,7 +1392,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         var value = GetRam(address);
         if (_enableTrackSource)
         {
-            GetAccessMap(address) |= ReadWriteFlags.Read;
+            GetAccessMap(address) |= RamReadWriteFlags.Read;
             HandleMemoryAccess(address, value);
         }
         return value;
@@ -1108,7 +1403,7 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         GetRam(address) = value;
         if (_enableTrackSource)
         {
-            GetAccessMap(address) |= ReadWriteFlags.Write;
+            GetAccessMap(address) |= RamReadWriteFlags.Write;
             HandleMemoryAccess(address, value);
         }
     }
@@ -1151,19 +1446,19 @@ public class CodeRelocator : IMos6502CpuMemoryBus
 
         public void SetUsed(byte zpAddr) => this[zpAddr >> 3] |= (byte)(1 << (zpAddr & 7));
 
+        public void ClearUsed(byte zpAddr) => this[zpAddr >> 3] &= (byte)~(1 << (zpAddr & 7));
+
+        public bool IsNotUsed()
+        {
+            Span<byte> span = this;
+            return span.IndexOfAnyExcept((byte)0) < 0;
+        }
+
         public void Clear()
         {
             Span<byte> span = this;
             span.Clear();
         }
-    }
-
-    [Flags]
-    private enum ReadWriteFlags : byte
-    {
-        None = 0,
-        Read = 1 << 0,
-        Write = 1 << 1,
     }
     
     private class ConstraintList : List<Constraint>;
@@ -1266,23 +1561,112 @@ public class CodeRelocator : IMos6502CpuMemoryBus
         ExactlyOne,
         Alike,
     }
+
+    private record struct ZeroPageReloc(byte Link, bool IsFree)
+    {
+        public byte Reloc { get; set; }
+    }
 }
 
 [Flags]
 public enum RamByteFlags
 {
     None = 0,
-    NoReloc = 1 << 0,
-    Reloc = 1 << 1,
-    UsedInZp = 1 << 2,
-    UsedInMsb = 1 << 3,
-    Read = 1 << 4,
-    Write = 1 << 5,
+    Read = 1 << 0,
+    Write = 1 << 1,
+    NoReloc = 1 << 2,
+    Reloc = 1 << 3,
+    UsedInZp = 1 << 4,
+    UsedInMsb = 1 << 5,
 }
 
-//public struct ProgramByteInfo
-//{
-//    public ProgramByteFlags
+[Flags]
+public enum RamReadWriteFlags : byte
+{
+    None = 0,
+    Read = 1 << 0,
+    Write = 1 << 1,
+    ReadWrite = Read | Write,
+}
 
+public readonly record struct CodeRelocationTarget
+{
+    public required ushort Address { get; init; }
 
-//}
+    public required RamZpRange ZpRange { get; init; }
+}
+
+public readonly record struct RamZpRange
+{
+    public RamZpRange(byte start, byte length)
+    {
+        var end = start + length;
+        if (end > 0x100)
+        {
+            throw new ArgumentOutOfRangeException(nameof(length), "The length exceeds the 256B zero-page address space.");
+        }
+        
+        Start = start;
+        Length = length;
+    }
+    
+    public byte Start { get; }
+
+    public byte Length { get; }
+
+    public bool IsEmpty => Length == 0;
+
+    public byte GetEnd() => IsEmpty ? throw new InvalidOperationException("RamZpRange is empty") : (byte)(Start + Length - 1);
+
+    public bool Contains(byte addr) => Length > 0 && addr >= Start && addr <= (Start + Length - 1);
+}
+
+public readonly record struct RamRangeAccess : IComparable<RamRangeAccess>, IComparable
+{
+    public RamRangeAccess(ushort start, ushort length, RamReadWriteFlags flags = RamReadWriteFlags.ReadWrite)
+    {
+        var end = start + length;
+        if (end > 0x10000)
+        {
+            throw new ArgumentOutOfRangeException(nameof(length), "The length exceeds the 64KB address space.");
+        }
+        
+        Start = start;
+        Length = length;
+        Flags = flags;
+    }
+    
+    public ushort Start { get; }
+
+    public ushort Length { get; }
+
+    public RamReadWriteFlags Flags { get; }
+
+    public ushort End => (ushort)(Start + Length);
+    
+    public bool Contains(ushort addr) => addr >= Start && addr <= End;
+
+    public int CompareTo(RamRangeAccess other)
+    {
+        var delta = Start.CompareTo(other.Start);
+        return delta != 0 ? delta : Length.CompareTo(other.Length);
+    }
+
+    public int CompareTo(object? obj)
+    {
+        if (obj is null)
+        {
+            return 1;
+        }
+
+        return obj is RamRangeAccess other ? CompareTo(other) : throw new ArgumentException($"Object must be of type {nameof(RamRangeAccess)}");
+    }
+
+    public static bool operator <(RamRangeAccess left, RamRangeAccess right) => left.CompareTo(right) < 0;
+
+    public static bool operator >(RamRangeAccess left, RamRangeAccess right) => left.CompareTo(right) > 0;
+
+    public static bool operator <=(RamRangeAccess left, RamRangeAccess right) => left.CompareTo(right) <= 0;
+
+    public static bool operator >=(RamRangeAccess left, RamRangeAccess right) => left.CompareTo(right) >= 0;
+}
