@@ -58,8 +58,9 @@ partial class CodeRelocator
     /// <param name="maxCycles">The maximum number of cycles to execute, or 0 for unlimited. Default is 0.</param>
     /// <param name="enableAnalysis">Whether to enable source tracking and relocation analysis during execution.</param>
     /// <param name="expectRtiInsteadOfRts">Whether to expect an RTI instruction instead of RTS for returning from the subroutine.</param>
+    /// <param name="useCycleByCycle">Whether to execute the CPU in cycle-by-cycle mode. Default is false.</param>
     /// <exception cref="InvalidOperationException">Thrown when the CPU halts or jams during execution.</exception>
-    public void RunSubroutineAt(ushort address, int maxCycles = 0, bool enableAnalysis = true, bool expectRtiInsteadOfRts = false)
+    public void RunSubroutineAt(ushort address, uint maxCycles = 0, bool enableAnalysis = true, bool expectRtiInsteadOfRts = false, bool useCycleByCycle = false)
     {
         _hasBeenAnalyzed = false; // Reset analysis state
         _srcA = null;
@@ -80,10 +81,17 @@ partial class CodeRelocator
 
         _enableTrackSource = enableAnalysis; // Enable tracking during execution
 
-        int cycleCount = 0;
+        uint cycleCount = 0;
         while (true)
         {
-            _cpu.Cycle();
+            if (useCycleByCycle)
+            {
+                _cpu.Cycle();
+            }
+            else
+            {
+                _cpu.FastStep();
+            }
 
             if (_cpu.IsHalted || _cpu.IsJammed)
             {
@@ -102,8 +110,8 @@ partial class CodeRelocator
                 }
             }
 
-
-            if (maxCycles > 0 && cycleCount++ >= maxCycles)
+            cycleCount += useCycleByCycle ? 1 : _cpu.InstructionCycles;
+            if (maxCycles > 0 && cycleCount >= maxCycles)
             {
                 break;
             }

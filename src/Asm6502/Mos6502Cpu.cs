@@ -75,7 +75,7 @@ public class Mos6502Cpu
 
     private protected Mos6502MemoryBusAccessKind _pendingExecuteReadKind;
     // This is the PC value at the memory location the opcode is fetched
-    private ushort _PCAtOpcode;
+    private protected ushort _PCAtOpcode;
     // working values during instruction execution
     private protected byte _wv0;
     private protected byte _wv1;
@@ -368,6 +368,63 @@ public class Mos6502Cpu
     }
 
     /// <summary>
+    /// Executes a single instruction quickly without cycle-accurate timing.
+    /// </summary>
+    /// <remarks>
+    /// This method bypasses the cycle-accurate state machine and executes instructions in one go.
+    /// It updates <see cref="InstructionCycles"/> with accurate cycle counts including page crossing penalties.
+    /// Use this for faster emulation when cycle-accurate timing is not required.
+    ///
+    /// This method must be used with <see cref="FastReset"/> to initialize the CPU state correctly.
+    /// </remarks>
+    public void FastStep()
+    {
+        if (_halted) return;
+
+        // Handle JAM state
+        if (_jammed)
+        {
+            InstructionCycles = 2;
+            return;
+        }
+
+        // Handle pending interrupts before fetching the next instruction
+        if (_raisedNmi)
+        {
+            HandleInterruptFast(InterruptFlags.Nmi);
+            _runningInterrupt = false;
+            _raisedNmi = false;
+            return;
+        }
+        else if (_raisedIrq && !GetFlag(Mos6502CpuFlags.I))
+        {
+            HandleInterruptFast(InterruptFlags.Irq);
+            _runningInterrupt = false;
+            _raisedIrq = false;
+            return;
+        }
+
+        if (_runState != Mos6502CpuRunState.Fetch)
+        {
+            Step();
+            return;
+        }
+
+        // Normal instruction fetch and execution
+        _PCAtOpcode = PC;
+        _opcode = (Mos6502OpCode)Read(PC++, Mos6502MemoryBusAccessKind.OpCode);
+
+        _av = PC;
+        _wv0 = (byte)(PC & 0xFF);
+        _wv1 = (byte)((PC >> 8) & 0xFF);
+        _pageCrossed = false;
+        _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.ExecuteRead;
+
+        InstructionCycles = 0; // Will be set by InternalFastStep
+        InternalFastStep();
+    }
+
+    /// <summary>
     /// Steps the CPU until the next instruction is fetched, allowing the current instruction to complete.
     /// </summary>
     /// <param name="onCycle">A callback function called on each cycle. If it returns false, stepping is aborted.</param>
@@ -462,6 +519,43 @@ public class Mos6502Cpu
     {
         Raise(InterruptFlags.Irq);
         Step();
+    }
+
+    /// <summary>
+    /// Quickly performs a CPU reset without cycle-accurate timing.
+    /// </summary>
+    /// <remarks>
+    /// This method performs a fast reset, loading the PC from the reset vector and setting appropriate flags.
+    /// It does not execute the full cycle-accurate reset sequence but achieves the same end state.
+    ///
+    /// This method must be used with <see cref="FastStep"/> to execute instructions correctly after the reset.
+    /// </remarks>
+    public void FastReset()
+    {
+        if (_jammed)
+        {
+            _jammed = false;
+        }
+
+        // Set interrupt disable flag
+        SetFlag(Mos6502CpuFlags.I, true);
+
+        // Decrement stack pointer by 3 (simulates the push operations during reset)
+        if (!_cold)
+        {
+            S = (byte)(S - 3);
+        }
+        else
+        {
+            _cold = false;
+        }
+
+        // Load PC from reset vector
+        PC = Read(CpuVectorReset, Mos6502MemoryBusAccessKind.VectorInterruptLow);
+        PC |= (ushort)(Read(CpuVectorReset + 1, Mos6502MemoryBusAccessKind.VectorInterruptHigh) << 8);
+
+        InstructionCycles = 7;
+        _halted = false;
     }
 
     /// <summary>
@@ -633,6 +727,35 @@ public class Mos6502Cpu
                 return;
         }
     }
+    
+    private void HandleInterruptFast(InterruptFlags interruptType)
+    {
+        // Push PC (high byte, then low byte)
+        Push((byte)(PC >> 8), Mos6502MemoryBusAccessKind.PushInterruptReturnAddressHigh);
+        Push((byte)(PC & 0xFF), Mos6502MemoryBusAccessKind.PushInterruptReturnAddressLow);
+
+        // Push status register (with U flag set, B flag clear for hardware interrupts)
+        var sr = SR | Mos6502CpuFlags.U;
+        sr &= ~Mos6502CpuFlags.B;
+        Push((byte)sr, Mos6502MemoryBusAccessKind.PushInterruptSR);
+
+        // Set interrupt disable flag
+        SetFlag(Mos6502CpuFlags.I, true);
+
+        // Load vector address based on interrupt type
+        ushort vectorAddress = interruptType switch
+        {
+            InterruptFlags.Nmi => CpuVectorNmi,
+            InterruptFlags.Irq => CpuVectorIrq,
+            _ => CpuVectorIrq
+        };
+
+        PC = Read(vectorAddress, Mos6502MemoryBusAccessKind.VectorInterruptLow);
+        PC |= (ushort)(Read((ushort)(vectorAddress + 1), Mos6502MemoryBusAccessKind.VectorInterruptHigh) << 8);
+
+        InstructionCycles = 7;
+    }
+
 
     private void Fetch()
     {
@@ -870,6 +993,857 @@ public class Mos6502Cpu
         }
     }
 
+
+    private protected virtual void InternalFastStep()
+    {
+        switch (_opcode)
+        {
+            // ADC
+            case Mos6502OpCode.ADC_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                ADC_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.ADC_ZeroPage:
+                ZeroPage_Fast();
+                ADC_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.ADC_ZeroPageX:
+                ZeroPageX_Fast();
+                ADC_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.ADC_Absolute:
+                Absolute_Fast();
+                ADC_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.ADC_AbsoluteX:
+                AbsoluteX_Fast();
+                ADC_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.ADC_AbsoluteY:
+                AbsoluteY_Fast();
+                ADC_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.ADC_IndirectX:
+                IndirectX_Fast();
+                ADC_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ADC_IndirectY:
+                IndirectY_Fast();
+                ADC_Fast();
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // AND
+            case Mos6502OpCode.AND_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                AND_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.AND_ZeroPage:
+                ZeroPage_Fast();
+                AND_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.AND_ZeroPageX:
+                ZeroPageX_Fast();
+                AND_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.AND_Absolute:
+                Absolute_Fast();
+                AND_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.AND_AbsoluteX:
+                AbsoluteX_Fast();
+                AND_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.AND_AbsoluteY:
+                AbsoluteY_Fast();
+                AND_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.AND_IndirectX:
+                IndirectX_Fast();
+                AND_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.AND_IndirectY:
+                IndirectY_Fast();
+                AND_Fast();
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // ASL
+            case Mos6502OpCode.ASL_Accumulator:
+                _addressingMode = Mos6502AddressingMode.Accumulator;
+                ASL_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.ASL_ZeroPage:
+                ZeroPage_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPage;
+                ASL_Fast();
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.ASL_ZeroPageX:
+                ZeroPageX_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPageX;
+                ASL_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ASL_Absolute:
+                Absolute_Fast();
+                _addressingMode = Mos6502AddressingMode.Absolute;
+                ASL_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ASL_AbsoluteX:
+                AbsoluteX_Fast();
+                _addressingMode = Mos6502AddressingMode.AbsoluteX;
+                ASL_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // BIT
+            case Mos6502OpCode.BIT_ZeroPage:
+                ZeroPage_Fast();
+                BIT_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.BIT_Absolute:
+                Absolute_Fast();
+                BIT_Fast();
+                InstructionCycles = 4;
+                break;
+
+            // Branch instructions
+            case Mos6502OpCode.BCC_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.C) == false;
+                    BRA_Fast(Mos6502CpuFlags.C, false);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BCS_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.C) == true;
+                    BRA_Fast(Mos6502CpuFlags.C, true);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BEQ_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.Z) == true;
+                    BRA_Fast(Mos6502CpuFlags.Z, true);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BMI_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.N) == true;
+                    BRA_Fast(Mos6502CpuFlags.N, true);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BNE_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.Z) == false;
+                    BRA_Fast(Mos6502CpuFlags.Z, false);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BPL_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.N) == false;
+                    BRA_Fast(Mos6502CpuFlags.N, false);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BVC_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.V) == false;
+                    BRA_Fast(Mos6502CpuFlags.V, false);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+            case Mos6502OpCode.BVS_Relative:
+                {
+                    bool taken = GetFlag(Mos6502CpuFlags.V) == true;
+                    BRA_Fast(Mos6502CpuFlags.V, true);
+                    InstructionCycles = !taken ? 2u : (_pageCrossed ? 4u : 3u);
+                    break;
+                }
+
+            // BRK
+            case Mos6502OpCode.BRK_Implied:
+                BRK_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // CLC, CLD, CLI, CLV
+            case Mos6502OpCode.CLC_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.C, false);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.CLD_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.D, false);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.CLI_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.I, false);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.CLV_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.V, false);
+                InstructionCycles = 2;
+                break;
+
+            // CMP
+            case Mos6502OpCode.CMP_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                CMP_Fast(ref A);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.CMP_ZeroPage:
+                ZeroPage_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.CMP_ZeroPageX:
+                ZeroPageX_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.CMP_Absolute:
+                Absolute_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.CMP_AbsoluteX:
+                AbsoluteX_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.CMP_AbsoluteY:
+                AbsoluteY_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.CMP_IndirectX:
+                IndirectX_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.CMP_IndirectY:
+                IndirectY_Fast();
+                CMP_Fast(ref A);
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // CPX
+            case Mos6502OpCode.CPX_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                CMP_Fast(ref X);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.CPX_ZeroPage:
+                ZeroPage_Fast();
+                CMP_Fast(ref X);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.CPX_Absolute:
+                Absolute_Fast();
+                CMP_Fast(ref X);
+                InstructionCycles = 4;
+                break;
+
+            // CPY
+            case Mos6502OpCode.CPY_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                CMP_Fast(ref Y);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.CPY_ZeroPage:
+                ZeroPage_Fast();
+                CMP_Fast(ref Y);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.CPY_Absolute:
+                Absolute_Fast();
+                CMP_Fast(ref Y);
+                InstructionCycles = 4;
+                break;
+
+            // DEC
+            case Mos6502OpCode.DEC_ZeroPage:
+                ZeroPage_Fast();
+                DEC_Fast();
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.DEC_ZeroPageX:
+                ZeroPageX_Fast();
+                DEC_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.DEC_Absolute:
+                Absolute_Fast();
+                DEC_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.DEC_AbsoluteX:
+                AbsoluteX_Fast();
+                DEC_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // DEX, DEY
+            case Mos6502OpCode.DEX_Implied:
+                DEC_Fast(ref X);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.DEY_Implied:
+                DEC_Fast(ref Y);
+                InstructionCycles = 2;
+                break;
+
+            // EOR
+            case Mos6502OpCode.EOR_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                EOR_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.EOR_ZeroPage:
+                ZeroPage_Fast();
+                EOR_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.EOR_ZeroPageX:
+                ZeroPageX_Fast();
+                EOR_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.EOR_Absolute:
+                Absolute_Fast();
+                EOR_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.EOR_AbsoluteX:
+                AbsoluteX_Fast();
+                EOR_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.EOR_AbsoluteY:
+                AbsoluteY_Fast();
+                EOR_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.EOR_IndirectX:
+                IndirectX_Fast();
+                EOR_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.EOR_IndirectY:
+                IndirectY_Fast();
+                EOR_Fast();
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // INC
+            case Mos6502OpCode.INC_ZeroPage:
+                ZeroPage_Fast();
+                INC_Fast();
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.INC_ZeroPageX:
+                ZeroPageX_Fast();
+                INC_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.INC_Absolute:
+                Absolute_Fast();
+                INC_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.INC_AbsoluteX:
+                AbsoluteX_Fast();
+                INC_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // INX, INY
+            case Mos6502OpCode.INX_Implied:
+                INC_Fast(ref X);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.INY_Implied:
+                INC_Fast(ref Y);
+                InstructionCycles = 2;
+                break;
+
+            // JMP
+            case Mos6502OpCode.JMP_Absolute:
+                Absolute_Fast();
+                JMP_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.JMP_Indirect:
+                Indirect_Fast();
+                JMP_Fast();
+                InstructionCycles = 5;
+                break;
+
+            // JSR
+            case Mos6502OpCode.JSR_Absolute:
+                Absolute_Fast();
+                JSR_Fast();
+                InstructionCycles = 6;
+                break;
+
+            // LDA
+            case Mos6502OpCode.LDA_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                LD_Fast(ref A);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.LDA_ZeroPage:
+                ZeroPage_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.LDA_ZeroPageX:
+                ZeroPageX_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.LDA_Absolute:
+                Absolute_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.LDA_AbsoluteX:
+                AbsoluteX_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.LDA_AbsoluteY:
+                AbsoluteY_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.LDA_IndirectX:
+                IndirectX_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.LDA_IndirectY:
+                IndirectY_Fast();
+                LD_Fast(ref A);
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // LDX
+            case Mos6502OpCode.LDX_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                LD_Fast(ref X);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.LDX_ZeroPage:
+                ZeroPage_Fast();
+                LD_Fast(ref X);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.LDX_ZeroPageY:
+                ZeroPageY_Fast();
+                LD_Fast(ref X);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.LDX_Absolute:
+                Absolute_Fast();
+                LD_Fast(ref X);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.LDX_AbsoluteY:
+                AbsoluteY_Fast();
+                LD_Fast(ref X);
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+
+            // LDY
+            case Mos6502OpCode.LDY_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                LD_Fast(ref Y);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.LDY_ZeroPage:
+                ZeroPage_Fast();
+                LD_Fast(ref Y);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.LDY_ZeroPageX:
+                ZeroPageX_Fast();
+                LD_Fast(ref Y);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.LDY_Absolute:
+                Absolute_Fast();
+                LD_Fast(ref Y);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.LDY_AbsoluteX:
+                AbsoluteX_Fast();
+                LD_Fast(ref Y);
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+
+            // LSR
+            case Mos6502OpCode.LSR_Accumulator:
+                _addressingMode = Mos6502AddressingMode.Accumulator;
+                LSR_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.LSR_ZeroPage:
+                ZeroPage_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPage;
+                LSR_Fast();
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.LSR_ZeroPageX:
+                ZeroPageX_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPageX;
+                LSR_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.LSR_Absolute:
+                Absolute_Fast();
+                _addressingMode = Mos6502AddressingMode.Absolute;
+                LSR_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.LSR_AbsoluteX:
+                AbsoluteX_Fast();
+                _addressingMode = Mos6502AddressingMode.AbsoluteX;
+                LSR_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // NOP
+            case Mos6502OpCode.NOP_Implied:
+                NOP_Fast();
+                InstructionCycles = 2;
+                break;
+
+            // ORA
+            case Mos6502OpCode.ORA_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                ORA_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.ORA_ZeroPage:
+                ZeroPage_Fast();
+                ORA_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.ORA_ZeroPageX:
+                ZeroPageX_Fast();
+                ORA_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.ORA_Absolute:
+                Absolute_Fast();
+                ORA_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.ORA_AbsoluteX:
+                AbsoluteX_Fast();
+                ORA_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.ORA_AbsoluteY:
+                AbsoluteY_Fast();
+                ORA_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.ORA_IndirectX:
+                IndirectX_Fast();
+                ORA_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ORA_IndirectY:
+                IndirectY_Fast();
+                ORA_Fast();
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // PHA, PHP
+            case Mos6502OpCode.PHA_Implied:
+                PHA_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.PHP_Implied:
+                PHP_Fast();
+                InstructionCycles = 3;
+                break;
+
+            // PLA, PLP
+            case Mos6502OpCode.PLA_Implied:
+                PLA_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.PLP_Implied:
+                PLP_Fast();
+                InstructionCycles = 4;
+                break;
+
+            // ROL
+            case Mos6502OpCode.ROL_Accumulator:
+                _addressingMode = Mos6502AddressingMode.Accumulator;
+                ROL_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.ROL_ZeroPage:
+                ZeroPage_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPage;
+                ROL_Fast();
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.ROL_ZeroPageX:
+                ZeroPageX_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPageX;
+                ROL_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ROL_Absolute:
+                Absolute_Fast();
+                _addressingMode = Mos6502AddressingMode.Absolute;
+                ROL_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ROL_AbsoluteX:
+                AbsoluteX_Fast();
+                _addressingMode = Mos6502AddressingMode.AbsoluteX;
+                ROL_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // ROR
+            case Mos6502OpCode.ROR_Accumulator:
+                _addressingMode = Mos6502AddressingMode.Accumulator;
+                ROR_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.ROR_ZeroPage:
+                ZeroPage_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPage;
+                ROR_Fast();
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.ROR_ZeroPageX:
+                ZeroPageX_Fast();
+                _addressingMode = Mos6502AddressingMode.ZeroPageX;
+                ROR_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ROR_Absolute:
+                Absolute_Fast();
+                _addressingMode = Mos6502AddressingMode.Absolute;
+                ROR_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.ROR_AbsoluteX:
+                AbsoluteX_Fast();
+                _addressingMode = Mos6502AddressingMode.AbsoluteX;
+                ROR_Fast();
+                InstructionCycles = 7;
+                break;
+
+            // RTI, RTS
+            case Mos6502OpCode.RTI_Implied:
+                RTI_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.RTS_Implied:
+                RTS_Fast();
+                InstructionCycles = 6;
+                break;
+
+            // SBC
+            case Mos6502OpCode.SBC_Immediate:
+                _pendingExecuteReadKind = Mos6502MemoryBusAccessKind.OperandImmediate;
+                PC++;
+                SBC_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.SBC_ZeroPage:
+                ZeroPage_Fast();
+                SBC_Fast();
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.SBC_ZeroPageX:
+                ZeroPageX_Fast();
+                SBC_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.SBC_Absolute:
+                Absolute_Fast();
+                SBC_Fast();
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.SBC_AbsoluteX:
+                AbsoluteX_Fast();
+                SBC_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.SBC_AbsoluteY:
+                AbsoluteY_Fast();
+                SBC_Fast();
+                InstructionCycles = _pageCrossed ? 5u : 4u;
+                break;
+            case Mos6502OpCode.SBC_IndirectX:
+                IndirectX_Fast();
+                SBC_Fast();
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.SBC_IndirectY:
+                IndirectY_Fast();
+                SBC_Fast();
+                InstructionCycles = _pageCrossed ? 6u : 5u;
+                break;
+
+            // SEC, SED, SEI
+            case Mos6502OpCode.SEC_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.C, true);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.SED_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.D, true);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.SEI_Implied:
+                CLOrSFlag_Fast(Mos6502CpuFlags.I, true);
+                InstructionCycles = 2;
+                break;
+
+            // STA
+            case Mos6502OpCode.STA_ZeroPage:
+                ZeroPage_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.STA_ZeroPageX:
+                ZeroPageX_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.STA_Absolute:
+                Absolute_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.STA_AbsoluteX:
+                AbsoluteX_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.STA_AbsoluteY:
+                AbsoluteY_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 5;
+                break;
+            case Mos6502OpCode.STA_IndirectX:
+                IndirectX_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 6;
+                break;
+            case Mos6502OpCode.STA_IndirectY:
+                IndirectY_Fast();
+                ST_Fast(ref A);
+                InstructionCycles = 6;
+                break;
+
+            // STX
+            case Mos6502OpCode.STX_ZeroPage:
+                ZeroPage_Fast();
+                ST_Fast(ref X);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.STX_ZeroPageY:
+                ZeroPageY_Fast();
+                ST_Fast(ref X);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.STX_Absolute:
+                Absolute_Fast();
+                ST_Fast(ref X);
+                InstructionCycles = 4;
+                break;
+
+            // STY
+            case Mos6502OpCode.STY_ZeroPage:
+                ZeroPage_Fast();
+                ST_Fast(ref Y);
+                InstructionCycles = 3;
+                break;
+            case Mos6502OpCode.STY_ZeroPageX:
+                ZeroPageX_Fast();
+                ST_Fast(ref Y);
+                InstructionCycles = 4;
+                break;
+            case Mos6502OpCode.STY_Absolute:
+                Absolute_Fast();
+                ST_Fast(ref Y);
+                InstructionCycles = 4;
+                break;
+
+            // TAX, TAY, TSX, TXA, TXS, TYA
+            case Mos6502OpCode.TAX_Implied:
+                TR_Fast(ref X, A);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.TAY_Implied:
+                TR_Fast(ref Y, A);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.TSX_Implied:
+                TR_Fast(ref X, S);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.TXA_Implied:
+                TR_Fast(ref A, X);
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.TXS_Implied:
+                TXS_Fast();
+                InstructionCycles = 2;
+                break;
+            case Mos6502OpCode.TYA_Implied:
+                TR_Fast(ref A, Y);
+                InstructionCycles = 2;
+                break;
+
+            default:
+                throw new InvalidOperationException($"The opcode {_opcode:X2} at address {_PCAtOpcode:X4} is not supported by this CPU variant.");
+        }
+    }
+
     // Addressing modes
     private void ZeroPage()
     {
@@ -877,6 +1851,13 @@ public class Mos6502Cpu
         _wv1 = 0;
         PC++;
         _runState = Mos6502CpuRunState.Execute;
+    }
+
+    private protected void ZeroPage_Fast()
+    {
+        _wv0 = Read(_av, Mos6502MemoryBusAccessKind.OperandZeroPage);
+        _wv1 = 0;
+        PC++;
     }
 
     private void ZeroPageX()
@@ -895,6 +1876,14 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void ZeroPageX_Fast()
+    {
+        _wv0 = Read(_av, Mos6502MemoryBusAccessKind.OperandZeroPageX);
+        _wv0 = (byte)(_wv0 + X);
+        _wv1 = 0;
+        PC++;
+    }
+
     private void ZeroPageY()
     {
         if (_cycleCount == 0)
@@ -909,6 +1898,14 @@ public class Mos6502Cpu
             PC++;
             _runState = Mos6502CpuRunState.Execute;
         }
+    }
+
+    private protected void ZeroPageY_Fast()
+    {
+        _wv0 = Read(_av, Mos6502MemoryBusAccessKind.OperandZeroPageY);
+        _wv0 = (byte)(_wv0 + Y);
+        _wv1 = 0;
+        PC++;
     }
 
     private void Absolute()
@@ -930,6 +1927,17 @@ public class Mos6502Cpu
             PC += 2;
             _runState = Mos6502CpuRunState.Execute;
             if (_opcode == Mos6502OpCode.JMP_Absolute) Exec();
+        }
+    }
+
+    private protected void Absolute_Fast()
+    {
+        var isJSR = _opcode == Mos6502OpCode.JSR_Absolute;
+        _wv0 = Read(_av++, isJSR ? Mos6502MemoryBusAccessKind.OperandJsrAbsoluteLow : Mos6502MemoryBusAccessKind.OperandAbsoluteLow);
+        if (!isJSR)
+        {
+            _wv1 = Read(_av, Mos6502MemoryBusAccessKind.OperandAbsoluteHigh);
+            PC += 2;
         }
     }
 
@@ -957,6 +1965,17 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void AbsoluteX_Fast()
+    {
+        _wv0 = Read(_av++, Mos6502MemoryBusAccessKind.OperandAbsoluteXLow);
+        _wv1 = Read(_av, Mos6502MemoryBusAccessKind.OperandAbsoluteXHigh);
+        if (PageCross(ref _wv0, X))
+        {
+            _wv1++;
+        }
+        PC += 2;
+    }
+
     private void AbsoluteY()
     {
         if (_cycleCount == 0)
@@ -981,6 +2000,17 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void AbsoluteY_Fast()
+    {
+        _wv0 = Read(_av++, Mos6502MemoryBusAccessKind.OperandAbsoluteYLow);
+        _wv1 = Read(_av, Mos6502MemoryBusAccessKind.OperandAbsoluteYHigh);
+        if (PageCross(ref _wv0, Y))
+        {
+            _wv1++;
+        }
+        PC += 2;
+    }
+
     private void Indirect()
     {
         switch (_cycleCount)
@@ -996,6 +2026,16 @@ public class Mos6502Cpu
                 if (_opcode == Mos6502OpCode.JMP_Indirect) Exec();
                 break;
         }
+    }
+
+    private protected void Indirect_Fast()
+    {
+        _wv0 = Read(_av++, Mos6502MemoryBusAccessKind.OperandIndirectLow);
+        _wv1 = Read(_av, Mos6502MemoryBusAccessKind.OperandIndirectHigh);
+        _av = Read((ushort)((_wv1 << 8) | _wv0++), Mos6502MemoryBusAccessKind.OperandIndirectResolveLow);
+        _wv1 = Read((ushort)((_wv1 << 8) | _wv0), Mos6502MemoryBusAccessKind.OperandIndirectResolveHigh);
+        _wv0 = (byte)_av;
+        PC += 2;
     }
 
     private void IndirectX()
@@ -1020,6 +2060,15 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void IndirectX_Fast()
+    {
+        _av = Read(_av, Mos6502MemoryBusAccessKind.OperandIndirectX);
+        _av = (ushort)((_av + X) & 0xFF);
+        _wv0 = Read(_av++, Mos6502MemoryBusAccessKind.OperandIndirectXResolveLow);
+        _wv1 = Read((ushort)(_av & 0xFF), Mos6502MemoryBusAccessKind.OperandIndirectXResolveHigh);
+        PC++;
+    }
+    
     private void IndirectY()
     {
         switch (_cycleCount)
@@ -1046,12 +2095,30 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void IndirectY_Fast()
+    {
+        _av = Read(_av, Mos6502MemoryBusAccessKind.OperandIndirectY);
+        PC++;
+        _wv0 = Read(_av++, Mos6502MemoryBusAccessKind.OperandIndirectYResolveLow);
+        _wv1 = Read((ushort)(_av & 0xFF), Mos6502MemoryBusAccessKind.OperandIndirectYResolveHigh);
+        if (PageCross(ref _wv0, Y))
+        {
+            _wv1++;
+        }
+    }
+
     // Opcodes
     private void ADC()
     {
         byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         ADC(p);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void ADC_Fast()
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        ADC(p);
     }
 
     private protected void ADC(byte p)
@@ -1112,6 +2179,13 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void AND_Fast()
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        A &= p;
+        UpdateNZFlag(A);
+    }
+
     private void ASL()
     {
         if (IsImplied(_addressingMode))
@@ -1149,6 +2223,25 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void ASL_Fast()
+    {
+        if (IsImplied(_addressingMode))
+        {
+            SetFlag(Mos6502CpuFlags.C, ((A >> 7) & 1) != 0);
+            A = (byte)(A << 1);
+            UpdateNZFlag(A);
+        }
+        else
+        {
+            _av = (ushort)((_wv1 << 8) | _wv0);
+            _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
+            SetFlag(Mos6502CpuFlags.C, ((_wv0 >> 7) & 1) != 0);
+            _wv0 = (byte)(_wv0 << 1);
+            UpdateNZFlag(_wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
+        }
+    }
+
     private void BIT()
     {
         byte p = Read((ushort)((_wv1 << 8) | _wv0), Mos6502MemoryBusAccessKind.ExecuteRead);
@@ -1159,6 +2252,15 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void BIT_Fast()
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), Mos6502MemoryBusAccessKind.ExecuteRead);
+        SetFlag(Mos6502CpuFlags.V, ((p >> 6) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.N, ((p >> 7) & 1) != 0);
+        p = (byte)(A & p);
+        SetFlag(Mos6502CpuFlags.Z, p == 0);
+    }
+
     private void BRK()
     {
         Read(PC++, Mos6502MemoryBusAccessKind.OperandDummyRead);
@@ -1166,6 +2268,18 @@ public class Mos6502Cpu
         _raisedBrk = true;
         _interruptFlags = InterruptFlags.Irq; // uses IRQ vector
         HandleInterrupt();
+    }
+
+    private protected void BRK_Fast()
+    {
+        PC++;
+        Push((byte)(PC >> 8), Mos6502MemoryBusAccessKind.PushInterruptReturnAddressHigh);
+        Push((byte)(PC & 0xFF), Mos6502MemoryBusAccessKind.PushInterruptReturnAddressLow);
+        var sr = SR | Mos6502CpuFlags.U | Mos6502CpuFlags.B;
+        Push((byte)sr, Mos6502MemoryBusAccessKind.PushInterruptSR);
+        SetFlag(Mos6502CpuFlags.I, true);
+        PC = Read(CpuVectorIrq, Mos6502MemoryBusAccessKind.VectorInterruptLow);
+        PC |= (ushort)(Read(CpuVectorIrq + 1, Mos6502MemoryBusAccessKind.VectorInterruptHigh) << 8);
     }
 
     private void DEC()
@@ -1193,12 +2307,28 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void DEC_Fast()
+    {
+        _av = (ushort)((_wv1 << 8) | _wv0);
+        _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
+        _wv0--;
+        Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
+        UpdateNZFlag(_wv0);
+    }
+
     private void EOR()
     {
         byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         A = (byte)(A ^ p);
         UpdateNZFlag(A);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void EOR_Fast()
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        A = (byte)(A ^ p);
+        UpdateNZFlag(A);
     }
 
     private void INC()
@@ -1226,10 +2356,24 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void INC_Fast()
+    {
+        _av = (ushort)((_wv1 << 8) | _wv0);
+        _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
+        _wv0++;
+        Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
+        UpdateNZFlag(_wv0);
+    }
+
     private void JMP()
     {
         PC = (ushort)((_wv1 << 8) | _wv0);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void JMP_Fast()
+    {
+        PC = (ushort)((_wv1 << 8) | _wv0);
     }
 
     private void JSR()
@@ -1252,6 +2396,15 @@ public class Mos6502Cpu
                 _runState = Mos6502CpuRunState.Fetch;
                 break;
         }
+    }
+
+    private protected void JSR_Fast()
+    {
+        PC += 2;
+        Push((byte)(--PC >> 8), Mos6502MemoryBusAccessKind.PushJsrTargetHigh);
+        Push((byte)(PC & 0xFF), Mos6502MemoryBusAccessKind.PushJsrTargetLow);
+        _wv1 = Read(_av, Mos6502MemoryBusAccessKind.OperandJsrAbsoluteHigh);
+        PC = (ushort)((_wv1 << 8) | _wv0);
     }
 
     private protected void LSR()
@@ -1291,6 +2444,25 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void LSR_Fast()
+    {
+        if (IsImplied(_addressingMode))
+        {
+            SetFlag(Mos6502CpuFlags.C, (A & 1) != 0);
+            A = (byte)(A >> 1);
+            UpdateNZFlag(A);
+        }
+        else
+        {
+            _av = (ushort)((_wv1 << 8) | _wv0);
+            _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
+            SetFlag(Mos6502CpuFlags.C, (_wv0 & 1) != 0);
+            _wv0 = (byte)(_wv0 >> 1);
+            UpdateNZFlag(_wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
+        }
+    }
+
     private void NOP()
     {
         if (IsImmediate(_addressingMode) || IsImmediate(_addressingMode))
@@ -1308,12 +2480,24 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void NOP_Fast()
+    {
+        // NOP does nothing in fast mode
+    }
+
     private void ORA()
     {
         byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         A |= p;
         UpdateNZFlag(A);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void ORA_Fast()
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        A |= p;
+        UpdateNZFlag(A);
     }
 
     private void ROL()
@@ -1354,6 +2538,29 @@ public class Mos6502Cpu
                     _runState = Mos6502CpuRunState.Fetch;
                     break;
             }
+        }
+    }
+
+    private protected void ROL_Fast()
+    {
+        if (IsImplied(_addressingMode))
+        {
+            bool tmp = GetFlag(Mos6502CpuFlags.C);
+            SetFlag(Mos6502CpuFlags.C, ((A >> 7) & 1) != 0);
+            A = (byte)(A << 1);
+            if (tmp) A |= 1;
+            UpdateNZFlag(A);
+        }
+        else
+        {
+            _av = (ushort)((_wv1 << 8) | _wv0);
+            _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
+            bool tmp = GetFlag(Mos6502CpuFlags.C);
+            SetFlag(Mos6502CpuFlags.C, ((_wv0 >> 7) & 1) != 0);
+            _wv0 = (byte)(_wv0 << 1);
+            if (tmp) _wv0 |= 1;
+            UpdateNZFlag(_wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
         }
     }
 
@@ -1398,6 +2605,29 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void ROR_Fast()
+    {
+        if (IsImplied(_addressingMode))
+        {
+            bool tmp = GetFlag(Mos6502CpuFlags.C);
+            SetFlag(Mos6502CpuFlags.C, (A & 1) != 0);
+            A = (byte)(A >> 1);
+            if (tmp) A |= 0x80;
+            UpdateNZFlag(A);
+        }
+        else
+        {
+            _av = (ushort)((_wv1 << 8) | _wv0);
+            _wv0 = Read(_av, Mos6502MemoryBusAccessKind.ExecuteRead);
+            bool tmp = GetFlag(Mos6502CpuFlags.C);
+            SetFlag(Mos6502CpuFlags.C, (_wv0 & 1) != 0);
+            _wv0 = (byte)(_wv0 >> 1);
+            if (tmp) _wv0 |= 0x80;
+            UpdateNZFlag(_wv0);
+            Write(_av, _wv0, Mos6502MemoryBusAccessKind.ExecuteWrite);
+        }
+    }
+
     private void RTI()
     {
         switch (_cycleCount)
@@ -1416,6 +2646,21 @@ public class Mos6502Cpu
                 _runState = Mos6502CpuRunState.Fetch;
                 break;
         }
+    }
+
+    private protected void RTI_Fast()
+    {
+        byte p = Pop(Mos6502MemoryBusAccessKind.PopSR);
+        SetFlag(Mos6502CpuFlags.C, (p & 1) != 0);
+        SetFlag(Mos6502CpuFlags.Z, ((p >> 1) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.I, ((p >> 2) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.D, ((p >> 3) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.B, false);
+        SetFlag(Mos6502CpuFlags.U, true);
+        SetFlag(Mos6502CpuFlags.V, ((p >> 6) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.N, ((p >> 7) & 1) != 0);
+        PC = Pop(Mos6502MemoryBusAccessKind.PopRtiLow);
+        PC = (ushort)((Pop(Mos6502MemoryBusAccessKind.PopRtiHigh) << 8) | PC);
     }
 
     private void RTS()
@@ -1441,11 +2686,24 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void RTS_Fast()
+    {
+        PC = Pop(Mos6502MemoryBusAccessKind.PopRtsLow);
+        PC = (ushort)((Pop(Mos6502MemoryBusAccessKind.PopRtsHigh) << 8) | PC);
+        PC++;
+    }
+
     private protected void SBC()
     {
         byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         SBC(p);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void SBC_Fast()
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        SBC(p);
     }
 
     private protected void SBC(byte p)
@@ -1495,6 +2753,12 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void PHP_Fast()
+    {
+        var sr = SR | Mos6502CpuFlags.B | Mos6502CpuFlags.U;
+        Push((byte)sr, Mos6502MemoryBusAccessKind.PushSR);
+    }
+
     private void PLP()
     {
         if (_cycleCount == 0)
@@ -1520,11 +2784,29 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void PLP_Fast()
+    {
+        byte p = Pop(Mos6502MemoryBusAccessKind.PopSR);
+        SetFlag(Mos6502CpuFlags.C, (p & 1) != 0);
+        SetFlag(Mos6502CpuFlags.Z, ((p >> 1) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.I, ((p >> 2) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.D, ((p >> 3) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.B, false);
+        SetFlag(Mos6502CpuFlags.U, true);
+        SetFlag(Mos6502CpuFlags.V, ((p >> 6) & 1) != 0);
+        SetFlag(Mos6502CpuFlags.N, ((p >> 7) & 1) != 0);
+    }
+
     private void TXS()
     {
         S = X;
         Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void TXS_Fast()
+    {
+        S = X;
     }
 
     // Wildcard opcodes
@@ -1566,11 +2848,36 @@ public class Mos6502Cpu
         }
     }
 
+    private protected void BRA_Fast(Mos6502CpuFlags flag, bool value)
+    {
+        _av = (ushort)((_wv1 << 8) | _wv0);
+        _wv0 = Read(_av++, Mos6502MemoryBusAccessKind.OperandBranchOffset);
+        PC++;
+        if (GetFlag(flag) == value)
+        {
+            byte tmp = (byte)(PC >> 8);
+            PC = (ushort)(PC + (sbyte)_wv0);
+            if (tmp != (byte)(PC >> 8))
+            {
+                _pageCrossed = true;
+            }
+            else
+            {
+                _pageCrossed = false;
+            }
+        }
+    }
+
     private void CLOrSFlag(Mos6502CpuFlags flag, bool set)
     {
         Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
         SetFlag(flag, set);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void CLOrSFlag_Fast(Mos6502CpuFlags flag, bool set)
+    {
+        SetFlag(flag, set);
     }
 
     private void CMP(ref byte reg)
@@ -1582,12 +2889,26 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void CMP_Fast(ref byte reg)
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        p = (byte)(reg - p);
+        UpdateNZFlag(p);
+        SetFlag(Mos6502CpuFlags.C, reg >= p);
+    }
+
     private void DEC(ref byte reg0)
     {
         reg0--;
         UpdateNZFlag(reg0);
         Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void DEC_Fast(ref byte reg0)
+    {
+        reg0--;
+        UpdateNZFlag(reg0);
     }
 
     private void INC(ref byte reg0)
@@ -1598,12 +2919,25 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void INC_Fast(ref byte reg0)
+    {
+        reg0++;
+        UpdateNZFlag(reg0);
+    }
+
     private void LD(ref byte reg)
     {
         byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
         reg = p;
         UpdateNZFlag(reg);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void LD_Fast(ref byte reg)
+    {
+        byte p = Read((ushort)((_wv1 << 8) | _wv0), _pendingExecuteReadKind);
+        reg = p;
+        UpdateNZFlag(reg);
     }
 
     private protected void ST(ref byte reg)
@@ -1618,12 +2952,24 @@ public class Mos6502Cpu
         _runState = Mos6502CpuRunState.Fetch;
     }
 
+    private protected void ST_Fast(ref byte reg)
+    {
+        _av = (ushort)((_wv1 << 8) | _wv0);
+        Write(_av, reg, Mos6502MemoryBusAccessKind.ExecuteWrite);
+    }
+
     private void TR(ref byte dst, byte src)
     {
         dst = src;
         UpdateNZFlag(dst);
         Read(_av, Mos6502MemoryBusAccessKind.ExecuteDummyRead);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void TR_Fast(ref byte dst, byte src)
+    {
+        dst = src;
+        UpdateNZFlag(dst);
     }
 
     private void PHA()
@@ -1635,6 +2981,11 @@ public class Mos6502Cpu
         }
         Push(A, Mos6502MemoryBusAccessKind.PushRegisterA);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void PHA_Fast()
+    {
+        Push(A, Mos6502MemoryBusAccessKind.PushRegisterA);
     }
 
     private void PLA()
@@ -1652,6 +3003,12 @@ public class Mos6502Cpu
         A = Pop(Mos6502MemoryBusAccessKind.PopRegisterA);
         UpdateNZFlag(A);
         _runState = Mos6502CpuRunState.Fetch;
+    }
+
+    private protected void PLA_Fast()
+    {
+        A = Pop(Mos6502MemoryBusAccessKind.PopRegisterA);
+        UpdateNZFlag(A);
     }
     
     private protected virtual void JAM()

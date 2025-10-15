@@ -2,6 +2,7 @@
 // Licensed under the BSD-Clause 2 license.
 // See license.txt file in the project root for full license information.
 
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
@@ -87,7 +88,7 @@ public class Mos6510CpuTests
 
     [TestMethod]
     [CustomDataSource]
-    public void TestJson(string file)
+    public void TestJson(string file, bool isFast)
     {
         if (!File.Exists(file))
         {
@@ -106,11 +107,19 @@ public class Mos6510CpuTests
         options.Converters.Add(new JsonMemoryActionConverter());
 
         var testCases = JsonSerializer.Deserialize<List<TestCase6502>>(File.ReadAllText(file), options)!;
-        
-        var bus = new MemoryBusTracker();
-        var cpu = new Mos6510Cpu(bus);
-        cpu.Steps(8);
-        bus.Reset();
+
+        MemoryBusTracker bus = new MemoryBusTracker();
+        Mos6510Cpu cpu = new Mos6510Cpu(bus);
+        if (isFast)
+        {
+            cpu.FastReset();
+            cpu.Reset();
+        }
+        else
+        {
+            cpu.Steps(8);
+            bus.Reset();
+        }
 
         Dictionary<TestCaseClusterKey, List<TestCase6502>> clusteredTests = new();
         
@@ -119,10 +128,17 @@ public class Mos6510CpuTests
         {
             if (cpu.IsJammed)
             {
-                cpu.Reset();
+                if (isFast)
+                {
+                    cpu.FastReset();
+                }
+                else
+                {
+                    cpu.Reset();
+                }
             }
             
-            var exception = TestSingle(file, test, cpu, bus, clusteredTests);
+            var exception = TestSingle(file, test, cpu, bus, clusteredTests, isFast);
             if (exception != null)
             {
                 Console.WriteLine($"Test `{test.Name}` in file `{file}` failed: {exception}");
@@ -135,13 +151,15 @@ public class Mos6510CpuTests
             Assert.Fail($"{failed}/{testCases.Count} tests failed in file `{file}`");
         }
 
+        if (isFast) return; // Do not cluster fast tests
+
         var fileName = Path.GetFileNameWithoutExtension(file);
         if (fileName == TestSubsetName) return; // Do not cluster the selected subset file
 
         UpdateSelectedTestsFromSampling(clusteredTests);
     }
 
-    private AssertFailedException? TestSingle(string file, TestCase6502 testCase, Mos6502Cpu cpu, MemoryBusTracker bus, Dictionary<TestCaseClusterKey, List<TestCase6502>> clusteredTests)
+    private AssertFailedException? TestSingle(string file, TestCase6502 testCase, Mos6502Cpu cpu, MemoryBusTracker bus, Dictionary<TestCaseClusterKey, List<TestCase6502>> clusteredTests, bool isFast)
     {
         try
         {
@@ -162,58 +180,66 @@ public class Mos6510CpuTests
                 bus.Ram[address] = value;
             }
 
-            var collectedCycles = new List<List<MemoryAction>>();
-
-
-            // Collect all cycles and associated memory actions for one CPU step/instruction
-            
-            cpu.Step(() =>
+            if (isFast)
             {
-                var collectedActions = new List<MemoryAction>();
-                collectedActions.AddRange(bus.Actions);
-                bus.Actions.Clear();
-                collectedCycles.Add(collectedActions);
-                return collectedCycles.Count <= 10;
-            });
-
-            var sb = new StringBuilder();
-            for (var i = 0; i < collectedCycles.Count; i++)
+                cpu.FastStep();
+            }
+            else
             {
-                var cycle = collectedCycles[i];
-                foreach (var action in cycle)
+                var collectedCycles = new List<List<MemoryAction>>();
+                
+                // Collect all cycles and associated memory actions for one CPU step/instruction
+
+                cpu.Step(() =>
                 {
+                    var collectedActions = new List<MemoryAction>();
+                    collectedActions.AddRange(bus.Actions);
+                    bus.Actions.Clear();
+                    collectedCycles.Add(collectedActions);
+                    return collectedCycles.Count <= 10;
+                });
+
+                var sb = new StringBuilder();
+                for (var i = 0; i < collectedCycles.Count; i++)
+                {
+                    var cycle = collectedCycles[i];
+                    foreach (var action in cycle)
+                    {
+                        sb.AppendLine($"[{i}] => {action}");
+                    }
+                }
+
+                var generatedActionsAsText = sb.ToString();
+                sb.Clear();
+                for (var i = 0; i < testCase.Cycles.Count; i++)
+                {
+                    var action = testCase.Cycles[i];
                     sb.AppendLine($"[{i}] => {action}");
                 }
+
+                var expectedActionsAsText = sb.ToString();
+
+                var actions = $"\n--- Expected Actions ---\n{expectedActionsAsText}\n--- Generated Actions ---\n{generatedActionsAsText}\n------------------------\n";
+
+                var minCycles = Math.Min(collectedCycles.Count, testCase.Cycles.Count);
+
+                for (var i = 0; i < minCycles; i++)
+                {
+                    var expectedMemoryAction = testCase.Cycles[i];
+                    var actualMemoryActions = collectedCycles[i];
+
+                    Assert.AreEqual(1, actualMemoryActions.Count, $"Expecting a single memory operation per cycle at cycle #{i} for test `{testCase.Name}`. {actions}");
+
+                    var action = actualMemoryActions[^1];
+                    Assert.AreEqual(action, expectedMemoryAction, $"Memory operation not matching at cycle #{i} for test `{testCase.Name}`. {actions}");
+                }
+
+                if (collectedCycles.Count != testCase.Cycles.Count)
+                {
+                    Assert.Fail($"Number of cycles not matching. Expected {testCase.Cycles.Count} but got {collectedCycles.Count} for test `{testCase.Name}`. {actions}");
+                }
             }
-            var generatedActionsAsText = sb.ToString();
-            sb.Clear();
-            for (var i = 0; i < testCase.Cycles.Count; i++)
-            {
-                var action = testCase.Cycles[i];
-                sb.AppendLine($"[{i}] => {action}");
-            }
-            var expectedActionsAsText = sb.ToString();
 
-            var actions = $"\n--- Expected Actions ---\n{expectedActionsAsText}\n--- Generated Actions ---\n{generatedActionsAsText}\n------------------------\n";
-            
-            var minCycles = Math.Min(collectedCycles.Count, testCase.Cycles.Count);
-
-            for (var i = 0; i < minCycles; i++)
-            {
-                var expectedMemoryAction = testCase.Cycles[i];
-                var actualMemoryActions = collectedCycles[i];
-
-                Assert.AreEqual(1, actualMemoryActions.Count, $"Expecting a single memory operation per cycle at cycle #{i} for test `{testCase.Name}`. {actions}");
-
-                var action = actualMemoryActions[^1];
-                Assert.AreEqual(action, expectedMemoryAction, $"Memory operation not matching at cycle #{i} for test `{testCase.Name}`. {actions}");
-            }
-
-            if (collectedCycles.Count != testCase.Cycles.Count)
-            {
-                Assert.Fail($"Number of cycles not matching. Expected {testCase.Cycles.Count} but got {collectedCycles.Count} for test `{testCase.Name}`. {actions}");
-            }
-            
             var final = testCase.Final!;
             Assert.AreEqual(final.PC, cpu.PC, $"Final PC not matching for test `{testCase.Name}`");
             Assert.AreEqual(final.S, cpu.S, $"Final S not matching for test `{testCase.Name}`");
@@ -231,7 +257,10 @@ public class Mos6510CpuTests
             }
 
             // We verify that the number of cycles emitted is matching the CPU.InstructionCycles
-            Assert.AreEqual((uint)testCase.Cycles.Count, cpu.InstructionCycles, $"Number of cycles not matching CPU.InstructionCycles for test `{testCase.Name}`");
+            if (!isFast || ((Mos6510OpCode)cpu.CurrentOpCode).ToMnemonic() != Mos6510Mnemonic.JAM)
+            {
+                Assert.AreEqual((uint)testCase.Cycles.Count, cpu.InstructionCycles, $"Number of cycles not matching CPU.InstructionCycles for test `{testCase.Name}`");
+            }
 
             // Extract cluster key from tests
             // The way it is working is that we group tests with the:
@@ -243,7 +272,7 @@ public class Mos6510CpuTests
             //
             // Then later, we will randomly select TestSubsetCountPerOpCode from each cluster
             var fileName = Path.GetFileNameWithoutExtension(file);
-            if (fileName.Length == 2) // opcode
+            if (!isFast && fileName.Length == 2) // opcode
             {
                 HashCode hash = new();
                 hash.Add(testCase.Cycles.Count);
@@ -417,12 +446,15 @@ public class Mos6510CpuTests
         public IEnumerable<object[]> GetData(MethodInfo methodInfo)
         {
             // Always add first the selected subset
-            yield return [Path.Combine(AppContext.BaseDirectory, $"{TestSubsetName}.json")];
+            var subsetName = Path.Combine(AppContext.BaseDirectory, $"{TestSubsetName}.json");
+            yield return [subsetName, false];
+            yield return [subsetName, true];
 
             for (int i = 0; i < 256; i++)
             {
                 var file = Path.Combine(Tests6502Folder, $"{i:X2}.json");
-                yield return [file];
+                yield return [file, false];
+                yield return [file, true];
             }
         }
 
@@ -431,16 +463,17 @@ public class Mos6510CpuTests
             if (data != null)
             {
                 var file = (string)data[0]!;
+                var isFast = (bool)data[1]!;
                 var fileNameWithoutExt = Path.GetFileNameWithoutExtension(file);
                 if (fileNameWithoutExt == TestSubsetName)
                 {
-                    return $"Primary_{fileNameWithoutExt}";
+                    return $"Primary_{fileNameWithoutExt}{(isFast ? "_Fast" : "")}";
                 }
                 else
                 {
                     var b = byte.Parse(fileNameWithoutExt, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
                     var opcode = (Mos6510OpCode)b;
-                    return $"Test_{b:X2}_{opcode}";
+                    return $"Test_{b:X2}_{opcode}{(isFast ? "_Fast": "")}";
                 }
             }
 

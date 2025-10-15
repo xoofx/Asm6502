@@ -31,6 +31,7 @@
 
 
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -494,7 +495,7 @@ partial class CodeRelocator
         }
     }
 
-    private void RelocExactlyOne(ProgramSource? src, byte zpAddress)
+    private void RelocExactlyOne(ProgramSource src, byte zpAddress)
     {
         // Mark duplicates as non-relocatable
         for (var s = src; s is not null; s = s.Next)
@@ -683,14 +684,15 @@ partial class CodeRelocator
         for (var s = src2; s is not null; s = s.Next)
             _programByteInfos[s.ProgramOffset].SetUsedInZp(zpAddr);
 
-        if (EnableZpReloc)
+        if (EnableZpReloc && src1 is not null)
         {
             var list = src1;
             for (var s = src2; s is not null; s = s.Next) list = CreateSourceAtProgramByteOffset(s.ProgramOffset, list);
             RelocExactlyOne(list, zpAddr);
         }
     }
-    
+
+    [return: NotNullIfNotNull(nameof(next))]
     private ProgramSource? CreateSourceAtProgramByteOffset(ushort offset, ProgramSource? next)
     {
         // Don't track an offset that is marked as NoReloc
