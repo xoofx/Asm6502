@@ -40,6 +40,35 @@ namespace Asm6502.Relocator;
 partial class CodeRelocator
 {
     /// <summary>
+    /// Checks the indirect address and determines if it is relocatable.
+    /// </summary>
+    /// <remarks>This method resolves the address from the specified indirect address and checks if it falls
+    /// within a relocatable range. If the resolved address is non-zero, it performs additional checks to verify its
+    /// relocatability and track the source of relocations.
+    ///
+    /// It can be used to track vectors or jump tables sets during a prior pass over the code. And execute them later for emulation (e.g. NMI routines or IRQ routines).
+    /// </remarks>
+    /// <param name="indirectAddress">The indirect address to be checked, represented as a 16-bit unsigned integer.</param>
+    /// <param name="address">When this method returns, contains the resolved address if the indirect address is relocatable; otherwise, it is
+    /// set to zero.</param>
+    /// <returns><see langword="true"/> if the indirect address is relocatable and the resolved address is non-zero; otherwise,
+    /// <see langword="false"/>.</returns>
+    public bool CheckIndirectAddressAndProbeIfRelocatable(ushort indirectAddress, out ushort address)
+    {
+        address = (ushort)((Ram[indirectAddress + 1] << 8) | Ram[indirectAddress]);
+        if (address != 0)
+        {
+            var lsbSource = GetRamProgramSource(indirectAddress);
+            var msbSource = GetRamProgramSource((ushort)(indirectAddress + 1));
+
+            CheckRelocRange(address, lsbSource, null, msbSource);
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// Relocates the program code to the specified target address and applies any required zero-page relocations.
     /// </summary>
     /// <remarks>This method performs relocation only once per instance; subsequent calls reuse the analysis

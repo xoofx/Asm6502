@@ -50,15 +50,16 @@ partial class CodeRelocator
             throw new ArgumentOutOfRangeException(nameof(targetAddress), "Target address and length exceed 64KB");
         buffer.CopyTo(_ram.AsSpan(targetAddress, buffer.Length));
     }
-    
+
     /// <summary>
-    /// Executes a subroutine at the specified address, simulating a JSR call and running until RTS returns.
+    /// Executes a subroutine at the specified address, simulating a JSR call and running until RTS returns (or RTI if specified).
     /// </summary>
     /// <param name="address">The address of the subroutine to execute.</param>
-    /// <param name="maxCycles">The maximum number of cycles to execute, or 0 for unlimited.</param>
+    /// <param name="maxCycles">The maximum number of cycles to execute, or 0 for unlimited. Default is 0.</param>
     /// <param name="enableAnalysis">Whether to enable source tracking and relocation analysis during execution.</param>
+    /// <param name="expectRtiInsteadOfRts">Whether to expect an RTI instruction instead of RTS for returning from the subroutine.</param>
     /// <exception cref="InvalidOperationException">Thrown when the CPU halts or jams during execution.</exception>
-    public void RunSubroutineAt(ushort address, int maxCycles, bool enableAnalysis = true)
+    public void RunSubroutineAt(ushort address, int maxCycles = 0, bool enableAnalysis = true, bool expectRtiInsteadOfRts = false)
     {
         _hasBeenAnalyzed = false; // Reset analysis state
         _srcA = null;
@@ -67,9 +68,15 @@ partial class CodeRelocator
         _eaSrcMsb = null;
 
         _cpu.PC = address;
-        _cpu.S = 0xFD; // Simulate that we came from a JSR (with a return address on the stack)
-        GetRam(0x1FE) = 0; // Clear the return address on the stack
-        GetRam(0x1FF) = 0;
+        var expectedOpcode = expectRtiInsteadOfRts ? Mos6502OpCode.RTI_Implied : Mos6502OpCode.RTS_Implied;
+
+        // Simulate the return address on the stack:
+        // - RTS: 2 bytes on the stack (when a JSR was done)
+        // - RTI: 3 bytes on the stack (when an interrupt was done)
+        _cpu.S = (byte)(0xFF - (expectRtiInsteadOfRts ? 3 : 2));
+
+        // Clear stack
+        ClearRamRegion(0x100, 0x100);
 
         _enableTrackSource = enableAnalysis; // Enable tracking during execution
 
@@ -88,7 +95,7 @@ partial class CodeRelocator
                 // Only run the post process after the full instruction has been executed
                 PostProcessInstructionForRegisters();
 
-                if (_cpu.CurrentOpCode == Mos6502OpCode.RTS_Implied && Cpu.S == 0xFF)
+                if (_cpu.CurrentOpCode == expectedOpcode && Cpu.S == 0xFF)
                 {
                     // RTS with empty stack, we are done
                     break;
