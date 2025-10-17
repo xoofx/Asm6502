@@ -14,6 +14,52 @@ namespace Asm6502.Tests;
 public class CodeRelocatorTests : VerifyBase
 {
     [TestMethod]
+    public async Task TestRelocationZp()
+    {
+        var asm = new Mos6510Assembler()
+            .LDA_Imm(0x10)
+            .STA(0xFF)
+            .LDA_Imm(0x20)
+            .STA(0xFE)
+            .LDA_Imm(0x30)
+            .STA(0xFD)
+            .RTS();
+
+        var config = new CodeRelocationConfig()
+        {
+            ProgramAddress = asm.BaseAddress,
+           ProgramBytes = asm.Buffer.ToArray(),
+        };
+
+        var relocator = new CodeRelocator(config)
+        {
+            Diagnostics =
+            {
+                LogLevel = CodeRelocationDiagnosticKind.Trace
+            },
+            Testing = true
+        };
+
+        relocator.RunSubroutineAt(asm.BaseAddress, 1000);
+        var relocatedBytes = relocator.Relocate(new CodeRelocationTarget()
+        {
+            Address = 0x3000,
+            ZpRange = new RamZpRange(0x80, 0x10)
+        });
+
+        var relocatedZp = relocator.GetZeroPageAddresses();
+        Assert.AreEqual(3, relocatedZp.Length);
+        Assert.AreEqual(0x80, relocatedZp[0]);
+        Assert.AreEqual(0x81, relocatedZp[1]);
+        Assert.AreEqual(0x82, relocatedZp[2]);
+
+        var writer = new StringWriter();
+        relocator.PrintRelocationMap(writer);
+        var log = writer.ToString();
+        await Verify(log);
+    }
+
+    [TestMethod]
     public async Task TestAddressingAbsolute()
         => await Verify(RelocToString(
             new Mos6510Assembler()

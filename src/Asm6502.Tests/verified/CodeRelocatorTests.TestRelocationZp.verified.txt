@@ -1,0 +1,9 @@
+﻿Program map:
+c000, 3000:  =?=Z=?=Z=?=Z=                                                   
+MSB relocations       (R): 0
+Zero-page relocations (Z): 3
+Static bytes          (=): 7
+Status undetermined   (?): 3
+Unused bytes          (.): 0
+Old zero-page addresses:   fd fe ff
+New zero-page addresses:   80 81 82

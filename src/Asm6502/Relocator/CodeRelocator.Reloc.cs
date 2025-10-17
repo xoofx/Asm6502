@@ -191,6 +191,30 @@ partial class CodeRelocator
 
         return newProgramBytes;
     }
+
+    /// <summary>
+    /// Retrieves the set of zero-page addresses relocated after running <see cref="Relocate"/>.
+    /// </summary>
+    /// <returns>An array of bytes containing the relocation addresses in the zero page. The array will be
+    /// empty if no writable addresses are found.</returns>
+    public byte[] GetZeroPageAddresses()
+    {
+        int countZp = 0;
+        for (int i = 2; i < 256; i++)
+        {
+            if ((_accessMap[i] & RamReadWriteFlags.Write) != 0) countZp++;
+        }
+        var result = new byte[countZp];
+        int index = 0;
+        for (int i = 2; i < 256; i++)
+        {
+            if ((_accessMap[i] & RamReadWriteFlags.Write) != 0)
+            {
+                result[index++] = _zpRelocations[i].Reloc;
+            }
+        }
+        return result;
+    }
     
     /// <summary>
     /// Prints a formatted relocation map of the program to the specified text writer.
