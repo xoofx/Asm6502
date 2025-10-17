@@ -36,6 +36,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <InternalsVisibleTo Include="Asm6502.Tests" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2650,15 +2650,7 @@ public class Mos6502Cpu
 
     private protected void RTI_Fast()
     {
-        byte p = Pop(Mos6502MemoryBusAccessKind.PopSR);
-        SetFlag(Mos6502CpuFlags.C, (p & 1) != 0);
-        SetFlag(Mos6502CpuFlags.Z, ((p >> 1) & 1) != 0);
-        SetFlag(Mos6502CpuFlags.I, ((p >> 2) & 1) != 0);
-        SetFlag(Mos6502CpuFlags.D, ((p >> 3) & 1) != 0);
-        SetFlag(Mos6502CpuFlags.B, false);
-        SetFlag(Mos6502CpuFlags.U, true);
-        SetFlag(Mos6502CpuFlags.V, ((p >> 6) & 1) != 0);
-        SetFlag(Mos6502CpuFlags.N, ((p >> 7) & 1) != 0);
+        PLP_Fast();
         PC = Pop(Mos6502MemoryBusAccessKind.PopRtiLow);
         PC = (ushort)((Pop(Mos6502MemoryBusAccessKind.PopRtiHigh) << 8) | PC);
     }
@@ -3041,10 +3033,13 @@ public class Mos6502Cpu
         }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void Push(byte value, Mos6502MemoryBusAccessKind kind) => Write((ushort)(0x100 + S--), value, kind);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private byte Pop(Mos6502MemoryBusAccessKind kind) => Read((ushort)(0x100 + (++S)), kind);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private protected void UpdateNZFlag(byte v)
     {
         SetFlag(Mos6502CpuFlags.N, (v & 0x80) != 0);

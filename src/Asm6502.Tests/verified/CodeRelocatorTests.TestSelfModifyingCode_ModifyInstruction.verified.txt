@@ -8,7 +8,8 @@ Unused bytes          (.): 0
 Old zero-page addresses:  
 New zero-page addresses:  
 
-Diagnostics: (none)
+Diagnostics:
+    Info CR0104: Relocation solving took 0.00ms
 
 Original:
 LL_01:

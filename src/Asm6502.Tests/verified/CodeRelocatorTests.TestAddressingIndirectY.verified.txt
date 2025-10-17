@@ -13,9 +13,10 @@ Diagnostics:
    Trace CR0101: Adding constraint: Exactly one reloc: {$c009}
    Trace CR0101: Adding constraint: Exactly one reloc: {$c00b, $c00d}
    Trace CR0101: Adding constraint: Exactly one reloc: {$c00b, $c00d}
-   Trace CR0101: Adding constraint: Exactly one reloc: {$c004}
    Trace CR0101: Adding constraint: Exactly one reloc: {$c00b, $c00d}
+   Trace CR0101: Adding constraint: Exactly one reloc: {$c004}
    Trace CR0101: Adding constraint: Exactly one reloc: {$c009}
+    Info CR0104: Relocation solving took 0.00ms
 
 Original:
 LL_01:

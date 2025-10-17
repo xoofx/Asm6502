@@ -329,13 +329,21 @@ public class CodeRelocatorTests : VerifyBase
         var writer = new StringWriter();
         ushort targetRelocAddr = 0x2000;
         var targetZpRange = new RamZpRange(0x80, 0x10);
-        
-        var relocator = new CodeRelocator(asm.BaseAddress, asm.Buffer.ToArray())
+
+
+        var config = new CodeRelocationConfig()
+        {
+            ProgramAddress = asm.BaseAddress,
+            ProgramBytes = asm.Buffer.ToArray()
+        };
+
+        var relocator = new CodeRelocator(config)
         {
             Diagnostics =
             {
                 LogLevel = CodeRelocationDiagnosticKind.Trace
-            }
+            },
+            Testing = true
         };
 
         byte[]? relocatedBytes = null;

@@ -30,6 +30,11 @@ public enum CodeRelocationDiagnosticId
     /// </summary>
     TRC_SolverShouldNotBeRelocated = 103,
 
+    /// <summary>
+    /// Represents the trace event identifier for solver timing information.
+    /// </summary>
+    TRC_SolverTime = 104,
+
     // Debug 200
     // Info 300
 
@@ -52,4 +57,19 @@ public enum CodeRelocationDiagnosticId
     /// Error: Relocation inconsistency detected.
     /// </summary>
     ERR_RelocationInconsistency = 502,
+    
+    /// <summary>
+    /// Indicates that an unexpected error has occurred during the operation.
+    /// </summary>
+    ERR_UnexpectedError = 503,
+
+    /// <summary>
+    /// Represents an error code indicating that the state of the SID registers is inconsistent with the expected state.
+    /// </summary>
+    ERR_InvalidSIDState = 504,
+
+    /// <summary>
+    /// Indicates that the maximum number of allowed cycles has been reached.
+    /// </summary>
+    ERR_MaxCyclesReached = 505,
 }

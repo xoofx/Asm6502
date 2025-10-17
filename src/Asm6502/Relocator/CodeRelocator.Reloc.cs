@@ -40,6 +40,15 @@ namespace Asm6502.Relocator;
 
 partial class CodeRelocator
 {
+    private readonly Stack<SolverStackFrame> _solverStackFramePool = new();
+    private readonly Stack<RamByteFlags[]> _backtrackPool = new();
+    private ConstraintList[] _allConstraints = [];
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the application is in unit testing mode (used by CodeRelocatorTests).
+    /// </summary>
+    internal bool Testing { get; set; }
+    
     /// <summary>
     /// Checks the indirect address and determines if it is relocatable.
     /// </summary>
@@ -94,15 +103,14 @@ partial class CodeRelocator
             throw new ArgumentException("Zero-page relocation is enabled but no zero-page range was specified", nameof(relocationTarget));
         }
 
-        if (relocationTarget.Address < 0x200)
+        if ((byte)relocationTarget.Address != (_programAddress & 0x00FF))
         {
-            throw new ArgumentException("Relocation target address must be >= 0x200", nameof(relocationTarget));
+            throw new ArgumentException($"Relocation target address ${relocationTarget.Address:x4} low byte must be match the program address low byte ${(byte)_programAddress:x2} instead of ${(byte)relocationTarget.Address:x2}", nameof(relocationTarget));
         }
 
-        // In practice, it should always be 0x00 (but we allow other values, as long as they are the same)
-        if ((byte)relocationTarget.Address != (byte)RelocationAnalysisStart)
+        if (relocationTarget.Address < 0x200)
         {
-            throw new ArgumentException($"Relocation target address low byte must be equal to RelocationStart low byte (${RelocationAnalysisStart:x4}). Actual: ${relocationTarget.Address:x4}", nameof(relocationTarget));
+            throw new ArgumentException("Relocation target address must be >= $200", nameof(relocationTarget));
         }
 
         if (relocationTarget.Address + _programBytes.Length > 0x10000)
@@ -124,37 +132,53 @@ partial class CodeRelocator
                 throw new CodeRelocationException(CodeRelocationDiagnosticId.ERR_RelocationInconsistency, "Trivial inconsistency detected. Check Diagnostics.");
             }
 
-            if (RecursiveSolver())
+            var clock = Stopwatch.StartNew();
+            try
             {
-                throw new CodeRelocationException(CodeRelocationDiagnosticId.ERR_NoSolutionFound, "No solution found. Check Diagnostics.");
+                // Collect all constraints
+                _allConstraints = _constraintsHashTable.Values.ToArray();
+
+                //if (RecursiveSolver())
+                if (HeapSolver())
+                {
+                    throw new CodeRelocationException(CodeRelocationDiagnosticId.ERR_NoSolutionFound, "No solution found. Check Diagnostics.");
+                }
+            }
+            finally
+            {
+                clock.Stop();
+                if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
+                {
+                    Diagnostics.Info(CodeRelocationDiagnosticId.TRC_SolverTime, $"Relocation solving took {(Testing ? 0.0 : clock.Elapsed.TotalMilliseconds):0.00}ms");
+                }
             }
         }
 
         ComputeZeroPageRelocations(relocationTarget.ZpRange);
 
-        var newProgramBytes = new byte[_programBytes.Length];
-        _programBytes.AsSpan().CopyTo(newProgramBytes);
+        var newProgramBytes = (byte[])_programBytes.Clone();
 
         // Apply relocations
         var msb = (byte)(relocationTarget.Address >> 8);
+        var msbOffset = msb - (_programAddress >> 8);
         for (int i = 0; i < newProgramBytes.Length; i++)
         {
-            ref var b = ref newProgramBytes[i];
-            ref var pb = ref _programByteInfos[i];
+            ref var pb = ref _programByteStates[i];
             if ((pb.Flags & RamByteFlags.Reloc) == 0)
             {
                 continue;
             }
 
-            if((pb.Flags & RamByteFlags.UsedInMsb) != 0)
+            ref var b = ref newProgramBytes[i];
+            if ((pb.Flags & RamByteFlags.UsedInMsb) != 0)
             {
-                b = msb;
+                b = (byte)(b + msbOffset);
             }
             else if (EnableZpReloc && (pb.Flags & RamByteFlags.UsedInZp) != 0)
             {
                 int j;
                 for(j = 2; j< 256; j++) {
-                    if(pb.ZpAddr.IsUsed((byte)j)) {
+                    if(pb.ZpAddr!.IsUsed((byte)j)) {
                         break;
                     }
                 }
@@ -186,24 +210,24 @@ partial class CodeRelocator
 
         writer.Write("Program map:");
         ushort org = _programAddress;
-        ushort targetOrg = _lastRelocationTarget.Address;
+        int relocOffset = _lastRelocationTarget.Address - _programAddress;
 
         // Align down and up to 64 bytes to display a full range
-        for (int addr = org & 0xFFC0, taddr = targetOrg & 0xFFC0; addr <= ((org + _programByteInfos.Length - 1) | 0x003F); addr++, taddr++)
+        for (int addr = org & 0xFFC0; addr <= ((org + _programByteStates.Length - 1) | 0x003F); addr++)
         {
             if ((addr & 0x3F) == 0)
             {
-                writer.Write($"\n{addr:x4}, {taddr:x4}:  ");
+                writer.Write($"\n{addr:x4}, {(ushort)(addr + relocOffset) :x4}:  ");
             }
 
-            if (addr < org || addr >= org + _programByteInfos.Length)
+            if (addr < org || addr >= org + _programByteStates.Length)
             {
                 writer.Write(" ");
             }
             else
             {
                 int i = addr - org;
-                ref var pb = ref _programByteInfos[i];
+                ref var pb = ref _programByteStates[i];
 
                 if ((pb.Flags & RamByteFlags.Reloc) != 0)
                 {
@@ -288,9 +312,9 @@ partial class CodeRelocator
         }
 
         // Find program bytes that contribute to multiple zero-page addresses and link them
-        for (int i = 0; i < _programByteInfos.Length; i++)
+        for (int i = 0; i < _programByteStates.Length; i++)
         {
-            ref var pb = ref _programByteInfos[i];
+            ref var pb = ref _programByteStates[i];
             if ((pb.Flags & (RamByteFlags.Reloc | RamByteFlags.UsedInZp)) != (RamByteFlags.Reloc | RamByteFlags.UsedInZp))
             {
                 continue;
@@ -299,7 +323,7 @@ partial class CodeRelocator
             int first = -1;
             for (int j = 0; j < 256; j++)
             {
-                if (!pb.ZpAddr.IsUsed((byte)j))
+                if (!pb.ZpAddr!.IsUsed((byte)j))
                 {
                     continue;
                 }
@@ -386,18 +410,13 @@ partial class CodeRelocator
 
         var ramRanges = SafeRamRanges.ToArray().AsSpan();
         ramRanges.Sort();
-
-
+        
         for (int i = 0; i < 65536; i++)
         {
             var addr = (ushort)i;
             if (addr >= _programAddress && addr < _programAddress + _programBytes.Length)
             {
                 // Inside program
-            }
-            else if (addr >= 0xd400 && addr <= 0xd41f) // SID registers: TODO make it configurable
-            {
-                // Ignore
             }
             else if (addr >= 2 && addr < 0x100) // ZeroPage
             {
@@ -407,11 +426,11 @@ partial class CodeRelocator
                     // TODO: Log read only from zero-page without writing
                     for (int j = 0; j < _programBytes.Length; j++)
                     {
-                        ref var pb = ref _programByteInfos[j];
-                        if ((pb.Flags & RamByteFlags.UsedInZp) != 0 && pb.ZpAddr.IsUsed((byte)addr))
+                        ref var pb = ref _programByteStates[j];
+                        if ((pb.Flags & RamByteFlags.UsedInZp) != 0 && pb.ZpAddr!.IsUsed((byte)addr))
                         {
-                            pb.ZpAddr.ClearUsed((byte)addr);
-                            if (pb.ZpAddr.IsNotUsed())
+                            pb.ZpAddr!.ClearUsed((byte)addr);
+                            if (pb.ZpAddr!.IsNotUsed())
                             {
                                 pb.Flags &= ~(RamByteFlags.Reloc | RamByteFlags.UsedInZp);
                             }
@@ -419,7 +438,7 @@ partial class CodeRelocator
                     }
                 }
             }
-            else if (addr >= 0x200) // Ignore stack (TODO: should we ignore also vectors?)
+            else if (addr >= 0x200)
             {
                 bool isAllowed = false;
                 var ramRwFlags = GetAccessMap(addr);
@@ -458,14 +477,11 @@ partial class CodeRelocator
 
         void ReportMemoryAccessOutOfBounds(ushort first, ushort last)
         {
-            if (first == last)
-            {
-                Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds, $"Warning: Write out of bounds at address ${first:x4}");
-            }
-            else
-            {
-                Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds, $"Warning: Write out of bounds at address ${first:x4}-${last:x4}");
-            }
+            Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_OutOfBounds,
+                first == last
+                    ? $"Warning: Write out of bounds at address ${first:x4}"
+                    : $"Warning: Write out of bounds at address ${first:x4}-${last:x4}"
+            );
         }
     }
 
@@ -485,9 +501,13 @@ partial class CodeRelocator
                 constraint.ProgramOffsets1.Add(s.ProgramOffset);
             }
 
-            for (var s = sv2; s is not null; s = s.Next)
+            if (sv2 is not null)
             {
-                constraint.ProgramOffsets2.Add(s.ProgramOffset);
+                constraint.ProgramOffsets2 ??= new();
+                for (var s = sv2; s is not null; s = s.Next)
+                {
+                    constraint.ProgramOffsets2.Add(s.ProgramOffset);
+                }
             }
 
             ConstraintList? list = null;
@@ -520,7 +540,7 @@ partial class CodeRelocator
 
         for (var s = src; s is not null; s = s.Next)
         {
-            ref var programByte = ref _programByteInfos[s.ProgramOffset];
+            ref var programByte = ref _programByteStates[s.ProgramOffset];
             if ((programByte.Flags & RamByteFlags.NoReloc) != 0)
             {
                 dontCount++;
@@ -548,7 +568,7 @@ partial class CodeRelocator
             
             for (var s = src; s is not null; s = s.Next)
             {
-                if ((_programByteInfos[s.ProgramOffset].Flags & RamByteFlags.NoReloc) == 0)
+                if ((_programByteStates[s.ProgramOffset].Flags & RamByteFlags.NoReloc) == 0)
                 {
                     constraint.ProgramOffsets1.Add(s.ProgramOffset);
                 }
@@ -602,7 +622,7 @@ partial class CodeRelocator
 
                     for (var s = src; s is not null; s = s.Next)
                     {
-                        if ((_programByteInfos[s.ProgramOffset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) == 0)
+                        if ((_programByteStates[s.ProgramOffset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) == 0)
                         {
                             constraint.ProgramOffsets1.Add(s.ProgramOffset);
                         }
@@ -631,21 +651,35 @@ partial class CodeRelocator
         }
         
         // Try to find existing constraint
-        foreach(var existing in CollectionsMarshal.AsSpan(constraints))
+        for(var it = constraints; it is not null; it = it.Next)
         {
-            if (existing.Equals(constraint))
+            var existing = it.Constraint;
+            if (existing is not null && existing.Equals(constraint))
             {
                 // Duplicate, don't add
                 return;
             }
         }
 
-        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
+        if (Diagnostics.LogLevel <= CodeRelocationDiagnosticKind.Debug)
         {
-            LogConstraints(constraint);
+            LogConstraint(constraint);
         }
 
-        constraints.Add(constraint);
+        if (constraints.Constraint is null)
+        {
+            Debug.Assert(constraints.Next is null);
+            constraints.Constraint = constraint;
+        }
+        else
+        {
+            var newNode = new ConstraintList
+            {
+                Constraint = constraint,
+                Next = constraints
+            };
+            constraints = newNode;
+        }
     }
 
     private void CheckRelocRange(ushort addr, ProgramSource? lsb1, ProgramSource? lsb2, ProgramSource? msb)
@@ -654,7 +688,7 @@ partial class CodeRelocator
 
         for (var s = msb; s != null; s = s.Next)
         {
-            _programByteInfos[s.ProgramOffset].Flags |= RamByteFlags.UsedInMsb;
+            _programByteStates[s.ProgramOffset].Flags |= RamByteFlags.UsedInMsb;
         }
 
         if (addr >= RelocationAnalysisStart && addr <= RelocationAnalysisEnd)
@@ -679,10 +713,10 @@ partial class CodeRelocator
     private void UsedForZpAddr(byte zpAddr, ProgramSource? src1, ProgramSource? src2)
     {
         for (var s = src1; s is not null; s = s.Next)
-            _programByteInfos[s.ProgramOffset].SetUsedInZp(zpAddr);
+            _programByteStates[s.ProgramOffset].SetUsedInZp(zpAddr);
 
         for (var s = src2; s is not null; s = s.Next)
-            _programByteInfos[s.ProgramOffset].SetUsedInZp(zpAddr);
+            _programByteStates[s.ProgramOffset].SetUsedInZp(zpAddr);
 
         if (EnableZpReloc && src1 is not null)
         {
@@ -696,7 +730,7 @@ partial class CodeRelocator
     private ProgramSource? CreateSourceAtProgramByteOffset(ushort offset, ProgramSource? next)
     {
         // Don't track an offset that is marked as NoReloc
-        if ((_programByteInfos[offset].Flags & RamByteFlags.NoReloc) != 0)
+        if ((_programByteStates[offset].Flags & RamByteFlags.NoReloc) != 0)
         {
             return next;
         }
@@ -758,8 +792,9 @@ partial class CodeRelocator
                 if ((_accessMap[i] & RamReadWriteFlags.Write) != 0)
                 {
                     Debug.Assert(constraints is not null);
-                    foreach (var constraint in constraints!)
+                    for (var it = constraints; it is not null; it = it.Next)
                     {
+                        var constraint = it.Constraint!;
                         ConstraintList? list = null;
                         AddOrMergeConstraint(ref list, constraint);
                     }
@@ -774,19 +809,29 @@ partial class CodeRelocator
         
         foreach (var constraints in _constraintsHashTable.Values)
         {
-            foreach (var constraint in constraints)
+            for(var it = constraints; it is not null; it = it.Next)
             {
+                var constraint = it.Constraint!;
                 AddConstraintToProgramBytes(constraint, constraint.ProgramOffsets1);
-                AddConstraintToProgramBytes(constraint, constraint.ProgramOffsets2);
+                if (constraint.ProgramOffsets2 is not null)
+                {
+                    AddConstraintToProgramBytes(constraint, constraint.ProgramOffsets2);
+                }
             }
         }
     }
 
     private void AddConstraintToProgramBytes(Constraint constraint, List<ushort> offsets)
     {
+        var prog = _programByteStates;
         foreach (var offset in CollectionsMarshal.AsSpan(offsets))
         {
-            _programByteInfos[offset].Constraints.Add(constraint);
+            ref var previousConstraint = ref prog[offset].ConstraintChain;
+            previousConstraint = new ConstraintList()
+            {
+                Constraint = constraint,
+                Next = previousConstraint
+            };
         }
     }
 
@@ -802,7 +847,7 @@ partial class CodeRelocator
             for (ushort i = 0; i < constraint.ProgramOffsets1.Count; i++)
             {
                 var offset = constraint.ProgramOffsets1[i];
-                ref var pb = ref _programByteInfos[offset];
+                ref var pb = ref _programByteStates[offset];
 
                 if ((pb.Flags & RamByteFlags.Reloc) != 0)
                 {
@@ -855,20 +900,23 @@ partial class CodeRelocator
         else if (constraint.Kind == ConstraintKind.Alike)
         {
             int n1Do = 0, n2Do = 0;
-
+            var pgs = _programByteStates;
             foreach (var offset in constraint.ProgramOffsets1)
             {
-                if ((_programByteInfos[offset].Flags & RamByteFlags.Reloc) != 0)
+                if ((pgs[offset].Flags & RamByteFlags.Reloc) != 0)
                 {
                     n1Do++;
                 }
             }
 
-            foreach (var offset in constraint.ProgramOffsets2)
+            if (constraint.ProgramOffsets2 is not null)
             {
-                if ((_programByteInfos[offset].Flags & RamByteFlags.Reloc) != 0)
+                foreach (var offset in constraint.ProgramOffsets2)
                 {
-                    n2Do++;
+                    if ((pgs[offset].Flags & RamByteFlags.Reloc) != 0)
+                    {
+                        n2Do++;
+                    }
                 }
             }
 
@@ -881,9 +929,9 @@ partial class CodeRelocator
 
     private bool CheckTrivialInconsistency()
     {
-        for (ushort i = 0; i < _programByteInfos.Length; i++)
+        for (ushort i = 0; i < _programByteStates.Length; i++)
         {
-            ref var pb = ref _programByteInfos[i];
+            ref var pb = ref _programByteStates[i];
 
             // If a byte contributes to both a zero-page address and an msb, it cannot be relocatable
             if ((pb.Flags & RamByteFlags.UsedInZp) != 0 && (pb.Flags & RamByteFlags.UsedInMsb) != 0)
@@ -901,99 +949,326 @@ partial class CodeRelocator
         return false;
     }
 
+    /// <summary>
+    /// Recursive backtracking solver for relocation constraints.
+    ///
+    /// THIS RESOLVED IS NOT USED BUT IS KEPT FOR REFERENCE. See <see cref="HeapSolver"/> for the current solver.
+    /// </summary>
     private bool RecursiveSolver()
     {
-        // Propagate constraints
-        while (true)
+        bool done;
+        do
         {
-            var done = true;
-            foreach (var constraints in _constraintsHashTable.Values)
+            done = true;
+            foreach (var constraints in _allConstraints)
             {
-                foreach (var constraint in constraints)
+                for (var it = constraints; it is not null; it = it.Next)
                 {
+                    var constraint = it.Constraint!;
                     if (constraint.CheckNeeded)
                     {
                         if (TryPropagateConstraint(constraint))
                         {
-                            return false; // Inconsistency
+                            return true;
                         }
-
                         done = false;
                     }
                 }
             }
-            if (done) break;
-        }
+        } while (!done);
 
-        // Search for an offset to decide
-        foreach(var constraints in _constraintsHashTable.Values)
+
+        foreach (var constraints in _allConstraints)
         {
-            foreach (var constraint in constraints)
+            for (var it = constraints; it is not null; it = it.Next)
             {
-                foreach (var offset in constraint.GetAllOffsets())
+                var constraint = it.Constraint!;
+                var prog = _programByteStates;
+                if (constraint.TryFindUnresolvedOffset(prog, out var offset))
                 {
-                    if ((_programByteInfos[offset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) != 0)
-                    {
-                        continue;
-                    }
-
-                    // Backtrack: save state
-                    var backtrack = new RamByteFlags[_programByteInfos.Length];
-                    for (ushort i = 0; i < _programByteInfos.Length; i++)
-                    {
-                        backtrack[i] = _programByteInfos[i].Flags;
-                    }
-
-                    if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
-                    {
-                        Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldNotBeRelocated, $"Guessing that ${_programAddress + offset:x4} should not be relocated.");
-                    }
-
+                    var backtrack = CreateBackTrackArray();
                     if (EnforceNoReloc(offset) || RecursiveSolver())
                     {
-                        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
-                        {
-                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverBackTracking, "Backtracking.");
-                        }
-                            
                         // Restore state
-                        for (ushort i = 0; i < _programByteInfos.Length; i++)
+                        for (int i = 0; i < prog.Length; i++)
                         {
-                            _programByteInfos[i].Flags = backtrack[i];
+                            prog[i].Flags = backtrack![i];
                         }
 
-                        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
-                        {
-                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldBeRelocated, $"Assuming that ${_programAddress + offset:X4} should be relocated.");
-                        }
+                        _backtrackPool.Push(backtrack);
 
                         return EnforceReloc(offset) || RecursiveSolver();
                     }
-
-                    return false;
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }
 
-        return false; // No more variables to decide - success
+        return false;
+    }
+
+    /// <summary>
+    /// Heap version of the <see cref="RecursiveSolver"/> to avoid stack overflows on large programs.
+    /// </summary>
+    /// <returns><c>true</c> if inconsistency detected, <c>false</c> on success.</returns>
+    private bool HeapSolver()
+    {
+        // Clear it as it depends on the program size
+        _backtrackPool.Clear();
+
+        var stack = new Stack<SolverStackFrame>();
+        var initFrame = CreateFrame();
+        initFrame.State = SolverState.PropagateConstraints;
+        stack.Push(initFrame);
+
+        while (stack.Count > 0)
+        {
+            //Console.WriteLine($"StackSize {stack.Count}");
+            //Console.WriteLine($"HeapResolver Stack: {stack.Count}");
+            var frame = stack.Pop();
+
+            switch (frame.State)
+            {
+                case SolverState.PropagateConstraints:
+                {
+                    // Propagate constraints
+                    bool inconsistency = false;
+                    while (true)
+                    {
+                        var done = true;
+                        foreach (var constraints in _allConstraints)
+                        {
+                            for(var it = constraints; it is not null; it = it.Next)
+                            {
+                                var constraint = it.Constraint!;
+                                if (constraint.CheckNeeded)
+                                {
+                                    if (TryPropagateConstraint(constraint))
+                                    {
+                                        inconsistency = true;
+                                        break;
+                                    }
+
+                                    done = false;
+                                }
+                            }
+
+                            if (inconsistency) break;
+                        }
+
+                        if (inconsistency || done) break;
+                    }
+
+                    if (inconsistency)
+                    {
+                        // Return false (inconsistency) - continue with parent frame
+                        if (frame.ParentFrame != null)
+                        {
+                            frame.ParentFrame.ChildReturnedInconsistency = true;
+                            stack.Push(frame.ParentFrame);
+                        }
+                        continue;
+                    }
+
+                    // Search for an offset to decide
+                    bool foundOffset = false;
+                    ushort offset = 0;
+                    var prog = _programByteStates;
+                    foreach (var constraints in _allConstraints)
+                    {
+                        for(var it = constraints; it is not null; it = it.Next)
+                        {
+                            var constraint = it.Constraint!;
+                            if (constraint.TryFindUnresolvedOffset(prog, out offset))
+                            {
+                                foundOffset = true;
+                                goto FoundOffset;
+                            }
+                        }
+                    }
+                    FoundOffset:
+
+                    if (foundOffset)
+                    {
+                        // Found an undecided offset - create backtracking point
+                        var backtrack = CreateBackTrackArray();
+                        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
+                        {
+                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldNotBeRelocated, $"Guessing that ${_programAddress + offset:x4} should not be relocated.");
+                        }
+
+                        // Create a frame to handle the result of trying NoReloc first
+                        var afterNoRelocFrame = CreateFrame();
+                        afterNoRelocFrame.State = SolverState.AfterNoRelocAttempt;
+                        afterNoRelocFrame.Offset = offset;
+                        afterNoRelocFrame.Backtrack = backtrack;
+                        afterNoRelocFrame.ParentFrame = frame.ParentFrame;
+
+                        stack.Push(afterNoRelocFrame);
+
+                        // Try NoReloc path
+                        if (EnforceNoReloc(offset))
+                        {
+                            // Immediate inconsistency
+                            afterNoRelocFrame.ChildReturnedInconsistency = true;
+                        }
+                        else
+                        {
+                            // Push a new propagation frame
+                            var propagationFrame = CreateFrame();
+                            propagationFrame.State = SolverState.PropagateConstraints;
+                            propagationFrame.ParentFrame = afterNoRelocFrame;
+                            stack.Push(propagationFrame);
+                        }
+                    }
+                    else
+                    {
+                        // No more variables to decide - success (return false)
+                        if (frame.ParentFrame != null)
+                        {
+                            frame.ParentFrame.ChildReturnedSuccess = true;
+                            stack.Push(frame.ParentFrame);
+                        }
+                    }
+
+                    break;
+                }
+
+                case SolverState.AfterNoRelocAttempt:
+                {
+                    if (frame.ChildReturnedInconsistency)
+                    {
+                        // NoReloc path failed, try Reloc path
+                        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
+                        {
+                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverBackTracking, "Backtracking.");
+                        }
+
+                        // Restore state
+                        var pgs = _programByteStates;
+                        var backtrack = frame.Backtrack!;
+                        for (ushort i = 0; i < pgs.Length; i++)
+                        {
+                            pgs[i].Flags = backtrack[i];
+                        }
+
+                        if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
+                        {
+                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldBeRelocated, $"Assuming that ${_programAddress + frame.Offset:X4} should be relocated.");
+                        }
+
+                        // Try Reloc path
+                        if (EnforceReloc(frame.Offset))
+                        {
+                            // Immediate inconsistency - propagate to parent
+                            if (frame.ParentFrame != null)
+                            {
+                                frame.ParentFrame.ChildReturnedInconsistency = true;
+                                stack.Push(frame.ParentFrame);
+                            }
+                        }
+                        else
+                        {
+                            // Push a new propagation frame
+                            var propagationFrame = CreateFrame();
+                            propagationFrame.State = SolverState.PropagateConstraints;
+                            propagationFrame.ParentFrame = frame.ParentFrame;
+                            stack.Push(propagationFrame);
+                        }
+                    }
+                    else if (frame.ChildReturnedSuccess)
+                    {
+                        // NoReloc path succeeded - return success (false)
+                        if (frame.ParentFrame != null)
+                        {
+                            frame.ParentFrame.ChildReturnedSuccess = true;
+                            stack.Push(frame.ParentFrame);
+                        }
+                    }
+                    else
+                    {
+                        // This shouldn't happen in normal flow
+                        if (frame.ParentFrame != null)
+                        {
+                            frame.ParentFrame.ChildReturnedInconsistency = true;
+                            stack.Push(frame.ParentFrame);
+                        }
+                    }
+                    break;
+                }
+            }
+
+            ReleaseFrame(frame);
+        }
+
+        return false; // Success
+    }
+
+    private enum SolverState
+    {
+        PropagateConstraints,
+        AfterNoRelocAttempt
+    }
+
+    private RamByteFlags[] CreateBackTrackArray()
+    {
+        var pg = _programByteStates;
+        var backtrack = _backtrackPool.Count > 0 ? _backtrackPool.Pop() : GC.AllocateUninitializedArray<RamByteFlags>(pg.Length);
+        for (ushort i = 0; i < pg.Length; i++)
+        {
+            backtrack[i] = pg[i].Flags;
+        }
+        return backtrack;
+    }
+
+    private SolverStackFrame CreateFrame()
+    {
+        return _solverStackFramePool.Count > 0 ? _solverStackFramePool.Pop() : new SolverStackFrame(); 
+    }
+
+    private void ReleaseFrame(SolverStackFrame frame)
+    {
+        if (frame.Backtrack is not null)
+            _backtrackPool.Push(frame.Backtrack);
+
+        frame.ParentFrame = null;
+        frame.Backtrack = null;
+        _solverStackFramePool.Push(frame);
+    }
+    
+    private class SolverStackFrame
+    {
+        public SolverStackFrame()
+        {
+        }
+
+        public SolverState State;
+        public ushort Offset;
+        public RamByteFlags[]? Backtrack;
+        public SolverStackFrame? ParentFrame;
+        public bool ChildReturnedInconsistency;
+        public bool ChildReturnedSuccess;
     }
 
 
     private bool EnforceNoReloc(ushort offset)
     {
-        ref var pb = ref _programByteInfos[offset];
-
-        if ((pb.Flags & RamByteFlags.Reloc) != 0)
+        ref var pb = ref _programByteStates[offset];
+        var flags = pb.Flags;
+        if ((flags & RamByteFlags.Reloc) != 0)
         {
             return true; // Inconsistency
         }
-        else if ((pb.Flags & RamByteFlags.NoReloc) == 0)
+        else if ((flags & RamByteFlags.NoReloc) == 0)
         {
-            pb.Flags |= RamByteFlags.NoReloc;
+            pb.Flags = flags | RamByteFlags.NoReloc;
 
-            foreach (var constraint in pb.Constraints)
+            for(var it = pb.ConstraintChain; it is not null; it = it.Next)
             {
-                constraint.CheckNeeded = true;
+                it.Constraint!.CheckNeeded = true;
             }
         }
 
@@ -1002,26 +1277,26 @@ partial class CodeRelocator
 
     private bool EnforceReloc(ushort offset)
     {
-        ref var pb = ref _programByteInfos[offset];
-
-        if ((pb.Flags & RamByteFlags.NoReloc) != 0)
+        ref var pb = ref _programByteStates[offset];
+        var flags = pb.Flags;
+        if ((flags & RamByteFlags.NoReloc) != 0)
         {
             return true; // Inconsistency
         }
-        else if ((pb.Flags & RamByteFlags.Reloc) == 0)
+        else if ((flags & RamByteFlags.Reloc) == 0)
         {
-            pb.Flags |= RamByteFlags.Reloc;
+            pb.Flags = flags | RamByteFlags.Reloc;
 
-            foreach (var constraint in pb.Constraints)
+            for (var it = pb.ConstraintChain; it is not null; it = it.Next)
             {
-                constraint.CheckNeeded = true;
+                it.Constraint!.CheckNeeded = true;
             }
         }
 
         return false;
     }
 
-    private void LogConstraints(Constraint constraint)
+    private void LogConstraint(Constraint constraint)
     {
         var sb = new StringBuilder();
         sb.Append("Adding constraint: ");
@@ -1042,9 +1317,12 @@ partial class CodeRelocator
                 sb.Append($"{(i > 0 ? ", " : "")}${_programAddress + constraint.ProgramOffsets1[i]:x4}");
             }
             sb.Append("}, {");
-            for (int i = 0; i < constraint.ProgramOffsets2.Count; i++)
+            if (constraint.ProgramOffsets2 is not null)
             {
-                sb.Append($"{(i > 0 ? ", " : "")}${_programAddress + constraint.ProgramOffsets2[i]:x4}");
+                for (int i = 0; i < constraint.ProgramOffsets2.Count; i++)
+                {
+                    sb.Append($"{(i > 0 ? ", " : "")}${_programAddress + constraint.ProgramOffsets2[i]:x4}");
+                }
             }
             sb.Append("}");
         }
@@ -1055,9 +1333,9 @@ partial class CodeRelocator
         Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverConstraint, sb.ToString());
     }
 
-    private void NoRelocAt(ushort offset) => _programByteInfos[offset].Flags |= RamByteFlags.NoReloc;
+    private void NoRelocAt(ushort offset) => _programByteStates[offset].Flags |= RamByteFlags.NoReloc;
 
-    private void RelocAt(ushort offset) => _programByteInfos[offset].Flags |= RamByteFlags.Reloc;
+    private void RelocAt(ushort offset) => _programByteStates[offset].Flags |= RamByteFlags.Reloc;
 
     private void NoReloc(ProgramSource? src)
     {
@@ -1082,43 +1360,54 @@ partial class CodeRelocator
     {
         public RamByteFlags Flags;
 
-        public readonly ConstraintList Constraints = new();
+        public ConstraintList? ConstraintChain;
 
-        public ZpBitmap ZpAddr;
+        public ZpBitmap? ZpAddr;
 
         public void SetUsedInZp(byte zpAddr)
         {
             Flags |= RamByteFlags.UsedInZp;
+            ZpAddr ??= new ZpBitmap();
             ZpAddr.SetUsed(zpAddr);
         }
     }
-
-    [InlineArray(32)]
-    private struct ZpBitmap
+    
+    private class ZpBitmap
     {
-        private byte _e;
+        private ZpBitmapArray _data;
 
-        public bool IsUsed(byte zpAddr) => (this[zpAddr >> 3] & (1 << (zpAddr & 7))) != 0;
+        public bool IsUsed(byte zpAddr) => (_data[zpAddr >> 3] & (1 << (zpAddr & 7))) != 0;
 
-        public void SetUsed(byte zpAddr) => this[zpAddr >> 3] |= (byte)(1 << (zpAddr & 7));
+        public void SetUsed(byte zpAddr) => _data[zpAddr >> 3] |= (byte)(1 << (zpAddr & 7));
 
-        public void ClearUsed(byte zpAddr) => this[zpAddr >> 3] &= (byte)~(1 << (zpAddr & 7));
+        public void ClearUsed(byte zpAddr) => _data[zpAddr >> 3] &= (byte)~(1 << (zpAddr & 7));
 
         public bool IsNotUsed()
         {
-            Span<byte> span = this;
+            Span<byte> span = _data;
             return span.IndexOfAnyExcept((byte)0) < 0;
         }
 
         public void Clear()
         {
-            Span<byte> span = this;
+            Span<byte> span = _data;
             span.Clear();
         }
+        
+        [InlineArray(32)]
+        private struct ZpBitmapArray
+        {
+            private byte _e;
+        }
     }
-    
-    private class ConstraintList : List<Constraint>;
 
+    private class ConstraintList
+    {
+        public Constraint? Constraint;
+        public ConstraintList? Next;
+    }
+
+    [DebuggerDisplay("Check = {CheckNeeded}, Kind = {Kind}, Offsets1 = {ProgramOffsets1.Count}, Offsets1 = {ProgramOffsets2.Count}")]
     private class Constraint : IEquatable<Constraint>
     {
         public bool CheckNeeded { get; set; }
@@ -1127,25 +1416,39 @@ partial class CodeRelocator
 
         public readonly List<ushort> ProgramOffsets1 = new();
 
-        public readonly List<ushort> ProgramOffsets2 = new();
+        public List<ushort>? ProgramOffsets2 { get; set; }
 
         public void SortOffsets()
         {
-            CollectionsMarshal.AsSpan(ProgramOffsets1).Sort();
-            CollectionsMarshal.AsSpan(ProgramOffsets2).Sort();
+            if (ProgramOffsets1.Count > 1) CollectionsMarshal.AsSpan(ProgramOffsets1).Sort();
+            if (ProgramOffsets2 is not null && ProgramOffsets2.Count > 1) CollectionsMarshal.AsSpan(ProgramOffsets2).Sort();
         }
 
-        public IEnumerable<ushort> GetAllOffsets()
+        public bool TryFindUnresolvedOffset(ProgramByteState[] prog, out ushort offset)
         {
-            foreach (var offset in ProgramOffsets1)
+            foreach(var localOffset in CollectionsMarshal.AsSpan(ProgramOffsets1))
             {
-                yield return offset;
+                if ((prog[localOffset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) == 0)
+                {
+                    offset = localOffset;
+                    return true;
+                }
             }
 
-            foreach (var offset in ProgramOffsets2)
+            if (ProgramOffsets2 is not null)
             {
-                yield return offset;
+                foreach (var localOffset in CollectionsMarshal.AsSpan(ProgramOffsets2))
+                {
+                    if ((prog[localOffset].Flags & (RamByteFlags.Reloc | RamByteFlags.NoReloc)) == 0)
+                    {
+                        offset = localOffset;
+                        return true;
+                    }
+                }
             }
+
+            offset = 0;
+            return false;
         }
 
         public override int GetHashCode()
@@ -1155,9 +1458,13 @@ partial class CodeRelocator
             {
                 hash.Add(offset);
             }
-            foreach (var offset in CollectionsMarshal.AsSpan(ProgramOffsets2))
+
+            if (ProgramOffsets2 is not null)
             {
-                hash.Add(offset);
+                foreach (var offset in CollectionsMarshal.AsSpan(ProgramOffsets2))
+                {
+                    hash.Add(offset);
+                }
             }
 
             return hash.ToHashCode();
@@ -1200,15 +1507,9 @@ partial class CodeRelocator
             return Equals((Constraint)obj);
         }
 
-        public static bool operator ==(Constraint? left, Constraint? right)
-        {
-            return Equals(left, right);
-        }
+        public static bool operator ==(Constraint? left, Constraint? right) => Equals(left, right);
 
-        public static bool operator !=(Constraint? left, Constraint? right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator !=(Constraint? left, Constraint? right) => !Equals(left, right);
     }
 
     private enum ConstraintKind

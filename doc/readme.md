@@ -23,6 +23,7 @@ This document provides a small user guide for the Asm6502 library.
   - [Customizing Disassembly Output](#customizing-disassembly-output)
   - [Assembler Debug Line Information](#assembler-debug-line-information)
   - [Org directive](#org-directive)
+  - [Code Relocator](#code-relocator)
   - [CPU Emulator (6502/6510)](#cpu-emulator-65026510)
   - [6510 Support](#6510-support)
 - [Tips and Best Practices](#tips-and-best-practices)
@@ -417,6 +418,114 @@ C010  A9 01      LDA #$01
 
 LL_01:
 C012  4C 02 C0   JMP LL_02
+```
+
+### Code Relocator
+
+Asm6502 includes a code relocation analyzer, `Asm6502.Relocator.CodeRelocator`, that emulates your 6502/6510 program to:
+- discover accessed addresses and zero-page usage
+- determine which code bytes are self-modified or contribute to addressing
+- compute a safe relocation mapping and optionally remap zero-page usage
+
+The relocator embeds its own 64 KiB RAM and a 6502/6510 CPU. It can trace memory reads/writes, branches, indirect accesses, and stack usage, and it can relocate your code to another base address while keeping it functional.
+
+Key types:
+- `CodeRelocator` – main API to analyze and relocate a program buffer
+- `CodeRelocationConfig` – input buffer and configuration (program start, analysis range, ZP relocation)
+- `CodeRelocationTarget` – where to relocate (new base address and zero-page range)
+- `CodeRelocationDiagnosticBag` – diagnostics, warnings and errors produced during analysis/relocation
+
+Minimal example:
+
+```csharp
+using Asm6502.Relocator;
+
+// Prepare configuration
+var config = new CodeRelocationConfig
+{
+    ProgramAddress = 0xC000,
+    ProgramBytes   = programBytes,   // your assembled bytes
+    ZpRelocate     = true,           // enable zero-page relocation if needed (the default)
+};
+
+var relocator = new CodeRelocator(config);
+
+// Analyze by running a subroutine from its entry point until RTS
+// Optionally cap cycles to guard against infinite loops
+relocator.RunSubroutineAt(0xC000, maxCycles: 500_000);
+
+// Request relocation to a new address and ZP range
+var relocated = relocator.Relocate(new CodeRelocationTarget
+{
+    Address = 0x2000,               // target base, same low-byte as original recommended
+    ZpRange = new RamZpRange(0x80, 0x20) // relocate ZP usage to $80-$9F
+});
+
+// Diagnostics and mapping can be inspected or printed
+if (relocator.Diagnostics.Messages.Count > 0)
+{
+    foreach (var m in relocator.Diagnostics.Messages) Console.WriteLine(m);
+}
+```
+
+Notes and constraints:
+- Analysis range defaults to `[ProgramAddress, ProgramAddress + ProgramBytes.Length - 1]`. You can override it in `CodeRelocationConfig`.
+- The relocator emulates code paths you run via `RunSubroutineAt`. Unreached code won’t be analyzed.
+- Write-then-read self-modifying sequences are tracked, so absolute operands modified at runtime will be resolved correctly when relocating.
+- If `ZpRelocate = true`, a non-empty `ZpRange` must be provided at relocation time.
+
+Recommended workflow:
+1) Initialize with original buffer (`Initialize` or constructor).
+2) Execute entry points with `RunSubroutineAt(address, maxCycles)` for init/play/IRQ/NMI.
+3) Call `Relocate(target)` once analysis is done.
+4) Optionally use `SafeRamRanges` to mark hardware or memory areas that must not be used during analysis (e.g., `$D400` SID regs).
+
+Advanced usage pattern (SID-like init/play/IRQ):
+
+```csharp
+// High-level flow similar to a SID driver:
+// - Run Init(A = subtune) once
+// - Run Play many times; optionally detect IRQ/NMI vectors (e.g., $0314/$0318 or $FFFE/$FFFA)
+
+relocator.Diagnostics.LogLevel = CodeRelocationDiagnosticKind.Info;
+
+for (int song = 0; song < songs; song++)
+{
+    relocator.Cpu.A = (byte)song; // pass subtune in A
+    relocator.RunSubroutineAt(initAddress, maxCycles: 1_000_000);
+
+    for (int i = 0; i < playSteps; i++)
+    {
+        // Optionally probe vectors written by the code to discover dynamic play entry
+        if (relocator.CheckIndirectAddressAndProbeIfRelocatable(0x0314, out var irqAddr) ||
+            relocator.CheckIndirectAddressAndProbeIfRelocatable(0xFFFE, out irqAddr))
+        {
+            relocator.RunSubroutineAt(irqAddr, maxCycles: 20_000);
+        }
+        else
+        {
+            relocator.RunSubroutineAt(playAddress, maxCycles: 20_000);
+        }
+
+        // Optionally analyze an NMI “digi” routine if detected
+        if (relocator.CheckIndirectAddressAndProbeIfRelocatable(0x0318, out var nmiAddr) ||
+            relocator.CheckIndirectAddressAndProbeIfRelocatable(0xFFFA, out nmiAddr))
+        {
+            relocator.RunSubroutineAt(nmiAddr, maxCycles: 1_000);
+        }
+    }
+}
+
+// Once analyzed, relocate
+var target = new CodeRelocationTarget
+{
+    Address = 0x2000,
+    ZpRange = new RamZpRange(0x80, 0x10)
+};
+var relocatedBytes = relocator.Relocate(target);
+
+// Optionally print relocation map and diagnostics
+relocator.PrintRelocationMap(Console.Out);
 ```
 
 ### CPU Emulator (6502/6510)

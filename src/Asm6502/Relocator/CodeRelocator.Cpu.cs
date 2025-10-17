@@ -9,6 +9,13 @@ namespace Asm6502.Relocator;
 
 partial class CodeRelocator
 {
+    private uint _runTotalCycleCount;
+
+    /// <summary>
+    /// Gets the total number of cycles completed during the current run via <see cref="RunSubroutineAt(ushort,uint,bool,bool,bool)"/>.
+    /// </summary>
+    public uint RunTotalCycleCount => _runTotalCycleCount;
+
     /// <summary>
     /// Gets the combined flags indicating how a byte at the specified RAM address has been accessed and used.
     /// </summary>
@@ -18,7 +25,7 @@ partial class CodeRelocator
     {
         var rwFlags = GetAccessMap(address);
         var offset = address - _programAddress;
-        var flags = (uint)offset < (uint)_programByteInfos.Length ? Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_programByteInfos), offset).Flags : RamByteFlags.None;
+        var flags = (uint)offset < (uint)_programByteStates.Length ? Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_programByteStates), offset).Flags : RamByteFlags.None;
         flags |= (RamByteFlags)rwFlags; // They share the same bit pattern for the flags Read and Write
         return flags;
     }
@@ -59,8 +66,9 @@ partial class CodeRelocator
     /// <param name="enableAnalysis">Whether to enable source tracking and relocation analysis during execution.</param>
     /// <param name="expectRtiInsteadOfRts">Whether to expect an RTI instruction instead of RTS for returning from the subroutine.</param>
     /// <param name="useCycleByCycle">Whether to execute the CPU in cycle-by-cycle mode. Default is false.</param>
+    /// <returns>True if the maximum number of cycles was reached before returning; otherwise, false.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the CPU halts or jams during execution.</exception>
-    public void RunSubroutineAt(ushort address, uint maxCycles = 0, bool enableAnalysis = true, bool expectRtiInsteadOfRts = false, bool useCycleByCycle = false)
+    public bool RunSubroutineAt(ushort address, uint maxCycles = 0, bool enableAnalysis = true, bool expectRtiInsteadOfRts = false, bool useCycleByCycle = false)
     {
         _hasBeenAnalyzed = false; // Reset analysis state
         _srcA = null;
@@ -81,7 +89,7 @@ partial class CodeRelocator
 
         _enableTrackSource = enableAnalysis; // Enable tracking during execution
 
-        uint cycleCount = 0;
+        _runTotalCycleCount = 0;
         while (true)
         {
             if (useCycleByCycle)
@@ -110,16 +118,17 @@ partial class CodeRelocator
                 }
             }
 
-            cycleCount += useCycleByCycle ? 1 : _cpu.InstructionCycles;
-            if (maxCycles > 0 && cycleCount >= maxCycles)
+            _runTotalCycleCount += useCycleByCycle ? 1 : _cpu.InstructionCycles;
+            if (maxCycles > 0 && _runTotalCycleCount >= maxCycles)
             {
-                break;
+                return true;
             }
 
             _eaSrcMsb = null;
         }
 
         _enableTrackSource = false;
+        return false;
     }
 
     // Implementation of IMos6502CpuMemoryBus
@@ -145,8 +154,7 @@ partial class CodeRelocator
             HandleMemoryAccess(address, value);
         }
     }
-
-
+    
     private void PostProcessInstructionForRegisters()
     {
         var mnemonic = ((Mos6510OpCode)_cpu.CurrentOpCode).ToMnemonic();
@@ -399,21 +407,18 @@ partial class CodeRelocator
                 source = GetRamProgramSource((ushort)(_cpu.PC + 1));
                 break;
             case Mos6502MemoryBusAccessKind.PopRtiLow:
-                // TODO
+                _eaSrcMsb = source;
                 break;
             case Mos6502MemoryBusAccessKind.PopRtiHigh:
-                // TODO
-                source = null;
+                //CheckRelocRange((ushort)((value << 8) | _cpu.PC), _eaSrcMsb, null, source);
                 break;
             case Mos6502MemoryBusAccessKind.PopRtsLow:
                 _eaSrcMsb = source;
                 break;
             case Mos6502MemoryBusAccessKind.PopRtsHigh:
-                // TODO: 
                 //CheckRelocRange((ushort)((value << 8) | _cpu.PC), _eaSrcMsb, null, source);
                 break;
         }
-
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

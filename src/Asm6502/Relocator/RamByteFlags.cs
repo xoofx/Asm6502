@@ -9,7 +9,7 @@ namespace Asm6502.Relocator;
 /// returned by <see cref="CodeRelocator.GetRamByteFlagsAt"/>.
 /// </summary>
 [Flags]
-public enum RamByteFlags
+public enum RamByteFlags : byte
 {
     /// <summary>
     /// No flags are set.

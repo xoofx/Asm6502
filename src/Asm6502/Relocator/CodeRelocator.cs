@@ -18,10 +18,10 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     private readonly byte[] _ram = new byte[65536];
     private readonly ProgramSource?[] _ramProgramSources = new ProgramSource?[65536];
     private readonly RamReadWriteFlags[] _accessMap = new RamReadWriteFlags[65536];
-    private readonly ushort _programAddress;
-    private readonly byte[] _programBytes;
+    private ushort _programAddress;
+    private byte[] _programBytes;
     private readonly Mos6502Cpu _cpu;
-    private readonly ProgramByteState[] _programByteInfos;
+    private ProgramByteState[] _programByteStates = [];
     private readonly Stack<ProgramSource> _sourcePool = new();
     private bool _enableTrackSource;
     private readonly ConstraintList?[] _zpConstraints = new ConstraintList?[0x100];
@@ -39,40 +39,17 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     private CodeRelocationTarget _lastRelocationTarget;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CodeRelocator"/> class with the specified program data and optional relocation boundaries.
+    /// Initializes a new instance of the CodeRelocator class using the specified configuration settings.
     /// </summary>
-    /// <param name="programAddress">The original address in memory where the program is loaded.</param>
-    /// <param name="programBytes">The byte array containing the machine code to be analyzed and relocated.</param>
-    /// <param name="relocationAnalysisStart">The starting address for the relocation analysis range. If null, defaults to <paramref name="programAddress"/>.</param>
-    /// <param name="relocationAnalysisEnd">The ending address for the relocation analysis  range. If null, defaults to the end of the program.</param>
-    /// <exception cref="InvalidOperationException">
-    /// Thrown when <paramref name="relocationAnalysisStart"/> is less than 0x200, or when <paramref name="relocationAnalysisStart"/> is greater than or equal to <paramref name="relocationAnalysisEnd"/>.
-    /// </exception>
-    public CodeRelocator(ushort programAddress, byte[] programBytes, ushort? relocationAnalysisStart = null, ushort? relocationAnalysisEnd = null)
+    /// <param name="config">The configuration settings that control code relocation behavior. Cannot be null.</param>
+    public CodeRelocator(CodeRelocationConfig config)
     {
-        ArgumentNullException.ThrowIfNull(programBytes);
-
-        RelocationAnalysisStart = relocationAnalysisStart ?? programAddress;
-        RelocationAnalysisEnd = relocationAnalysisEnd ?? (ushort)(programAddress + programBytes.Length - 1);
-
-        // Check RelocationStart/End correctness
-        if (RelocationAnalysisStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than $0200");
-        if (RelocationAnalysisStart >= RelocationAnalysisEnd)
-            throw new InvalidOperationException($"RelocationStart (${RelocationAnalysisStart:x4}) must be less than RelocationEnd (${RelocationAnalysisEnd:x4})");
-
-        _programAddress = (ushort)programAddress;
-        _programBytes = programBytes;
-        _programByteInfos = new ProgramByteState[programBytes.Length];
-        EnableZpReloc = true;
-        for (ushort i = 0; i < programBytes.Length; i++)
-        {
-            _programByteInfos[i] = new ProgramByteState();
-        }
-
+        ArgumentNullException.ThrowIfNull(config);
         _zpRelocations = new ZeroPageReloc[256];
-
         _cpu = new Mos6510Cpu(this);
-        Reset();
+
+        _programBytes = null!; // Will be set in Initialize
+        Initialize(config);
     }
 
     /// <summary>
@@ -102,12 +79,12 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     /// <summary>
     /// Gets the starting address of the relocation analysis range. By default, it is the <see cref="ProgramAddress"/>
     /// </summary>
-    public ushort RelocationAnalysisStart { get; }
+    public ushort RelocationAnalysisStart { get; private set; }
 
     /// <summary>
     /// Gets the ending address of the relocation analysis range. By default, it is <see cref="ProgramAddress"/> + <see cref="ProgramBytes"/> length - 1.
     /// </summary>
-    public ushort RelocationAnalysisEnd { get; }
+    public ushort RelocationAnalysisEnd { get; private set; }
 
     /// <summary>
     /// Gets the list of RAM address ranges that are safe to use during relocation, identified through program analysis.
@@ -117,12 +94,41 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     /// <summary>
     /// Gets a value indicating whether zero-page relocation is enabled for this relocator. Default is true.
     /// </summary>
-    public bool EnableZpReloc { get; init; }
+    public bool EnableZpReloc { get; private set; }
 
     /// <summary>
     /// Gets the diagnostic bag containing warnings and errors generated during code analysis and relocation.
     /// </summary>
     public CodeRelocationDiagnosticBag Diagnostics { get; } = new();
+
+    /// <summary>
+    /// Initializes the relocation analysis using the specified configuration.
+    /// </summary>
+    /// <param name="config">The configuration settings used to initialize relocation analysis. Must specify the program address and program
+    /// bytes. Optional relocation analysis start and end addresses can be provided; if omitted, defaults are derived
+    /// from the program address and length.</param>
+    /// <exception cref="InvalidOperationException">Thrown if the relocation analysis start address is less than 0x0200, or if the relocation analysis start address
+    /// is greater than or equal to the relocation analysis end address.</exception>
+    public void Initialize(CodeRelocationConfig config)
+    {
+        ArgumentNullException.ThrowIfNull(config);
+
+        RelocationAnalysisStart = config.RelocationAnalysisStart ?? config.ProgramAddress;
+        RelocationAnalysisEnd = config.RelocationAnalysisEnd ?? (ushort)(config.ProgramAddress + config.ProgramBytes.Length - 1);
+        // Check RelocationStart/End correctness
+        if (RelocationAnalysisStart < 0x200) throw new InvalidOperationException("RelocationStart must be greater than $0200");
+        if (RelocationAnalysisStart >= RelocationAnalysisEnd)
+            throw new InvalidOperationException($"RelocationStart (${RelocationAnalysisStart:x4}) must be less than RelocationEnd (${RelocationAnalysisEnd:x4})");
+        _programAddress = (ushort)config.ProgramAddress;
+        _programBytes = config.ProgramBytes;
+        _programByteStates = new ProgramByteState[config.ProgramBytes.Length];
+        EnableZpReloc = config.ZpRelocate;
+        for (ushort i = 0; i < config.ProgramBytes.Length; i++)
+        {
+            _programByteStates[i] = new ProgramByteState();
+        }
+        Reset();
+    }
 
     /// <summary>
     /// Resets the relocator to its initial state, clearing all analysis data, diagnostics, and restoring the original program in memory.
@@ -144,11 +150,11 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
 
         _programBytes.AsSpan().CopyTo(ram[_programAddress..]);
 
-        for (ushort i = 0; i < _programByteInfos.Length; i++)
+        for (ushort i = 0; i < _programByteStates.Length; i++)
         {
             var addr = (ushort)(_programAddress + i);
             _ramProgramSources[addr] = CreateSourceAtProgramByteOffset(i, null);
-            _programByteInfos[i].Flags = RamByteFlags.None;
+            _programByteStates[i].Flags = RamByteFlags.None;
         }
 
         _enableTrackSource = false;
