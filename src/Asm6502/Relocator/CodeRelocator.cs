@@ -28,7 +28,8 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     private readonly Dictionary<int, ConstraintList> _constraintsHashTable = new();
 
     // Track of the program source for the current effective address and all registers
-    private ProgramSource? _eaSrcMsb;
+    private ProgramSource? _srcEAMsb;
+    private ProgramSource? _srcPCMsb;
     private ProgramSource? _srcX;
     private ProgramSource? _srcY;
     private ProgramSource? _srcA;

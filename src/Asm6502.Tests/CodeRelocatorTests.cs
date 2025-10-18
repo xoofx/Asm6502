@@ -13,6 +13,8 @@ namespace Asm6502.Tests;
 [TestClass]
 public class CodeRelocatorTests : VerifyBase
 {
+    private Mos6510Cpu? _cpu;
+
     [TestMethod]
     public async Task TestRelocationZp()
     {
@@ -198,8 +200,38 @@ public class CodeRelocatorTests : VerifyBase
             .End()
         ));
 
+    [TestMethod]
+    public async Task TestJSR_ModifyPC()
+    {
+        await Verify(RelocToString(
+            new Mos6510Assembler()
+                .JSR(out var subroutine)
+                .RTS() // Never called as we patch it
+                .LabelForward(out var realReturn)
+                .Label(subroutine) // Replace the return address on the stack
+                .PLA() // We pop the JSR addressed pushed above
+                .PLA()
+                .LDA_Imm(realReturn.HighByte())
+                .PHA() // We replace it with another address (below) that is at the page above
+                .LDA_Imm(realReturn.LowByte() - 1) // Because JSR pushes PC - 1
+                .PHA()
+                .LDA_Imm(0x42)
+                .RTS()
+                .Align(256, (byte)Mos6510OpCode.NOP_Implied)
+                .NOP()
+                .NOP() // Padding to ensure we are at the next page (JSR PC - 1 address is pushed on the stack)
+                .Label(realReturn)
+                .LDA_Imm(0x43)
+                .RTS()
+                .End()
+        ));
 
-  
+        if (_cpu is not null)
+        {
+            Assert.AreEqual(0x43, _cpu.A, "Invalid A Register");
+        }
+    }
+
     [TestMethod]
     public async Task TestLAX()
         => await Verify(RelocToString(
@@ -419,7 +451,7 @@ public class CodeRelocatorTests : VerifyBase
         if (relocatedBytes is not null)
         {
             relocator.PrintRelocationMap(writer);
-
+            _cpu = (Mos6510Cpu)relocator.Cpu;
             writer.WriteLine();
         }
 
