@@ -447,7 +447,7 @@ partial class CodeRelocator
                 // A zp address was read from without writing to it
                 if (GetAccessMap(addr) == RamReadWriteFlags.Read)
                 {
-                    // TODO: Log read only from zero-page without writing
+                    Diagnostics.Warning(CodeRelocationDiagnosticId.WRN_ZeroPageReadWithoutWriting, $"Warning: Zero-page address ${i:x2} read but never written.{(EnableZpReloc ? " Not relocating." : "")}");
                     for (int j = 0; j < _programBytes.Length; j++)
                     {
                         ref var pb = ref _programByteStates[j];
@@ -1395,7 +1395,8 @@ partial class CodeRelocator
             ZpAddr.SetUsed(zpAddr);
         }
     }
-    
+
+    [DebuggerTypeProxy(typeof(ZpBitmapDebugView))]
     private class ZpBitmap
     {
         private ZpBitmapArray _data;
@@ -1423,6 +1424,33 @@ partial class CodeRelocator
         {
             private byte _e;
         }
+
+        private class ZpBitmapDebugView
+        {
+            private readonly ZpBitmap _bitmap;
+            public ZpBitmapDebugView(ZpBitmap bitmap)
+            {
+                _bitmap = bitmap;
+            }
+            [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+            public byte[] UsedZpAddresses
+            {
+                get
+                {
+                    var list = new List<byte>();
+                    for (int i = 0; i < 256; i++)
+                    {
+                        if (_bitmap.IsUsed((byte)i))
+                        {
+                            list.Add((byte)i);
+                        }
+                    }
+                    return list.ToArray();
+                }
+            }
+        }
+
+
     }
 
     private class ConstraintList

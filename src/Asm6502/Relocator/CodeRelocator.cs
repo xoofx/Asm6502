@@ -103,6 +103,11 @@ public partial class CodeRelocator : IMos6502CpuMemoryBus
     public CodeRelocationDiagnosticBag Diagnostics { get; } = new();
 
     /// <summary>
+    /// Gets or sets a callback that is executed each time an instruction is going to be executed at the specified program counter passed as parameter.
+    /// </summary>
+    public Action<ushort>? LogExecuteAtPC { get; set; }
+
+    /// <summary>
     /// Initializes the relocation analysis using the specified configuration.
     /// </summary>
     /// <param name="config">The configuration settings used to initialize relocation analysis. Must specify the program address and program

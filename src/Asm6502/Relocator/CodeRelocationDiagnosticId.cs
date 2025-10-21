@@ -47,6 +47,11 @@ public enum CodeRelocationDiagnosticId
     /// Warning: Relocation address is out of bounds.
     /// </summary>
     WRN_OutOfBounds = 401,
+    
+    /// <summary>
+    /// Warning: Zero-page read without prior write detected.
+    /// </summary>
+    WRN_ZeroPageReadWithoutWriting = 402,
 
     /// <summary>
     /// Error: No valid solution found for code relocation.

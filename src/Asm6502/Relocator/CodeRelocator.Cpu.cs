@@ -98,6 +98,8 @@ partial class CodeRelocator
             }
             else
             {
+                // Log the PC before executing the instruction
+                LogExecuteAtPC?.Invoke(_cpu.PC);
                 _cpu.FastStep();
             }
 
@@ -157,6 +159,8 @@ partial class CodeRelocator
     
     private void PostProcessInstructionForRegisters()
     {
+        var opcode = (Mos6510OpCode)_cpu.CurrentOpCode;
+        var addressingMode = opcode.ToAddressingMode();
         var mnemonic = ((Mos6510OpCode)_cpu.CurrentOpCode).ToMnemonic();
         switch (mnemonic)
         {
@@ -165,14 +169,19 @@ partial class CodeRelocator
                 _srcPCMsb = _srcEAMsb;
                 break;
 
+            case Mos6510Mnemonic.ASL:
+            case Mos6510Mnemonic.LSR:
+            case Mos6510Mnemonic.ROL:
+            case Mos6510Mnemonic.ROR:
+                if (addressingMode == Mos6502AddressingMode.Accumulator)
+                {
+                    _srcA = null;
+                }
+                break;
+
             case Mos6510Mnemonic.EOR:
             case Mos6510Mnemonic.AND:
             case Mos6510Mnemonic.ORA:
-            case Mos6510Mnemonic.SLO:
-            case Mos6510Mnemonic.ALR:
-            case Mos6510Mnemonic.ANC:
-            case Mos6510Mnemonic.ANE:
-            case Mos6510Mnemonic.ARR:
                 _srcA = null;
                 break;
             case Mos6510Mnemonic.TAX:
@@ -190,13 +199,26 @@ partial class CodeRelocator
             case Mos6510Mnemonic.TXS:
                 NoReloc(_srcX);
                 break;
+            case Mos6510Mnemonic.TSX:
             case Mos6510Mnemonic.SBX:
-                _srcX = null; // TODO: check if this is correct
+                _srcX = null;
                 break;
+
+            // Undocumented opcodes
+
             case Mos6510Mnemonic.LAX:
                 _srcA = _srcEAMsb;
                 _srcX = _srcEAMsb;
                 break;
+
+            case Mos6510Mnemonic.SLO:
+            case Mos6510Mnemonic.ARR:
+            case Mos6510Mnemonic.ALR:
+            case Mos6510Mnemonic.ANC:
+            case Mos6510Mnemonic.ANE:
+                _srcA = null;
+                break;
+
             case Mos6510Mnemonic.LXA:
             case Mos6510Mnemonic.LAS:
                 _srcA = null;
@@ -241,6 +263,7 @@ partial class CodeRelocator
                             _srcA = null;
                         }
                         break;
+                    case Mos6510Mnemonic.DCP: // Illegal opcode (DEC + CMP)
                     case Mos6510Mnemonic.CMP:
                         RelocAlike(value, source, _cpu.A, _srcA);
                         break;
@@ -276,9 +299,20 @@ partial class CodeRelocator
             case Mos6502MemoryBusAccessKind.OperandAbsoluteHigh:
             case Mos6502MemoryBusAccessKind.OperandJsrAbsoluteHigh:
             {
-                _srcEAMsb = source;
-                var ea = (ushort)((value << 8) | GetRam((ushort)(address - 1)));
-                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), null, source);
+                var lowByte = GetRam((ushort)(address - 1));
+                var lowSource = GetRamProgramSource((ushort)(address - 1));
+                var ea = (ushort)((value << 8) | lowByte);
+                if (ea < 0x100)
+                {
+                    _srcEAMsb = lowSource;
+                    NoReloc(source);
+                    UsedForZpAddr((byte)ea, lowSource, null);
+                }
+                else
+                {
+                    _srcEAMsb = source;
+                    CheckRelocRange(ea, lowSource, null, source);
+                }
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandBranchOffset:
@@ -301,16 +335,42 @@ partial class CodeRelocator
                 break;
             case Mos6502MemoryBusAccessKind.OperandAbsoluteXHigh:
             {
-                _srcEAMsb = source;
-                var ea = (ushort)(((value << 8) | GetRam((ushort)(address - 1))) + _cpu.X);
-                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), _srcX, source);
+                var lowByte = GetRam((ushort)(address - 1));
+                var lowSource = GetRamProgramSource((ushort)(address - 1));
+                var ea = (ushort)(((value << 8) | lowByte) + _cpu.X);
+                if (ea < 0x100)
+                {
+                    _srcEAMsb = lowSource;
+                    NoReloc(source);
+                    // Mark the original zero-page address as used
+                    if (lowByte != (byte)ea) UsedForZpAddr(lowByte, lowSource, _srcX);
+                    UsedForZpAddr((byte)ea, lowSource, _srcX);
+                }
+                else
+                {
+
+                    _srcEAMsb = source;
+                    CheckRelocRange(ea, lowSource, _srcX, source);
+                }
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandAbsoluteYHigh:
             {
-                _srcEAMsb = source;
-                var ea = (ushort)(((value << 8) | GetRam((ushort)(address - 1))) + _cpu.Y);
-                CheckRelocRange(ea, GetRamProgramSource((ushort)(address - 1)), _srcY, source);
+                var lowByte = GetRam((ushort)(address - 1));
+                var lowSource = GetRamProgramSource((ushort)(address - 1));
+                var ea = (ushort)(((value << 8) | lowByte) + _cpu.Y);
+                if (ea < 0x100)
+                {
+                    _srcEAMsb = lowSource;
+                    NoReloc(source);
+                    if (lowByte != (byte)ea) UsedForZpAddr(lowByte, lowSource, _srcY);
+                    UsedForZpAddr((byte)ea, lowSource, _srcY);
+                }
+                else
+                {
+                    _srcEAMsb = source;
+                    CheckRelocRange(ea, lowSource, _srcY, source);
+                }
             }
                 break;
             case Mos6502MemoryBusAccessKind.OperandZeroPage:
@@ -324,6 +384,7 @@ partial class CodeRelocator
             {
                 _srcEAMsb = null;
                 var ea = (byte)(value + _cpu.X);
+                if (value != ea) UsedForZpAddr(value, source, _srcX); // Mark the original zero-page address as used
                 UsedForZpAddr(ea, source, _srcX);
             }
                 break;
@@ -331,6 +392,7 @@ partial class CodeRelocator
             {
                 _srcEAMsb = null;
                 var ea = (byte)(value + _cpu.Y);
+                if (value != ea) UsedForZpAddr(value, source, _srcY); // Mark the original zero-page address as used
                 UsedForZpAddr(ea, source, _srcY);
             }
                 break;
@@ -338,6 +400,12 @@ partial class CodeRelocator
             case Mos6502MemoryBusAccessKind.OperandIndirectX:
             {
                 var tmp = (byte)(value + _cpu.X);
+                if (value != tmp)
+                {
+                    UsedForZpAddr(value, source, _srcX); // Mark the original zero-page address as used
+                    UsedForZpAddr((byte)(value + 1), source, _srcX); // Mark the original zero-page address as used
+                }
+
                 UsedForZpAddr(tmp, source, _srcX);
                 UsedForZpAddr((byte)(tmp + 1), source, _srcX);
             }
@@ -424,6 +492,23 @@ partial class CodeRelocator
             case Mos6502MemoryBusAccessKind.PopRtsHigh:
                 _srcPCMsb = source;
                 CheckRelocRange((ushort)((value << 8) | _cpu.PC), _srcEAMsb, null, source);
+                break;
+
+            // The low byte accesses that don't require special handling
+
+            case Mos6502MemoryBusAccessKind.Undefined:
+            case Mos6502MemoryBusAccessKind.OperandAbsoluteLow:
+            case Mos6502MemoryBusAccessKind.OperandAbsoluteXLow:
+            case Mos6502MemoryBusAccessKind.OperandAbsoluteYLow:
+            case Mos6502MemoryBusAccessKind.OperandDummyRead:
+            case Mos6502MemoryBusAccessKind.OperandIndirectLow:
+            case Mos6502MemoryBusAccessKind.OperandIndirectResolveLow:
+            case Mos6502MemoryBusAccessKind.OperandIndirectXResolveLow:
+            case Mos6502MemoryBusAccessKind.OperandIndirectYResolveLow:
+            case Mos6502MemoryBusAccessKind.OperandJsrAbsoluteLow:
+            case Mos6502MemoryBusAccessKind.ExecuteDummyRead:
+            case Mos6502MemoryBusAccessKind.ExecuteDummyWrite:
+            default:
                 break;
         }
     }
