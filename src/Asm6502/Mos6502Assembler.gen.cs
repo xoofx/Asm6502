@@ -11,13 +11,27 @@ namespace Asm6502;
 /// <summary>
 /// Represents a 6502 assembler for generating machine code and managing labels.
 /// </summary>
-public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
+public partial class Mos6502Assembler : Mos6502Assembler<Mos6502Assembler>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Mos6502Assembler"/> class.
     /// </summary>
     /// <param name="baseAddress">The base address for code generation.</param>
-    public Mos6502Assembler(ushort baseAddress = 0xC000) : base(baseAddress)
+    public  Mos6502Assembler(ushort baseAddress = 0xC000) : base(baseAddress)
+    {
+    }
+}
+
+/// <summary>
+/// Represents a 6502 assembler base class for generating machine code and managing labels.
+/// </summary>
+public abstract partial class Mos6502Assembler<TAsm> : Mos6502AssemblerBase<TAsm> where TAsm : Mos6502Assembler<TAsm>
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6502Assembler"/> class.
+    /// </summary>
+    /// <param name="baseAddress">The base address for code generation.</param>
+    protected Mos6502Assembler(ushort baseAddress = 0xC000) : base(baseAddress)
     {
     }
 
@@ -28,7 +42,7 @@ public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
     /// <param name="debugFilePath">The file path for debugging information (optional).</param>
     /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+    public TAsm AddInstruction(Mos6502Instruction instruction, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
         if (!instruction.IsValid) throw new ArgumentException("Invalid instruction", nameof(instruction));
 
@@ -52,7 +66,7 @@ public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
             debugMap.LogDebugLineInfo(debugLineInfo);
         }
 
-        return this;
+        return (TAsm)this;
     }
 
     /// <summary>
@@ -63,7 +77,7 @@ public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
     /// <param name="debugFilePath">The file path for debugging information (optional).</param>
     /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502Assembler AddInstruction(Mos6502Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+    public TAsm AddInstruction(Mos6502Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
         var currentAddress = CurrentAddress;
         var bufferOffset = SizeInBytes;
@@ -73,20 +87,34 @@ public partial class Mos6502Assembler : Mos6502AssemblerBase<Mos6502Assembler>
 
         Patches.Add(new(currentAddress, (ushort)(bufferOffset + 1), instruction.AddressingMode, expression));
 
-        return this;
+        return (TAsm)this;
     }
 }
 
 /// <summary>
-/// Represents a 6502 assembler for generating machine code and managing labels.
+/// Represents a 6510 assembler for generating machine code and managing labels.
 /// </summary>
-public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
+public partial class Mos6510Assembler : Mos6510Assembler<Mos6510Assembler>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Mos6510Assembler"/> class.
     /// </summary>
     /// <param name="baseAddress">The base address for code generation.</param>
-    public Mos6510Assembler(ushort baseAddress = 0xC000) : base(baseAddress)
+    public  Mos6510Assembler(ushort baseAddress = 0xC000) : base(baseAddress)
+    {
+    }
+}
+
+/// <summary>
+/// Represents a 6510 assembler base class for generating machine code and managing labels.
+/// </summary>
+public abstract partial class Mos6510Assembler<TAsm> : Mos6502AssemblerBase<TAsm> where TAsm : Mos6510Assembler<TAsm>
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Mos6510Assembler"/> class.
+    /// </summary>
+    /// <param name="baseAddress">The base address for code generation.</param>
+    protected Mos6510Assembler(ushort baseAddress = 0xC000) : base(baseAddress)
     {
     }
 
@@ -97,7 +125,7 @@ public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
     /// <param name="debugFilePath">The file path for debugging information (optional).</param>
     /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6510Assembler AddInstruction(Mos6510Instruction instruction, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+    public TAsm AddInstruction(Mos6510Instruction instruction, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
         if (!instruction.IsValid) throw new ArgumentException("Invalid instruction", nameof(instruction));
 
@@ -121,7 +149,7 @@ public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
             debugMap.LogDebugLineInfo(debugLineInfo);
         }
 
-        return this;
+        return (TAsm)this;
     }
 
     /// <summary>
@@ -132,7 +160,7 @@ public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
     /// <param name="debugFilePath">The file path for debugging information (optional).</param>
     /// <param name="debugLineNumber">The line number for debugging information (optional).</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6510Assembler AddInstruction(Mos6510Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+    public TAsm AddInstruction(Mos6510Instruction instruction, Mos6502Expression expression, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
     {
         var currentAddress = CurrentAddress;
         var bufferOffset = SizeInBytes;
@@ -142,6 +170,6 @@ public partial class Mos6510Assembler : Mos6502AssemblerBase<Mos6510Assembler>
 
         Patches.Add(new(currentAddress, (ushort)(bufferOffset + 1), instruction.AddressingMode, expression));
 
-        return this;
+        return (TAsm)this;
     }
 }

@@ -836,7 +836,7 @@ internal class GeneratorApp
 
         writer.WriteLine("namespace Asm6502;");
         writer.WriteLine();
-        writer.WriteLine($"partial class {className}Assembler");
+        writer.WriteLine($"partial class {className}Assembler<TAsm>");
         writer.OpenBraceBlock();
 
         var mnemonicToSignatureToOpcodes = new Dictionary<string, Dictionary<string, OpcodeSignature>>();
@@ -1004,7 +1004,7 @@ internal class GeneratorApp
                 {
                     writer.WriteLine("[Obsolete(\"This instruction is unstable and may not behave as expected.\", false)]");
                 }
-                writer.WriteLine($"public {className}Assembler {signature}");
+                writer.WriteLine($"public TAsm {signature}");
                 writer.Indent();
 
                 writer.Write($"=> AddInstruction({className}InstructionFactory.{opcodeSignature.Name}(");

@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 
 namespace Asm6502;
 
-partial class Mos6502Assembler
+partial class Mos6502Assembler<TAsm>
 {
     /// <summary>
     /// Add Memory to Accumulator with Carry. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ADC">ADC_Imm</see> instruction (0x69) with addressing mode Immediate.
@@ -29,7 +29,7 @@ partial class Mos6502Assembler
     ///         + + - - - - + +
     /// </code>
     /// </remarks>
-    public Mos6502Assembler ADC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm ADC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.ADC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// AND Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#AND">AND_Imm</see> instruction (0x29) with addressing mode Immediate.
@@ -46,7 +46,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + -
     /// </code>
     /// </remarks>
-    public Mos6502Assembler AND_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm AND_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.AND_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CMP">CMP_Imm</see> instruction (0xc9) with addressing mode Immediate.
@@ -63,7 +63,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + +
     /// </code>
     /// </remarks>
-    public Mos6502Assembler CMP_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm CMP_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.CMP_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Memory and Index X. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPX">CPX_Imm</see> instruction (0xe0) with addressing mode Immediate.
@@ -80,7 +80,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + +
     /// </code>
     /// </remarks>
-    public Mos6502Assembler CPX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm CPX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.CPX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Compare Memory and Index Y. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#CPY">CPY_Imm</see> instruction (0xc0) with addressing mode Immediate.
@@ -97,7 +97,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + +
     /// </code>
     /// </remarks>
-    public Mos6502Assembler CPY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm CPY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.CPY_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Exclusive-OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#EOR">EOR_Imm</see> instruction (0x49) with addressing mode Immediate.
@@ -114,7 +114,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + -
     /// </code>
     /// </remarks>
-    public Mos6502Assembler EOR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm EOR_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.EOR_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Accumulator with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDA">LDA_Imm</see> instruction (0xa9) with addressing mode Immediate.
@@ -131,7 +131,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + -
     /// </code>
     /// </remarks>
-    public Mos6502Assembler LDA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm LDA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.LDA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Index X with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDX">LDX_Imm</see> instruction (0xa2) with addressing mode Immediate.
@@ -148,7 +148,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + -
     /// </code>
     /// </remarks>
-    public Mos6502Assembler LDX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm LDX_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.LDX_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Load Index Y with Memory. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#LDY">LDY_Imm</see> instruction (0xa0) with addressing mode Immediate.
@@ -165,7 +165,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + -
     /// </code>
     /// </remarks>
-    public Mos6502Assembler LDY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm LDY_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.LDY_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// OR Memory with Accumulator. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#ORA">ORA_Imm</see> instruction (0x09) with addressing mode Immediate.
@@ -182,7 +182,7 @@ partial class Mos6502Assembler
     ///         + - - - - - + -
     /// </code>
     /// </remarks>
-    public Mos6502Assembler ORA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm ORA_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.ORA_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
     /// <summary>
     /// Subtract Memory from Accumulator with Borrow. <see href="https://www.masswerk.at/6502/6502_instruction_set.html#SBC">SBC_Imm</see> instruction (0xe9) with addressing mode Immediate.
@@ -199,6 +199,6 @@ partial class Mos6502Assembler
     ///         + + - - - - + +
     /// </code>
     /// </remarks>
-    public Mos6502Assembler SBC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
+    public TAsm SBC_Imm<TEnum>(TEnum immediate, [CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) where TEnum : struct, Enum
         => AddInstruction(Mos6502InstructionFactory.SBC_Imm(Unsafe.As<TEnum, byte>(ref immediate)), debugFilePath, debugLineNumber);
 }
