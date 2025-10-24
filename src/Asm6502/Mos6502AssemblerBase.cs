@@ -428,6 +428,42 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     }
 
     /// <summary>
+    /// Arranges the specified assembly blocks in memory, filling any gaps and binding labels as needed.
+    /// </summary>
+    /// <remarks>This method places each block at the current address, fills any gaps between blocks with zero
+    /// bytes, and ensures that labels are bound to their corresponding addresses. Use this method to control the layout
+    /// of code or data blocks within the assembled output.
+    /// Some blocks may have fixed addresses (if their label is already bound), while others will be placed sequentially.
+    /// </remarks>
+    /// <param name="blocks">An array of assembly blocks to arrange sequentially in memory.</param>
+    /// <returns>The current assembler instance, allowing for method chaining.</returns>
+    public Mos6502AssemblerBase ArrangeBlocks(params AsmBlock[] blocks)
+    {
+        var newBlocks = ArrangeBlocks(blocks, CurrentAddress);
+
+        foreach (var (address, block) in newBlocks)
+        {
+            var fill = address - CurrentAddress;
+            if (fill > 0)
+            {
+                // Fill gap
+                AppendBytes(fill, 0);
+            }
+
+            // Place label
+            if (!block.Label.IsBound)
+            {
+                Label(block.Label);
+            }
+
+            // Append block data
+            Append(block.Buffer);
+        }
+
+        return this;
+    }
+
+    /// <summary>
     /// Releases resources used by the assembler.
     /// </summary>
     public void Dispose()
@@ -466,6 +502,83 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         return (ushort)address;
     }
 
+    private static List<(ushort Address, AsmBlock Block)> ArrangeBlocks(AsmBlock[] blocks, ushort startAddress)
+    {
+        var fixedBlocks = blocks.Where(x => x.Label.IsBound)
+            .OrderBy(x => x.Label.Address)
+            .ToList();
+
+        // Step 0: Check that fixed address are not before the start address
+        foreach (var fixedBlk in fixedBlocks)
+        {
+            if (fixedBlk.Label.Address < startAddress)
+                throw new InvalidOperationException($"Fixed block address 0x{fixedBlk.Label.Address:X4} for label {fixedBlk.Label} is before the start address 0x{startAddress:X4}");
+        }
+        
+        // Step 1: Validate fixed blocks (no overlaps)
+        for (int i = 0; i < fixedBlocks.Count - 1; i++)
+        {
+            var a = fixedBlocks[i];
+            var b = fixedBlocks[i + 1];
+            ushort aEnd = (ushort)(a.Label.Address + a.Buffer.Length);
+            if (aEnd > b.Label.Address)
+                throw new InvalidOperationException($"Fixed block overlap: {a.Label} vs {b.Label}");
+        }
+
+        var floatingBlocks = blocks.Where(x => !x.Label.IsBound)
+            .OrderByDescending(x => x.Buffer.Length)
+            .ToList();
+
+        // Build gaps: (startAddr, size) -> dynamic updates
+        var gaps = new List<(ushort StartAddress, ushort EndAddress)>();
+        ushort cursor = startAddress;
+
+        foreach (var fixedBlk in fixedBlocks)
+        {
+            if (cursor < fixedBlk.Label.Address)
+                gaps.Add((cursor, fixedBlk.Label.Address));
+            cursor = (ushort)(fixedBlk.Label.Address + fixedBlk.Buffer.Length);
+        }
+
+        gaps.Add((cursor, ushort.MaxValue)); // open ended final gap
+
+        List<(ushort Address, AsmBlock Block)> result = new();
+        foreach (var fixedBlk in fixedBlocks)
+        {
+            result.Add((fixedBlk.Label.Address, fixedBlk));
+        }
+
+        // Place floating blocks
+        foreach (var block in floatingBlocks)
+        {
+            int size = block.Buffer.Length;
+            ushort align = block.Alignment;
+            bool placed = false;
+
+            for (int g = 0; g < gaps.Count && !placed; g++)
+            {
+                var gap = gaps[g];
+                ushort addr = AlignUp(gap.StartAddress, align);
+                if (addr + size <= gap.EndAddress)
+                {
+                    // Place block
+                    result.Add((addr, block));
+
+                    // Update gap
+                    gaps[g] = ((ushort)(addr + size), gap.EndAddress);
+                    placed = true;
+                }
+            }
+
+            if (!placed)
+                throw new InvalidOperationException($"Cannot place block {block.Label}");
+        }
+
+        return result.OrderBy(x => x.Address).ToList();
+
+        static ushort AlignUp(ushort value, ushort align) => (ushort)((value + (align - 1)) & ~(align - 1));
+    }
+
     /// <summary>
     /// Represents a patch that needs to be applied to a memory location after labels have been bound.
     /// </summary>
@@ -481,7 +594,6 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
 /// </summary>
 public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase where TAsm : Mos6502AssemblerBase<TAsm>
 {
-
     /// <summary>
     /// Initializes a new instance of the <see cref="Mos6502Assembler"/> class.
     /// </summary>
@@ -640,4 +752,16 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// The label name is extracted from the C# expression passed as argument. For example: <c>assembler.LabelForward(out var myLabel);</c> will create a label with the name "myLabel".
     /// </remarks>
     public new TAsm LabelForward(out Mos6502Label label, [CallerArgumentExpression(nameof(label))] string? labelExpression = null) => (TAsm)base.LabelForward(out label, labelExpression);
+
+    /// <summary>
+    /// Arranges the specified assembly blocks in memory, filling any gaps and binding labels as needed.
+    /// </summary>
+    /// <remarks>This method places each block at the current address, fills any gaps between blocks with zero
+    /// bytes, and ensures that labels are bound to their corresponding addresses. Use this method to control the layout
+    /// of code or data blocks within the assembled output.
+    /// Some blocks may have fixed addresses (if their label is already bound), while others will be placed sequentially.
+    /// </remarks>
+    /// <param name="blocks">An array of assembly blocks to arrange sequentially in memory.</param>
+    /// <returns>The current assembler instance, allowing for method chaining.</returns>
+    public new TAsm ArrangeBlocks(params AsmBlock[] blocks) => (TAsm)base.ArrangeBlocks(blocks);
 }
