@@ -16,6 +16,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
 {
     private byte[] _buffer;
     private protected readonly List<Patch> Patches;
+    private List<Action> _callBacksOnResolve;
 
     /// <summary>
     /// Creates a new instance of the <see cref="Mos6502AssemblerBase"/> class.
@@ -25,6 +26,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     {
         _buffer = [];
         Patches = new();
+        _callBacksOnResolve = new();
         BaseAddress = baseAddress;
     }
 
@@ -342,6 +344,28 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         // Notifies the current address
         DebugMap?.EndProgram(CurrentAddress);
 
+        // Invoke callbacks
+        foreach (var callback in _callBacksOnResolve)
+        {
+            callback();
+        }
+        _callBacksOnResolve.Clear();
+
+        return this;
+    }
+
+    /// <summary>
+    /// Registers a callback to be invoked when the method <see cref="End"/> is called and the resolve label addresses completes.
+    /// </summary>
+    /// <param name="callback">The action to execute when the resolve operation ends. Cannot be null.</param>
+    /// <returns>The current assembler instance, allowing for method chaining.</returns>
+    /// <remarks>
+    /// The callbacks are removed after <see cref="End"/> is called.
+    /// </remarks>
+    public Mos6502AssemblerBase OnResolveEnd(Action callback)
+    {
+        ArgumentNullException.ThrowIfNull(callback);
+        _callBacksOnResolve.Add(callback);
         return this;
     }
 
@@ -764,4 +788,14 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// <param name="blocks">An array of assembly blocks to arrange sequentially in memory.</param>
     /// <returns>The current assembler instance, allowing for method chaining.</returns>
     public new TAsm ArrangeBlocks(params AsmBlock[] blocks) => (TAsm)base.ArrangeBlocks(blocks);
+
+    /// <summary>
+    /// Registers a callback to be invoked when the method <see cref="End"/> is called and the resolve label addresses completes.
+    /// </summary>
+    /// <param name="callback">The action to execute when the resolve operation ends. Cannot be null.</param>
+    /// <returns>The current assembler instance, allowing for method chaining.</returns>
+    /// <remarks>
+    /// The callbacks are removed after <see cref="End"/> is called.
+    /// </remarks>
+    public new TAsm OnResolveEnd(Action callback) => (TAsm)base.OnResolveEnd(callback);
 }
