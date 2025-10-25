@@ -89,7 +89,7 @@ public abstract record Mos6502ExpressionU16 : Mos6502Expression
     /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
     /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
     /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the subtraction.</returns>
-    public static Mos6502ExpressionU16 operator -(Mos6502ExpressionU16 left, short right) => new Mos6502ExpressionAddConstU16(left, (short)-right);
+    public static Mos6502ExpressionU16 operator -(Mos6502ExpressionU16 left, int right) => new Mos6502ExpressionAddConstU16(left, (short)-right);
 
     /// <summary>
     /// Adds one 16-bit MOS 6502 expression to const.
@@ -97,7 +97,15 @@ public abstract record Mos6502ExpressionU16 : Mos6502Expression
     /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
     /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
     /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the addition.</returns>
-    public static Mos6502ExpressionU16 operator +(Mos6502ExpressionU16 left, short right) => new Mos6502ExpressionAddConstU16(left, (short)right);
+    public static Mos6502ExpressionU16 operator +(Mos6502ExpressionU16 left, int right) => new Mos6502ExpressionAddConstU16(left, (short)right);
+    
+    /// <summary>
+    /// Adds one 16-bit MOS 6502 expression to const.
+    /// </summary>
+    /// <param name="left">The minuend, representing the 16-bit expression to subtract from.</param>
+    /// <param name="right">The subtrahend, representing the 16-bit const value to subtract.</param>
+    /// <returns>A new <see cref="Mos6502ExpressionU16"/> representing the result of the addition.</returns>
+    public static Mos6502ExpressionU16 operator /(Mos6502ExpressionU16 left, int right) => new Mos6502ExpressionDivideByConstU16(left, right <= 0 ? throw new ArgumentOutOfRangeException(nameof(right), "Divisor must be > 0") : (ushort)right);
 }
 
 /// <summary>
@@ -211,6 +219,24 @@ public record Mos6502ExpressionAddConstU16(Mos6502ExpressionU16 Left, short Righ
     public override ushort Evaluate()
     {
         var result = (ushort)(Left.Evaluate() + Right);
+        return result;
+    }
+
+    /// <inheritdoc />
+    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
+}
+
+/// <summary>
+/// A 16-bit expression that divides a 16-bit expression by a constant value.
+/// </summary>
+/// <param name="Left">The left operand, which is a 16-bit expression.</param>
+/// <param name="Right">The right operand, which is a constant 16-bit value to be added to the left operand.</param>
+public record Mos6502ExpressionDivideByConstU16(Mos6502ExpressionU16 Left, ushort Right) : Mos6502ExpressionU16
+{
+    /// <inheritdoc />
+    public override ushort Evaluate()
+    {
+        var result = (ushort)(Left.Evaluate() / Right);
         return result;
     }
 
