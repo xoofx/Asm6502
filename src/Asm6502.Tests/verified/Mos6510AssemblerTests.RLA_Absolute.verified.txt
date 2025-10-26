@@ -3,10 +3,7 @@ C003  2F 01 FF   RLA $FF01
 
 ; 2F 34 12 2F 01 FF
 
-Debug Info (Program: RLA_Absolute)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2248
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2249
+$c000 ORG BEGIN: RLA_Absolute
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2248
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2249
+$c006 END

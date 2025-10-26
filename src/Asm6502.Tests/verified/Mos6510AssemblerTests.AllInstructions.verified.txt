@@ -625,597 +625,594 @@ C507  EB FF      USBC #$FF
 
 ; 6D 34 12 6D 01 FF 7D 34 12 7D 02 FF 79 34 12 79 03 FF 69 01 69 42 69 FF 61 05 61 20 61 FF 71 06 71 30 71 FE 65 03 65 20 65 FE 75 02 75 30 75 FB 2D 34 12 2D 01 FF 3D 34 12 3D 02 FF 39 34 12 39 03 FF 29 01 29 42 29 FF 21 05 21 20 21 FF 31 06 31 30 31 FE 25 03 25 20 25 FE 35 02 35 30 35 FB 0E 34 12 0E 01 FF 1E 34 12 1E 02 FF 0A 0A 06 03 06 20 06 FE 16 02 16 30 16 FB 90 10 90 DB B0 10 B0 DB F0 10 F0 DB 2C 34 12 2C 01 FF 24 03 24 20 24 FE 30 10 30 DB D0 10 D0 DB 10 10 10 DB 00 50 10 50 DB 70 10 70 DB 18 D8 58 B8 CD 34 12 CD 01 FF DD 34 12 DD 02 FF D9 34 12 D9 03 FF C9 01 C9 42 C9 FF C1 05 C1 20 C1 FF D1 06 D1 30 D1 FE C5 03 C5 20 C5 FE D5 02 D5 30 D5 FB EC 34 12 EC 01 FF E0 01 E0 42 E0 FF E4 03 E4 20 E4 FE CC 34 12 CC 01 FF C0 01 C0 42 C0 FF C4 03 C4 20 C4 FE CE 34 12 CE 01 FF DE 34 12 DE 02 FF C6 03 C6 20 C6 FE D6 02 D6 30 D6 FB CA 88 4D 34 12 4D 01 FF 5D 34 12 5D 02 FF 59 34 12 59 03 FF 49 01 49 42 49 FF 41 05 41 20 41 FF 51 06 51 30 51 FE 45 03 45 20 45 FE 55 02 55 30 55 FB EE 34 12 EE 01 FF FE 34 12 FE 02 FF E6 03 E6 20 E6 FE F6 02 F6 30 F6 FB E8 C8 4C 34 12 4C 01 FF 6C 34 12 6C 04 FF 20 34 12 20 01 FF AD 34 12 AD 01 FF BD 34 12 BD 02 FF B9 34 12 B9 03 FF A9 01 A9 42 A9 FF A1 05 A1 20 A1 FF B1 06 B1 30 B1 FE A5 03 A5 20 A5 FE B5 02 B5 30 B5 FB AE 34 12 AE 01 FF BE 34 12 BE 03 FF A2 01 A2 42 A2 FF A6 03 A6 20 A6 FE B6 01 B6 40 B6 FC AC 34 12 AC 01 FF BC 34 12 BC 02 FF A0 01 A0 42 A0 FF A4 03 A4 20 A4 FE B4 02 B4 30 B4 FB 4E 34 12 4E 01 FF 5E 34 12 5E 02 FF 4A 4A 46 03 46 20 46 FE 56 02 56 30 56 FB EA 0D 34 12 0D 01 FF 1D 34 12 1D 02 FF 19 34 12 19 03 FF 09 01 09 42 09 FF 01 05 01 20 01 FF 11 06 11 30 11 FE 05 03 05 20 05 FE 15 02 15 30 15 FB 48 08 68 28 2E 34 12 2E 01 FF 3E 34 12 3E 02 FF 2A 2A 26 03 26 20 26 FE 36 02 36 30 36 FB 6E 34 12 6E 01 FF 7E 34 12 7E 02 FF 6A 6A 66 03 66 20 66 FE 76 02 76 30 76 FB 40 60 ED 34 12 ED 01 FF FD 34 12 FD 02 FF F9 34 12 F9 03 FF E9 01 E9 42 E9 FF E1 05 E1 20 E1 FF F1 06 F1 30 F1 FE E5 03 E5 20 E5 FE F5 02 F5 30 F5 FB 38 F8 78 8D 34 12 8D 01 FF 9D 34 12 9D 02 FF 99 34 12 99 03 FF 81 05 81 20 81 FF 91 06 91 30 91 FE 85 03 85 20 85 FE 95 02 95 30 95 FB 8E 34 12 8E 01 FF 86 03 86 20 86 FE 96 01 96 40 96 FC 8C 34 12 8C 01 FF 84 03 84 20 84 FE 94 02 94 30 94 FB AA A8 BA 8A 9A 98 4B 01 4B 42 4B FF 0B 01 0B 42 0B FF 2B 01 2B 42 2B FF 8B 01 8B 42 8B FF 6B 01 6B 42 6B FF CF 34 12 CF 01 FF DF 34 12 DF 02 FF DB 34 12 DB 03 FF C3 05 C3 20 C3 FF D3 06 D3 30 D3 FE C7 03 C7 20 C7 FE D7 02 D7 30 D7 FB EF 34 12 EF 01 FF FF 34 12 FF 02 FF FB 34 12 FB 03 FF E3 05 E3 20 E3 FF F3 06 F3 30 F3 FE E7 03 E7 20 E7 FE F7 02 F7 30 F7 FB 02 12 22 32 42 52 62 72 92 B2 D2 F2 BB 34 12 BB 03 FF AF 34 12 AF 01 FF BF 34 12 BF 03 FF A3 05 A3 20 A3 FF B3 06 B3 30 B3 FE A7 03 A7 20 A7 FE B7 01 B7 40 B7 FC AB 01 AB 42 AB FF 0C 34 12 0C 01 FF 1C 34 12 1C 02 FF 3C 34 12 3C 02 FF 5C 34 12 5C 02 FF 7C 34 12 7C 02 FF DC 34 12 DC 02 FF FC 34 12 FC 02 FF 80 01 80 42 80 FF 82 01 82 42 82 FF 89 01 89 42 89 FF C2 01 C2 42 C2 FF E2 01 E2 42 E2 FF 1A 3A 5A 7A DA FA 04 03 04 20 04 FE 44 03 44 20 44 FE 64 03 64 20 64 FE 14 02 14 30 14 FB 34 02 34 30 34 FB 54 02 54 30 54 FB 74 02 74 30 74 FB D4 02 D4 30 D4 FB F4 02 F4 30 F4 FB 2F 34 12 2F 01 FF 3F 34 12 3F 02 FF 3B 34 12 3B 03 FF 23 05 23 20 23 FF 33 06 33 30 33 FE 27 03 27 20 27 FE 37 02 37 30 37 FB 6F 34 12 6F 01 FF 7F 34 12 7F 02 FF 7B 34 12 7B 03 FF 63 05 63 20 63 FF 73 06 73 30 73 FE 67 03 67 20 67 FE 77 02 77 30 77 FB 8F 34 12 8F 01 FF 83 05 83 20 83 FF 87 03 87 20 87 FE 97 01 97 40 97 FC CB 01 CB 42 CB FF 9F 34 12 9F 03 FF 93 06 93 30 93 FE 9E 34 12 9E 03 FF 9C 34 12 9C 02 FF 0F 34 12 0F 01 FF 1F 34 12 1F 02 FF 1B 34 12 1B 03 FF 03 05 03 20 03 FF 13 06 13 30 13 FE 07 03 07 20 07 FE 17 02 17 30 17 FB 4F 34 12 4F 01 FF 5F 34 12 5F 02 FF 5B 34 12 5B 03 FF 43 05 43 20 43 FF 53 06 53 30 53 FE 47 03 47 20 47 FE 57 02 57 30 57 FB 9B 34 12 9B 03 FF EB 01 EB 42 EB FF
 
-Debug Info (Program: AllInstructions)
-- Program Start Address: C000
-- Program End Address: C509
-- Debug Line Count: 589
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2660
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2661
-C006 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2662
-C009 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2663
-C00C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2664
-C00F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2665
-C012 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2666
-C014 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2667
-C016 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2668
-C018 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2669
-C01A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2670
-C01C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2671
-C01E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2672
-C020 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2673
-C022 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2674
-C024 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2675
-C026 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2676
-C028 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2677
-C02A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2678
-C02C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2679
-C02E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2680
-C030 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2681
-C033 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2682
-C036 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2683
-C039 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2684
-C03C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2685
-C03F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2686
-C042 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2687
-C044 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2688
-C046 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2689
-C048 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2690
-C04A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2691
-C04C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2692
-C04E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2693
-C050 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2694
-C052 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2695
-C054 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2696
-C056 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2697
-C058 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2698
-C05A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2699
-C05C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2700
-C05E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2701
-C060 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2702
-C063 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2703
-C066 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2704
-C069 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2705
-C06C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2706
-C06D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2707
-C06E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2708
-C070 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2709
-C072 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2710
-C074 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2711
-C076 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2712
-C078 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2713
-C07A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2714
-C07C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2715
-C07E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2716
-C080 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2717
-C082 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2718
-C084 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2719
-C086 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2720
-C089 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2721
-C08C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2722
-C08E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2723
-C090 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2724
-C092 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2725
-C094 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2726
-C096 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2727
-C098 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2728
-C09A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2729
-C09C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2730
-C09E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2731
-C09F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2732
-C0A1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2733
-C0A3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2734
-C0A5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2735
-C0A7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2736
-C0A8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2737
-C0A9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2738
-C0AA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2739
-C0AB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2740
-C0AE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2741
-C0B1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2742
-C0B4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2743
-C0B7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2744
-C0BA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2745
-C0BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2746
-C0BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2747
-C0C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2748
-C0C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2749
-C0C5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2750
-C0C7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2751
-C0C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2752
-C0CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2753
-C0CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2754
-C0CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2755
-C0D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2756
-C0D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2757
-C0D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2758
-C0D7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2759
-C0D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2760
-C0DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2761
-C0DE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2762
-C0E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2763
-C0E3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2764
-C0E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2765
-C0E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2766
-C0E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2767
-C0EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2768
-C0ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2769
-C0F0 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2770
-C0F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2771
-C0F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2772
-C0F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2773
-C0F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2774
-C0FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2775
-C0FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2776
-C0FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2777
-C102 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2778
-C105 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2779
-C108 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2780
-C10B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2781
-C10D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2782
-C10F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2783
-C111 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2784
-C113 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2785
-C115 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2786
-C117 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2787
-C118 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2788
-C119 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2789
-C11C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2790
-C11F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2791
-C122 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2792
-C125 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2793
-C128 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2794
-C12B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2795
-C12D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2796
-C12F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2797
-C131 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2798
-C133 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2799
-C135 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2800
-C137 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2801
-C139 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2802
-C13B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2803
-C13D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2804
-C13F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2805
-C141 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2806
-C143 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2807
-C145 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2808
-C147 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2809
-C149 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2810
-C14C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2811
-C14F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2812
-C152 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2813
-C155 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2814
-C157 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2815
-C159 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2816
-C15B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2817
-C15D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2818
-C15F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2819
-C161 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2820
-C162 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2821
-C163 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2822
-C166 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2823
-C169 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2824
-C16C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2825
-C16F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2826
-C172 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2827
-C175 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2828
-C178 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2829
-C17B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2830
-C17E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2831
-C181 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2832
-C184 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2833
-C187 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2834
-C189 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2835
-C18B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2836
-C18D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2837
-C18F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2838
-C191 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2839
-C193 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2840
-C195 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2841
-C197 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2842
-C199 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2843
-C19B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2844
-C19D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2845
-C19F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2846
-C1A1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2847
-C1A3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2848
-C1A5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2849
-C1A8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2850
-C1AB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2851
-C1AE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2852
-C1B1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2853
-C1B3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2854
-C1B5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2855
-C1B7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2856
-C1B9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2857
-C1BB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2858
-C1BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2859
-C1BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2860
-C1C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2861
-C1C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2862
-C1C6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2863
-C1C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2864
-C1CC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2865
-C1CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2866
-C1D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2867
-C1D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2868
-C1D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2869
-C1D7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2870
-C1D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2871
-C1DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2872
-C1DD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2873
-C1DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2874
-C1E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2875
-C1E4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2876
-C1E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2877
-C1EA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2878
-C1ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2879
-C1EE {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2880
-C1EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2881
-C1F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2882
-C1F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2883
-C1F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2884
-C1F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2885
-C1F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2886
-C1FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2887
-C1FC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2888
-C1FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2889
-C202 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2890
-C205 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2891
-C208 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2892
-C20B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2893
-C20E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2894
-C210 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2895
-C212 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2896
-C214 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2897
-C216 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2898
-C218 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2899
-C21A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2900
-C21C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2901
-C21E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2902
-C220 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2903
-C222 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2904
-C224 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2905
-C226 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2906
-C228 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2907
-C22A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2908
-C22C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2909
-C22D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2910
-C22E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2911
-C22F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2912
-C230 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2913
-C233 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2914
-C236 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2915
-C239 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2916
-C23C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2917
-C23D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2918
-C23E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2919
-C240 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2920
-C242 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2921
-C244 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2922
-C246 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2923
-C248 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2924
-C24A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2925
-C24D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2926
-C250 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2927
-C253 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2928
-C256 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2929
-C257 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2930
-C258 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2931
-C25A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2932
-C25C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2933
-C25E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2934
-C260 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2935
-C262 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2936
-C264 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2937
-C265 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2938
-C266 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2939
-C269 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2940
-C26C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2941
-C26F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2942
-C272 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2943
-C275 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2944
-C278 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2945
-C27A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2946
-C27C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2947
-C27E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2948
-C280 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2949
-C282 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2950
-C284 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2951
-C286 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2952
-C288 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2953
-C28A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2954
-C28C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2955
-C28E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2956
-C290 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2957
-C292 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2958
-C294 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2959
-C296 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2960
-C297 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2961
-C298 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2962
-C299 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2963
-C29C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2964
-C29F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2965
-C2A2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2966
-C2A5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2967
-C2A8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2968
-C2AB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2969
-C2AD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2970
-C2AF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2971
-C2B1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2972
-C2B3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2973
-C2B5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2974
-C2B7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2975
-C2B9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2976
-C2BB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2977
-C2BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2978
-C2BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2979
-C2C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2980
-C2C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2981
-C2C6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2982
-C2C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2983
-C2CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2984
-C2CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2985
-C2CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2986
-C2D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2987
-C2D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2988
-C2D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2989
-C2D8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2990
-C2DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2991
-C2DD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2992
-C2DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2993
-C2E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2994
-C2E3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2995
-C2E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2996
-C2E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2997
-C2E8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2998
-C2E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2999
-C2EA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3000
-C2EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3001
-C2EC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3002
-C2ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3003
-C2EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3004
-C2F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3005
-C2F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3006
-C2F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3007
-C2F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3008
-C2F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3009
-C2FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3010
-C2FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3011
-C2FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3012
-C301 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3013
-C303 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3014
-C305 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3015
-C307 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3016
-C309 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3017
-C30B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3018
-C30E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3019
-C311 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3020
-C314 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3021
-C317 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3022
-C31A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3023
-C31D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3024
-C31F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3025
-C321 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3026
-C323 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3027
-C325 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3028
-C327 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3029
-C329 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3030
-C32B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3031
-C32D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3032
-C32F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3033
-C331 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3034
-C333 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3035
-C335 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3036
-C338 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3037
-C33B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3038
-C33E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3039
-C341 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3040
-C344 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3041
-C347 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3042
-C349 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3043
-C34B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3044
-C34D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3045
-C34F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3046
-C351 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3047
-C353 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3048
-C355 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3049
-C357 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3050
-C359 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3051
-C35B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3052
-C35D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3053
-C35F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3054
-C360 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3055
-C361 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3056
-C362 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3057
-C363 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3058
-C364 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3059
-C365 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3060
-C366 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3061
-C367 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3062
-C368 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3063
-C369 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3064
-C36A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3065
-C36B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3066
-C36E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3067
-C371 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3068
-C374 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3069
-C377 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3070
-C37A {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3071
-C37D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3072
-C37F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3073
-C381 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3074
-C383 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3075
-C385 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3076
-C387 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3077
-C389 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3078
-C38B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3079
-C38D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3080
-C38F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3081
-C391 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3082
-C393 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3083
-C395 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3084
-C397 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3085
-C399 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3086
-C39B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3087
-C39E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3088
-C3A1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3089
-C3A4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3090
-C3A7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3091
-C3AA {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3092
-C3AD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3093
-C3B0 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3094
-C3B3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3095
-C3B6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3096
-C3B9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3097
-C3BC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3098
-C3BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3099
-C3C2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3100
-C3C5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3101
-C3C7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3102
-C3C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3103
-C3CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3104
-C3CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3105
-C3CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3106
-C3D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3107
-C3D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3108
-C3D5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3109
-C3D7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3110
-C3D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3111
-C3DB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3112
-C3DD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3113
-C3DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3114
-C3E1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3115
-C3E3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3116
-C3E4 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3117
-C3E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3118
-C3E6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3119
-C3E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3120
-C3E8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3121
-C3E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3122
-C3EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3123
-C3ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3124
-C3EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3125
-C3F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3126
-C3F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3127
-C3F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3128
-C3F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3129
-C3F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3130
-C3FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3131
-C3FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3132
-C3FF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3133
-C401 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3134
-C403 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3135
-C405 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3136
-C407 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3137
-C409 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3138
-C40B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3139
-C40D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3140
-C40F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3141
-C411 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3142
-C413 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3143
-C415 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3144
-C417 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3145
-C419 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3146
-C41B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3147
-C41D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3148
-C41F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3149
-C422 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3150
-C425 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3151
-C428 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3152
-C42B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3153
-C42E {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3154
-C431 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3155
-C433 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3156
-C435 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3157
-C437 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3158
-C439 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3159
-C43B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3160
-C43D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3161
-C43F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3162
-C441 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3163
-C443 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3164
-C445 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3165
-C447 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3166
-C449 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3167
-C44C {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3168
-C44F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3169
-C452 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3170
-C455 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3171
-C458 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3172
-C45B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3173
-C45D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3174
-C45F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3175
-C461 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3176
-C463 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3177
-C465 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3178
-C467 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3179
-C469 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3180
-C46B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3181
-C46D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3182
-C46F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3183
-C471 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3184
-C473 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3185
-C476 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3186
-C479 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3187
-C47B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3188
-C47D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3189
-C47F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3190
-C481 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3191
-C483 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3192
-C485 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3193
-C487 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3194
-C489 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3195
-C48B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3196
-C48D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3197
-C48F {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3198
-C491 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3199
-C494 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3200
-C497 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3201
-C499 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3202
-C49B {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3203
-C49D {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3204
-C4A0 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3205
-C4A3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3206
-C4A6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3207
-C4A9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3208
-C4AC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3209
-C4AF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3210
-C4B2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3211
-C4B5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3212
-C4B8 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3213
-C4BB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3214
-C4BD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3215
-C4BF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3216
-C4C1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3217
-C4C3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3218
-C4C5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3219
-C4C7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3220
-C4C9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3221
-C4CB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3222
-C4CD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3223
-C4CF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3224
-C4D1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3225
-C4D3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3226
-C4D6 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3227
-C4D9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3228
-C4DC {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3229
-C4DF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3230
-C4E2 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3231
-C4E5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3232
-C4E7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3233
-C4E9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3234
-C4EB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3235
-C4ED {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3236
-C4EF {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3237
-C4F1 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3238
-C4F3 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3239
-C4F5 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3240
-C4F7 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3241
-C4F9 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3242
-C4FB {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3243
-C4FD {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3244
-C500 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3245
-C503 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3246
-C505 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3247
-C507 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3248
+$c000 ORG BEGIN: AllInstructions
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2660
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2661
+$c006 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2662
+$c009 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2663
+$c00c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2664
+$c00f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2665
+$c012 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2666
+$c014 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2667
+$c016 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2668
+$c018 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2669
+$c01a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2670
+$c01c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2671
+$c01e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2672
+$c020 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2673
+$c022 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2674
+$c024 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2675
+$c026 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2676
+$c028 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2677
+$c02a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2678
+$c02c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2679
+$c02e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2680
+$c030 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2681
+$c033 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2682
+$c036 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2683
+$c039 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2684
+$c03c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2685
+$c03f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2686
+$c042 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2687
+$c044 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2688
+$c046 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2689
+$c048 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2690
+$c04a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2691
+$c04c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2692
+$c04e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2693
+$c050 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2694
+$c052 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2695
+$c054 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2696
+$c056 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2697
+$c058 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2698
+$c05a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2699
+$c05c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2700
+$c05e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2701
+$c060 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2702
+$c063 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2703
+$c066 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2704
+$c069 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2705
+$c06c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2706
+$c06d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2707
+$c06e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2708
+$c070 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2709
+$c072 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2710
+$c074 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2711
+$c076 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2712
+$c078 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2713
+$c07a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2714
+$c07c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2715
+$c07e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2716
+$c080 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2717
+$c082 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2718
+$c084 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2719
+$c086 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2720
+$c089 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2721
+$c08c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2722
+$c08e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2723
+$c090 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2724
+$c092 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2725
+$c094 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2726
+$c096 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2727
+$c098 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2728
+$c09a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2729
+$c09c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2730
+$c09e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2731
+$c09f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2732
+$c0a1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2733
+$c0a3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2734
+$c0a5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2735
+$c0a7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2736
+$c0a8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2737
+$c0a9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2738
+$c0aa LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2739
+$c0ab LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2740
+$c0ae LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2741
+$c0b1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2742
+$c0b4 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2743
+$c0b7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2744
+$c0ba LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2745
+$c0bd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2746
+$c0bf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2747
+$c0c1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2748
+$c0c3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2749
+$c0c5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2750
+$c0c7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2751
+$c0c9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2752
+$c0cb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2753
+$c0cd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2754
+$c0cf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2755
+$c0d1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2756
+$c0d3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2757
+$c0d5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2758
+$c0d7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2759
+$c0d9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2760
+$c0db LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2761
+$c0de LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2762
+$c0e1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2763
+$c0e3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2764
+$c0e5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2765
+$c0e7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2766
+$c0e9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2767
+$c0eb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2768
+$c0ed LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2769
+$c0f0 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2770
+$c0f3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2771
+$c0f5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2772
+$c0f7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2773
+$c0f9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2774
+$c0fb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2775
+$c0fd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2776
+$c0ff LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2777
+$c102 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2778
+$c105 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2779
+$c108 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2780
+$c10b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2781
+$c10d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2782
+$c10f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2783
+$c111 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2784
+$c113 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2785
+$c115 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2786
+$c117 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2787
+$c118 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2788
+$c119 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2789
+$c11c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2790
+$c11f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2791
+$c122 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2792
+$c125 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2793
+$c128 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2794
+$c12b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2795
+$c12d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2796
+$c12f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2797
+$c131 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2798
+$c133 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2799
+$c135 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2800
+$c137 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2801
+$c139 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2802
+$c13b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2803
+$c13d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2804
+$c13f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2805
+$c141 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2806
+$c143 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2807
+$c145 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2808
+$c147 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2809
+$c149 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2810
+$c14c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2811
+$c14f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2812
+$c152 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2813
+$c155 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2814
+$c157 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2815
+$c159 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2816
+$c15b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2817
+$c15d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2818
+$c15f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2819
+$c161 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2820
+$c162 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2821
+$c163 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2822
+$c166 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2823
+$c169 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2824
+$c16c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2825
+$c16f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2826
+$c172 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2827
+$c175 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2828
+$c178 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2829
+$c17b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2830
+$c17e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2831
+$c181 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2832
+$c184 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2833
+$c187 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2834
+$c189 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2835
+$c18b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2836
+$c18d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2837
+$c18f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2838
+$c191 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2839
+$c193 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2840
+$c195 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2841
+$c197 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2842
+$c199 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2843
+$c19b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2844
+$c19d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2845
+$c19f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2846
+$c1a1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2847
+$c1a3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2848
+$c1a5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2849
+$c1a8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2850
+$c1ab LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2851
+$c1ae LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2852
+$c1b1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2853
+$c1b3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2854
+$c1b5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2855
+$c1b7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2856
+$c1b9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2857
+$c1bb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2858
+$c1bd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2859
+$c1bf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2860
+$c1c1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2861
+$c1c3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2862
+$c1c6 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2863
+$c1c9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2864
+$c1cc LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2865
+$c1cf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2866
+$c1d1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2867
+$c1d3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2868
+$c1d5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2869
+$c1d7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2870
+$c1d9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2871
+$c1db LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2872
+$c1dd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2873
+$c1df LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2874
+$c1e1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2875
+$c1e4 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2876
+$c1e7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2877
+$c1ea LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2878
+$c1ed LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2879
+$c1ee LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2880
+$c1ef LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2881
+$c1f1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2882
+$c1f3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2883
+$c1f5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2884
+$c1f7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2885
+$c1f9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2886
+$c1fb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2887
+$c1fc LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2888
+$c1ff LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2889
+$c202 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2890
+$c205 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2891
+$c208 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2892
+$c20b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2893
+$c20e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2894
+$c210 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2895
+$c212 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2896
+$c214 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2897
+$c216 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2898
+$c218 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2899
+$c21a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2900
+$c21c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2901
+$c21e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2902
+$c220 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2903
+$c222 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2904
+$c224 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2905
+$c226 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2906
+$c228 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2907
+$c22a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2908
+$c22c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2909
+$c22d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2910
+$c22e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2911
+$c22f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2912
+$c230 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2913
+$c233 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2914
+$c236 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2915
+$c239 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2916
+$c23c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2917
+$c23d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2918
+$c23e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2919
+$c240 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2920
+$c242 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2921
+$c244 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2922
+$c246 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2923
+$c248 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2924
+$c24a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2925
+$c24d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2926
+$c250 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2927
+$c253 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2928
+$c256 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2929
+$c257 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2930
+$c258 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2931
+$c25a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2932
+$c25c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2933
+$c25e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2934
+$c260 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2935
+$c262 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2936
+$c264 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2937
+$c265 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2938
+$c266 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2939
+$c269 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2940
+$c26c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2941
+$c26f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2942
+$c272 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2943
+$c275 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2944
+$c278 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2945
+$c27a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2946
+$c27c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2947
+$c27e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2948
+$c280 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2949
+$c282 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2950
+$c284 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2951
+$c286 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2952
+$c288 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2953
+$c28a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2954
+$c28c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2955
+$c28e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2956
+$c290 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2957
+$c292 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2958
+$c294 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2959
+$c296 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2960
+$c297 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2961
+$c298 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2962
+$c299 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2963
+$c29c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2964
+$c29f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2965
+$c2a2 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2966
+$c2a5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2967
+$c2a8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2968
+$c2ab LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2969
+$c2ad LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2970
+$c2af LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2971
+$c2b1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2972
+$c2b3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2973
+$c2b5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2974
+$c2b7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2975
+$c2b9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2976
+$c2bb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2977
+$c2bd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2978
+$c2bf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2979
+$c2c1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2980
+$c2c3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2981
+$c2c6 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2982
+$c2c9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2983
+$c2cb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2984
+$c2cd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2985
+$c2cf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2986
+$c2d1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2987
+$c2d3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2988
+$c2d5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2989
+$c2d8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2990
+$c2db LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2991
+$c2dd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2992
+$c2df LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2993
+$c2e1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2994
+$c2e3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2995
+$c2e5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2996
+$c2e7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2997
+$c2e8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2998
+$c2e9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2999
+$c2ea LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3000
+$c2eb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3001
+$c2ec LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3002
+$c2ed LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3003
+$c2ef LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3004
+$c2f1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3005
+$c2f3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3006
+$c2f5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3007
+$c2f7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3008
+$c2f9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3009
+$c2fb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3010
+$c2fd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3011
+$c2ff LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3012
+$c301 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3013
+$c303 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3014
+$c305 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3015
+$c307 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3016
+$c309 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3017
+$c30b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3018
+$c30e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3019
+$c311 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3020
+$c314 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3021
+$c317 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3022
+$c31a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3023
+$c31d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3024
+$c31f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3025
+$c321 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3026
+$c323 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3027
+$c325 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3028
+$c327 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3029
+$c329 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3030
+$c32b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3031
+$c32d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3032
+$c32f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3033
+$c331 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3034
+$c333 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3035
+$c335 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3036
+$c338 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3037
+$c33b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3038
+$c33e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3039
+$c341 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3040
+$c344 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3041
+$c347 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3042
+$c349 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3043
+$c34b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3044
+$c34d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3045
+$c34f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3046
+$c351 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3047
+$c353 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3048
+$c355 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3049
+$c357 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3050
+$c359 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3051
+$c35b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3052
+$c35d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3053
+$c35f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3054
+$c360 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3055
+$c361 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3056
+$c362 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3057
+$c363 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3058
+$c364 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3059
+$c365 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3060
+$c366 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3061
+$c367 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3062
+$c368 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3063
+$c369 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3064
+$c36a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3065
+$c36b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3066
+$c36e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3067
+$c371 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3068
+$c374 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3069
+$c377 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3070
+$c37a LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3071
+$c37d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3072
+$c37f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3073
+$c381 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3074
+$c383 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3075
+$c385 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3076
+$c387 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3077
+$c389 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3078
+$c38b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3079
+$c38d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3080
+$c38f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3081
+$c391 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3082
+$c393 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3083
+$c395 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3084
+$c397 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3085
+$c399 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3086
+$c39b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3087
+$c39e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3088
+$c3a1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3089
+$c3a4 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3090
+$c3a7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3091
+$c3aa LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3092
+$c3ad LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3093
+$c3b0 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3094
+$c3b3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3095
+$c3b6 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3096
+$c3b9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3097
+$c3bc LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3098
+$c3bf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3099
+$c3c2 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3100
+$c3c5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3101
+$c3c7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3102
+$c3c9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3103
+$c3cb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3104
+$c3cd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3105
+$c3cf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3106
+$c3d1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3107
+$c3d3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3108
+$c3d5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3109
+$c3d7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3110
+$c3d9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3111
+$c3db LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3112
+$c3dd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3113
+$c3df LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3114
+$c3e1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3115
+$c3e3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3116
+$c3e4 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3117
+$c3e5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3118
+$c3e6 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3119
+$c3e7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3120
+$c3e8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3121
+$c3e9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3122
+$c3eb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3123
+$c3ed LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3124
+$c3ef LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3125
+$c3f1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3126
+$c3f3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3127
+$c3f5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3128
+$c3f7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3129
+$c3f9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3130
+$c3fb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3131
+$c3fd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3132
+$c3ff LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3133
+$c401 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3134
+$c403 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3135
+$c405 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3136
+$c407 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3137
+$c409 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3138
+$c40b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3139
+$c40d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3140
+$c40f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3141
+$c411 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3142
+$c413 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3143
+$c415 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3144
+$c417 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3145
+$c419 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3146
+$c41b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3147
+$c41d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3148
+$c41f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3149
+$c422 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3150
+$c425 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3151
+$c428 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3152
+$c42b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3153
+$c42e LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3154
+$c431 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3155
+$c433 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3156
+$c435 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3157
+$c437 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3158
+$c439 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3159
+$c43b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3160
+$c43d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3161
+$c43f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3162
+$c441 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3163
+$c443 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3164
+$c445 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3165
+$c447 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3166
+$c449 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3167
+$c44c LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3168
+$c44f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3169
+$c452 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3170
+$c455 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3171
+$c458 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3172
+$c45b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3173
+$c45d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3174
+$c45f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3175
+$c461 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3176
+$c463 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3177
+$c465 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3178
+$c467 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3179
+$c469 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3180
+$c46b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3181
+$c46d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3182
+$c46f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3183
+$c471 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3184
+$c473 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3185
+$c476 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3186
+$c479 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3187
+$c47b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3188
+$c47d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3189
+$c47f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3190
+$c481 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3191
+$c483 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3192
+$c485 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3193
+$c487 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3194
+$c489 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3195
+$c48b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3196
+$c48d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3197
+$c48f LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3198
+$c491 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3199
+$c494 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3200
+$c497 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3201
+$c499 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3202
+$c49b LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3203
+$c49d LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3204
+$c4a0 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3205
+$c4a3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3206
+$c4a6 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3207
+$c4a9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3208
+$c4ac LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3209
+$c4af LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3210
+$c4b2 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3211
+$c4b5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3212
+$c4b8 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3213
+$c4bb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3214
+$c4bd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3215
+$c4bf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3216
+$c4c1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3217
+$c4c3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3218
+$c4c5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3219
+$c4c7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3220
+$c4c9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3221
+$c4cb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3222
+$c4cd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3223
+$c4cf LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3224
+$c4d1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3225
+$c4d3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3226
+$c4d6 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3227
+$c4d9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3228
+$c4dc LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3229
+$c4df LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3230
+$c4e2 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3231
+$c4e5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3232
+$c4e7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3233
+$c4e9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3234
+$c4eb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3235
+$c4ed LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3236
+$c4ef LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3237
+$c4f1 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3238
+$c4f3 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3239
+$c4f5 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3240
+$c4f7 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3241
+$c4f9 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3242
+$c4fb LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3243
+$c4fd LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3244
+$c500 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3245
+$c503 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3246
+$c505 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3247
+$c507 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:3248
+$c509 END

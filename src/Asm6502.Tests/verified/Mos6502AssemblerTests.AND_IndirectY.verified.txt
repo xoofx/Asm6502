@@ -4,11 +4,8 @@ C004  31 FE      AND ($FE),Y
 
 ; 31 06 31 30 31 FE
 
-Debug Info (Program: AND_IndirectY)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:160
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:161
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:162
+$c000 ORG BEGIN: AND_IndirectY
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:160
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:161
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:162
+$c006 END

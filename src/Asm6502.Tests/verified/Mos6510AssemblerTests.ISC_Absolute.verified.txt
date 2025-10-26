@@ -3,10 +3,7 @@ C003  EF 01 FF   ISC $FF01
 
 ; EF 34 12 EF 01 FF
 
-Debug Info (Program: ISC_Absolute)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1703
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1704
+$c000 ORG BEGIN: ISC_Absolute
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1703
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1704
+$c006 END

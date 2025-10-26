@@ -20,3 +20,17 @@ LL_01:
 C012  4C 02 C0   JMP LL_02
 
 ; A9 00 4C 12 C0 EA EA EA EA EA EA EA EA EA EA EA A9 01 4C 02 C0
+
+$c000 ORG BEGIN: TestOrgWithLabels
+$c000 CODE SECTION BEGIN: Code1
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:181
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:184
+$c005 CODE SECTION END
+$c005 DATA SECTION BEGIN: Data1
+$c010 DATA SECTION END
+$c010 ORG BEGIN: 
+$c010 CODE SECTION BEGIN: Code2
+$c010 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:196
+$c012 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:198
+$c015 CODE SECTION END
+$c015 END

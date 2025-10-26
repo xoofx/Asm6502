@@ -4,11 +4,8 @@ C004  85 FE      STA $FE
 
 ; 85 03 85 20 85 FE
 
-Debug Info (Program: STA_ZeroPage)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1434
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1435
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1436
+$c000 ORG BEGIN: STA_ZeroPage
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1434
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1435
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1436
+$c006 END

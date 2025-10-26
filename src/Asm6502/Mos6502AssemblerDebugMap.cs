@@ -9,37 +9,16 @@ namespace Asm6502;
 /// <summary>
 /// Default implementation of <see cref="IMos6502AssemblerDebugMap"/> that stores debug line info into a list.
 /// </summary>
-[DebuggerDisplay("BeginAddress={BeginAddress}, EndAddress={EndAddress}, DebugLinesCount={DebugLines.Count}")]
+[DebuggerDisplay("Count={Items.Count}")]
 public class Mos6502AssemblerDebugMap : IMos6502AssemblerDebugMap
 {
     /// <summary>
-    /// Gets or sets the name of the program (to be used in debug output via <see cref="DumpTo"/> ).
-    /// </summary>
-    public string? Name { get; set; }
-
-    /// <summary>
-    /// Gets the starting address of the program.
-    /// </summary>
-    public ushort BeginAddress { get; private set; }
-
-    /// <summary>
-    /// Gets the ending address of the program.
-    /// </summary>
-    public ushort EndAddress { get; private set; }
-
-    /// <summary>
     /// Gets the list of debug line information collected during assembly.
     /// </summary>
-    public List<Mos6502AssemblerDebugLineInfo> DebugLines { get; } = new ();
+    public List<Mos6502AssemblerDebugInfo> Items { get; } = new();
     
     /// <inheritdoc />
-    public void BeginProgram(ushort address) => BeginAddress = address;
-
-    /// <inheritdoc />
-    public void LogDebugLineInfo(Mos6502AssemblerDebugLineInfo debugLineInfo) => DebugLines.Add(debugLineInfo);
-
-    /// <inheritdoc />
-    public void EndProgram(ushort address) => EndAddress = address;
+    public void LogDebugInfo(Mos6502AssemblerDebugInfo debugInfo) => Items.Add(debugInfo);
 
     /// <inheritdoc />
     public override string ToString()
@@ -48,7 +27,7 @@ public class Mos6502AssemblerDebugMap : IMos6502AssemblerDebugMap
         DumpTo(stringWriter);
         return stringWriter.ToString();
     }
-    
+
     /// <summary>
     /// Writes a detailed representation of the program's debug information to the specified <see cref="TextWriter"/>.
     /// </summary>
@@ -57,14 +36,9 @@ public class Mos6502AssemblerDebugMap : IMos6502AssemblerDebugMap
     /// <param name="writer">The <see cref="TextWriter"/> to which the debug information will be written.</param>
     public void DumpTo(TextWriter writer)
     {
-        writer.WriteLine($"Debug Info (Program: {Name ?? "???"})");
-        writer.WriteLine($"- Program Start Address: {BeginAddress:X4}");
-        writer.WriteLine($"- Program End Address: {EndAddress:X4}");
-        writer.WriteLine($"- Debug Line Count: {DebugLines.Count}");
-        writer.WriteLine();
-        foreach (var line in DebugLines)
+        foreach (var info in Items)
         {
-            writer.WriteLine(line.ToString());
+            writer.WriteLine(info.ToString());
         }
     }
 }

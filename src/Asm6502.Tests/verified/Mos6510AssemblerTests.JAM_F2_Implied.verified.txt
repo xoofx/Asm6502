@@ -2,9 +2,6 @@
 
 ; F2
 
-Debug Info (Program: JAM_F2_Implied)
-- Program Start Address: C000
-- Program End Address: C001
-- Debug Line Count: 1
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1876
+$c000 ORG BEGIN: JAM_F2_Implied
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1876
+$c001 END

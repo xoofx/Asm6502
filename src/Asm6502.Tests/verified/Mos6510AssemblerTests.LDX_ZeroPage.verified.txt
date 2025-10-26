@@ -4,11 +4,8 @@ C004  A6 FE      LDX $FE
 
 ; A6 03 A6 20 A6 FE
 
-Debug Info (Program: LDX_ZeroPage)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:891
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:892
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:893
+$c000 ORG BEGIN: LDX_ZeroPage
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:891
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:892
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:893
+$c006 END

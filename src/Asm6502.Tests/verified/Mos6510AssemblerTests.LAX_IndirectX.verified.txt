@@ -4,11 +4,8 @@ C004  A3 FF      LAX ($FF,X)
 
 ; A3 05 A3 20 A3 FF
 
-Debug Info (Program: LAX_IndirectX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1915
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1916
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1917
+$c000 ORG BEGIN: LAX_IndirectX
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1915
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1916
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1917
+$c006 END

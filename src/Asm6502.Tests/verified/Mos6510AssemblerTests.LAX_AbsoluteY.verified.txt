@@ -3,10 +3,7 @@ C003  BF 03 FF   LAX $FF03,Y
 
 ; BF 34 12 BF 03 FF
 
-Debug Info (Program: LAX_AbsoluteY)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1905
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1906
+$c000 ORG BEGIN: LAX_AbsoluteY
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1905
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1906
+$c006 END

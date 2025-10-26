@@ -11,10 +11,7 @@ public abstract class VerifyMos6502Base : VerifyBase
         return new Mos6502Assembler()
         {
             DebugMap = new Mos6502AssemblerDebugMap()
-            {
-                Name = TestContext.TestName
-            }
-        }.Begin(address);
+        }.Begin(address, TestContext.TestName);
     }
 
     protected async Task VerifyAsm(Mos6502Assembler asm)
@@ -25,8 +22,7 @@ public abstract class VerifyMos6502Base : VerifyBase
             PrintAddress = true,
             PrintAssemblyBytes = true,
         });
-
-
+        
         var asmText = dis.Disassemble(asm.Buffer);
         var allBytes = $"; {string.Join(" ", asm.Buffer.ToArray().Select(x => $"{x:X2}"))}";
 
@@ -45,10 +41,7 @@ public abstract class VerifyAsmMos6510Base : VerifyBase
         return new Mos6510Assembler()
         {
             DebugMap = new Mos6502AssemblerDebugMap()
-            {
-                Name = TestContext.TestName
-            }
-        }.Begin(address);
+        }.Begin(address, TestContext.TestName);
     }
 
     protected async Task VerifyAsm(Mos6510Assembler asm)
@@ -59,8 +52,7 @@ public abstract class VerifyAsmMos6510Base : VerifyBase
             PrintAddress = true,
             PrintAssemblyBytes = true,
         });
-
-
+        
         var asmText = dis.Disassemble(asm.Buffer);
         var allBytes = $"; {string.Join(" ", asm.Buffer.ToArray().Select(x => $"{x:X2}"))}";
 

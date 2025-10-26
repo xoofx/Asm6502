@@ -11,20 +11,11 @@ namespace Asm6502;
 public interface IMos6502AssemblerDebugMap
 {
     /// <summary>
-    /// Signals the start of a program at the specified address.
+    /// Logs detailed debugging information for the assembler process.
     /// </summary>
-    /// <param name="address">The starting address of the program.</param>
-    void BeginProgram(ushort address);
-
-    /// <summary>
-    /// Logs debug information for a single source line.
-    /// </summary>
-    /// <param name="debugLineInfo">The debug line information to log.</param>
-    void LogDebugLineInfo(Mos6502AssemblerDebugLineInfo debugLineInfo);
-
-    /// <summary>
-    /// Signals the end of a program at the specified address.
-    /// </summary>
-    /// <param name="address">The ending address of the program.</param>
-    void EndProgram(ushort address);
+    /// <remarks>Use this method to record diagnostic data that can assist in troubleshooting or analyzing the
+    /// assembler's behavior. The information provided may include source mappings, symbol tables, or other relevant
+    /// details depending on the implementation.</remarks>
+    /// <param name="debugInfo">The debugging information to be logged. Must not be null.</param>
+    void LogDebugInfo(Mos6502AssemblerDebugInfo debugInfo);
 }

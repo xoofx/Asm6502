@@ -4,11 +4,8 @@ C004  C0 FF      CPY #$FF
 
 ; C0 01 C0 42 C0 FF
 
-Debug Info (Program: CPY_Immediate)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:518
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:519
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:520
+$c000 ORG BEGIN: CPY_Immediate
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:518
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:519
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:520
+$c006 END

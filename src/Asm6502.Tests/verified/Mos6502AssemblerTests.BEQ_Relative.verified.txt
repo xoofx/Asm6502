@@ -4,10 +4,7 @@ C002  F0 DB      BEQ $-37
 
 ; F0 10 F0 DB
 
-Debug Info (Program: BEQ_Relative)
-- Program Start Address: C000
-- Program End Address: C004
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:265
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:266
+$c000 ORG BEGIN: BEQ_Relative
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:265
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:266
+$c004 END

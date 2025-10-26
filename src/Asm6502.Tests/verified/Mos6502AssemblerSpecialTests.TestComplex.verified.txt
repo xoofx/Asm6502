@@ -33,27 +33,26 @@ C025  60         RTS
 
 ; A2 00 A0 10 BD 00 02 C9 FF F0 06 18 69 01 9D 00 02 E8 88 D0 EF 20 1B C0 4C 18 C0 A2 00 8E 20 D0 E8 E0 08 D0 F8 60
 
-Debug Info (Program: TestComplex)
-- Program Start Address: C000
-- Program End Address: C026
-- Debug Line Count: 19
-
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:83
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:84
-C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:87
-C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:88
-C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:89
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:91
-C00C {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:92
-C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:93
-C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:96
-C012 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:97
-C013 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:98
-C015 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:101
-C018 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:105
-C01B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:113
-C01D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:116
-C020 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:117
-C021 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:118
-C023 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:119
-C025 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:120
+$c000 ORG BEGIN: TestComplex
+$c000 CODE SECTION BEGIN: HelloWorld
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:83
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:84
+$c004 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:87
+$c007 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:88
+$c009 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:89
+$c00b LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:91
+$c00c LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:92
+$c00e LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:93
+$c011 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:96
+$c012 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:97
+$c013 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:98
+$c015 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:101
+$c018 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:105
+$c01b LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:113
+$c01d LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:116
+$c020 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:117
+$c021 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:118
+$c023 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:119
+$c025 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:120
+$c026 CODE SECTION END
+$c026 END

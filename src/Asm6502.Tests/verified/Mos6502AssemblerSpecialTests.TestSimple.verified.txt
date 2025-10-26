@@ -14,15 +14,12 @@ LL_02:
 
 ; A5 05 8D 00 10 A1 01 B1 02 F0 FA 90 01 60
 
-Debug Info (Program: TestSimple)
-- Program Start Address: C000
-- Program End Address: C00E
-- Debug Line Count: 7
-
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:60
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:61
-C005 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:63
-C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:64
-C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:65
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:66
-C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:67
+$c000 ORG BEGIN: TestSimple
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:59
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:60
+$c005 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:62
+$c007 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:63
+$c009 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:64
+$c00b LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:65
+$c00d LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:66
+$c00e END

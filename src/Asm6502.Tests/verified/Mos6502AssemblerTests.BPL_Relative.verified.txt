@@ -4,10 +4,7 @@ C002  10 DB      BPL $-37
 
 ; 10 10 10 DB
 
-Debug Info (Program: BPL_Relative)
-- Program Start Address: C000
-- Program End Address: C004
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:316
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:317
+$c000 ORG BEGIN: BPL_Relative
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:316
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:317
+$c004 END

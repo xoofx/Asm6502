@@ -58,13 +58,8 @@ public abstract partial class Mos6502Assembler<TAsm> : Mos6502AssemblerBase<TAsm
         CurrentCycleCount += instruction.CycleCount;
         CurrentOffset += (ushort)sizeInBytes;
 
-        var debugMap = DebugMap;
-        if (debugMap != null)
-        {
-            // Log debug information for the instruction
-            var debugLineInfo = new Mos6502AssemblerDebugLineInfo(currentAddress, debugFilePath ?? string.Empty, debugLineNumber);
-            debugMap.LogDebugLineInfo(debugLineInfo);
-        }
+        // Log debug information for the instruction
+        DebugMap?.LogDebugInfo(new(currentAddress, Mos6502AssemblerDebugInfoKind.LineInfo, debugFilePath, debugLineNumber));
 
         return (TAsm)this;
     }
@@ -141,13 +136,8 @@ public abstract partial class Mos6510Assembler<TAsm> : Mos6502AssemblerBase<TAsm
         CurrentCycleCount += instruction.CycleCount;
         CurrentOffset += (ushort)sizeInBytes;
 
-        var debugMap = DebugMap;
-        if (debugMap != null)
-        {
-            // Log debug information for the instruction
-            var debugLineInfo = new Mos6502AssemblerDebugLineInfo(currentAddress, debugFilePath ?? string.Empty, debugLineNumber);
-            debugMap.LogDebugLineInfo(debugLineInfo);
-        }
+        // Log debug information for the instruction
+        DebugMap?.LogDebugInfo(new(currentAddress, Mos6502AssemblerDebugInfoKind.LineInfo, debugFilePath, debugLineNumber));
 
         return (TAsm)this;
     }

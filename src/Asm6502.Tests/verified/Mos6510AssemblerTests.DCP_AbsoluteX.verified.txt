@@ -3,10 +3,7 @@ C003  DF 02 FF   DCP $FF02,X
 
 ; DF 34 12 DF 02 FF
 
-Debug Info (Program: DCP_AbsoluteX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1639
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1640
+$c000 ORG BEGIN: DCP_AbsoluteX
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1639
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1640
+$c006 END

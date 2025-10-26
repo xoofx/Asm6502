@@ -4,10 +4,7 @@ C002  D0 DB      BNE $-37
 
 ; D0 10 D0 DB
 
-Debug Info (Program: BNE_Relative)
-- Program Start Address: C000
-- Program End Address: C004
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:306
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:307
+$c000 ORG BEGIN: BNE_Relative
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:306
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:307
+$c004 END

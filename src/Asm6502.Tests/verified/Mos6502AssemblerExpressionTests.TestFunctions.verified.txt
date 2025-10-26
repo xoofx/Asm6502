@@ -4,11 +4,9 @@ C005  AD 34 12   LDA $1234
 
 ; A9 0A 8D 00 10 AD 34 12
 
-Debug Info (Program: TestFunctions)
-- Program Start Address: C000
-- Program End Address: C008
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:60
-C002 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:61
-C005 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:62
+$c000 ORG BEGIN: TestFunctions
+$c000 ORG BEGIN: 
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:60
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:61
+$c005 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:62
+$c008 END

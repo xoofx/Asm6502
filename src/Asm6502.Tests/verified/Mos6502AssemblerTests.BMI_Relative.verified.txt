@@ -4,10 +4,7 @@ C002  30 DB      BMI $-37
 
 ; 30 10 30 DB
 
-Debug Info (Program: BMI_Relative)
-- Program Start Address: C000
-- Program End Address: C004
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:296
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:297
+$c000 ORG BEGIN: BMI_Relative
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:296
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:297
+$c004 END

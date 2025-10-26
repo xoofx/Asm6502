@@ -4,11 +4,8 @@ C004  67 FE      RRA $FE
 
 ; 67 03 67 20 67 FE
 
-Debug Info (Program: RRA_ZeroPage)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2374
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2375
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2376
+$c000 ORG BEGIN: RRA_ZeroPage
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2374
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2375
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2376
+$c006 END

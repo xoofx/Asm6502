@@ -4,11 +4,8 @@ C004  71 FE      ADC ($FE),Y
 
 ; 71 06 71 30 71 FE
 
-Debug Info (Program: ADC_IndirectY)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:75
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:76
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:77
+$c000 ORG BEGIN: ADC_IndirectY
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:75
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:76
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:77
+$c006 END

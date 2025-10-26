@@ -3,10 +3,7 @@ C003  6E 01 FF   ROR $FF01
 
 ; 6E 34 12 6E 01 FF
 
-Debug Info (Program: ROR_Absolute)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1200
-C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1201
+$c000 ORG BEGIN: ROR_Absolute
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1200
+$c003 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1201
+$c006 END

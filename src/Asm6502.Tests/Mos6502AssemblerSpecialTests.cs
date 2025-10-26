@@ -56,7 +56,6 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
         var forwardLabel = new Mos6502Label();
 
         asm
-            .Begin()
             .LDA(0x5)
             .STA(0x1000)
             .Label(out var label)
@@ -76,7 +75,8 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
     {
         // Start address (for example, on C64 this is an available memory area)
         using var asm = CreateAsm();
-        asm.Org(0xc000);
+
+        asm.BeginCodeSection("HelloWorld");
 
         // Initialization
         asm.Label(out var start)
@@ -119,7 +119,9 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
             .BNE(flash_loop)
             .RTS()
 
+            .EndCodeSection()
             .End();            // Resolve labels
+        
 
         await VerifyAsm(asm);
     }
@@ -170,22 +172,34 @@ public class Mos6502AssemblerSpecialTests : VerifyMos6502Base
     [TestMethod]
     public async Task TestOrgWithLabels()
     {
-        using var asm = new Mos6502Assembler();
-        asm.Begin(0xC000);
+        using var asm = new Mos6502Assembler()
+        {
+            DebugMap = new Mos6502AssemblerDebugMap()
+        };
+        asm.Begin(0xC000, TestContext.TestName);
+        asm.BeginCodeSection("Code1");
         asm.LDA_Imm(0);
         asm.Label("LABEL1", out var label1);
         asm.LabelForward("LABEL2", out var label2);
         asm.JMP(label2);
+        asm.EndCodeSection();
+
+        asm.BeginDataSection("Data1");
 
         // Fill with NOPs to reach address 0xC010
         asm.AppendBytes(0x10 - asm.SizeInBytes, (byte)Mos6502OpCode.NOP_Implied);
 
+        asm.EndDataSection();
+
         asm.Org(0xC010);
+        asm.BeginCodeSection("Code2");
         asm.LDA_Imm(1);
         asm.Label(label2);
         asm.JMP(label1);
-        asm.End();
+        asm.EndCodeSection();
 
+        asm.End();
+        
         await VerifyAsm(asm);
     }
 }

@@ -2,9 +2,6 @@
 
 ; 98
 
-Debug Info (Program: TYA_Implied)
-- Program Start Address: C000
-- Program End Address: C001
-- Debug Line Count: 1
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1565
+$c000 ORG BEGIN: TYA_Implied
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1565
+$c001 END

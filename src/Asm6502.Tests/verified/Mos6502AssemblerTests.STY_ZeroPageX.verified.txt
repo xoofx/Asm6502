@@ -4,11 +4,8 @@ C004  94 FB      STY $FB,X
 
 ; 94 02 94 30 94 FB
 
-Debug Info (Program: STY_ZeroPageX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1509
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1510
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1511
+$c000 ORG BEGIN: STY_ZeroPageX
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1509
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1510
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1511
+$c006 END

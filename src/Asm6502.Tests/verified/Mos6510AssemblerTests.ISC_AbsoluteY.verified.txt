@@ -3,10 +3,7 @@ C003  FB 03 FF   ISC $FF03,Y
 
 ; FB 34 12 FB 03 FF
 
-Debug Info (Program: ISC_AbsoluteY)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1723
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1724
+$c000 ORG BEGIN: ISC_AbsoluteY
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1723
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1724
+$c006 END

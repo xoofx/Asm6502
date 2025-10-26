@@ -6,13 +6,11 @@ C00A  60         RTS
 
 ; A9 0B 8D 00 10 A9 C0 8D 01 10 60
 
-Debug Info (Program: TestLowHighBytes)
-- Program Start Address: C000
-- Program End Address: C00B
-- Debug Line Count: 5
-
-C000 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:20
-C002 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:21
-C005 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:22
-C007 {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:23
-C00A {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:24
+$c000 ORG BEGIN: TestLowHighBytes
+$c000 ORG BEGIN: 
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:20
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:21
+$c005 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:22
+$c007 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:23
+$c00a LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:24
+$c00b END

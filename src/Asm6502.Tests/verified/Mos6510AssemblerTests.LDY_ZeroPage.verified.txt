@@ -4,11 +4,8 @@ C004  A4 FE      LDY $FE
 
 ; A4 03 A4 20 A4 FE
 
-Debug Info (Program: LDY_ZeroPage)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:944
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:945
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:946
+$c000 ORG BEGIN: LDY_ZeroPage
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:944
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:945
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:946
+$c006 END

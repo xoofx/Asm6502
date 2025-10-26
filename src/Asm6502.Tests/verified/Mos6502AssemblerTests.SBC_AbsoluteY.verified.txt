@@ -3,10 +3,7 @@ C003  F9 03 FF   SBC $FF03,Y
 
 ; F9 34 12 F9 03 FF
 
-Debug Info (Program: SBC_AbsoluteY)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1290
-C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1291
+$c000 ORG BEGIN: SBC_AbsoluteY
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1290
+$c003 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:1291
+$c006 END

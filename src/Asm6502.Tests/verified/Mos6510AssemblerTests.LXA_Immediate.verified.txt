@@ -4,11 +4,8 @@ C004  AB FF      LXA #$FF
 
 ; AB 01 AB 42 AB FF
 
-Debug Info (Program: LXA_Immediate)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1959
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1960
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1961
+$c000 ORG BEGIN: LXA_Immediate
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1959
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1960
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1961
+$c006 END

@@ -4,11 +4,8 @@ C004  A9 FF      LDA #$FF
 
 ; A9 01 A9 42 A9 FF
 
-Debug Info (Program: LDA_Immediate)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:805
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:806
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:807
+$c000 ORG BEGIN: LDA_Immediate
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:805
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:806
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:807
+$c006 END

@@ -12,18 +12,16 @@ C016  B1 10      LDA ($10),Y
 
 ; A9 10 A5 10 B5 10 B6 10 AD 34 12 BD 34 12 B9 34 12 6C 34 12 A1 10 B1 10
 
-Debug Info (Program: TestAddressingModes)
-- Program Start Address: C000
-- Program End Address: C018
-- Debug Line Count: 10
-
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:133
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:134
-C004 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:135
-C006 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:136
-C008 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:137
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:138
-C00E {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:139
-C011 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:140
-C014 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:141
-C016 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:142
+$c000 ORG BEGIN: TestAddressingModes
+$c000 ORG BEGIN: 
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:135
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:136
+$c004 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:137
+$c006 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:138
+$c008 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:139
+$c00b LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:140
+$c00e LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:141
+$c011 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:142
+$c014 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:143
+$c016 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:144
+$c018 END

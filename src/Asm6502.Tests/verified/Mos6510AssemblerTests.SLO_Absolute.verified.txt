@@ -3,10 +3,7 @@ C003  0F 01 FF   SLO $FF01
 
 ; 0F 34 12 0F 01 FF
 
-Debug Info (Program: SLO_Absolute)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2491
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2492
+$c000 ORG BEGIN: SLO_Absolute
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2491
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2492
+$c006 END

@@ -4,10 +4,7 @@ C003  4C 01 FF   JMP $FF01
 
 ; 4C 34 12 4C 01 FF
 
-Debug Info (Program: JMP_Absolute)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:745
-C003 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:746
+$c000 ORG BEGIN: JMP_Absolute
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:745
+$c003 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:746
+$c006 END

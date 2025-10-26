@@ -4,11 +4,8 @@ C004  01 FF      ORA ($FF,X)
 
 ; 01 05 01 20 01 FF
 
-Debug Info (Program: ORA_IndirectX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1068
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1069
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1070
+$c000 ORG BEGIN: ORA_IndirectX
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1068
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1069
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:1070
+$c006 END

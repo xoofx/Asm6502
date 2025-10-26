@@ -359,18 +359,15 @@ Console.WriteLine(toString);
 will print something like:
 
 ```
-Debug Info (Program: TestSimple)
-- Program Start Address: 0xC000
-- Program End Address: C00E
-- Debug Line Count: 7
-
-C000 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:51
-C002 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:52
-C005 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:54
-C007 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:55
-C009 {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:56
-C00B {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:57
-C00D {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:58
+$c000 ORG BEGIN: TestSimple
+$c000 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:59
+$c002 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:60
+$c005 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:62
+$c007 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:63
+$c009 LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:64
+$c00b LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:65
+$c00d LINE: {ProjectDirectory}Mos6502AssemblerSpecialTests.cs:66
+$c00e END
 ```
 
 ### Org directive

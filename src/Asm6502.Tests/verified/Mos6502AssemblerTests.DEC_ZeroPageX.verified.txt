@@ -4,11 +4,8 @@ C004  D6 FB      DEC $FB,X
 
 ; D6 02 D6 30 D6 FB
 
-Debug Info (Program: DEC_ZeroPageX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:571
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:572
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:573
+$c000 ORG BEGIN: DEC_ZeroPageX
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:571
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:572
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:573
+$c006 END

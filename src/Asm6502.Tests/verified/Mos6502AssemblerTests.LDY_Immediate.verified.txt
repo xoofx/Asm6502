@@ -4,11 +4,8 @@ C004  A0 FF      LDY #$FF
 
 ; A0 01 A0 42 A0 FF
 
-Debug Info (Program: LDY_Immediate)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:933
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:934
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:935
+$c000 ORG BEGIN: LDY_Immediate
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:933
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:934
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:935
+$c006 END

@@ -4,11 +4,8 @@ C004  EB FF      USBC #$FF
 
 ; EB 01 EB 42 EB FF
 
-Debug Info (Program: USBC_Immediate)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2649
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2650
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2651
+$c000 ORG BEGIN: USBC_Immediate
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2649
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2650
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2651
+$c006 END

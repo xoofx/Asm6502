@@ -4,11 +4,8 @@ C004  A5 FE      LDA $FE
 
 ; A5 03 A5 20 A5 FE
 
-Debug Info (Program: LDA_ZeroPage)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:838
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:839
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:840
+$c000 ORG BEGIN: LDA_ZeroPage
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:838
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:839
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:840
+$c006 END

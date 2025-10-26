@@ -4,11 +4,8 @@ C004  25 FE      AND $FE
 
 ; 25 03 25 20 25 FE
 
-Debug Info (Program: AND_ZeroPage)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:171
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:172
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:173
+$c000 ORG BEGIN: AND_ZeroPage
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:171
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:172
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:173
+$c006 END

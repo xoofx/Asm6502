@@ -31,7 +31,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     }
 
     /// <summary>
-    /// Gets the base address for code generation. This address can be changed using the <see cref="Org(ushort)"/> method.
+    /// Gets the base address for code generation. This address can be changed using the <see cref="Org"/> method.
     /// </summary>
     public ushort BaseAddress { get; private set; }
 
@@ -87,14 +87,6 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
 
         return this;
     }
-
-    /// <summary>
-    /// Writes a buffer of bytes to the assembler's internal buffer.
-    /// </summary>
-    /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
-    /// <returns>The current assembler instance.</returns>
-    [Obsolete("This method is deprecated. Please use Append instead.")]
-    public Mos6502AssemblerBase AppendBuffer(ReadOnlySpan<byte> input) => Append(input);
 
     /// <summary>
     /// Appends an 8-bit value to the assembler's internal buffer.
@@ -217,16 +209,19 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     }
 
     /// <summary>
-    /// Resets the assembler state.
+    /// Initializes a new assembly session starting at the specified address and optionally assigns a name to the
+    /// session.
     /// </summary>
-    /// <returns>The current assembler instance.</returns>
-    public Mos6502AssemblerBase Begin(ushort address = 0xc000)
+    /// <param name="address">The starting memory address for the assembly session. Defaults to 0xC000 if not specified.</param>
+    /// <param name="name">An optional name to associate with the assembly session. Can be null if no name is required.</param>
+    /// <returns>The current instance of the assembler, allowing for method chaining.</returns>
+    public Mos6502AssemblerBase Begin(ushort address = 0xc000, string? name = null)
     {
         ReleaseSharedBuffer();
         Patches.Clear();
         SizeInBytes = 0;
         CurrentCycleCount = 0;
-        Org(address);
+        Org(address, name);
 
         return this;
     }
@@ -253,15 +248,20 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     }
     
     /// <summary>
-    /// Sets the origin address for the assembler, resets the <see cref="CurrentOffset"/>.
+    /// Sets the program's origin address and optionally assigns a name to the program section.
     /// </summary>
-    public Mos6502AssemblerBase Org(ushort address)
+    /// <remarks>Calling this method resets the current offset to zero and updates the debug mapping if
+    /// available. Use this method to define the starting point for code generation in the assembled output.</remarks>
+    /// <param name="address">The starting address in memory where the program will be assembled.</param>
+    /// <param name="name">An optional name for the program section. If null, no name is assigned.</param>
+    /// <returns>The current instance of the assembler, allowing for method chaining.</returns>
+    public Mos6502AssemblerBase Org(ushort address, string? name = null)
     {
         BaseAddress = address;
         CurrentOffset = 0;
 
         // Reset the base address to the default value
-        DebugMap?.BeginProgram(BaseAddress);
+        DebugMap?.LogDebugInfo(new(BaseAddress, Mos6502AssemblerDebugInfoKind.OriginBegin, name));
 
         return this;
     }
@@ -342,7 +342,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         Patches.Clear();
 
         // Notifies the current address
-        DebugMap?.EndProgram(CurrentAddress);
+        DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.End));
 
         // Invoke callbacks
         foreach (var callback in _callBacksOnResolve)
@@ -484,6 +484,50 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
             Append(block.Buffer);
         }
 
+        return this;
+    }
+
+    /// <summary>
+    /// Begins a new code section in the assembler, optionally assigning it a name.
+    /// </summary>
+    /// <param name="name">The optional name to assign to the new code section. If null, the section is unnamed.</param>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public Mos6502AssemblerBase BeginCodeSection(string? name = null)
+    {
+        this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.CodeSectionBegin, name));
+        return this;
+    }
+
+    /// <summary>
+    /// Ends the current code section and finalizes any associated debug mapping for the current address.
+    /// </summary>
+    /// <remarks>Call this method after completing a code section to ensure that debug information is properly
+    /// finalized.</remarks>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public Mos6502AssemblerBase EndCodeSection()
+    {
+        this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.CodeSectionEnd));
+        return this;
+    }
+
+    /// <summary>
+    /// Begins a new data section in the assembly, optionally assigning it a name.
+    /// </summary>
+    /// <param name="name">The optional name to assign to the data section. If null, the section is unnamed.</param>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public Mos6502AssemblerBase BeginDataSection(string? name = null)
+    {
+        this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.DataSectionBegin, name));
+        return this;
+    }
+
+    /// <summary>
+    /// Ends the current data section in the assembler and updates the debug map accordingly.
+    /// </summary>
+    /// <returns>The current instance of <see cref="Mos6502AssemblerBase"/> to allow for method chaining.</returns>
+    public Mos6502AssemblerBase EndDataSection()
+    {
+        this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.DataSectionEnd));
         return this;
     }
 
@@ -634,14 +678,6 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     public new TAsm Append(ReadOnlySpan<byte> input) => (TAsm)base.Append(input);
 
     /// <summary>
-    /// Writes a buffer of bytes to the assembler's internal buffer.
-    /// </summary>
-    /// <param name="input">A buffer to append to the assembler's internal buffer.</param>
-    /// <returns>The current assembler instance.</returns>
-    [Obsolete("This method is deprecated. Please use Append instead.")]
-    public new TAsm AppendBuffer(ReadOnlySpan<byte> input) => (TAsm)base.Append(input);
-
-    /// <summary>
     /// Appends an 8-bit expression to the assembler's internal buffer.
     /// </summary>
     /// <param name="expression">An 16-bit expression to append.</param>
@@ -695,7 +731,7 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// <summary>
     /// Resets the assembler state.
     /// </summary>
-    public new TAsm Begin(ushort address = 0xc000) => (TAsm)base.Begin(address);
+    public new TAsm Begin(ushort address = 0xc000, string? name = null) => (TAsm)base.Begin(address, name);
 
     /// <summary>
     /// Resets the current cycle count to zero.
@@ -713,7 +749,7 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// <summary>
     /// Sets the origin address for the assembler and resets the <see cref="Mos6502AssemblerBase.CurrentOffset"/>.
     /// </summary>
-    public new TAsm Org(ushort address) => (TAsm)base.Org(address);
+    public new TAsm Org(ushort address, string? name = null) => (TAsm)base.Org(address, name);
 
     /// <summary>
     /// Assembles the instructions and patches the labels.
@@ -798,4 +834,32 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// The callbacks are removed after <see cref="End"/> is called.
     /// </remarks>
     public new TAsm OnResolveEnd(Action callback) => (TAsm)base.OnResolveEnd(callback);
+
+    /// <summary>
+    /// Begins a new code section in the assembler, optionally assigning it a name.
+    /// </summary>
+    /// <param name="name">The optional name to assign to the new code section. If null, the section is unnamed.</param>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public new TAsm BeginCodeSection(string? name = null) => (TAsm)base.BeginCodeSection(name);
+
+    /// <summary>
+    /// Ends the current code section and finalizes any associated debug mapping for the current address.
+    /// </summary>
+    /// <remarks>Call this method after completing a code section to ensure that debug information is properly
+    /// finalized.</remarks>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public new TAsm EndCodeSection() => (TAsm)base.EndCodeSection();
+
+    /// <summary>
+    /// Begins a new data section in the assembly, optionally assigning it a name.
+    /// </summary>
+    /// <param name="name">The optional name to assign to the data section. If null, the section is unnamed.</param>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public new TAsm BeginDataSection(string? name = null) => (TAsm)base.BeginDataSection(name);
+
+    /// <summary>
+    /// Ends the current data section in the assembler and updates the debug map accordingly.
+    /// </summary>
+    /// <returns>The current instance of <see cref="Mos6502AssemblerBase"/> to allow for method chaining.</returns>
+    public new TAsm EndDataSection() => (TAsm)base.EndDataSection();
 }

@@ -4,11 +4,8 @@ C004  B5 FB      LDA $FB,X
 
 ; B5 02 B5 30 B5 FB
 
-Debug Info (Program: LDA_ZeroPageX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:849
-C002 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:850
-C004 {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:851
+$c000 ORG BEGIN: LDA_ZeroPageX
+$c000 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:849
+$c002 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:850
+$c004 LINE: {ProjectDirectory}generated/Mos6502AssemblerTests.gen.cs:851
+$c006 END

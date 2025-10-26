@@ -4,11 +4,8 @@ C004  83 FF      SAX ($FF,X)
 
 ; 83 05 83 20 83 FF
 
-Debug Info (Program: SAX_IndirectX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2406
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2407
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2408
+$c000 ORG BEGIN: SAX_IndirectX
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2406
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2407
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2408
+$c006 END

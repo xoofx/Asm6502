@@ -4,11 +4,8 @@ C004  E2 FF      NOP #$FF
 
 ; E2 01 E2 42 E2 FF
 
-Debug Info (Program: NOP_E2_Immediate)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2084
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2085
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2086
+$c000 ORG BEGIN: NOP_E2_Immediate
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2084
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2085
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:2086
+$c006 END

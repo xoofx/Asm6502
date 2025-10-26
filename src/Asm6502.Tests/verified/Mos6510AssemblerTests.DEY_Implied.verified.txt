@@ -2,9 +2,6 @@
 
 ; 88
 
-Debug Info (Program: DEY_Implied)
-- Program Start Address: C000
-- Program End Address: C001
-- Debug Line Count: 1
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:591
+$c000 ORG BEGIN: DEY_Implied
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:591
+$c001 END

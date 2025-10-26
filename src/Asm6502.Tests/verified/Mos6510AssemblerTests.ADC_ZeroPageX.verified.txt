@@ -4,11 +4,8 @@ C004  75 FB      ADC $FB,X
 
 ; 75 02 75 30 75 FB
 
-Debug Info (Program: ADC_ZeroPageX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 3
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:97
-C002 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:98
-C004 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:99
+$c000 ORG BEGIN: ADC_ZeroPageX
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:97
+$c002 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:98
+$c004 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:99
+$c006 END

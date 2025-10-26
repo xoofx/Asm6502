@@ -3,10 +3,7 @@ C003  1E 02 FF   ASL $FF02,X
 
 ; 1E 34 12 1E 02 FF
 
-Debug Info (Program: ASL_AbsoluteX)
-- Program Start Address: C000
-- Program End Address: C006
-- Debug Line Count: 2
-
-C000 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:203
-C003 {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:204
+$c000 ORG BEGIN: ASL_AbsoluteX
+$c000 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:203
+$c003 LINE: {ProjectDirectory}generated/Mos6510AssemblerTests.gen.cs:204
+$c006 END
