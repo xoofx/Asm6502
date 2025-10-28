@@ -290,13 +290,6 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
                     }
                     resolved = label.Address;
                     break;
-                case Mos6502LabelZp label:
-                    if (!label.IsBound)
-                    {
-                        throw new InvalidOperationException($"ZeroPage Label number #{i} `{label}` is not bound. Please bind it before assembling.");
-                    }
-                    resolved = label.Address;
-                    break;
                 case Mos6502ExpressionU8 exprU8:
                     resolved = exprU8.Evaluate();
                     break;
@@ -528,6 +521,26 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     public Mos6502AssemblerBase EndDataSection()
     {
         this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.DataSectionEnd));
+        return this;
+    }
+
+    /// <summary>
+    /// Begins the definition of a new function in the assembler source code and logs associated debug information.
+    /// </summary>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public Mos6502AssemblerBase BeginFunction([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0)
+    {
+        this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.FunctionBegin, debugFilePath, debugLineNumber));
+        return this;
+    }
+
+    /// <summary>
+    /// Marks the end of the current function in the assembly process and updates the debug information accordingly.
+    /// </summary>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public Mos6502AssemblerBase EndFunction()
+    {
+        this.DebugMap?.LogDebugInfo(new(CurrentAddress, Mos6502AssemblerDebugInfoKind.FunctionEnd));
         return this;
     }
 
@@ -862,4 +875,19 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// </summary>
     /// <returns>The current instance of <see cref="Mos6502AssemblerBase"/> to allow for method chaining.</returns>
     public new TAsm EndDataSection() => (TAsm)base.EndDataSection();
+    
+    /// <summary>
+    /// Begins the definition of a new function in the assembler source code and logs associated debug information.
+    /// </summary>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    /// <remarks>
+    /// The debug file path and line numbers should be provided by the calling function in order to propagate where the function is used.
+    /// </remarks>
+    public new TAsm BeginFunction([CallerFilePath] string debugFilePath = "", [CallerLineNumber] int debugLineNumber = 0) => (TAsm)base.BeginFunction(debugFilePath, debugLineNumber);
+
+    /// <summary>
+    /// Marks the end of the current function in the assembly process and updates the debug information accordingly.
+    /// </summary>
+    /// <returns>The current instance of the assembler, enabling method chaining.</returns>
+    public new TAsm EndFunction() => (TAsm)base.EndFunction();
 }

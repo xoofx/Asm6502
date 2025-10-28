@@ -19,6 +19,7 @@ public enum Mos6502AssemblerDebugInfoKind
     /// <summary>
     /// Maps an assembled address to a source file and line.
     /// <see cref="Mos6502AssemblerDebugInfo.Name"/> is the file path.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the native address of the line.
     /// <see cref="Mos6502AssemblerDebugInfo.LineNumber"/> is the 1-based line number.
     /// </summary>
     LineInfo,
@@ -26,26 +27,44 @@ public enum Mos6502AssemblerDebugInfoKind
     /// <summary>
     /// Marks entry into a code section.
     /// <see cref="Mos6502AssemblerDebugInfo.Name"/> is the section name.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the address of start of the code section.
     /// </summary>
     CodeSectionBegin,
 
     /// <summary>
     /// Marks exit from a code section.
     /// <see cref="Mos6502AssemblerDebugInfo.Name"/> is null.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the address of end of the code section.
     /// </summary>
     CodeSectionEnd,
 
     /// <summary>
     /// Marks entry into a data section.
     /// <see cref="Mos6502AssemblerDebugInfo.Name"/> is the section name.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the address of start of the data section.
     /// </summary>
     DataSectionBegin,
 
     /// <summary>
     /// Marks exit from a data section.
     /// <see cref="Mos6502AssemblerDebugInfo.Name"/> is null.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the address of end of the data section.
     /// </summary>
     DataSectionEnd,
+
+    /// <summary>
+    /// Indicates the beginning of a function or method in the code structure.
+    /// <see cref="Mos6502AssemblerDebugInfo.Name"/> is the file path.
+    /// <see cref="Mos6502AssemblerDebugInfo.LineNumber"/> is the 1-based line number.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the address of start of the function.
+    /// </summary>
+    FunctionBegin,
+
+    /// <summary>
+    /// Represents the end of a function in the code structure.
+    /// <see cref="Mos6502AssemblerDebugInfo.Address"/> is the address of end of the function.
+    /// </summary>
+    FunctionEnd,
 
     /// <summary>
     /// Marks the end of the debug stream.
