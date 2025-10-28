@@ -59,7 +59,7 @@ public record Mos6502Label : Mos6502ExpressionU16, IMos6502Label
     }
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => labels.Add(this);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => labels.Add(this);
 
     /// <inheritdoc />
     public override string ToString() => Name ?? (IsBound ? $"0x{Address:X4}" : $"0x????");

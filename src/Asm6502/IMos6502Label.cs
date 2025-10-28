@@ -5,7 +5,7 @@
 namespace Asm6502;
 
 /// <summary>
-/// Represents a label <see cref="Mos6502Label"/> or <see cref="Mos6502LabelZp"/> in the MOS 6502 assembly context.
+/// Represents a label <see cref="Mos6502Label"/> in the MOS 6502 assembly context.
 /// Provides the name of the label and indicates whether it is bound to an address.
 /// </summary>
 public interface IMos6502Label

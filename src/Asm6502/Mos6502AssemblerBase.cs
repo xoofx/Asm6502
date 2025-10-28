@@ -374,7 +374,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
     /// </summary>
     /// <param name="labels">The labels set to populate.</param>
     /// <returns>The current assembler instance.</returns>
-    public Mos6502AssemblerBase CollectLabels(HashSet<IMos6502Label> labels)
+    public Mos6502AssemblerBase CollectLabels(HashSet<Mos6502Label> labels)
     {
         var patches = Patches;
         foreach (var patch in patches)
@@ -765,7 +765,7 @@ public abstract partial class Mos6502AssemblerBase<TAsm> : Mos6502AssemblerBase 
     /// </summary>
     /// <param name="labels">The labels set to populate.</param>
     /// <returns>The current assembler instance.</returns>
-    public new TAsm CollectLabels(HashSet<IMos6502Label> labels) => (TAsm)base.CollectLabels(labels);
+    public new TAsm CollectLabels(HashSet<Mos6502Label> labels) => (TAsm)base.CollectLabels(labels);
 
     /// <summary>
     /// Binds a label to the current address.

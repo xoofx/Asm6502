@@ -25,6 +25,7 @@ public class ZeroPageAllocator
     /// </summary>
     public ZeroPageAllocator()
     {
+        Clear();
     }
 
     /// <summary>
@@ -42,12 +43,58 @@ public class ZeroPageAllocator
     /// </summary>
     public void Clear()
     {
-        Span<bool> bitmap = _bitmap;
-        bitmap.Clear();
         AllocatedCount = 0;
-        Span<ZeroPageAddress> table = _table;
-        table.Clear();
+        for (int addr = 0; addr < 0x100; addr++)
+        {
+            if (!IsSystem((byte)addr))
+            {
+                _bitmap[GetBitmapIndex((byte)addr)] = false;
+                _table[addr] = default;
+            }
+            else
+            {
+                AllocatedCount++;
+            }
+        }
     }
+
+    /// <summary>
+    /// Returns a list of all currently allocated zero-page addresses.
+    /// </summary>
+    /// <returns>A list of <see cref="ZeroPageAddress"/> objects representing the allocated zero-page addresses. The list will be
+    /// empty if no addresses are allocated.</returns>
+    public List<ZeroPageAddress> GetAllocatedAddresses()
+    {
+        var addresses = new List<ZeroPageAddress>(AllocatedCount);
+        GetAllocatedAddresses(addresses);
+        return addresses;
+    }
+
+    /// <summary>
+    /// Adds all currently allocated zero-page addresses to the specified collection.
+    /// </summary>
+    /// <param name="addresses">The list to which allocated zero-page addresses will be added. Must not be null.</param>
+    public void GetAllocatedAddresses(List<ZeroPageAddress> addresses)
+    {
+        for(int addr = 0; addr < 0x100; addr++)
+        {
+            if (TryGetAddress((byte)addr, out var label))
+            {
+                addresses.Add(label);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Determines whether the specified address represents a system address.
+    /// </summary>
+    /// <remarks>This method cana be derived to implement custom logic about system addresses.
+    /// With the 6510, the address $00 and $01 are reserved for defining memory banks with ROMs.
+    /// By returning true for these addresses, the allocator can avoid allocating them or clearing them when calling <see cref="Clear"/>.
+    /// </remarks>
+    /// <param name="address">The address to evaluate.</param>
+    /// <returns>true if the specified address is recognized as a system address; otherwise, false.</returns>
+    public virtual bool IsSystem(byte address) => false;
 
     /// <summary>
     /// Determines whether the specified zero-page address is currently allocated or reserved.
@@ -56,7 +103,7 @@ public class ZeroPageAllocator
     /// <returns>True if the address is allocated; otherwise, false.</returns>
     public bool IsAllocated(byte address)
     {
-        var index = 0xFF - address;
+        var index = GetBitmapIndex(address);
         return _bitmap[index];
     }
 
@@ -68,7 +115,7 @@ public class ZeroPageAllocator
     /// <returns>True if the address is allocated and a value was returned; otherwise, false.</returns>
     public bool TryGetAddress(byte address, out ZeroPageAddress zeroPageAddress)
     {
-        var index = 0xFF - address;
+        var index = GetBitmapIndex(address);
         if (_bitmap[index])
         {
             zeroPageAddress = _table[address];
@@ -149,7 +196,7 @@ public class ZeroPageAllocator
             if (relativeIndex < 0) throw new InvalidOperationException($"No consecutive zero page addresses available with the requested length {length}");
             index += relativeIndex;
 
-            var address = 0xFF - index - (length - 1);
+            var address = 0xFF - (index + length - 1);
             if (address < 0) throw new InvalidOperationException($"No consecutive zero page addresses available with the requested length {length}");
 
             // Check if we have enough space
@@ -187,9 +234,11 @@ public class ZeroPageAllocator
     /// <exception cref="ArgumentException">Thrown if the address is not allocated.</exception>
     public void Free(byte address)
     {
+        if (IsSystem(address)) throw new ArgumentException($"Address ${address:x2} is a system address and cannot be freed", nameof(address));
+
         Span<bool> bitmap = _bitmap;
-        var index = 0xFF - address;
-        if (!bitmap[index]) throw new ArgumentException($"Address 0x{address:x2} is not allocated", nameof(address));
+        var index = GetBitmapIndex(address);
+        if (!bitmap[index]) throw new ArgumentException($"Address ${address:x2} is not allocated", nameof(address));
         bitmap[index] = false;
         _table[address] = default;
         AllocatedCount--;
@@ -202,8 +251,10 @@ public class ZeroPageAllocator
     /// <exception cref="ArgumentException">Thrown if the address is not allocated.</exception>
     public void Free(ZeroPageAddress address)
     {
+        if (IsSystem(address.Address)) throw new ArgumentException($"Address ${address.Address:x2} is a system address and cannot be freed", nameof(address));
+
         Span<bool> bitmap = _bitmap;
-        var index = 0xFF - address.Address;
+        var index = GetBitmapIndex(address.Address);
         if (!bitmap[index]) throw new ArgumentException($"Address {address} is not allocated", nameof(address));
         bitmap[index] = false;
         _table[address.Address] = default;
@@ -222,14 +273,15 @@ public class ZeroPageAllocator
         for (int i = 0; i < range.Length; i++)
         {
             var address = (byte)(range.BeginAddress + i);
-            var index = 0xFF - address;
-            if (!bitmap[index]) throw new ArgumentException($"Address 0x{address:x2} from range {range} is not allocated", nameof(range));
+            if (IsSystem(address)) throw new ArgumentException($"Address ${address:x2} from range {range} is a system address and cannot be freed", nameof(range));
+            var index = GetBitmapIndex(address);
+            if (!bitmap[index]) throw new ArgumentException($"Address ${address:x2} from range {range} is not allocated", nameof(range));
         }
 
         for (int i = 0; i < range.Length; i++)
         {
             var address = (byte)(range.BeginAddress + i);
-            var index = 0xFF - address;
+            var index = GetBitmapIndex(address);
             bitmap[index] = false;
             _table[address] = default;
         }
@@ -255,7 +307,7 @@ public class ZeroPageAllocator
     public ZeroPageAddress Reserve(ZeroPageAddress address)
     {
         Span<bool> bitmap = _bitmap;
-        var index = 0xFF - address.Address;
+        var index = GetBitmapIndex(address.Address);
         if (bitmap[index]) throw new ArgumentException($"Address {address} is already allocated", nameof(address));
         bitmap[index] = true;
         _table[address] = address;
@@ -263,6 +315,8 @@ public class ZeroPageAllocator
         return address;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private int GetBitmapIndex(byte address) => 0xFF - address;
 
     [InlineArray(256)]
     private struct ZeroPageAddressTable

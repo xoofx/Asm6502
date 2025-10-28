@@ -13,7 +13,7 @@ public abstract record Mos6502Expression()
     /// Collects all labels used in this expression.
     /// </summary>
     /// <param name="labels">The set to collect labels into.</param>
-    public abstract void CollectLabels(HashSet<IMos6502Label> labels);
+    public abstract void CollectLabels(HashSet<Mos6502Label> labels);
 }
 
 /// <summary>
@@ -120,7 +120,7 @@ public record Mos6502ExpressionLowByte(Mos6502ExpressionU16 Expression) : Mos650
     public override byte Evaluate() => (byte)(Expression.Evaluate());
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -135,7 +135,7 @@ public record Mos6502ExpressionHighByte(Mos6502ExpressionU16 Expression) : Mos65
     public override byte Evaluate() => (byte)(Expression.Evaluate() >> 8);
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -157,7 +157,7 @@ public record Mos6502ExpressionSubtractU8(Mos6502ExpressionU8 Left, Mos6502Expre
     }
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    public override void CollectLabels(HashSet<Mos6502Label> labels)
     {
         Left.CollectLabels(labels);
         Right.CollectLabels(labels);
@@ -179,7 +179,7 @@ public record Mos6502ExpressionAddConstU8(Mos6502ExpressionU8 Left, sbyte Right)
     }
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Left.CollectLabels(labels);
 }
 
 /// <summary>
@@ -201,7 +201,7 @@ public record Mos6502ExpressionSubtractU16(Mos6502ExpressionU16 Left, Mos6502Exp
     }
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    public override void CollectLabels(HashSet<Mos6502Label> labels)
     {
         Left.CollectLabels(labels);
         Right.CollectLabels(labels);
@@ -223,7 +223,7 @@ public record Mos6502ExpressionAddConstU16(Mos6502ExpressionU16 Left, short Righ
     }
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Left.CollectLabels(labels);
 }
 
 /// <summary>
@@ -241,7 +241,7 @@ public record Mos6502ExpressionDivideByConstU16(Mos6502ExpressionU16 Left, ushor
     }
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Left.CollectLabels(labels);
 }
 
 /// <summary>
@@ -254,7 +254,7 @@ public record Mos6502ExpressionU8ToU16(Mos6502ExpressionU8 Left) : Mos6502Expres
     public override ushort Evaluate() => Left.Evaluate();
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Left.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Left.CollectLabels(labels);
 }
 
 
@@ -268,7 +268,7 @@ public record Mos6502ExpressionIndirectU16(Mos6502ExpressionU16 Expression) : Mo
     public override ushort Evaluate() => Expression.Evaluate();
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -280,7 +280,7 @@ public record Mos6502ExpressionIndirectX(Mos6502ExpressionU8 Expression) : Mos65
     /// <inheritdoc />
     public override byte Evaluate() => Expression.Evaluate();
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -293,7 +293,7 @@ public record Mos6502ExpressionIndirectY(Mos6502ExpressionU8 Expression) : Mos65
     public override byte Evaluate() => Expression.Evaluate();
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels) => Expression.CollectLabels(labels);
+    public override void CollectLabels(HashSet<Mos6502Label> labels) => Expression.CollectLabels(labels);
 }
 
 /// <summary>
@@ -306,7 +306,7 @@ public record Mos6502ExpressionFuncU8(Func<byte> EvaluateFunc) : Mos6502Expressi
     public override byte Evaluate() => EvaluateFunc();
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    public override void CollectLabels(HashSet<Mos6502Label> labels)
     {
     }
 }
@@ -321,7 +321,7 @@ public record Mos6502ExpressionFuncU16(Func<ushort> EvaluateFunc) : Mos6502Expre
     public override ushort Evaluate() => EvaluateFunc();
 
     /// <inheritdoc />
-    public override void CollectLabels(HashSet<IMos6502Label> labels)
+    public override void CollectLabels(HashSet<Mos6502Label> labels)
     {
     }
 }

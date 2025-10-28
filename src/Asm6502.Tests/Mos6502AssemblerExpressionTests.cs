@@ -70,8 +70,8 @@ public class Mos6502AssemblerExpressionTests : VerifyMos6502Base
     {
         using var asm = CreateAsm();
 
-        var zp1 = new Mos6502LabelZp("zp1", 0x01);
-        var zp2 = new Mos6502LabelZp("zp1", 0x02);
+        var zp1 = new Mos6502Label("test1", 0x01);
+        var zp2 = new Mos6502Label("test2", 0x02);
 
         asm
             .Begin()
@@ -79,9 +79,9 @@ public class Mos6502AssemblerExpressionTests : VerifyMos6502Base
             .STA(zp2)
             .RTS();
 
-        var labels = new HashSet<IMos6502Label>();
+        var labels = new HashSet<Mos6502Label>();
         asm.CollectLabels(labels);
-        CollectionAssert.AreEqual(new [] { zp1, zp2 }, labels.Cast<Mos6502LabelZp>().ToArray());
+        CollectionAssert.AreEqual(new [] { zp1, zp2 }, labels.OrderBy(x => x.Address).ToArray());
 
         asm.End();
 

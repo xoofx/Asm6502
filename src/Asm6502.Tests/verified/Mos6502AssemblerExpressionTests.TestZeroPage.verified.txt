@@ -1,12 +1,12 @@
-﻿C000  A5 01      LDA $01
-C002  85 02      STA $02
-C004  60         RTS
+﻿C000  AD 01 00   LDA $0001
+C003  8D 02 00   STA $0002
+C006  60         RTS
 
-; A5 01 85 02 60
+; AD 01 00 8D 02 00 60
 
 $c000 ORG BEGIN: TestZeroPage
 $c000 ORG BEGIN: 
 $c000 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:78
-$c002 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:79
-$c004 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:80
-$c005 END
+$c003 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:79
+$c006 LINE: {ProjectDirectory}Mos6502AssemblerExpressionTests.cs:80
+$c007 END
