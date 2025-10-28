@@ -24,8 +24,10 @@ public record Mos6502AssemblerDebugInfo(ushort Address, Mos6502AssemblerDebugInf
             Mos6502AssemblerDebugInfoKind.CodeSectionEnd => $"${Address:x4} CODE SECTION END",
             Mos6502AssemblerDebugInfoKind.DataSectionBegin => $"${Address:x4} DATA SECTION BEGIN: {Name}",
             Mos6502AssemblerDebugInfoKind.DataSectionEnd => $"${Address:x4} DATA SECTION END",
+            Mos6502AssemblerDebugInfoKind.FunctionBegin => $"${Address:x4} FUNCTION BEGIN: {Name}:{LineNumber}",
+            Mos6502AssemblerDebugInfoKind.FunctionEnd => $"${Address:x4} FUNCTION END",
             Mos6502AssemblerDebugInfoKind.End => $"${Address:x4} END",
-            _ => $"{Address:X4} UNKNOWN KIND"
+            _ => $"{Address:x4} UNKNOWN KIND"
         };
     }
 }
