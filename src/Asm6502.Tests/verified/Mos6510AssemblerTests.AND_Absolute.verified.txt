@@ -1,5 +1,5 @@
-﻿C000  2D 34 12   AND $1234
-C003  2D 01 FF   AND $FF01
+﻿c000  2d 34 12   AND $1234
+c003  2d 01 ff   AND $ff01
 
 ; 2D 34 12 2D 01 FF
 

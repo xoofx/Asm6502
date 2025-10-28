@@ -1,5 +1,5 @@
-﻿C000  3C 34 12   NOP $1234,X
-C003  3C 02 FF   NOP $FF02,X
+﻿c000  3c 34 12   NOP $1234,X
+c003  3c 02 ff   NOP $ff02,X
 
 ; 3C 34 12 3C 02 FF
 

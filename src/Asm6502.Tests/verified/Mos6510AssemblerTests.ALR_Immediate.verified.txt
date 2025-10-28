@@ -1,6 +1,6 @@
-﻿C000  4B 01      ALR #$01
-C002  4B 42      ALR #$42
-C004  4B FF      ALR #$FF
+﻿c000  4b 01      ALR #$01
+c002  4b 42      ALR #$42
+c004  4b ff      ALR #$ff
 
 ; 4B 01 4B 42 4B FF
 

@@ -1,5 +1,5 @@
-﻿C000  8C 34 12   STY $1234
-C003  8C 01 FF   STY $FF01
+﻿c000  8c 34 12   STY $1234
+c003  8c 01 ff   STY $ff01
 
 ; 8C 34 12 8C 01 FF
 

@@ -1,14 +1,14 @@
-﻿C000  A5 05      LDA $05
-C002  8D 00 10   STA $1000
+﻿c000  a5 05      LDA $05
+c002  8d 00 10   STA $1000
 
 LL_01:
-C005  A1 01      LDA ($01,X)
-C007  B1 02      LDA ($02),Y
-C009  F0 FA      BEQ LL_01
+c005  a1 01      LDA ($01,X)
+c007  b1 02      LDA ($02),Y
+c009  f0 fa      BEQ LL_01
 
-C00B  90 01      BCC LL_02
+c00b  90 01      BCC LL_02
 
-C00D  60         RTS
+c00d  60         RTS
 
 LL_02:
 

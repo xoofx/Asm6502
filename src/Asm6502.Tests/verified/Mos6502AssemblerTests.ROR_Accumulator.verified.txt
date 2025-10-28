@@ -1,5 +1,5 @@
-﻿C000  6A         ROR A
-C001  6A         ROR A
+﻿c000  6a         ROR A
+c001  6a         ROR A
 
 ; 6A 6A
 

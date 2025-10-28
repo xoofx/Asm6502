@@ -1,5 +1,5 @@
-﻿C000  2E 34 12   ROL $1234
-C003  2E 01 FF   ROL $FF01
+﻿c000  2e 34 12   ROL $1234
+c003  2e 01 ff   ROL $ff01
 
 ; 2E 34 12 2E 01 FF
 

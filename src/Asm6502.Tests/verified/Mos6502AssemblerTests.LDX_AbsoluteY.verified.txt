@@ -1,5 +1,5 @@
-﻿C000  BE 34 12   LDX $1234,Y
-C003  BE 03 FF   LDX $FF03,Y
+﻿c000  be 34 12   LDX $1234,Y
+c003  be 03 ff   LDX $ff03,Y
 
 ; BE 34 12 BE 03 FF
 

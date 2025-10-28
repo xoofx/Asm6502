@@ -1,6 +1,6 @@
-﻿C000  E3 05      ISC ($05,X)
-C002  E3 20      ISC ($20,X)
-C004  E3 FF      ISC ($FF,X)
+﻿c000  e3 05      ISC ($05,X)
+c002  e3 20      ISC ($20,X)
+c004  e3 ff      ISC ($ff,X)
 
 ; E3 05 E3 20 E3 FF
 

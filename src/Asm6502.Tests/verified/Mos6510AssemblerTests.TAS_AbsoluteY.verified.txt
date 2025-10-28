@@ -1,5 +1,5 @@
-﻿C000  9B 34 12   TAS $1234,Y
-C003  9B 03 FF   TAS $FF03,Y
+﻿c000  9b 34 12   TAS $1234,Y
+c003  9b 03 ff   TAS $ff03,Y
 
 ; 9B 34 12 9B 03 FF
 

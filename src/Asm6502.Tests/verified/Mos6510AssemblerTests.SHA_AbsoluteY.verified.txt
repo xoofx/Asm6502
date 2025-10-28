@@ -1,5 +1,5 @@
-﻿C000  9F 34 12   SHA $1234,Y
-C003  9F 03 FF   SHA $FF03,Y
+﻿c000  9f 34 12   SHA $1234,Y
+c003  9f 03 ff   SHA $ff03,Y
 
 ; 9F 34 12 9F 03 FF
 

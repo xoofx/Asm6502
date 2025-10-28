@@ -1,5 +1,5 @@
-﻿C000  BD 34 12   LDA $1234,X
-C003  BD 02 FF   LDA $FF02,X
+﻿c000  bd 34 12   LDA $1234,X
+c003  bd 02 ff   LDA $ff02,X
 
 ; BD 34 12 BD 02 FF
 

@@ -1,6 +1,6 @@
-﻿C000  C4 03      CPY $03
-C002  C4 20      CPY $20
-C004  C4 FE      CPY $FE
+﻿c000  c4 03      CPY $03
+c002  c4 20      CPY $20
+c004  c4 fe      CPY $fe
 
 ; C4 03 C4 20 C4 FE
 

@@ -13,29 +13,29 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  AF 0B C0   LAX LL_01
-C003  8E 08 C0   STX $C008
-C006  AD 0A 00   LDA $000A
-C009  60         RTS
+c000  af 0b c0   LAX LL_01
+c003  8e 08 c0   STX $c008
+c006  ad 0a 00   LDA $000a
+c009  60         RTS
 
-C00A  EA         NOP
+c00a  ea         NOP
 
 LL_01:
-C00B  C0 EA      CPY #$EA
-C00D  EA         NOP
-C00E  EA         NOP
+c00b  c0 ea      CPY #$ea
+c00d  ea         NOP
+c00e  ea         NOP
 
 Relocated:
 LL_01:
-2000  AF 0B 20   LAX LL_01
-2003  8E 08 20   STX $2008
-2006  AD 0A 00   LDA $000A
+2000  af 0b 20   LAX LL_01
+2003  8e 08 20   STX $2008
+2006  ad 0a 00   LDA $000a
 2009  60         RTS
 
-200A  EA         NOP
+200a  ea         NOP
 
 LL_01:
-200B  20 EA EA   JSR $EAEA
+200b  20 ea ea   JSR $eaea
 
-200E  EA         NOP
+200e  ea         NOP
 

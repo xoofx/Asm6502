@@ -1,6 +1,6 @@
-﻿C000  54 02      NOP $02,X
-C002  54 30      NOP $30,X
-C004  54 FB      NOP $FB,X
+﻿c000  54 02      NOP $02,X
+c002  54 30      NOP $30,X
+c004  54 fb      NOP $fb,X
 
 ; 54 02 54 30 54 FB
 

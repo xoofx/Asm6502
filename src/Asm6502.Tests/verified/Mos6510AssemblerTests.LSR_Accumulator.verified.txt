@@ -1,5 +1,5 @@
-﻿C000  4A         LSR A
-C001  4A         LSR A
+﻿c000  4a         LSR A
+c001  4a         LSR A
 
 ; 4A 4A
 

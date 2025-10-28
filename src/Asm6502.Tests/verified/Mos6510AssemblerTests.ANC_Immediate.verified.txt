@@ -1,6 +1,6 @@
-﻿C000  0B 01      ANC #$01
-C002  0B 42      ANC #$42
-C004  0B FF      ANC #$FF
+﻿c000  0b 01      ANC #$01
+c002  0b 42      ANC #$42
+c004  0b ff      ANC #$ff
 
 ; 0B 01 0B 42 0B FF
 

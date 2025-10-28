@@ -1,6 +1,6 @@
-﻿C000  B7 01      LAX $01,Y
-C002  B7 40      LAX $40,Y
-C004  B7 FC      LAX $FC,Y
+﻿c000  b7 01      LAX $01,Y
+c002  b7 40      LAX $40,Y
+c004  b7 fc      LAX $fc,Y
 
 ; B7 01 B7 40 B7 FC
 

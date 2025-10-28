@@ -1,5 +1,5 @@
-﻿C000  7B 34 12   RRA $1234,Y
-C003  7B 03 FF   RRA $FF03,Y
+﻿c000  7b 34 12   RRA $1234,Y
+c003  7b 03 ff   RRA $ff03,Y
 
 ; 7B 34 12 7B 03 FF
 

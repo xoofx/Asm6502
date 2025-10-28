@@ -1,5 +1,5 @@
-﻿C000  4F 34 12   SRE $1234
-C003  4F 01 FF   SRE $FF01
+﻿c000  4f 34 12   SRE $1234
+c003  4f 01 ff   SRE $ff01
 
 ; 4F 34 12 4F 01 FF
 

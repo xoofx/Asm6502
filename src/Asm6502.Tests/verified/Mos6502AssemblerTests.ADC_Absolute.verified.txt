@@ -1,5 +1,5 @@
-﻿C000  6D 34 12   ADC $1234
-C003  6D 01 FF   ADC $FF01
+﻿c000  6d 34 12   ADC $1234
+c003  6d 01 ff   ADC $ff01
 
 ; 6D 34 12 6D 01 FF
 

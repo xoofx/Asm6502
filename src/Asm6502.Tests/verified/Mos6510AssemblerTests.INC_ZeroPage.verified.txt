@@ -1,6 +1,6 @@
-﻿C000  E6 03      INC $03
-C002  E6 20      INC $20
-C004  E6 FE      INC $FE
+﻿c000  e6 03      INC $03
+c002  e6 20      INC $20
+c004  e6 fe      INC $fe
 
 ; E6 03 E6 20 E6 FE
 

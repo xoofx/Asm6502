@@ -1,5 +1,5 @@
-﻿C000  0F 34 12   SLO $1234
-C003  0F 01 FF   SLO $FF01
+﻿c000  0f 34 12   SLO $1234
+c003  0f 01 ff   SLO $ff01
 
 ; 0F 34 12 0F 01 FF
 

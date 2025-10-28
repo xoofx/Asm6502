@@ -1,6 +1,6 @@
-﻿C000  6B 01      ARR #$01
-C002  6B 42      ARR #$42
-C004  6B FF      ARR #$FF
+﻿c000  6b 01      ARR #$01
+c002  6b 42      ARR #$42
+c004  6b ff      ARR #$ff
 
 ; 6B 01 6B 42 6B FF
 

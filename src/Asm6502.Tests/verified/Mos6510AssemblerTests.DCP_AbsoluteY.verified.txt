@@ -1,5 +1,5 @@
-﻿C000  DB 34 12   DCP $1234,Y
-C003  DB 03 FF   DCP $FF03,Y
+﻿c000  db 34 12   DCP $1234,Y
+c003  db 03 ff   DCP $ff03,Y
 
 ; DB 34 12 DB 03 FF
 

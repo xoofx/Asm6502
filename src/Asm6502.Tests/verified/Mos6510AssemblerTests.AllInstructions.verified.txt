@@ -1,627 +1,627 @@
-﻿C000  6D 34 12   ADC $1234
-C003  6D 01 FF   ADC $FF01
-C006  7D 34 12   ADC $1234,X
-C009  7D 02 FF   ADC $FF02,X
-C00C  79 34 12   ADC $1234,Y
-C00F  79 03 FF   ADC $FF03,Y
-C012  69 01      ADC #$01
-C014  69 42      ADC #$42
-C016  69 FF      ADC #$FF
-C018  61 05      ADC ($05,X)
-C01A  61 20      ADC ($20,X)
-C01C  61 FF      ADC ($FF,X)
-C01E  71 06      ADC ($06),Y
-C020  71 30      ADC ($30),Y
-C022  71 FE      ADC ($FE),Y
-C024  65 03      ADC $03
-C026  65 20      ADC $20
-C028  65 FE      ADC $FE
-C02A  75 02      ADC $02,X
-C02C  75 30      ADC $30,X
-C02E  75 FB      ADC $FB,X
-C030  2D 34 12   AND $1234
-C033  2D 01 FF   AND $FF01
-C036  3D 34 12   AND $1234,X
-C039  3D 02 FF   AND $FF02,X
-C03C  39 34 12   AND $1234,Y
-C03F  39 03 FF   AND $FF03,Y
-C042  29 01      AND #$01
-C044  29 42      AND #$42
-C046  29 FF      AND #$FF
-C048  21 05      AND ($05,X)
-C04A  21 20      AND ($20,X)
-C04C  21 FF      AND ($FF,X)
-C04E  31 06      AND ($06),Y
-C050  31 30      AND ($30),Y
-C052  31 FE      AND ($FE),Y
-C054  25 03      AND $03
-C056  25 20      AND $20
-C058  25 FE      AND $FE
-C05A  35 02      AND $02,X
-C05C  35 30      AND $30,X
-C05E  35 FB      AND $FB,X
-C060  0E 34 12   ASL $1234
-C063  0E 01 FF   ASL $FF01
-C066  1E 34 12   ASL $1234,X
-C069  1E 02 FF   ASL $FF02,X
-C06C  0A         ASL A
-C06D  0A         ASL A
-C06E  06 03      ASL $03
-C070  06 20      ASL $20
-C072  06 FE      ASL $FE
-C074  16 02      ASL $02,X
-C076  16 30      ASL $30,X
-C078  16 FB      ASL $FB,X
-C07A  90 10      BCC LL_01
+﻿c000  6d 34 12   ADC $1234
+c003  6d 01 ff   ADC $ff01
+c006  7d 34 12   ADC $1234,X
+c009  7d 02 ff   ADC $ff02,X
+c00c  79 34 12   ADC $1234,Y
+c00f  79 03 ff   ADC $ff03,Y
+c012  69 01      ADC #$01
+c014  69 42      ADC #$42
+c016  69 ff      ADC #$ff
+c018  61 05      ADC ($05,X)
+c01a  61 20      ADC ($20,X)
+c01c  61 ff      ADC ($ff,X)
+c01e  71 06      ADC ($06),Y
+c020  71 30      ADC ($30),Y
+c022  71 fe      ADC ($fe),Y
+c024  65 03      ADC $03
+c026  65 20      ADC $20
+c028  65 fe      ADC $fe
+c02a  75 02      ADC $02,X
+c02c  75 30      ADC $30,X
+c02e  75 fb      ADC $fb,X
+c030  2d 34 12   AND $1234
+c033  2d 01 ff   AND $ff01
+c036  3d 34 12   AND $1234,X
+c039  3d 02 ff   AND $ff02,X
+c03c  39 34 12   AND $1234,Y
+c03f  39 03 ff   AND $ff03,Y
+c042  29 01      AND #$01
+c044  29 42      AND #$42
+c046  29 ff      AND #$ff
+c048  21 05      AND ($05,X)
+c04a  21 20      AND ($20,X)
+c04c  21 ff      AND ($ff,X)
+c04e  31 06      AND ($06),Y
+c050  31 30      AND ($30),Y
+c052  31 fe      AND ($fe),Y
+c054  25 03      AND $03
+c056  25 20      AND $20
+c058  25 fe      AND $fe
+c05a  35 02      AND $02,X
+c05c  35 30      AND $30,X
+c05e  35 fb      AND $fb,X
+c060  0e 34 12   ASL $1234
+c063  0e 01 ff   ASL $ff01
+c066  1e 34 12   ASL $1234,X
+c069  1e 02 ff   ASL $ff02,X
+c06c  0a         ASL A
+c06d  0a         ASL A
+c06e  06 03      ASL $03
+c070  06 20      ASL $20
+c072  06 fe      ASL $fe
+c074  16 02      ASL $02,X
+c076  16 30      ASL $30,X
+c078  16 fb      ASL $fb,X
+c07a  90 10      BCC LL_01
 
-C07C  90 DB      BCC $-37
+c07c  90 db      BCC $-37
 
 LL_14:
-C07E  B0 10      BCS LL_03
+c07e  b0 10      BCS LL_03
 
-C080  B0 DB      BCS $-37
+c080  b0 db      BCS $-37
 
 LL_16:
-C082  F0 10      BEQ LL_05
+c082  f0 10      BEQ LL_05
 
-C084  F0 DB      BEQ $-37
+c084  f0 db      BEQ $-37
 
-C086  2C 34 12   BIT $1234
-C089  2C 01 FF   BIT $FF01
+c086  2c 34 12   BIT $1234
+c089  2c 01 ff   BIT $ff01
 
 LL_01:
-C08C  24 03      BIT $03
-C08E  24 20      BIT $20
+c08c  24 03      BIT $03
+c08e  24 20      BIT $20
 
 LL_03:
-C090  24 FE      BIT $FE
-C092  30 10      BMI $16
+c090  24 fe      BIT $fe
+c092  30 10      BMI $16
 
 LL_05:
-C094  30 DB      BMI $-37
+c094  30 db      BMI $-37
 
-C096  D0 10      BNE LL_09
+c096  d0 10      BNE LL_09
 
-C098  D0 DB      BNE $-37
+c098  d0 db      BNE $-37
 
-C09A  10 10      BPL $16
+c09a  10 10      BPL $16
 
-C09C  10 DB      BPL $-37
+c09c  10 db      BPL $-37
 
-C09E  00         BRK
-C09F  50 10      BVC LL_13
+c09e  00         BRK
+c09f  50 10      BVC LL_13
 
-C0A1  50 DB      BVC LL_14
+c0a1  50 db      BVC LL_14
 
-C0A3  70 10      BVS $16
+c0a3  70 10      BVS $16
 
-C0A5  70 DB      BVS LL_16
+c0a5  70 db      BVS LL_16
 
-C0A7  18         CLC
+c0a7  18         CLC
 
 LL_09:
-C0A8  D8         CLD
-C0A9  58         CLI
-C0AA  B8         CLV
-C0AB  CD 34 12   CMP $1234
-C0AE  CD 01 FF   CMP $FF01
+c0a8  d8         CLD
+c0a9  58         CLI
+c0aa  b8         CLV
+c0ab  cd 34 12   CMP $1234
+c0ae  cd 01 ff   CMP $ff01
 
 LL_13:
-C0B1  DD 34 12   CMP $1234,X
-C0B4  DD 02 FF   CMP $FF02,X
-C0B7  D9 34 12   CMP $1234,Y
-C0BA  D9 03 FF   CMP $FF03,Y
-C0BD  C9 01      CMP #$01
-C0BF  C9 42      CMP #$42
-C0C1  C9 FF      CMP #$FF
-C0C3  C1 05      CMP ($05,X)
-C0C5  C1 20      CMP ($20,X)
-C0C7  C1 FF      CMP ($FF,X)
-C0C9  D1 06      CMP ($06),Y
-C0CB  D1 30      CMP ($30),Y
-C0CD  D1 FE      CMP ($FE),Y
-C0CF  C5 03      CMP $03
-C0D1  C5 20      CMP $20
-C0D3  C5 FE      CMP $FE
-C0D5  D5 02      CMP $02,X
-C0D7  D5 30      CMP $30,X
-C0D9  D5 FB      CMP $FB,X
-C0DB  EC 34 12   CPX $1234
-C0DE  EC 01 FF   CPX $FF01
-C0E1  E0 01      CPX #$01
-C0E3  E0 42      CPX #$42
-C0E5  E0 FF      CPX #$FF
-C0E7  E4 03      CPX $03
-C0E9  E4 20      CPX $20
-C0EB  E4 FE      CPX $FE
-C0ED  CC 34 12   CPY $1234
-C0F0  CC 01 FF   CPY $FF01
-C0F3  C0 01      CPY #$01
-C0F5  C0 42      CPY #$42
-C0F7  C0 FF      CPY #$FF
-C0F9  C4 03      CPY $03
-C0FB  C4 20      CPY $20
-C0FD  C4 FE      CPY $FE
-C0FF  CE 34 12   DEC $1234
-C102  CE 01 FF   DEC $FF01
-C105  DE 34 12   DEC $1234,X
-C108  DE 02 FF   DEC $FF02,X
-C10B  C6 03      DEC $03
-C10D  C6 20      DEC $20
-C10F  C6 FE      DEC $FE
-C111  D6 02      DEC $02,X
-C113  D6 30      DEC $30,X
-C115  D6 FB      DEC $FB,X
-C117  CA         DEX
-C118  88         DEY
-C119  4D 34 12   EOR $1234
-C11C  4D 01 FF   EOR $FF01
-C11F  5D 34 12   EOR $1234,X
-C122  5D 02 FF   EOR $FF02,X
-C125  59 34 12   EOR $1234,Y
-C128  59 03 FF   EOR $FF03,Y
-C12B  49 01      EOR #$01
-C12D  49 42      EOR #$42
-C12F  49 FF      EOR #$FF
-C131  41 05      EOR ($05,X)
-C133  41 20      EOR ($20,X)
-C135  41 FF      EOR ($FF,X)
-C137  51 06      EOR ($06),Y
-C139  51 30      EOR ($30),Y
-C13B  51 FE      EOR ($FE),Y
-C13D  45 03      EOR $03
-C13F  45 20      EOR $20
-C141  45 FE      EOR $FE
-C143  55 02      EOR $02,X
-C145  55 30      EOR $30,X
-C147  55 FB      EOR $FB,X
-C149  EE 34 12   INC $1234
-C14C  EE 01 FF   INC $FF01
-C14F  FE 34 12   INC $1234,X
-C152  FE 02 FF   INC $FF02,X
-C155  E6 03      INC $03
-C157  E6 20      INC $20
-C159  E6 FE      INC $FE
-C15B  F6 02      INC $02,X
-C15D  F6 30      INC $30,X
-C15F  F6 FB      INC $FB,X
-C161  E8         INX
-C162  C8         INY
-C163  4C 34 12   JMP $1234
+c0b1  dd 34 12   CMP $1234,X
+c0b4  dd 02 ff   CMP $ff02,X
+c0b7  d9 34 12   CMP $1234,Y
+c0ba  d9 03 ff   CMP $ff03,Y
+c0bd  c9 01      CMP #$01
+c0bf  c9 42      CMP #$42
+c0c1  c9 ff      CMP #$ff
+c0c3  c1 05      CMP ($05,X)
+c0c5  c1 20      CMP ($20,X)
+c0c7  c1 ff      CMP ($ff,X)
+c0c9  d1 06      CMP ($06),Y
+c0cb  d1 30      CMP ($30),Y
+c0cd  d1 fe      CMP ($fe),Y
+c0cf  c5 03      CMP $03
+c0d1  c5 20      CMP $20
+c0d3  c5 fe      CMP $fe
+c0d5  d5 02      CMP $02,X
+c0d7  d5 30      CMP $30,X
+c0d9  d5 fb      CMP $fb,X
+c0db  ec 34 12   CPX $1234
+c0de  ec 01 ff   CPX $ff01
+c0e1  e0 01      CPX #$01
+c0e3  e0 42      CPX #$42
+c0e5  e0 ff      CPX #$ff
+c0e7  e4 03      CPX $03
+c0e9  e4 20      CPX $20
+c0eb  e4 fe      CPX $fe
+c0ed  cc 34 12   CPY $1234
+c0f0  cc 01 ff   CPY $ff01
+c0f3  c0 01      CPY #$01
+c0f5  c0 42      CPY #$42
+c0f7  c0 ff      CPY #$ff
+c0f9  c4 03      CPY $03
+c0fb  c4 20      CPY $20
+c0fd  c4 fe      CPY $fe
+c0ff  ce 34 12   DEC $1234
+c102  ce 01 ff   DEC $ff01
+c105  de 34 12   DEC $1234,X
+c108  de 02 ff   DEC $ff02,X
+c10b  c6 03      DEC $03
+c10d  c6 20      DEC $20
+c10f  c6 fe      DEC $fe
+c111  d6 02      DEC $02,X
+c113  d6 30      DEC $30,X
+c115  d6 fb      DEC $fb,X
+c117  ca         DEX
+c118  88         DEY
+c119  4d 34 12   EOR $1234
+c11c  4d 01 ff   EOR $ff01
+c11f  5d 34 12   EOR $1234,X
+c122  5d 02 ff   EOR $ff02,X
+c125  59 34 12   EOR $1234,Y
+c128  59 03 ff   EOR $ff03,Y
+c12b  49 01      EOR #$01
+c12d  49 42      EOR #$42
+c12f  49 ff      EOR #$ff
+c131  41 05      EOR ($05,X)
+c133  41 20      EOR ($20,X)
+c135  41 ff      EOR ($ff,X)
+c137  51 06      EOR ($06),Y
+c139  51 30      EOR ($30),Y
+c13b  51 fe      EOR ($fe),Y
+c13d  45 03      EOR $03
+c13f  45 20      EOR $20
+c141  45 fe      EOR $fe
+c143  55 02      EOR $02,X
+c145  55 30      EOR $30,X
+c147  55 fb      EOR $fb,X
+c149  ee 34 12   INC $1234
+c14c  ee 01 ff   INC $ff01
+c14f  fe 34 12   INC $1234,X
+c152  fe 02 ff   INC $ff02,X
+c155  e6 03      INC $03
+c157  e6 20      INC $20
+c159  e6 fe      INC $fe
+c15b  f6 02      INC $02,X
+c15d  f6 30      INC $30,X
+c15f  f6 fb      INC $fb,X
+c161  e8         INX
+c162  c8         INY
+c163  4c 34 12   JMP $1234
 
-C166  4C 01 FF   JMP $FF01
+c166  4c 01 ff   JMP $ff01
 
-C169  6C 34 12   JMP ($1234)
+c169  6c 34 12   JMP ($1234)
 
-C16C  6C 04 FF   JMP ($FF04)
+c16c  6c 04 ff   JMP ($ff04)
 
-C16F  20 34 12   JSR $1234
+c16f  20 34 12   JSR $1234
 
-C172  20 01 FF   JSR $FF01
+c172  20 01 ff   JSR $ff01
 
-C175  AD 34 12   LDA $1234
-C178  AD 01 FF   LDA $FF01
-C17B  BD 34 12   LDA $1234,X
-C17E  BD 02 FF   LDA $FF02,X
-C181  B9 34 12   LDA $1234,Y
-C184  B9 03 FF   LDA $FF03,Y
-C187  A9 01      LDA #$01
-C189  A9 42      LDA #$42
-C18B  A9 FF      LDA #$FF
-C18D  A1 05      LDA ($05,X)
-C18F  A1 20      LDA ($20,X)
-C191  A1 FF      LDA ($FF,X)
-C193  B1 06      LDA ($06),Y
-C195  B1 30      LDA ($30),Y
-C197  B1 FE      LDA ($FE),Y
-C199  A5 03      LDA $03
-C19B  A5 20      LDA $20
-C19D  A5 FE      LDA $FE
-C19F  B5 02      LDA $02,X
-C1A1  B5 30      LDA $30,X
-C1A3  B5 FB      LDA $FB,X
-C1A5  AE 34 12   LDX $1234
-C1A8  AE 01 FF   LDX $FF01
-C1AB  BE 34 12   LDX $1234,Y
-C1AE  BE 03 FF   LDX $FF03,Y
-C1B1  A2 01      LDX #$01
-C1B3  A2 42      LDX #$42
-C1B5  A2 FF      LDX #$FF
-C1B7  A6 03      LDX $03
-C1B9  A6 20      LDX $20
-C1BB  A6 FE      LDX $FE
-C1BD  B6 01      LDX $01,Y
-C1BF  B6 40      LDX $40,Y
-C1C1  B6 FC      LDX $FC,Y
-C1C3  AC 34 12   LDY $1234
-C1C6  AC 01 FF   LDY $FF01
-C1C9  BC 34 12   LDY $1234,X
-C1CC  BC 02 FF   LDY $FF02,X
-C1CF  A0 01      LDY #$01
-C1D1  A0 42      LDY #$42
-C1D3  A0 FF      LDY #$FF
-C1D5  A4 03      LDY $03
-C1D7  A4 20      LDY $20
-C1D9  A4 FE      LDY $FE
-C1DB  B4 02      LDY $02,X
-C1DD  B4 30      LDY $30,X
-C1DF  B4 FB      LDY $FB,X
-C1E1  4E 34 12   LSR $1234
-C1E4  4E 01 FF   LSR $FF01
-C1E7  5E 34 12   LSR $1234,X
-C1EA  5E 02 FF   LSR $FF02,X
-C1ED  4A         LSR A
-C1EE  4A         LSR A
-C1EF  46 03      LSR $03
-C1F1  46 20      LSR $20
-C1F3  46 FE      LSR $FE
-C1F5  56 02      LSR $02,X
-C1F7  56 30      LSR $30,X
-C1F9  56 FB      LSR $FB,X
-C1FB  EA         NOP
-C1FC  0D 34 12   ORA $1234
-C1FF  0D 01 FF   ORA $FF01
-C202  1D 34 12   ORA $1234,X
-C205  1D 02 FF   ORA $FF02,X
-C208  19 34 12   ORA $1234,Y
-C20B  19 03 FF   ORA $FF03,Y
-C20E  09 01      ORA #$01
-C210  09 42      ORA #$42
-C212  09 FF      ORA #$FF
-C214  01 05      ORA ($05,X)
-C216  01 20      ORA ($20,X)
-C218  01 FF      ORA ($FF,X)
-C21A  11 06      ORA ($06),Y
-C21C  11 30      ORA ($30),Y
-C21E  11 FE      ORA ($FE),Y
-C220  05 03      ORA $03
-C222  05 20      ORA $20
-C224  05 FE      ORA $FE
-C226  15 02      ORA $02,X
-C228  15 30      ORA $30,X
-C22A  15 FB      ORA $FB,X
-C22C  48         PHA
-C22D  08         PHP
-C22E  68         PLA
-C22F  28         PLP
-C230  2E 34 12   ROL $1234
-C233  2E 01 FF   ROL $FF01
-C236  3E 34 12   ROL $1234,X
-C239  3E 02 FF   ROL $FF02,X
-C23C  2A         ROL A
-C23D  2A         ROL A
-C23E  26 03      ROL $03
-C240  26 20      ROL $20
-C242  26 FE      ROL $FE
-C244  36 02      ROL $02,X
-C246  36 30      ROL $30,X
-C248  36 FB      ROL $FB,X
-C24A  6E 34 12   ROR $1234
-C24D  6E 01 FF   ROR $FF01
-C250  7E 34 12   ROR $1234,X
-C253  7E 02 FF   ROR $FF02,X
-C256  6A         ROR A
-C257  6A         ROR A
-C258  66 03      ROR $03
-C25A  66 20      ROR $20
-C25C  66 FE      ROR $FE
-C25E  76 02      ROR $02,X
-C260  76 30      ROR $30,X
-C262  76 FB      ROR $FB,X
-C264  40         RTI
+c175  ad 34 12   LDA $1234
+c178  ad 01 ff   LDA $ff01
+c17b  bd 34 12   LDA $1234,X
+c17e  bd 02 ff   LDA $ff02,X
+c181  b9 34 12   LDA $1234,Y
+c184  b9 03 ff   LDA $ff03,Y
+c187  a9 01      LDA #$01
+c189  a9 42      LDA #$42
+c18b  a9 ff      LDA #$ff
+c18d  a1 05      LDA ($05,X)
+c18f  a1 20      LDA ($20,X)
+c191  a1 ff      LDA ($ff,X)
+c193  b1 06      LDA ($06),Y
+c195  b1 30      LDA ($30),Y
+c197  b1 fe      LDA ($fe),Y
+c199  a5 03      LDA $03
+c19b  a5 20      LDA $20
+c19d  a5 fe      LDA $fe
+c19f  b5 02      LDA $02,X
+c1a1  b5 30      LDA $30,X
+c1a3  b5 fb      LDA $fb,X
+c1a5  ae 34 12   LDX $1234
+c1a8  ae 01 ff   LDX $ff01
+c1ab  be 34 12   LDX $1234,Y
+c1ae  be 03 ff   LDX $ff03,Y
+c1b1  a2 01      LDX #$01
+c1b3  a2 42      LDX #$42
+c1b5  a2 ff      LDX #$ff
+c1b7  a6 03      LDX $03
+c1b9  a6 20      LDX $20
+c1bb  a6 fe      LDX $fe
+c1bd  b6 01      LDX $01,Y
+c1bf  b6 40      LDX $40,Y
+c1c1  b6 fc      LDX $fc,Y
+c1c3  ac 34 12   LDY $1234
+c1c6  ac 01 ff   LDY $ff01
+c1c9  bc 34 12   LDY $1234,X
+c1cc  bc 02 ff   LDY $ff02,X
+c1cf  a0 01      LDY #$01
+c1d1  a0 42      LDY #$42
+c1d3  a0 ff      LDY #$ff
+c1d5  a4 03      LDY $03
+c1d7  a4 20      LDY $20
+c1d9  a4 fe      LDY $fe
+c1db  b4 02      LDY $02,X
+c1dd  b4 30      LDY $30,X
+c1df  b4 fb      LDY $fb,X
+c1e1  4e 34 12   LSR $1234
+c1e4  4e 01 ff   LSR $ff01
+c1e7  5e 34 12   LSR $1234,X
+c1ea  5e 02 ff   LSR $ff02,X
+c1ed  4a         LSR A
+c1ee  4a         LSR A
+c1ef  46 03      LSR $03
+c1f1  46 20      LSR $20
+c1f3  46 fe      LSR $fe
+c1f5  56 02      LSR $02,X
+c1f7  56 30      LSR $30,X
+c1f9  56 fb      LSR $fb,X
+c1fb  ea         NOP
+c1fc  0d 34 12   ORA $1234
+c1ff  0d 01 ff   ORA $ff01
+c202  1d 34 12   ORA $1234,X
+c205  1d 02 ff   ORA $ff02,X
+c208  19 34 12   ORA $1234,Y
+c20b  19 03 ff   ORA $ff03,Y
+c20e  09 01      ORA #$01
+c210  09 42      ORA #$42
+c212  09 ff      ORA #$ff
+c214  01 05      ORA ($05,X)
+c216  01 20      ORA ($20,X)
+c218  01 ff      ORA ($ff,X)
+c21a  11 06      ORA ($06),Y
+c21c  11 30      ORA ($30),Y
+c21e  11 fe      ORA ($fe),Y
+c220  05 03      ORA $03
+c222  05 20      ORA $20
+c224  05 fe      ORA $fe
+c226  15 02      ORA $02,X
+c228  15 30      ORA $30,X
+c22a  15 fb      ORA $fb,X
+c22c  48         PHA
+c22d  08         PHP
+c22e  68         PLA
+c22f  28         PLP
+c230  2e 34 12   ROL $1234
+c233  2e 01 ff   ROL $ff01
+c236  3e 34 12   ROL $1234,X
+c239  3e 02 ff   ROL $ff02,X
+c23c  2a         ROL A
+c23d  2a         ROL A
+c23e  26 03      ROL $03
+c240  26 20      ROL $20
+c242  26 fe      ROL $fe
+c244  36 02      ROL $02,X
+c246  36 30      ROL $30,X
+c248  36 fb      ROL $fb,X
+c24a  6e 34 12   ROR $1234
+c24d  6e 01 ff   ROR $ff01
+c250  7e 34 12   ROR $1234,X
+c253  7e 02 ff   ROR $ff02,X
+c256  6a         ROR A
+c257  6a         ROR A
+c258  66 03      ROR $03
+c25a  66 20      ROR $20
+c25c  66 fe      ROR $fe
+c25e  76 02      ROR $02,X
+c260  76 30      ROR $30,X
+c262  76 fb      ROR $fb,X
+c264  40         RTI
 
-C265  60         RTS
+c265  60         RTS
 
-C266  ED 34 12   SBC $1234
-C269  ED 01 FF   SBC $FF01
-C26C  FD 34 12   SBC $1234,X
-C26F  FD 02 FF   SBC $FF02,X
-C272  F9 34 12   SBC $1234,Y
-C275  F9 03 FF   SBC $FF03,Y
-C278  E9 01      SBC #$01
-C27A  E9 42      SBC #$42
-C27C  E9 FF      SBC #$FF
-C27E  E1 05      SBC ($05,X)
-C280  E1 20      SBC ($20,X)
-C282  E1 FF      SBC ($FF,X)
-C284  F1 06      SBC ($06),Y
-C286  F1 30      SBC ($30),Y
-C288  F1 FE      SBC ($FE),Y
-C28A  E5 03      SBC $03
-C28C  E5 20      SBC $20
-C28E  E5 FE      SBC $FE
-C290  F5 02      SBC $02,X
-C292  F5 30      SBC $30,X
-C294  F5 FB      SBC $FB,X
-C296  38         SEC
-C297  F8         SED
-C298  78         SEI
-C299  8D 34 12   STA $1234
-C29C  8D 01 FF   STA $FF01
-C29F  9D 34 12   STA $1234,X
-C2A2  9D 02 FF   STA $FF02,X
-C2A5  99 34 12   STA $1234,Y
-C2A8  99 03 FF   STA $FF03,Y
-C2AB  81 05      STA ($05,X)
-C2AD  81 20      STA ($20,X)
-C2AF  81 FF      STA ($FF,X)
-C2B1  91 06      STA ($06),Y
-C2B3  91 30      STA ($30),Y
-C2B5  91 FE      STA ($FE),Y
-C2B7  85 03      STA $03
-C2B9  85 20      STA $20
-C2BB  85 FE      STA $FE
-C2BD  95 02      STA $02,X
-C2BF  95 30      STA $30,X
-C2C1  95 FB      STA $FB,X
-C2C3  8E 34 12   STX $1234
-C2C6  8E 01 FF   STX $FF01
-C2C9  86 03      STX $03
-C2CB  86 20      STX $20
-C2CD  86 FE      STX $FE
-C2CF  96 01      STX $01,Y
-C2D1  96 40      STX $40,Y
-C2D3  96 FC      STX $FC,Y
-C2D5  8C 34 12   STY $1234
-C2D8  8C 01 FF   STY $FF01
-C2DB  84 03      STY $03
-C2DD  84 20      STY $20
-C2DF  84 FE      STY $FE
-C2E1  94 02      STY $02,X
-C2E3  94 30      STY $30,X
-C2E5  94 FB      STY $FB,X
-C2E7  AA         TAX
-C2E8  A8         TAY
-C2E9  BA         TSX
-C2EA  8A         TXA
-C2EB  9A         TXS
-C2EC  98         TYA
-C2ED  4B 01      ALR #$01
-C2EF  4B 42      ALR #$42
-C2F1  4B FF      ALR #$FF
-C2F3  0B 01      ANC #$01
-C2F5  0B 42      ANC #$42
-C2F7  0B FF      ANC #$FF
-C2F9  2B 01      ANC #$01
-C2FB  2B 42      ANC #$42
-C2FD  2B FF      ANC #$FF
-C2FF  8B 01      ANE #$01
-C301  8B 42      ANE #$42
-C303  8B FF      ANE #$FF
-C305  6B 01      ARR #$01
-C307  6B 42      ARR #$42
-C309  6B FF      ARR #$FF
-C30B  CF 34 12   DCP $1234
-C30E  CF 01 FF   DCP $FF01
-C311  DF 34 12   DCP $1234,X
-C314  DF 02 FF   DCP $FF02,X
-C317  DB 34 12   DCP $1234,Y
-C31A  DB 03 FF   DCP $FF03,Y
-C31D  C3 05      DCP ($05,X)
-C31F  C3 20      DCP ($20,X)
-C321  C3 FF      DCP ($FF,X)
-C323  D3 06      DCP ($06),Y
-C325  D3 30      DCP ($30),Y
-C327  D3 FE      DCP ($FE),Y
-C329  C7 03      DCP $03
-C32B  C7 20      DCP $20
-C32D  C7 FE      DCP $FE
-C32F  D7 02      DCP $02,X
-C331  D7 30      DCP $30,X
-C333  D7 FB      DCP $FB,X
-C335  EF 34 12   ISC $1234
-C338  EF 01 FF   ISC $FF01
-C33B  FF 34 12   ISC $1234,X
-C33E  FF 02 FF   ISC $FF02,X
-C341  FB 34 12   ISC $1234,Y
-C344  FB 03 FF   ISC $FF03,Y
-C347  E3 05      ISC ($05,X)
-C349  E3 20      ISC ($20,X)
-C34B  E3 FF      ISC ($FF,X)
-C34D  F3 06      ISC ($06),Y
-C34F  F3 30      ISC ($30),Y
-C351  F3 FE      ISC ($FE),Y
-C353  E7 03      ISC $03
-C355  E7 20      ISC $20
-C357  E7 FE      ISC $FE
-C359  F7 02      ISC $02,X
-C35B  F7 30      ISC $30,X
-C35D  F7 FB      ISC $FB,X
-C35F  02         JAM
-C360  12         JAM
-C361  22         JAM
-C362  32         JAM
-C363  42         JAM
-C364  52         JAM
-C365  62         JAM
-C366  72         JAM
-C367  92         JAM
-C368  B2         JAM
-C369  D2         JAM
-C36A  F2         JAM
-C36B  BB 34 12   LAS $1234,Y
-C36E  BB 03 FF   LAS $FF03,Y
-C371  AF 34 12   LAX $1234
-C374  AF 01 FF   LAX $FF01
-C377  BF 34 12   LAX $1234,Y
-C37A  BF 03 FF   LAX $FF03,Y
-C37D  A3 05      LAX ($05,X)
-C37F  A3 20      LAX ($20,X)
-C381  A3 FF      LAX ($FF,X)
-C383  B3 06      LAX ($06),Y
-C385  B3 30      LAX ($30),Y
-C387  B3 FE      LAX ($FE),Y
-C389  A7 03      LAX $03
-C38B  A7 20      LAX $20
-C38D  A7 FE      LAX $FE
-C38F  B7 01      LAX $01,Y
-C391  B7 40      LAX $40,Y
-C393  B7 FC      LAX $FC,Y
-C395  AB 01      LXA #$01
-C397  AB 42      LXA #$42
-C399  AB FF      LXA #$FF
-C39B  0C 34 12   NOP $1234
-C39E  0C 01 FF   NOP $FF01
-C3A1  1C 34 12   NOP $1234,X
-C3A4  1C 02 FF   NOP $FF02,X
-C3A7  3C 34 12   NOP $1234,X
-C3AA  3C 02 FF   NOP $FF02,X
-C3AD  5C 34 12   NOP $1234,X
-C3B0  5C 02 FF   NOP $FF02,X
-C3B3  7C 34 12   NOP $1234,X
-C3B6  7C 02 FF   NOP $FF02,X
-C3B9  DC 34 12   NOP $1234,X
-C3BC  DC 02 FF   NOP $FF02,X
-C3BF  FC 34 12   NOP $1234,X
-C3C2  FC 02 FF   NOP $FF02,X
-C3C5  80 01      NOP #$01
-C3C7  80 42      NOP #$42
-C3C9  80 FF      NOP #$FF
-C3CB  82 01      NOP #$01
-C3CD  82 42      NOP #$42
-C3CF  82 FF      NOP #$FF
-C3D1  89 01      NOP #$01
-C3D3  89 42      NOP #$42
-C3D5  89 FF      NOP #$FF
-C3D7  C2 01      NOP #$01
-C3D9  C2 42      NOP #$42
-C3DB  C2 FF      NOP #$FF
-C3DD  E2 01      NOP #$01
-C3DF  E2 42      NOP #$42
-C3E1  E2 FF      NOP #$FF
-C3E3  1A         NOP
-C3E4  3A         NOP
-C3E5  5A         NOP
-C3E6  7A         NOP
-C3E7  DA         NOP
-C3E8  FA         NOP
-C3E9  04 03      NOP $03
-C3EB  04 20      NOP $20
-C3ED  04 FE      NOP $FE
-C3EF  44 03      NOP $03
-C3F1  44 20      NOP $20
-C3F3  44 FE      NOP $FE
-C3F5  64 03      NOP $03
-C3F7  64 20      NOP $20
-C3F9  64 FE      NOP $FE
-C3FB  14 02      NOP $02,X
-C3FD  14 30      NOP $30,X
-C3FF  14 FB      NOP $FB,X
-C401  34 02      NOP $02,X
-C403  34 30      NOP $30,X
-C405  34 FB      NOP $FB,X
-C407  54 02      NOP $02,X
-C409  54 30      NOP $30,X
-C40B  54 FB      NOP $FB,X
-C40D  74 02      NOP $02,X
-C40F  74 30      NOP $30,X
-C411  74 FB      NOP $FB,X
-C413  D4 02      NOP $02,X
-C415  D4 30      NOP $30,X
-C417  D4 FB      NOP $FB,X
-C419  F4 02      NOP $02,X
-C41B  F4 30      NOP $30,X
-C41D  F4 FB      NOP $FB,X
-C41F  2F 34 12   RLA $1234
-C422  2F 01 FF   RLA $FF01
-C425  3F 34 12   RLA $1234,X
-C428  3F 02 FF   RLA $FF02,X
-C42B  3B 34 12   RLA $1234,Y
-C42E  3B 03 FF   RLA $FF03,Y
-C431  23 05      RLA ($05,X)
-C433  23 20      RLA ($20,X)
-C435  23 FF      RLA ($FF,X)
-C437  33 06      RLA ($06),Y
-C439  33 30      RLA ($30),Y
-C43B  33 FE      RLA ($FE),Y
-C43D  27 03      RLA $03
-C43F  27 20      RLA $20
-C441  27 FE      RLA $FE
-C443  37 02      RLA $02,X
-C445  37 30      RLA $30,X
-C447  37 FB      RLA $FB,X
-C449  6F 34 12   RRA $1234
-C44C  6F 01 FF   RRA $FF01
-C44F  7F 34 12   RRA $1234,X
-C452  7F 02 FF   RRA $FF02,X
-C455  7B 34 12   RRA $1234,Y
-C458  7B 03 FF   RRA $FF03,Y
-C45B  63 05      RRA ($05,X)
-C45D  63 20      RRA ($20,X)
-C45F  63 FF      RRA ($FF,X)
-C461  73 06      RRA ($06),Y
-C463  73 30      RRA ($30),Y
-C465  73 FE      RRA ($FE),Y
-C467  67 03      RRA $03
-C469  67 20      RRA $20
-C46B  67 FE      RRA $FE
-C46D  77 02      RRA $02,X
-C46F  77 30      RRA $30,X
-C471  77 FB      RRA $FB,X
-C473  8F 34 12   SAX $1234
-C476  8F 01 FF   SAX $FF01
-C479  83 05      SAX ($05,X)
-C47B  83 20      SAX ($20,X)
-C47D  83 FF      SAX ($FF,X)
-C47F  87 03      SAX $03
-C481  87 20      SAX $20
-C483  87 FE      SAX $FE
-C485  97 01      SAX $01,Y
-C487  97 40      SAX $40,Y
-C489  97 FC      SAX $FC,Y
-C48B  CB 01      SBX #$01
-C48D  CB 42      SBX #$42
-C48F  CB FF      SBX #$FF
-C491  9F 34 12   SHA $1234,Y
-C494  9F 03 FF   SHA $FF03,Y
-C497  93 06      SHA ($06),Y
-C499  93 30      SHA ($30),Y
-C49B  93 FE      SHA ($FE),Y
-C49D  9E 34 12   SHX $1234,Y
-C4A0  9E 03 FF   SHX $FF03,Y
-C4A3  9C 34 12   SHY $1234,X
-C4A6  9C 02 FF   SHY $FF02,X
-C4A9  0F 34 12   SLO $1234
-C4AC  0F 01 FF   SLO $FF01
-C4AF  1F 34 12   SLO $1234,X
-C4B2  1F 02 FF   SLO $FF02,X
-C4B5  1B 34 12   SLO $1234,Y
-C4B8  1B 03 FF   SLO $FF03,Y
-C4BB  03 05      SLO ($05,X)
-C4BD  03 20      SLO ($20,X)
-C4BF  03 FF      SLO ($FF,X)
-C4C1  13 06      SLO ($06),Y
-C4C3  13 30      SLO ($30),Y
-C4C5  13 FE      SLO ($FE),Y
-C4C7  07 03      SLO $03
-C4C9  07 20      SLO $20
-C4CB  07 FE      SLO $FE
-C4CD  17 02      SLO $02,X
-C4CF  17 30      SLO $30,X
-C4D1  17 FB      SLO $FB,X
-C4D3  4F 34 12   SRE $1234
-C4D6  4F 01 FF   SRE $FF01
-C4D9  5F 34 12   SRE $1234,X
-C4DC  5F 02 FF   SRE $FF02,X
-C4DF  5B 34 12   SRE $1234,Y
-C4E2  5B 03 FF   SRE $FF03,Y
-C4E5  43 05      SRE ($05,X)
-C4E7  43 20      SRE ($20,X)
-C4E9  43 FF      SRE ($FF,X)
-C4EB  53 06      SRE ($06),Y
-C4ED  53 30      SRE ($30),Y
-C4EF  53 FE      SRE ($FE),Y
-C4F1  47 03      SRE $03
-C4F3  47 20      SRE $20
-C4F5  47 FE      SRE $FE
-C4F7  57 02      SRE $02,X
-C4F9  57 30      SRE $30,X
-C4FB  57 FB      SRE $FB,X
-C4FD  9B 34 12   TAS $1234,Y
-C500  9B 03 FF   TAS $FF03,Y
-C503  EB 01      USBC #$01
-C505  EB 42      USBC #$42
-C507  EB FF      USBC #$FF
+c266  ed 34 12   SBC $1234
+c269  ed 01 ff   SBC $ff01
+c26c  fd 34 12   SBC $1234,X
+c26f  fd 02 ff   SBC $ff02,X
+c272  f9 34 12   SBC $1234,Y
+c275  f9 03 ff   SBC $ff03,Y
+c278  e9 01      SBC #$01
+c27a  e9 42      SBC #$42
+c27c  e9 ff      SBC #$ff
+c27e  e1 05      SBC ($05,X)
+c280  e1 20      SBC ($20,X)
+c282  e1 ff      SBC ($ff,X)
+c284  f1 06      SBC ($06),Y
+c286  f1 30      SBC ($30),Y
+c288  f1 fe      SBC ($fe),Y
+c28a  e5 03      SBC $03
+c28c  e5 20      SBC $20
+c28e  e5 fe      SBC $fe
+c290  f5 02      SBC $02,X
+c292  f5 30      SBC $30,X
+c294  f5 fb      SBC $fb,X
+c296  38         SEC
+c297  f8         SED
+c298  78         SEI
+c299  8d 34 12   STA $1234
+c29c  8d 01 ff   STA $ff01
+c29f  9d 34 12   STA $1234,X
+c2a2  9d 02 ff   STA $ff02,X
+c2a5  99 34 12   STA $1234,Y
+c2a8  99 03 ff   STA $ff03,Y
+c2ab  81 05      STA ($05,X)
+c2ad  81 20      STA ($20,X)
+c2af  81 ff      STA ($ff,X)
+c2b1  91 06      STA ($06),Y
+c2b3  91 30      STA ($30),Y
+c2b5  91 fe      STA ($fe),Y
+c2b7  85 03      STA $03
+c2b9  85 20      STA $20
+c2bb  85 fe      STA $fe
+c2bd  95 02      STA $02,X
+c2bf  95 30      STA $30,X
+c2c1  95 fb      STA $fb,X
+c2c3  8e 34 12   STX $1234
+c2c6  8e 01 ff   STX $ff01
+c2c9  86 03      STX $03
+c2cb  86 20      STX $20
+c2cd  86 fe      STX $fe
+c2cf  96 01      STX $01,Y
+c2d1  96 40      STX $40,Y
+c2d3  96 fc      STX $fc,Y
+c2d5  8c 34 12   STY $1234
+c2d8  8c 01 ff   STY $ff01
+c2db  84 03      STY $03
+c2dd  84 20      STY $20
+c2df  84 fe      STY $fe
+c2e1  94 02      STY $02,X
+c2e3  94 30      STY $30,X
+c2e5  94 fb      STY $fb,X
+c2e7  aa         TAX
+c2e8  a8         TAY
+c2e9  ba         TSX
+c2ea  8a         TXA
+c2eb  9a         TXS
+c2ec  98         TYA
+c2ed  4b 01      ALR #$01
+c2ef  4b 42      ALR #$42
+c2f1  4b ff      ALR #$ff
+c2f3  0b 01      ANC #$01
+c2f5  0b 42      ANC #$42
+c2f7  0b ff      ANC #$ff
+c2f9  2b 01      ANC #$01
+c2fb  2b 42      ANC #$42
+c2fd  2b ff      ANC #$ff
+c2ff  8b 01      ANE #$01
+c301  8b 42      ANE #$42
+c303  8b ff      ANE #$ff
+c305  6b 01      ARR #$01
+c307  6b 42      ARR #$42
+c309  6b ff      ARR #$ff
+c30b  cf 34 12   DCP $1234
+c30e  cf 01 ff   DCP $ff01
+c311  df 34 12   DCP $1234,X
+c314  df 02 ff   DCP $ff02,X
+c317  db 34 12   DCP $1234,Y
+c31a  db 03 ff   DCP $ff03,Y
+c31d  c3 05      DCP ($05,X)
+c31f  c3 20      DCP ($20,X)
+c321  c3 ff      DCP ($ff,X)
+c323  d3 06      DCP ($06),Y
+c325  d3 30      DCP ($30),Y
+c327  d3 fe      DCP ($fe),Y
+c329  c7 03      DCP $03
+c32b  c7 20      DCP $20
+c32d  c7 fe      DCP $fe
+c32f  d7 02      DCP $02,X
+c331  d7 30      DCP $30,X
+c333  d7 fb      DCP $fb,X
+c335  ef 34 12   ISC $1234
+c338  ef 01 ff   ISC $ff01
+c33b  ff 34 12   ISC $1234,X
+c33e  ff 02 ff   ISC $ff02,X
+c341  fb 34 12   ISC $1234,Y
+c344  fb 03 ff   ISC $ff03,Y
+c347  e3 05      ISC ($05,X)
+c349  e3 20      ISC ($20,X)
+c34b  e3 ff      ISC ($ff,X)
+c34d  f3 06      ISC ($06),Y
+c34f  f3 30      ISC ($30),Y
+c351  f3 fe      ISC ($fe),Y
+c353  e7 03      ISC $03
+c355  e7 20      ISC $20
+c357  e7 fe      ISC $fe
+c359  f7 02      ISC $02,X
+c35b  f7 30      ISC $30,X
+c35d  f7 fb      ISC $fb,X
+c35f  02         JAM
+c360  12         JAM
+c361  22         JAM
+c362  32         JAM
+c363  42         JAM
+c364  52         JAM
+c365  62         JAM
+c366  72         JAM
+c367  92         JAM
+c368  b2         JAM
+c369  d2         JAM
+c36a  f2         JAM
+c36b  bb 34 12   LAS $1234,Y
+c36e  bb 03 ff   LAS $ff03,Y
+c371  af 34 12   LAX $1234
+c374  af 01 ff   LAX $ff01
+c377  bf 34 12   LAX $1234,Y
+c37a  bf 03 ff   LAX $ff03,Y
+c37d  a3 05      LAX ($05,X)
+c37f  a3 20      LAX ($20,X)
+c381  a3 ff      LAX ($ff,X)
+c383  b3 06      LAX ($06),Y
+c385  b3 30      LAX ($30),Y
+c387  b3 fe      LAX ($fe),Y
+c389  a7 03      LAX $03
+c38b  a7 20      LAX $20
+c38d  a7 fe      LAX $fe
+c38f  b7 01      LAX $01,Y
+c391  b7 40      LAX $40,Y
+c393  b7 fc      LAX $fc,Y
+c395  ab 01      LXA #$01
+c397  ab 42      LXA #$42
+c399  ab ff      LXA #$ff
+c39b  0c 34 12   NOP $1234
+c39e  0c 01 ff   NOP $ff01
+c3a1  1c 34 12   NOP $1234,X
+c3a4  1c 02 ff   NOP $ff02,X
+c3a7  3c 34 12   NOP $1234,X
+c3aa  3c 02 ff   NOP $ff02,X
+c3ad  5c 34 12   NOP $1234,X
+c3b0  5c 02 ff   NOP $ff02,X
+c3b3  7c 34 12   NOP $1234,X
+c3b6  7c 02 ff   NOP $ff02,X
+c3b9  dc 34 12   NOP $1234,X
+c3bc  dc 02 ff   NOP $ff02,X
+c3bf  fc 34 12   NOP $1234,X
+c3c2  fc 02 ff   NOP $ff02,X
+c3c5  80 01      NOP #$01
+c3c7  80 42      NOP #$42
+c3c9  80 ff      NOP #$ff
+c3cb  82 01      NOP #$01
+c3cd  82 42      NOP #$42
+c3cf  82 ff      NOP #$ff
+c3d1  89 01      NOP #$01
+c3d3  89 42      NOP #$42
+c3d5  89 ff      NOP #$ff
+c3d7  c2 01      NOP #$01
+c3d9  c2 42      NOP #$42
+c3db  c2 ff      NOP #$ff
+c3dd  e2 01      NOP #$01
+c3df  e2 42      NOP #$42
+c3e1  e2 ff      NOP #$ff
+c3e3  1a         NOP
+c3e4  3a         NOP
+c3e5  5a         NOP
+c3e6  7a         NOP
+c3e7  da         NOP
+c3e8  fa         NOP
+c3e9  04 03      NOP $03
+c3eb  04 20      NOP $20
+c3ed  04 fe      NOP $fe
+c3ef  44 03      NOP $03
+c3f1  44 20      NOP $20
+c3f3  44 fe      NOP $fe
+c3f5  64 03      NOP $03
+c3f7  64 20      NOP $20
+c3f9  64 fe      NOP $fe
+c3fb  14 02      NOP $02,X
+c3fd  14 30      NOP $30,X
+c3ff  14 fb      NOP $fb,X
+c401  34 02      NOP $02,X
+c403  34 30      NOP $30,X
+c405  34 fb      NOP $fb,X
+c407  54 02      NOP $02,X
+c409  54 30      NOP $30,X
+c40b  54 fb      NOP $fb,X
+c40d  74 02      NOP $02,X
+c40f  74 30      NOP $30,X
+c411  74 fb      NOP $fb,X
+c413  d4 02      NOP $02,X
+c415  d4 30      NOP $30,X
+c417  d4 fb      NOP $fb,X
+c419  f4 02      NOP $02,X
+c41b  f4 30      NOP $30,X
+c41d  f4 fb      NOP $fb,X
+c41f  2f 34 12   RLA $1234
+c422  2f 01 ff   RLA $ff01
+c425  3f 34 12   RLA $1234,X
+c428  3f 02 ff   RLA $ff02,X
+c42b  3b 34 12   RLA $1234,Y
+c42e  3b 03 ff   RLA $ff03,Y
+c431  23 05      RLA ($05,X)
+c433  23 20      RLA ($20,X)
+c435  23 ff      RLA ($ff,X)
+c437  33 06      RLA ($06),Y
+c439  33 30      RLA ($30),Y
+c43b  33 fe      RLA ($fe),Y
+c43d  27 03      RLA $03
+c43f  27 20      RLA $20
+c441  27 fe      RLA $fe
+c443  37 02      RLA $02,X
+c445  37 30      RLA $30,X
+c447  37 fb      RLA $fb,X
+c449  6f 34 12   RRA $1234
+c44c  6f 01 ff   RRA $ff01
+c44f  7f 34 12   RRA $1234,X
+c452  7f 02 ff   RRA $ff02,X
+c455  7b 34 12   RRA $1234,Y
+c458  7b 03 ff   RRA $ff03,Y
+c45b  63 05      RRA ($05,X)
+c45d  63 20      RRA ($20,X)
+c45f  63 ff      RRA ($ff,X)
+c461  73 06      RRA ($06),Y
+c463  73 30      RRA ($30),Y
+c465  73 fe      RRA ($fe),Y
+c467  67 03      RRA $03
+c469  67 20      RRA $20
+c46b  67 fe      RRA $fe
+c46d  77 02      RRA $02,X
+c46f  77 30      RRA $30,X
+c471  77 fb      RRA $fb,X
+c473  8f 34 12   SAX $1234
+c476  8f 01 ff   SAX $ff01
+c479  83 05      SAX ($05,X)
+c47b  83 20      SAX ($20,X)
+c47d  83 ff      SAX ($ff,X)
+c47f  87 03      SAX $03
+c481  87 20      SAX $20
+c483  87 fe      SAX $fe
+c485  97 01      SAX $01,Y
+c487  97 40      SAX $40,Y
+c489  97 fc      SAX $fc,Y
+c48b  cb 01      SBX #$01
+c48d  cb 42      SBX #$42
+c48f  cb ff      SBX #$ff
+c491  9f 34 12   SHA $1234,Y
+c494  9f 03 ff   SHA $ff03,Y
+c497  93 06      SHA ($06),Y
+c499  93 30      SHA ($30),Y
+c49b  93 fe      SHA ($fe),Y
+c49d  9e 34 12   SHX $1234,Y
+c4a0  9e 03 ff   SHX $ff03,Y
+c4a3  9c 34 12   SHY $1234,X
+c4a6  9c 02 ff   SHY $ff02,X
+c4a9  0f 34 12   SLO $1234
+c4ac  0f 01 ff   SLO $ff01
+c4af  1f 34 12   SLO $1234,X
+c4b2  1f 02 ff   SLO $ff02,X
+c4b5  1b 34 12   SLO $1234,Y
+c4b8  1b 03 ff   SLO $ff03,Y
+c4bb  03 05      SLO ($05,X)
+c4bd  03 20      SLO ($20,X)
+c4bf  03 ff      SLO ($ff,X)
+c4c1  13 06      SLO ($06),Y
+c4c3  13 30      SLO ($30),Y
+c4c5  13 fe      SLO ($fe),Y
+c4c7  07 03      SLO $03
+c4c9  07 20      SLO $20
+c4cb  07 fe      SLO $fe
+c4cd  17 02      SLO $02,X
+c4cf  17 30      SLO $30,X
+c4d1  17 fb      SLO $fb,X
+c4d3  4f 34 12   SRE $1234
+c4d6  4f 01 ff   SRE $ff01
+c4d9  5f 34 12   SRE $1234,X
+c4dc  5f 02 ff   SRE $ff02,X
+c4df  5b 34 12   SRE $1234,Y
+c4e2  5b 03 ff   SRE $ff03,Y
+c4e5  43 05      SRE ($05,X)
+c4e7  43 20      SRE ($20,X)
+c4e9  43 ff      SRE ($ff,X)
+c4eb  53 06      SRE ($06),Y
+c4ed  53 30      SRE ($30),Y
+c4ef  53 fe      SRE ($fe),Y
+c4f1  47 03      SRE $03
+c4f3  47 20      SRE $20
+c4f5  47 fe      SRE $fe
+c4f7  57 02      SRE $02,X
+c4f9  57 30      SRE $30,X
+c4fb  57 fb      SRE $fb,X
+c4fd  9b 34 12   TAS $1234,Y
+c500  9b 03 ff   TAS $ff03,Y
+c503  eb 01      USBC #$01
+c505  eb 42      USBC #$42
+c507  eb ff      USBC #$ff
 
 ; 6D 34 12 6D 01 FF 7D 34 12 7D 02 FF 79 34 12 79 03 FF 69 01 69 42 69 FF 61 05 61 20 61 FF 71 06 71 30 71 FE 65 03 65 20 65 FE 75 02 75 30 75 FB 2D 34 12 2D 01 FF 3D 34 12 3D 02 FF 39 34 12 39 03 FF 29 01 29 42 29 FF 21 05 21 20 21 FF 31 06 31 30 31 FE 25 03 25 20 25 FE 35 02 35 30 35 FB 0E 34 12 0E 01 FF 1E 34 12 1E 02 FF 0A 0A 06 03 06 20 06 FE 16 02 16 30 16 FB 90 10 90 DB B0 10 B0 DB F0 10 F0 DB 2C 34 12 2C 01 FF 24 03 24 20 24 FE 30 10 30 DB D0 10 D0 DB 10 10 10 DB 00 50 10 50 DB 70 10 70 DB 18 D8 58 B8 CD 34 12 CD 01 FF DD 34 12 DD 02 FF D9 34 12 D9 03 FF C9 01 C9 42 C9 FF C1 05 C1 20 C1 FF D1 06 D1 30 D1 FE C5 03 C5 20 C5 FE D5 02 D5 30 D5 FB EC 34 12 EC 01 FF E0 01 E0 42 E0 FF E4 03 E4 20 E4 FE CC 34 12 CC 01 FF C0 01 C0 42 C0 FF C4 03 C4 20 C4 FE CE 34 12 CE 01 FF DE 34 12 DE 02 FF C6 03 C6 20 C6 FE D6 02 D6 30 D6 FB CA 88 4D 34 12 4D 01 FF 5D 34 12 5D 02 FF 59 34 12 59 03 FF 49 01 49 42 49 FF 41 05 41 20 41 FF 51 06 51 30 51 FE 45 03 45 20 45 FE 55 02 55 30 55 FB EE 34 12 EE 01 FF FE 34 12 FE 02 FF E6 03 E6 20 E6 FE F6 02 F6 30 F6 FB E8 C8 4C 34 12 4C 01 FF 6C 34 12 6C 04 FF 20 34 12 20 01 FF AD 34 12 AD 01 FF BD 34 12 BD 02 FF B9 34 12 B9 03 FF A9 01 A9 42 A9 FF A1 05 A1 20 A1 FF B1 06 B1 30 B1 FE A5 03 A5 20 A5 FE B5 02 B5 30 B5 FB AE 34 12 AE 01 FF BE 34 12 BE 03 FF A2 01 A2 42 A2 FF A6 03 A6 20 A6 FE B6 01 B6 40 B6 FC AC 34 12 AC 01 FF BC 34 12 BC 02 FF A0 01 A0 42 A0 FF A4 03 A4 20 A4 FE B4 02 B4 30 B4 FB 4E 34 12 4E 01 FF 5E 34 12 5E 02 FF 4A 4A 46 03 46 20 46 FE 56 02 56 30 56 FB EA 0D 34 12 0D 01 FF 1D 34 12 1D 02 FF 19 34 12 19 03 FF 09 01 09 42 09 FF 01 05 01 20 01 FF 11 06 11 30 11 FE 05 03 05 20 05 FE 15 02 15 30 15 FB 48 08 68 28 2E 34 12 2E 01 FF 3E 34 12 3E 02 FF 2A 2A 26 03 26 20 26 FE 36 02 36 30 36 FB 6E 34 12 6E 01 FF 7E 34 12 7E 02 FF 6A 6A 66 03 66 20 66 FE 76 02 76 30 76 FB 40 60 ED 34 12 ED 01 FF FD 34 12 FD 02 FF F9 34 12 F9 03 FF E9 01 E9 42 E9 FF E1 05 E1 20 E1 FF F1 06 F1 30 F1 FE E5 03 E5 20 E5 FE F5 02 F5 30 F5 FB 38 F8 78 8D 34 12 8D 01 FF 9D 34 12 9D 02 FF 99 34 12 99 03 FF 81 05 81 20 81 FF 91 06 91 30 91 FE 85 03 85 20 85 FE 95 02 95 30 95 FB 8E 34 12 8E 01 FF 86 03 86 20 86 FE 96 01 96 40 96 FC 8C 34 12 8C 01 FF 84 03 84 20 84 FE 94 02 94 30 94 FB AA A8 BA 8A 9A 98 4B 01 4B 42 4B FF 0B 01 0B 42 0B FF 2B 01 2B 42 2B FF 8B 01 8B 42 8B FF 6B 01 6B 42 6B FF CF 34 12 CF 01 FF DF 34 12 DF 02 FF DB 34 12 DB 03 FF C3 05 C3 20 C3 FF D3 06 D3 30 D3 FE C7 03 C7 20 C7 FE D7 02 D7 30 D7 FB EF 34 12 EF 01 FF FF 34 12 FF 02 FF FB 34 12 FB 03 FF E3 05 E3 20 E3 FF F3 06 F3 30 F3 FE E7 03 E7 20 E7 FE F7 02 F7 30 F7 FB 02 12 22 32 42 52 62 72 92 B2 D2 F2 BB 34 12 BB 03 FF AF 34 12 AF 01 FF BF 34 12 BF 03 FF A3 05 A3 20 A3 FF B3 06 B3 30 B3 FE A7 03 A7 20 A7 FE B7 01 B7 40 B7 FC AB 01 AB 42 AB FF 0C 34 12 0C 01 FF 1C 34 12 1C 02 FF 3C 34 12 3C 02 FF 5C 34 12 5C 02 FF 7C 34 12 7C 02 FF DC 34 12 DC 02 FF FC 34 12 FC 02 FF 80 01 80 42 80 FF 82 01 82 42 82 FF 89 01 89 42 89 FF C2 01 C2 42 C2 FF E2 01 E2 42 E2 FF 1A 3A 5A 7A DA FA 04 03 04 20 04 FE 44 03 44 20 44 FE 64 03 64 20 64 FE 14 02 14 30 14 FB 34 02 34 30 34 FB 54 02 54 30 54 FB 74 02 74 30 74 FB D4 02 D4 30 D4 FB F4 02 F4 30 F4 FB 2F 34 12 2F 01 FF 3F 34 12 3F 02 FF 3B 34 12 3B 03 FF 23 05 23 20 23 FF 33 06 33 30 33 FE 27 03 27 20 27 FE 37 02 37 30 37 FB 6F 34 12 6F 01 FF 7F 34 12 7F 02 FF 7B 34 12 7B 03 FF 63 05 63 20 63 FF 73 06 73 30 73 FE 67 03 67 20 67 FE 77 02 77 30 77 FB 8F 34 12 8F 01 FF 83 05 83 20 83 FF 87 03 87 20 87 FE 97 01 97 40 97 FC CB 01 CB 42 CB FF 9F 34 12 9F 03 FF 93 06 93 30 93 FE 9E 34 12 9E 03 FF 9C 34 12 9C 02 FF 0F 34 12 0F 01 FF 1F 34 12 1F 02 FF 1B 34 12 1B 03 FF 03 05 03 20 03 FF 13 06 13 30 13 FE 07 03 07 20 07 FE 17 02 17 30 17 FB 4F 34 12 4F 01 FF 5F 34 12 5F 02 FF 5B 34 12 5B 03 FF 43 05 43 20 43 FF 53 06 53 30 53 FE 47 03 47 20 47 FE 57 02 57 30 57 FB 9B 34 12 9B 03 FF EB 01 EB 42 EB FF
 

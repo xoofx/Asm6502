@@ -1,6 +1,6 @@
-﻿C000  96 01      STX $01,Y
-C002  96 40      STX $40,Y
-C004  96 FC      STX $FC,Y
+﻿c000  96 01      STX $01,Y
+c002  96 40      STX $40,Y
+c004  96 fc      STX $fc,Y
 
 ; 96 01 96 40 96 FC
 

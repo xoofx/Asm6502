@@ -1,35 +1,35 @@
-﻿C000  A2 00      LDX #$00
-C002  A0 10      LDY #$10
+﻿c000  a2 00      LDX #$00
+c002  a0 10      LDY #$10
 
 LL_02:
-C004  BD 00 02   LDA $0200,X
-C007  C9 FF      CMP #$FF
-C009  F0 06      BEQ LL_01
+c004  bd 00 02   LDA $0200,X
+c007  c9 ff      CMP #$ff
+c009  f0 06      BEQ LL_01
 
-C00B  18         CLC
-C00C  69 01      ADC #$01
-C00E  9D 00 02   STA $0200,X
+c00b  18         CLC
+c00c  69 01      ADC #$01
+c00e  9d 00 02   STA $0200,X
 
 LL_01:
-C011  E8         INX
-C012  88         DEY
-C013  D0 EF      BNE LL_02
+c011  e8         INX
+c012  88         DEY
+c013  d0 ef      BNE LL_02
 
-C015  20 1B C0   JSR LL_03
+c015  20 1b c0   JSR LL_03
 
 LL_04:
-C018  4C 18 C0   JMP LL_04
+c018  4c 18 c0   JMP LL_04
 
 LL_03:
-C01B  A2 00      LDX #$00
+c01b  a2 00      LDX #$00
 
 LL_05:
-C01D  8E 20 D0   STX $D020
-C020  E8         INX
-C021  E0 08      CPX #$08
-C023  D0 F8      BNE LL_05
+c01d  8e 20 d0   STX $d020
+c020  e8         INX
+c021  e0 08      CPX #$08
+c023  d0 f8      BNE LL_05
 
-C025  60         RTS
+c025  60         RTS
 
 ; A2 00 A0 10 BD 00 02 C9 FF F0 06 18 69 01 9D 00 02 E8 88 D0 EF 20 1B C0 4C 18 C0 A2 00 8E 20 D0 E8 E0 08 D0 F8 60
 

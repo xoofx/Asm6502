@@ -1,6 +1,6 @@
-﻿C000  A7 03      LAX $03
-C002  A7 20      LAX $20
-C004  A7 FE      LAX $FE
+﻿c000  a7 03      LAX $03
+c002  a7 20      LAX $20
+c004  a7 fe      LAX $fe
 
 ; A7 03 A7 20 A7 FE
 

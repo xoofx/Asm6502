@@ -1,6 +1,6 @@
-﻿C000  8B 01      ANE #$01
-C002  8B 42      ANE #$42
-C004  8B FF      ANE #$FF
+﻿c000  8b 01      ANE #$01
+c002  8b 42      ANE #$42
+c004  8b ff      ANE #$ff
 
 ; 8B 01 8B 42 8B FF
 

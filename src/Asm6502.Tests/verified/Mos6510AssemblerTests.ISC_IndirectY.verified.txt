@@ -1,6 +1,6 @@
-﻿C000  F3 06      ISC ($06),Y
-C002  F3 30      ISC ($30),Y
-C004  F3 FE      ISC ($FE),Y
+﻿c000  f3 06      ISC ($06),Y
+c002  f3 30      ISC ($30),Y
+c004  f3 fe      ISC ($fe),Y
 
 ; F3 06 F3 30 F3 FE
 

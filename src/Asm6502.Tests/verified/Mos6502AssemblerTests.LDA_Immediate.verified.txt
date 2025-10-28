@@ -1,6 +1,6 @@
-﻿C000  A9 01      LDA #$01
-C002  A9 42      LDA #$42
-C004  A9 FF      LDA #$FF
+﻿c000  a9 01      LDA #$01
+c002  a9 42      LDA #$42
+c004  a9 ff      LDA #$ff
 
 ; A9 01 A9 42 A9 FF
 

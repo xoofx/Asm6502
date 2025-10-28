@@ -1,5 +1,5 @@
-﻿C000  4E 34 12   LSR $1234
-C003  4E 01 FF   LSR $FF01
+﻿c000  4e 34 12   LSR $1234
+c003  4e 01 ff   LSR $ff01
 
 ; 4E 34 12 4E 01 FF
 

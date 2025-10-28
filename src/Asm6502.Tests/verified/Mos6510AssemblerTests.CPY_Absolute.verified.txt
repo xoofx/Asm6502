@@ -1,5 +1,5 @@
-﻿C000  CC 34 12   CPY $1234
-C003  CC 01 FF   CPY $FF01
+﻿c000  cc 34 12   CPY $1234
+c003  cc 01 ff   CPY $ff01
 
 ; CC 34 12 CC 01 FF
 

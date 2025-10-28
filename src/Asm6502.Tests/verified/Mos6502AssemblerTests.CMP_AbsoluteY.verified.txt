@@ -1,5 +1,5 @@
-﻿C000  D9 34 12   CMP $1234,Y
-C003  D9 03 FF   CMP $FF03,Y
+﻿c000  d9 34 12   CMP $1234,Y
+c003  d9 03 ff   CMP $ff03,Y
 
 ; D9 34 12 D9 03 FF
 

@@ -1,5 +1,5 @@
-﻿C000  B9 34 12   LDA $1234,Y
-C003  B9 03 FF   LDA $FF03,Y
+﻿c000  b9 34 12   LDA $1234,Y
+c003  b9 03 ff   LDA $ff03,Y
 
 ; B9 34 12 B9 03 FF
 

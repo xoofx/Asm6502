@@ -1,5 +1,5 @@
-﻿C000  0E 34 12   ASL $1234
-C003  0E 01 FF   ASL $FF01
+﻿c000  0e 34 12   ASL $1234
+c003  0e 01 ff   ASL $ff01
 
 ; 0E 34 12 0E 01 FF
 

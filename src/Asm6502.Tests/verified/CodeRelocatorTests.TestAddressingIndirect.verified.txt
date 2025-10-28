@@ -13,21 +13,21 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  AD 05 C0   LDA LL_01
-C003  60         RTS
+c000  ad 05 c0   LDA LL_01
+c003  60         RTS
 
-C004  EA         NOP
+c004  ea         NOP
 
 LL_01:
-C005  04 C0      NOP $C0
+c005  04 c0      NOP $c0
 
 Relocated:
 LL_01:
-2000  AD 05 20   LDA LL_01
+2000  ad 05 20   LDA LL_01
 2003  60         RTS
 
-2004  EA         NOP
+2004  ea         NOP
 
 LL_01:
-2005  04 C0      NOP $C0
+2005  04 c0      NOP $c0
 

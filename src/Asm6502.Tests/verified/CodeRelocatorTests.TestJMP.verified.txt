@@ -13,18 +13,18 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  4C 05 C0   JMP LL_01
+c000  4c 05 c0   JMP LL_01
 
-C003  A9 FF      LDA #$FF
+c003  a9 ff      LDA #$ff
 
 LL_01:
-C005  60         RTS
+c005  60         RTS
 
 Relocated:
 LL_01:
-2000  4C 05 20   JMP LL_01
+2000  4c 05 20   JMP LL_01
 
-2003  A9 FF      LDA #$FF
+2003  a9 ff      LDA #$ff
 
 LL_01:
 2005  60         RTS

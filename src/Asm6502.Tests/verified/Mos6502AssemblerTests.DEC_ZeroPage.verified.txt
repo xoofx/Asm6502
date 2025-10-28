@@ -1,6 +1,6 @@
-﻿C000  C6 03      DEC $03
-C002  C6 20      DEC $20
-C004  C6 FE      DEC $FE
+﻿c000  c6 03      DEC $03
+c002  c6 20      DEC $20
+c004  c6 fe      DEC $fe
 
 ; C6 03 C6 20 C6 FE
 

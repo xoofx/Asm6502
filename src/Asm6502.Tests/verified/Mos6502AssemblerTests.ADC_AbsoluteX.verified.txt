@@ -1,5 +1,5 @@
-﻿C000  7D 34 12   ADC $1234,X
-C003  7D 02 FF   ADC $FF02,X
+﻿c000  7d 34 12   ADC $1234,X
+c003  7d 02 ff   ADC $ff02,X
 
 ; 7D 34 12 7D 02 FF
 

@@ -1,6 +1,6 @@
-﻿C000  D7 02      DCP $02,X
-C002  D7 30      DCP $30,X
-C004  D7 FB      DCP $FB,X
+﻿c000  d7 02      DCP $02,X
+c002  d7 30      DCP $30,X
+c004  d7 fb      DCP $fb,X
 
 ; D7 02 D7 30 D7 FB
 

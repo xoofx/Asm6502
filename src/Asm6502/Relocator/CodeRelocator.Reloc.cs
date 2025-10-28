@@ -1181,7 +1181,7 @@ partial class CodeRelocator
 
                         if (Diagnostics.LogLevel == CodeRelocationDiagnosticKind.Trace)
                         {
-                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldBeRelocated, $"Assuming that ${_programAddress + frame.Offset:X4} should be relocated.");
+                            Diagnostics.Trace(CodeRelocationDiagnosticId.TRC_SolverShouldBeRelocated, $"Assuming that ${_programAddress + frame.Offset:x4} should be relocated.");
                         }
 
                         // Try Reloc path

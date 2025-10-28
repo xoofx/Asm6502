@@ -1,6 +1,6 @@
-﻿C000  15 02      ORA $02,X
-C002  15 30      ORA $30,X
-C004  15 FB      ORA $FB,X
+﻿c000  15 02      ORA $02,X
+c002  15 30      ORA $30,X
+c004  15 fb      ORA $fb,X
 
 ; 15 02 15 30 15 FB
 

@@ -105,7 +105,7 @@ partial class CodeRelocator
 
             if (_cpu.IsHalted || _cpu.IsJammed)
             {
-                throw new InvalidOperationException($"CPU was halted or jammed at ${_cpu.PCAtOpcode:X4}");
+                throw new InvalidOperationException($"CPU was halted or jammed at ${_cpu.PCAtOpcode:x4}");
             }
 
             if (Cpu.RunState == Mos6502CpuRunState.Fetch)

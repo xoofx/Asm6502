@@ -239,7 +239,7 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
                     }
                 }
 
-                return destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4}", out charsWritten);
             }
             case Mos6502AddressingMode.AbsoluteX:
             {
@@ -254,7 +254,7 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
                     }
                 }
 
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},X", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},X", out charsWritten);
             }
             case Mos6502AddressingMode.AbsoluteY:
             {
@@ -269,20 +269,20 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
                     }
                 }
 
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},Y", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},Y", out charsWritten);
             }
             case Mos6502AddressingMode.Accumulator:
                 return lowercase ? destination.TryWrite(provider, $"{mnemonicText} a", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} A", out charsWritten);
             case Mos6502AddressingMode.Immediate:
-                return destination.TryWrite(provider, $"{mnemonicText} #${LowOperand:X2}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} #${LowOperand:x2}", out charsWritten);
             case Mos6502AddressingMode.Implied:
                 return destination.TryWrite(provider, $"{mnemonicText}", out charsWritten);
             case Mos6502AddressingMode.Indirect:
-                return destination.TryWrite(provider, $"{mnemonicText} (${Operand:X4})", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} (${Operand:x4})", out charsWritten);
             case Mos6502AddressingMode.IndirectX:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2},x)", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2},X)", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2},x)", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2},X)", out charsWritten);
             case Mos6502AddressingMode.IndirectY:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2}),y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2}),Y", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2}),y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2}),Y", out charsWritten);
             case Mos6502AddressingMode.Relative:
             {
                 if (tryFormatDelegate != null)
@@ -297,11 +297,11 @@ public readonly struct Mos6502Instruction : IEquatable<Mos6502Instruction>, ISpa
                 return destination.TryWrite(provider, $"{mnemonicText} ${(sbyte)LowOperand}", out charsWritten);
             }
             case Mos6502AddressingMode.ZeroPage:
-                return destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2}", out charsWritten);
             case Mos6502AddressingMode.ZeroPageX:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},X", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},X", out charsWritten);
             case Mos6502AddressingMode.ZeroPageY:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},Y", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},Y", out charsWritten);
             default:
                 throw new InvalidOperationException(); // Should never happen
         }
@@ -548,7 +548,7 @@ public readonly struct Mos6510Instruction : IEquatable<Mos6510Instruction>, ISpa
                     }
                 }
 
-                return destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4}", out charsWritten);
             }
             case Mos6502AddressingMode.AbsoluteX:
             {
@@ -563,7 +563,7 @@ public readonly struct Mos6510Instruction : IEquatable<Mos6510Instruction>, ISpa
                     }
                 }
 
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},X", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},X", out charsWritten);
             }
             case Mos6502AddressingMode.AbsoluteY:
             {
@@ -578,20 +578,20 @@ public readonly struct Mos6510Instruction : IEquatable<Mos6510Instruction>, ISpa
                     }
                 }
 
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:X4},Y", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${Operand:x4},Y", out charsWritten);
             }
             case Mos6502AddressingMode.Accumulator:
                 return lowercase ? destination.TryWrite(provider, $"{mnemonicText} a", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} A", out charsWritten);
             case Mos6502AddressingMode.Immediate:
-                return destination.TryWrite(provider, $"{mnemonicText} #${LowOperand:X2}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} #${LowOperand:x2}", out charsWritten);
             case Mos6502AddressingMode.Implied:
                 return destination.TryWrite(provider, $"{mnemonicText}", out charsWritten);
             case Mos6502AddressingMode.Indirect:
-                return destination.TryWrite(provider, $"{mnemonicText} (${Operand:X4})", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} (${Operand:x4})", out charsWritten);
             case Mos6502AddressingMode.IndirectX:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2},x)", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2},X)", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2},x)", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2},X)", out charsWritten);
             case Mos6502AddressingMode.IndirectY:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2}),y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:X2}),Y", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2}),y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} (${LowOperand:x2}),Y", out charsWritten);
             case Mos6502AddressingMode.Relative:
             {
                 if (tryFormatDelegate != null)
@@ -606,11 +606,11 @@ public readonly struct Mos6510Instruction : IEquatable<Mos6510Instruction>, ISpa
                 return destination.TryWrite(provider, $"{mnemonicText} ${(sbyte)LowOperand}", out charsWritten);
             }
             case Mos6502AddressingMode.ZeroPage:
-                return destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2}", out charsWritten);
+                return destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2}", out charsWritten);
             case Mos6502AddressingMode.ZeroPageX:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},X", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},x", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},X", out charsWritten);
             case Mos6502AddressingMode.ZeroPageY:
-                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:X2},Y", out charsWritten);
+                return lowercase ? destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},y", out charsWritten) : destination.TryWrite(provider, $"{mnemonicText} ${LowOperand:x2},Y", out charsWritten);
             default:
                 throw new InvalidOperationException(); // Should never happen
         }

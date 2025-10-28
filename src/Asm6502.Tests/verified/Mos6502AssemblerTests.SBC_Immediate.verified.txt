@@ -1,6 +1,6 @@
-﻿C000  E9 01      SBC #$01
-C002  E9 42      SBC #$42
-C004  E9 FF      SBC #$FF
+﻿c000  e9 01      SBC #$01
+c002  e9 42      SBC #$42
+c004  e9 ff      SBC #$ff
 
 ; E9 01 E9 42 E9 FF
 

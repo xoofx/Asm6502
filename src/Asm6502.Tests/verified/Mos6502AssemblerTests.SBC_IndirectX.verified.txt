@@ -1,6 +1,6 @@
-﻿C000  E1 05      SBC ($05,X)
-C002  E1 20      SBC ($20,X)
-C004  E1 FF      SBC ($FF,X)
+﻿c000  e1 05      SBC ($05,X)
+c002  e1 20      SBC ($20,X)
+c004  e1 ff      SBC ($ff,X)
 
 ; E1 05 E1 20 E1 FF
 

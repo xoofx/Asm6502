@@ -1,6 +1,6 @@
-﻿C000  17 02      SLO $02,X
-C002  17 30      SLO $30,X
-C004  17 FB      SLO $FB,X
+﻿c000  17 02      SLO $02,X
+c002  17 30      SLO $30,X
+c004  17 fb      SLO $fb,X
 
 ; 17 02 17 30 17 FB
 

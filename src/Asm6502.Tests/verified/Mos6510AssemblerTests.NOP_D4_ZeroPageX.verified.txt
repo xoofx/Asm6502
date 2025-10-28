@@ -1,6 +1,6 @@
-﻿C000  D4 02      NOP $02,X
-C002  D4 30      NOP $30,X
-C004  D4 FB      NOP $FB,X
+﻿c000  d4 02      NOP $02,X
+c002  d4 30      NOP $30,X
+c004  d4 fb      NOP $fb,X
 
 ; D4 02 D4 30 D4 FB
 

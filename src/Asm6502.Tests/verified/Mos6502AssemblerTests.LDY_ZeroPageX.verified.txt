@@ -1,6 +1,6 @@
-﻿C000  B4 02      LDY $02,X
-C002  B4 30      LDY $30,X
-C004  B4 FB      LDY $FB,X
+﻿c000  b4 02      LDY $02,X
+c002  b4 30      LDY $30,X
+c004  b4 fb      LDY $fb,X
 
 ; B4 02 B4 30 B4 FB
 

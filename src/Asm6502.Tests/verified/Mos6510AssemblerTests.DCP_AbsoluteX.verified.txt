@@ -1,5 +1,5 @@
-﻿C000  DF 34 12   DCP $1234,X
-C003  DF 02 FF   DCP $FF02,X
+﻿c000  df 34 12   DCP $1234,X
+c003  df 02 ff   DCP $ff02,X
 
 ; DF 34 12 DF 02 FF
 

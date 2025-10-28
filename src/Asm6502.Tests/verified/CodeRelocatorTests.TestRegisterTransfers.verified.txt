@@ -13,41 +13,41 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  AD 13 C0   LDA LL_01
-C003  AA         TAX
-C004  A9 00      LDA #$00
-C006  8A         TXA
-C007  A8         TAY
-C008  A9 00      LDA #$00
-C00A  98         TYA
-C00B  8D 10 C0   STA $C010
-C00E  AD 12 00   LDA $0012
-C011  60         RTS
+c000  ad 13 c0   LDA LL_01
+c003  aa         TAX
+c004  a9 00      LDA #$00
+c006  8a         TXA
+c007  a8         TAY
+c008  a9 00      LDA #$00
+c00a  98         TYA
+c00b  8d 10 c0   STA $c010
+c00e  ad 12 00   LDA $0012
+c011  60         RTS
 
-C012  EA         NOP
+c012  ea         NOP
 
 LL_01:
-C013  C0 EA      CPY #$EA
-C015  EA         NOP
-C016  EA         NOP
+c013  c0 ea      CPY #$ea
+c015  ea         NOP
+c016  ea         NOP
 
 Relocated:
 LL_01:
-2000  AD 13 20   LDA LL_01
-2003  AA         TAX
-2004  A9 00      LDA #$00
-2006  8A         TXA
-2007  A8         TAY
-2008  A9 00      LDA #$00
-200A  98         TYA
-200B  8D 10 20   STA $2010
-200E  AD 12 00   LDA $0012
+2000  ad 13 20   LDA LL_01
+2003  aa         TAX
+2004  a9 00      LDA #$00
+2006  8a         TXA
+2007  a8         TAY
+2008  a9 00      LDA #$00
+200a  98         TYA
+200b  8d 10 20   STA $2010
+200e  ad 12 00   LDA $0012
 2011  60         RTS
 
-2012  EA         NOP
+2012  ea         NOP
 
 LL_01:
-2013  20 EA EA   JSR $EAEA
+2013  20 ea ea   JSR $eaea
 
-2016  EA         NOP
+2016  ea         NOP
 

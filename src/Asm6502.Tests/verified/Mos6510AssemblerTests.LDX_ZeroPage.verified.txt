@@ -1,6 +1,6 @@
-﻿C000  A6 03      LDX $03
-C002  A6 20      LDX $20
-C004  A6 FE      LDX $FE
+﻿c000  a6 03      LDX $03
+c002  a6 20      LDX $20
+c004  a6 fe      LDX $fe
 
 ; A6 03 A6 20 A6 FE
 

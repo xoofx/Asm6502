@@ -1,5 +1,5 @@
-﻿C000  1B 34 12   SLO $1234,Y
-C003  1B 03 FF   SLO $FF03,Y
+﻿c000  1b 34 12   SLO $1234,Y
+c003  1b 03 ff   SLO $ff03,Y
 
 ; 1B 34 12 1B 03 FF
 

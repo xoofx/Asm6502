@@ -1,5 +1,5 @@
-﻿C000  8E 34 12   STX $1234
-C003  8E 01 FF   STX $FF01
+﻿c000  8e 34 12   STX $1234
+c003  8e 01 ff   STX $ff01
 
 ; 8E 34 12 8E 01 FF
 

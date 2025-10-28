@@ -1,5 +1,5 @@
-﻿C000  9E 34 12   SHX $1234,Y
-C003  9E 03 FF   SHX $FF03,Y
+﻿c000  9e 34 12   SHX $1234,Y
+c003  9e 03 ff   SHX $ff03,Y
 
 ; 9E 34 12 9E 03 FF
 

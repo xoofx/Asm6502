@@ -1,5 +1,5 @@
-﻿C000  8F 34 12   SAX $1234
-C003  8F 01 FF   SAX $FF01
+﻿c000  8f 34 12   SAX $1234
+c003  8f 01 ff   SAX $ff01
 
 ; 8F 34 12 8F 01 FF
 

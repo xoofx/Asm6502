@@ -1,6 +1,6 @@
-﻿C000  C3 05      DCP ($05,X)
-C002  C3 20      DCP ($20,X)
-C004  C3 FF      DCP ($FF,X)
+﻿c000  c3 05      DCP ($05,X)
+c002  c3 20      DCP ($20,X)
+c004  c3 ff      DCP ($ff,X)
 
 ; C3 05 C3 20 C3 FF
 

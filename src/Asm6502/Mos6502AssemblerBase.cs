@@ -298,7 +298,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
                     resolved = exprU16.Evaluate();
                     break;
                 default:
-                    throw new InvalidOperationException($"Unsupported expression type `{expression.GetType()}` for patch at offset 0x{patch.BufferOffset:X4} with expression `{expression}`");
+                    throw new InvalidOperationException($"Unsupported expression type `{expression.GetType()}` for patch at offset ${patch.BufferOffset:x4} with expression `{expression}`");
             }
 
             var patchRef = Buffer.Slice(patch.BufferOffset);
@@ -323,12 +323,12 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
                 case Mos6502AddressingMode.Relative:
                     var deltaPc = resolved - (patch.Address + 2);
                     if (deltaPc < sbyte.MinValue || deltaPc > sbyte.MaxValue)
-                        throw new InvalidOperationException($"Relative address for expression `{expression}` at buffer offset 0x`{patch.BufferOffset - 1:X4}` is out of range: {deltaPc}. Must be [-128, 127] ");
+                        throw new InvalidOperationException($"Relative address for expression `{expression}` at buffer offset $`{patch.BufferOffset - 1:x4}` is out of range: {deltaPc}. Must be [-128, 127] ");
 
                     patchRef[0] = (byte)deltaPc;
                     break;
                 default:
-                    throw new InvalidOperationException($"Unsupported addressing mode {patch.AddressingMode} for patch at offset 0x{patch.BufferOffset:X4} with expression `{expression}`");
+                    throw new InvalidOperationException($"Unsupported addressing mode {patch.AddressingMode} for patch at offset ${patch.BufferOffset:x4} with expression `{expression}`");
             }
         }
 
@@ -593,7 +593,7 @@ public abstract partial class Mos6502AssemblerBase : IDisposable
         foreach (var fixedBlk in fixedBlocks)
         {
             if (fixedBlk.Label.Address < startAddress)
-                throw new InvalidOperationException($"Fixed block address 0x{fixedBlk.Label.Address:X4} for label {fixedBlk.Label} is before the start address 0x{startAddress:X4}");
+                throw new InvalidOperationException($"Fixed block address ${fixedBlk.Label.Address:x4} for label {fixedBlk.Label} is before the start address ${startAddress:x4}");
         }
         
         // Step 1: Validate fixed blocks (no overlaps)

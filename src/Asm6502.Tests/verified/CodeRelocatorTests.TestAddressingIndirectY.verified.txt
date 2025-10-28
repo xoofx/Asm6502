@@ -20,29 +20,29 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  AD 0F C0   LDA LL_01
-C003  85 10      STA $10
-C005  AD 10 C0   LDA $C010
-C008  85 11      STA $11
-C00A  A0 00      LDY #$00
-C00C  B1 10      LDA ($10),Y
-C00E  60         RTS
+c000  ad 0f c0   LDA LL_01
+c003  85 10      STA $10
+c005  ad 10 c0   LDA $c010
+c008  85 11      STA $11
+c00a  a0 00      LDY #$00
+c00c  b1 10      LDA ($10),Y
+c00e  60         RTS
 
 LL_01:
-C00F  11 C0      ORA ($C0),Y
-C011  EA         NOP
+c00f  11 c0      ORA ($c0),Y
+c011  ea         NOP
 
 Relocated:
 LL_01:
-2000  AD 0F 20   LDA LL_01
+2000  ad 0f 20   LDA LL_01
 2003  85 80      STA $80
-2005  AD 10 20   LDA $2010
+2005  ad 10 20   LDA $2010
 2008  85 81      STA $81
-200A  A0 00      LDY #$00
-200C  B1 80      LDA ($80),Y
-200E  60         RTS
+200a  a0 00      LDY #$00
+200c  b1 80      LDA ($80),Y
+200e  60         RTS
 
 LL_01:
-200F  11 20      ORA ($20),Y
-2011  EA         NOP
+200f  11 20      ORA ($20),Y
+2011  ea         NOP
 

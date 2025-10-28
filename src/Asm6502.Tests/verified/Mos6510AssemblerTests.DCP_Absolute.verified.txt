@@ -1,5 +1,5 @@
-﻿C000  CF 34 12   DCP $1234
-C003  CF 01 FF   DCP $FF01
+﻿c000  cf 34 12   DCP $1234
+c003  cf 01 ff   DCP $ff01
 
 ; CF 34 12 CF 01 FF
 

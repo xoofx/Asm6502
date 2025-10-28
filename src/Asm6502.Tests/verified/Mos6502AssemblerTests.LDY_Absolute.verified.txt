@@ -1,5 +1,5 @@
-﻿C000  AC 34 12   LDY $1234
-C003  AC 01 FF   LDY $FF01
+﻿c000  ac 34 12   LDY $1234
+c003  ac 01 ff   LDY $ff01
 
 ; AC 34 12 AC 01 FF
 

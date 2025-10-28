@@ -1,5 +1,5 @@
-﻿C000  CE 34 12   DEC $1234
-C003  CE 01 FF   DEC $FF01
+﻿c000  ce 34 12   DEC $1234
+c003  ce 01 ff   DEC $ff01
 
 ; CE 34 12 CE 01 FF
 

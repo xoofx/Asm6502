@@ -13,13 +13,13 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  20 04 C0   JSR LL_01
+c000  20 04 c0   JSR LL_01
 
-C003  60         RTS
+c003  60         RTS
 
 LL_01:
-C004  A9 42      LDA #$42
-C006  60         RTS
+c004  a9 42      LDA #$42
+c006  60         RTS
 
 Relocated:
 LL_01:
@@ -28,6 +28,6 @@ LL_01:
 2003  60         RTS
 
 LL_01:
-2004  A9 42      LDA #$42
+2004  a9 42      LDA #$42
 2006  60         RTS
 

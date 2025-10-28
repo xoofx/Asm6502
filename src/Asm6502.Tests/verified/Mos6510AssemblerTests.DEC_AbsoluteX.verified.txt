@@ -1,5 +1,5 @@
-﻿C000  DE 34 12   DEC $1234,X
-C003  DE 02 FF   DEC $FF02,X
+﻿c000  de 34 12   DEC $1234,X
+c003  de 02 ff   DEC $ff02,X
 
 ; DE 34 12 DE 02 FF
 

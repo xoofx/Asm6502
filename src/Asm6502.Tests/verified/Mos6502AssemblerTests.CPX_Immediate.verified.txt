@@ -1,6 +1,6 @@
-﻿C000  E0 01      CPX #$01
-C002  E0 42      CPX #$42
-C004  E0 FF      CPX #$FF
+﻿c000  e0 01      CPX #$01
+c002  e0 42      CPX #$42
+c004  e0 ff      CPX #$ff
 
 ; E0 01 E0 42 E0 FF
 

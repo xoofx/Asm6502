@@ -1,5 +1,5 @@
-﻿C000  4D 34 12   EOR $1234
-C003  4D 01 FF   EOR $FF01
+﻿c000  4d 34 12   EOR $1234
+c003  4d 01 ff   EOR $ff01
 
 ; 4D 34 12 4D 01 FF
 

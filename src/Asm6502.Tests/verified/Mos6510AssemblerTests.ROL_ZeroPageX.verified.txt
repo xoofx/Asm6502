@@ -1,6 +1,6 @@
-﻿C000  36 02      ROL $02,X
-C002  36 30      ROL $30,X
-C004  36 FB      ROL $FB,X
+﻿c000  36 02      ROL $02,X
+c002  36 30      ROL $30,X
+c004  36 fb      ROL $fb,X
 
 ; 36 02 36 30 36 FB
 

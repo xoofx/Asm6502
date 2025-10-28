@@ -1,5 +1,5 @@
-﻿C000  0C 34 12   NOP $1234
-C003  0C 01 FF   NOP $FF01
+﻿c000  0c 34 12   NOP $1234
+c003  0c 01 ff   NOP $ff01
 
 ; 0C 34 12 0C 01 FF
 

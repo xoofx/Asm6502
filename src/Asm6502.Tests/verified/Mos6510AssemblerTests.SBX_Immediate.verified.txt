@@ -1,6 +1,6 @@
-﻿C000  CB 01      SBX #$01
-C002  CB 42      SBX #$42
-C004  CB FF      SBX #$FF
+﻿c000  cb 01      SBX #$01
+c002  cb 42      SBX #$42
+c004  cb ff      SBX #$ff
 
 ; CB 01 CB 42 CB FF
 

@@ -1,5 +1,5 @@
-﻿C000  BF 34 12   LAX $1234,Y
-C003  BF 03 FF   LAX $FF03,Y
+﻿c000  bf 34 12   LAX $1234,Y
+c003  bf 03 ff   LAX $ff03,Y
 
 ; BF 34 12 BF 03 FF
 

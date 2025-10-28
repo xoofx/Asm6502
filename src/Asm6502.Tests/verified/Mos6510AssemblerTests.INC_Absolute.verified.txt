@@ -1,5 +1,5 @@
-﻿C000  EE 34 12   INC $1234
-C003  EE 01 FF   INC $FF01
+﻿c000  ee 34 12   INC $1234
+c003  ee 01 ff   INC $ff01
 
 ; EE 34 12 EE 01 FF
 

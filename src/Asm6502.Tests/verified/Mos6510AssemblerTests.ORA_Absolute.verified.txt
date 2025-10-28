@@ -1,5 +1,5 @@
-﻿C000  0D 34 12   ORA $1234
-C003  0D 01 FF   ORA $FF01
+﻿c000  0d 34 12   ORA $1234
+c003  0d 01 ff   ORA $ff01
 
 ; 0D 34 12 0D 01 FF
 

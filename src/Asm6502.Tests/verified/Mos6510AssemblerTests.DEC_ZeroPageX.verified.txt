@@ -1,6 +1,6 @@
-﻿C000  D6 02      DEC $02,X
-C002  D6 30      DEC $30,X
-C004  D6 FB      DEC $FB,X
+﻿c000  d6 02      DEC $02,X
+c002  d6 30      DEC $30,X
+c004  d6 fb      DEC $fb,X
 
 ; D6 02 D6 30 D6 FB
 

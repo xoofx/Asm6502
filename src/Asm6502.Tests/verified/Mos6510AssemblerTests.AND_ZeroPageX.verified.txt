@@ -1,6 +1,6 @@
-﻿C000  35 02      AND $02,X
-C002  35 30      AND $30,X
-C004  35 FB      AND $FB,X
+﻿c000  35 02      AND $02,X
+c002  35 30      AND $30,X
+c004  35 fb      AND $fb,X
 
 ; 35 02 35 30 35 FB
 

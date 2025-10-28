@@ -1,6 +1,6 @@
-﻿C000  56 02      LSR $02,X
-C002  56 30      LSR $30,X
-C004  56 FB      LSR $FB,X
+﻿c000  56 02      LSR $02,X
+c002  56 30      LSR $30,X
+c004  56 fb      LSR $fb,X
 
 ; 56 02 56 30 56 FB
 

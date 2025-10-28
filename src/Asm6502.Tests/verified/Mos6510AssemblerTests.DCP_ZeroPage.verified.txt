@@ -1,6 +1,6 @@
-﻿C000  C7 03      DCP $03
-C002  C7 20      DCP $20
-C004  C7 FE      DCP $FE
+﻿c000  c7 03      DCP $03
+c002  c7 20      DCP $20
+c004  c7 fe      DCP $fe
 
 ; C7 03 C7 20 C7 FE
 

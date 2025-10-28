@@ -1,6 +1,6 @@
-﻿C000  B0 10      BCS $16
+﻿c000  b0 10      BCS $16
 
-C002  B0 DB      BCS $-37
+c002  b0 db      BCS $-37
 
 ; B0 10 B0 DB
 

@@ -20,39 +20,39 @@ Diagnostics:
 
 Original:
 LL_01:
-C000  AD 1B C0   LDA LL_01
-C003  8D 1D C0   STA $C01D
-C006  AD 1C C0   LDA $C01C
-C009  8D 1E C0   STA $C01E
-C00C  AD 1D C0   LDA $C01D
-C00F  85 02      STA $02
-C011  AD 1E C0   LDA $C01E
-C014  85 03      STA $03
-C016  A0 00      LDY #$00
-C018  B1 02      LDA ($02),Y
-C01A  60         RTS
+c000  ad 1b c0   LDA LL_01
+c003  8d 1d c0   STA $c01d
+c006  ad 1c c0   LDA $c01c
+c009  8d 1e c0   STA $c01e
+c00c  ad 1d c0   LDA $c01d
+c00f  85 02      STA $02
+c011  ad 1e c0   LDA $c01e
+c014  85 03      STA $03
+c016  a0 00      LDY #$00
+c018  b1 02      LDA ($02),Y
+c01a  60         RTS
 
 LL_01:
-C01B  1F C0 00   SLO $00C0,X
-C01E  00         BRK
-C01F  EA         NOP
+c01b  1f c0 00   SLO $00c0,X
+c01e  00         BRK
+c01f  ea         NOP
 
 Relocated:
 LL_01:
-2000  AD 1B 20   LDA LL_01
-2003  8D 1D 20   STA $201D
-2006  AD 1C 20   LDA $201C
-2009  8D 1E 20   STA $201E
-200C  AD 1D 20   LDA $201D
-200F  85 80      STA $80
-2011  AD 1E 20   LDA $201E
+2000  ad 1b 20   LDA LL_01
+2003  8d 1d 20   STA $201d
+2006  ad 1c 20   LDA $201c
+2009  8d 1e 20   STA $201e
+200c  ad 1d 20   LDA $201d
+200f  85 80      STA $80
+2011  ad 1e 20   LDA $201e
 2014  85 81      STA $81
-2016  A0 00      LDY #$00
-2018  B1 80      LDA ($80),Y
-201A  60         RTS
+2016  a0 00      LDY #$00
+2018  b1 80      LDA ($80),Y
+201a  60         RTS
 
 LL_01:
-201B  1F 20 00   SLO $0020,X
-201E  00         BRK
-201F  EA         NOP
+201b  1f 20 00   SLO $0020,X
+201e  00         BRK
+201f  ea         NOP
 

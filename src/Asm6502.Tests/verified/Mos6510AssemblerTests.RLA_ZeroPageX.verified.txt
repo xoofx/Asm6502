@@ -1,6 +1,6 @@
-﻿C000  37 02      RLA $02,X
-C002  37 30      RLA $30,X
-C004  37 FB      RLA $FB,X
+﻿c000  37 02      RLA $02,X
+c002  37 30      RLA $30,X
+c004  37 fb      RLA $fb,X
 
 ; 37 02 37 30 37 FB
 

@@ -1,5 +1,5 @@
-﻿C000  0A         ASL A
-C001  0A         ASL A
+﻿c000  0a         ASL A
+c001  0a         ASL A
 
 ; 0A 0A
 

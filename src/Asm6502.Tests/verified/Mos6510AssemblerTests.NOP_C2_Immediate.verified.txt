@@ -1,6 +1,6 @@
-﻿C000  C2 01      NOP #$01
-C002  C2 42      NOP #$42
-C004  C2 FF      NOP #$FF
+﻿c000  c2 01      NOP #$01
+c002  c2 42      NOP #$42
+c004  c2 ff      NOP #$ff
 
 ; C2 01 C2 42 C2 FF
 

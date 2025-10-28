@@ -1,6 +1,6 @@
-﻿C000  C0 01      CPY #$01
-C002  C0 42      CPY #$42
-C004  C0 FF      CPY #$FF
+﻿c000  c0 01      CPY #$01
+c002  c0 42      CPY #$42
+c004  c0 ff      CPY #$ff
 
 ; C0 01 C0 42 C0 FF
 

@@ -1,6 +1,6 @@
-﻿C000  14 02      NOP $02,X
-C002  14 30      NOP $30,X
-C004  14 FB      NOP $FB,X
+﻿c000  14 02      NOP $02,X
+c002  14 30      NOP $30,X
+c004  14 fb      NOP $fb,X
 
 ; 14 02 14 30 14 FB
 

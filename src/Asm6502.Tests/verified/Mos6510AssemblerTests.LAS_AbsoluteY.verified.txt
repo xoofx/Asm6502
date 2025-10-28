@@ -1,5 +1,5 @@
-﻿C000  BB 34 12   LAS $1234,Y
-C003  BB 03 FF   LAS $FF03,Y
+﻿c000  bb 34 12   LAS $1234,Y
+c003  bb 03 ff   LAS $ff03,Y
 
 ; BB 34 12 BB 03 FF
 

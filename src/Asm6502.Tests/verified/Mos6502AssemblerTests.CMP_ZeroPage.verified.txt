@@ -1,6 +1,6 @@
-﻿C000  C5 03      CMP $03
-C002  C5 20      CMP $20
-C004  C5 FE      CMP $FE
+﻿c000  c5 03      CMP $03
+c002  c5 20      CMP $20
+c004  c5 fe      CMP $fe
 
 ; C5 03 C5 20 C5 FE
 

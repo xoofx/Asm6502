@@ -194,7 +194,7 @@ public class Mos6502Disassembler
                 {
                     if (Options.PrintAddress)
                     {
-                        textSpan.TryWrite($"{Options.BaseAddress + _currentOffset:X4}", out var localCharsWritten);
+                        textSpan.TryWrite($"{Options.BaseAddress + _currentOffset:x4}", out var localCharsWritten);
                         charsWritten += localCharsWritten;
                         runningSpan = textSpan.Slice(localCharsWritten);
 
@@ -209,13 +209,13 @@ public class Mos6502Disassembler
                         switch (bytes.Length)
                         {
                             case 1:
-                                runningSpan.TryWrite($"{bytes[0]:X2}       ", out localCharsWritten);
+                                runningSpan.TryWrite($"{bytes[0]:x2}       ", out localCharsWritten);
                                 break;
                             case 2:
-                                runningSpan.TryWrite($"{bytes[0]:X2} {bytes[1]:X2}    ", out localCharsWritten);
+                                runningSpan.TryWrite($"{bytes[0]:x2} {bytes[1]:x2}    ", out localCharsWritten);
                                 break;
                             case 3:
-                                runningSpan.TryWrite($"{bytes[0]:X2} {bytes[1]:X2} {bytes[2]:X2} ", out localCharsWritten);
+                                runningSpan.TryWrite($"{bytes[0]:x2} {bytes[1]:x2} {bytes[2]:x2} ", out localCharsWritten);
                                 break;
                         }
 
@@ -399,7 +399,7 @@ public class Mos6502Disassembler
             }
 
             // If not found, we will provide print absolute address
-            textSpan.TryWrite($"${Options.BaseAddress + absoluteOffset:X4}", out charsWritten);
+            textSpan.TryWrite($"${Options.BaseAddress + absoluteOffset:x4}", out charsWritten);
             return false;
         }
 
@@ -631,7 +631,7 @@ public class Mos6510Disassembler
                 {
                     if (Options.PrintAddress)
                     {
-                        textSpan.TryWrite($"{Options.BaseAddress + _currentOffset:X4}", out var localCharsWritten);
+                        textSpan.TryWrite($"{Options.BaseAddress + _currentOffset:x4}", out var localCharsWritten);
                         charsWritten += localCharsWritten;
                         runningSpan = textSpan.Slice(localCharsWritten);
 
@@ -646,13 +646,13 @@ public class Mos6510Disassembler
                         switch (bytes.Length)
                         {
                             case 1:
-                                runningSpan.TryWrite($"{bytes[0]:X2}       ", out localCharsWritten);
+                                runningSpan.TryWrite($"{bytes[0]:x2}       ", out localCharsWritten);
                                 break;
                             case 2:
-                                runningSpan.TryWrite($"{bytes[0]:X2} {bytes[1]:X2}    ", out localCharsWritten);
+                                runningSpan.TryWrite($"{bytes[0]:x2} {bytes[1]:x2}    ", out localCharsWritten);
                                 break;
                             case 3:
-                                runningSpan.TryWrite($"{bytes[0]:X2} {bytes[1]:X2} {bytes[2]:X2} ", out localCharsWritten);
+                                runningSpan.TryWrite($"{bytes[0]:x2} {bytes[1]:x2} {bytes[2]:x2} ", out localCharsWritten);
                                 break;
                         }
 
@@ -836,7 +836,7 @@ public class Mos6510Disassembler
             }
 
             // If not found, we will provide print absolute address
-            textSpan.TryWrite($"${Options.BaseAddress + absoluteOffset:X4}", out charsWritten);
+            textSpan.TryWrite($"${Options.BaseAddress + absoluteOffset:x4}", out charsWritten);
             return false;
         }
 

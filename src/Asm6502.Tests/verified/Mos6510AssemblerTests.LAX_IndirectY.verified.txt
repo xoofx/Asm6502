@@ -1,6 +1,6 @@
-﻿C000  B3 06      LAX ($06),Y
-C002  B3 30      LAX ($30),Y
-C004  B3 FE      LAX ($FE),Y
+﻿c000  b3 06      LAX ($06),Y
+c002  b3 30      LAX ($30),Y
+c004  b3 fe      LAX ($fe),Y
 
 ; B3 06 B3 30 B3 FE
 

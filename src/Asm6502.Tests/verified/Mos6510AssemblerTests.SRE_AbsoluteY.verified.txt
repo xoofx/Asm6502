@@ -1,5 +1,5 @@
-﻿C000  5B 34 12   SRE $1234,Y
-C003  5B 03 FF   SRE $FF03,Y
+﻿c000  5b 34 12   SRE $1234,Y
+c003  5b 03 ff   SRE $ff03,Y
 
 ; 5B 34 12 5B 03 FF
 

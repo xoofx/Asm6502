@@ -1,14 +1,14 @@
-﻿C000  A9 10      LDA #$10
-C002  A5 10      LDA $10
-C004  B5 10      LDA $10,X
-C006  B6 10      LDX $10,Y
-C008  AD 34 12   LDA $1234
-C00B  BD 34 12   LDA $1234,X
-C00E  B9 34 12   LDA $1234,Y
-C011  6C 34 12   JMP ($1234)
+﻿c000  a9 10      LDA #$10
+c002  a5 10      LDA $10
+c004  b5 10      LDA $10,X
+c006  b6 10      LDX $10,Y
+c008  ad 34 12   LDA $1234
+c00b  bd 34 12   LDA $1234,X
+c00e  b9 34 12   LDA $1234,Y
+c011  6c 34 12   JMP ($1234)
 
-C014  A1 10      LDA ($10,X)
-C016  B1 10      LDA ($10),Y
+c014  a1 10      LDA ($10,X)
+c016  b1 10      LDA ($10),Y
 
 ; A9 10 A5 10 B5 10 B6 10 AD 34 12 BD 34 12 B9 34 12 6C 34 12 A1 10 B1 10
 

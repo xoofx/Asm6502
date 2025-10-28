@@ -1,5 +1,5 @@
-﻿C000  5E 34 12   LSR $1234,X
-C003  5E 02 FF   LSR $FF02,X
+﻿c000  5e 34 12   LSR $1234,X
+c003  5e 02 ff   LSR $ff02,X
 
 ; 5E 34 12 5E 02 FF
 

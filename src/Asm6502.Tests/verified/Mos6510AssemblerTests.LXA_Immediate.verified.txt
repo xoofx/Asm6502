@@ -1,6 +1,6 @@
-﻿C000  AB 01      LXA #$01
-C002  AB 42      LXA #$42
-C004  AB FF      LXA #$FF
+﻿c000  ab 01      LXA #$01
+c002  ab 42      LXA #$42
+c004  ab ff      LXA #$ff
 
 ; AB 01 AB 42 AB FF
 

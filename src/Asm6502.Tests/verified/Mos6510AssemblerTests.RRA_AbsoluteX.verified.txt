@@ -1,5 +1,5 @@
-﻿C000  7F 34 12   RRA $1234,X
-C003  7F 02 FF   RRA $FF02,X
+﻿c000  7f 34 12   RRA $1234,X
+c003  7f 02 ff   RRA $ff02,X
 
 ; 7F 34 12 7F 02 FF
 

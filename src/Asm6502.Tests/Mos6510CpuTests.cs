@@ -253,7 +253,7 @@ public class Mos6510CpuTests
                 var address = ramBlock[0];
                 var expectedValue = (byte)ramBlock[1];
                 var actualValue = bus.Ram[address];
-                Assert.AreEqual(expectedValue, actualValue, $"Final RAM value not matching at address {address:X4} for test `{testCase.Name}`");
+                Assert.AreEqual(expectedValue, actualValue, $"Final RAM value not matching at address ${address:x4} for test `{testCase.Name}`");
             }
 
             // We verify that the number of cycles emitted is matching the CPU.InstructionCycles

@@ -1,5 +1,5 @@
-﻿C000  CD 34 12   CMP $1234
-C003  CD 01 FF   CMP $FF01
+﻿c000  cd 34 12   CMP $1234
+c003  cd 01 ff   CMP $ff01
 
 ; CD 34 12 CD 01 FF
 

@@ -1,6 +1,6 @@
-﻿C000  97 01      SAX $01,Y
-C002  97 40      SAX $40,Y
-C004  97 FC      SAX $FC,Y
+﻿c000  97 01      SAX $01,Y
+c002  97 40      SAX $40,Y
+c004  97 fc      SAX $fc,Y
 
 ; 97 01 97 40 97 FC
 

@@ -1,5 +1,5 @@
-﻿C000  3D 34 12   AND $1234,X
-C003  3D 02 FF   AND $FF02,X
+﻿c000  3d 34 12   AND $1234,X
+c003  3d 02 ff   AND $ff02,X
 
 ; 3D 34 12 3D 02 FF
 

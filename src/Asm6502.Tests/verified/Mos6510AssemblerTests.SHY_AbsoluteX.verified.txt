@@ -1,5 +1,5 @@
-﻿C000  9C 34 12   SHY $1234,X
-C003  9C 02 FF   SHY $FF02,X
+﻿c000  9c 34 12   SHY $1234,X
+c003  9c 02 ff   SHY $ff02,X
 
 ; 9C 34 12 9C 02 FF
 

@@ -1,5 +1,5 @@
-﻿C000  8D 34 12   STA $1234
-C003  8D 01 FF   STA $FF01
+﻿c000  8d 34 12   STA $1234
+c003  8d 01 ff   STA $ff01
 
 ; 8D 34 12 8D 01 FF
 

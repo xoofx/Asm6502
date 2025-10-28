@@ -1,6 +1,6 @@
-﻿C000  F7 02      ISC $02,X
-C002  F7 30      ISC $30,X
-C004  F7 FB      ISC $FB,X
+﻿c000  f7 02      ISC $02,X
+c002  f7 30      ISC $30,X
+c004  f7 fb      ISC $fb,X
 
 ; F7 02 F7 30 F7 FB
 

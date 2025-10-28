@@ -1,5 +1,5 @@
-﻿C000  EC 34 12   CPX $1234
-C003  EC 01 FF   CPX $FF01
+﻿c000  ec 34 12   CPX $1234
+c003  ec 01 ff   CPX $ff01
 
 ; EC 34 12 EC 01 FF
 

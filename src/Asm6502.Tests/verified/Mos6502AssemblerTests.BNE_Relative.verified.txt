@@ -1,6 +1,6 @@
-﻿C000  D0 10      BNE $16
+﻿c000  d0 10      BNE $16
 
-C002  D0 DB      BNE $-37
+c002  d0 db      BNE $-37
 
 ; D0 10 D0 DB
 

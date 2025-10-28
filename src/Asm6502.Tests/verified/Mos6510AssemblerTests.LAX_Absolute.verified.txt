@@ -1,5 +1,5 @@
-﻿C000  AF 34 12   LAX $1234
-C003  AF 01 FF   LAX $FF01
+﻿c000  af 34 12   LAX $1234
+c003  af 01 ff   LAX $ff01
 
 ; AF 34 12 AF 01 FF
 

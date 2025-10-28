@@ -62,7 +62,7 @@ public record Mos6502Label : Mos6502ExpressionU16, IMos6502Label
     public override void CollectLabels(HashSet<Mos6502Label> labels) => labels.Add(this);
 
     /// <inheritdoc />
-    public override string ToString() => Name ?? (IsBound ? $"0x{Address:X4}" : $"0x????");
+    public override string ToString() => Name ?? (IsBound ? $"${Address:x4}" : "$????");
 
     /// <summary>
     /// This method tries to parse a simple C# expression to extract a label name.

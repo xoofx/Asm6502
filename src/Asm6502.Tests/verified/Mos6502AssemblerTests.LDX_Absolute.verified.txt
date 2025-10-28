@@ -1,5 +1,5 @@
-﻿C000  AE 34 12   LDX $1234
-C003  AE 01 FF   LDX $FF01
+﻿c000  ae 34 12   LDX $1234
+c003  ae 01 ff   LDX $ff01
 
 ; AE 34 12 AE 01 FF
 

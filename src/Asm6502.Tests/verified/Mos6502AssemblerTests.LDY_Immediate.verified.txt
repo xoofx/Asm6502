@@ -1,6 +1,6 @@
-﻿C000  A0 01      LDY #$01
-C002  A0 42      LDY #$42
-C004  A0 FF      LDY #$FF
+﻿c000  a0 01      LDY #$01
+c002  a0 42      LDY #$42
+c004  a0 ff      LDY #$ff
 
 ; A0 01 A0 42 A0 FF
 

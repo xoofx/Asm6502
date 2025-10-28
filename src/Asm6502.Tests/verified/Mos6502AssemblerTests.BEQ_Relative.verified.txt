@@ -1,6 +1,6 @@
-﻿C000  F0 10      BEQ $16
+﻿c000  f0 10      BEQ $16
 
-C002  F0 DB      BEQ $-37
+c002  f0 db      BEQ $-37
 
 ; F0 10 F0 DB
 

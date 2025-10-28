@@ -766,7 +766,7 @@ public class Mos6502Cpu
         // Protection against unknown opcodes
         if (_addressingMode == Mos6502AddressingMode.Unknown)
         {
-            throw new InvalidOperationException($"The opcode {_opcode:X2} at address {_PCAtOpcode:X4} is not supported by this CPU variant.");
+            throw new InvalidOperationException($"The opcode ${(byte)_opcode:x2} at address ${_PCAtOpcode:x4} is not supported by this CPU variant.");
         }
 
         _av = PC;
@@ -989,7 +989,7 @@ public class Mos6502Cpu
                 TR(ref A, Y);
                 break;
             default:
-                throw new InvalidOperationException($"Execution of 0x{(byte)_opcode:X2} is not supported at PC = 0x{_PCAtOpcode:X4} .");
+                throw new InvalidOperationException($"Execution of ${(byte)_opcode:x2} is not supported at PC = ${_PCAtOpcode:x4} .");
         }
     }
 
@@ -1840,7 +1840,7 @@ public class Mos6502Cpu
                 break;
 
             default:
-                throw new InvalidOperationException($"The opcode {_opcode:X2} at address {_PCAtOpcode:X4} is not supported by this CPU variant.");
+                throw new InvalidOperationException($"The opcode ${_opcode:x2} at address ${_PCAtOpcode:x4} is not supported by this CPU variant.");
         }
     }
 

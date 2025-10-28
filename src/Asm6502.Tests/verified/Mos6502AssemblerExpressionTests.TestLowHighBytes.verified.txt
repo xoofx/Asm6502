@@ -1,8 +1,8 @@
-﻿C000  A9 0B      LDA #$0B
-C002  8D 00 10   STA $1000
-C005  A9 C0      LDA #$C0
-C007  8D 01 10   STA $1001
-C00A  60         RTS
+﻿c000  a9 0b      LDA #$0b
+c002  8d 00 10   STA $1000
+c005  a9 c0      LDA #$c0
+c007  8d 01 10   STA $1001
+c00a  60         RTS
 
 ; A9 0B 8D 00 10 A9 C0 8D 01 10 60
 

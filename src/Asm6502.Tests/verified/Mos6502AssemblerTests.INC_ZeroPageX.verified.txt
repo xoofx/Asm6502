@@ -1,6 +1,6 @@
-﻿C000  F6 02      INC $02,X
-C002  F6 30      INC $30,X
-C004  F6 FB      INC $FB,X
+﻿c000  f6 02      INC $02,X
+c002  f6 30      INC $30,X
+c004  f6 fb      INC $fb,X
 
 ; F6 02 F6 30 F6 FB
 

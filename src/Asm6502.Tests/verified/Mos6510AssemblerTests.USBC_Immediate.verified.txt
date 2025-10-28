@@ -1,6 +1,6 @@
-﻿C000  EB 01      USBC #$01
-C002  EB 42      USBC #$42
-C004  EB FF      USBC #$FF
+﻿c000  eb 01      USBC #$01
+c002  eb 42      USBC #$42
+c004  eb ff      USBC #$ff
 
 ; EB 01 EB 42 EB FF
 

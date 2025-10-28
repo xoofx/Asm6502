@@ -1,5 +1,5 @@
-﻿C000  FF 34 12   ISC $1234,X
-C003  FF 02 FF   ISC $FF02,X
+﻿c000  ff 34 12   ISC $1234,X
+c003  ff 02 ff   ISC $ff02,X
 
 ; FF 34 12 FF 02 FF
 

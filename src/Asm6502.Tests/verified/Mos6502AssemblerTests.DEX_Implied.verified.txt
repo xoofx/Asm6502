@@ -1,4 +1,4 @@
-﻿C000  CA         DEX
+﻿c000  ca         DEX
 
 ; CA
 

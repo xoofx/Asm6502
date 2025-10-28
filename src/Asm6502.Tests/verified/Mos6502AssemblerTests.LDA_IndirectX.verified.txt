@@ -1,6 +1,6 @@
-﻿C000  A1 05      LDA ($05,X)
-C002  A1 20      LDA ($20,X)
-C004  A1 FF      LDA ($FF,X)
+﻿c000  a1 05      LDA ($05,X)
+c002  a1 20      LDA ($20,X)
+c004  a1 ff      LDA ($ff,X)
 
 ; A1 05 A1 20 A1 FF
 

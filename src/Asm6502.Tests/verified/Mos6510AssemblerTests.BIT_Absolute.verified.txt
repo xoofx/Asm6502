@@ -1,5 +1,5 @@
-﻿C000  2C 34 12   BIT $1234
-C003  2C 01 FF   BIT $FF01
+﻿c000  2c 34 12   BIT $1234
+c003  2c 01 ff   BIT $ff01
 
 ; 2C 34 12 2C 01 FF
 

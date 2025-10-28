@@ -1,5 +1,5 @@
-﻿C000  FE 34 12   INC $1234,X
-C003  FE 02 FF   INC $FF02,X
+﻿c000  fe 34 12   INC $1234,X
+c003  fe 02 ff   INC $ff02,X
 
 ; FE 34 12 FE 02 FF
 

@@ -1,6 +1,6 @@
-﻿C000  A5 03      LDA $03
-C002  A5 20      LDA $20
-C004  A5 FE      LDA $FE
+﻿c000  a5 03      LDA $03
+c002  a5 20      LDA $20
+c004  a5 fe      LDA $fe
 
 ; A5 03 A5 20 A5 FE
 
